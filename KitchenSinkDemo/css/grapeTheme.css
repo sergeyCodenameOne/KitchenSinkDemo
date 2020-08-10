@@ -1,0 +1,38 @@
+
+TitleArea{
+    background: linear-gradient(to left, #906bff, #5368ff);
+}
+
+Button{
+    background-color: #8c6efc;
+}
+
+Button.pressed{
+    background-color: #EB9390;
+}
+
+SideCommand{
+    background-color: #8c6efc;
+}
+
+SideCommand.pressed{
+    background-color: #EB9390;
+}
+
+SideBarTitleArea{
+    background: linear-gradient(to left, #906bff, #5368ff);
+}
+
+SideNavigationPanel{
+}
+
+
+
+
+/*not in use //*/
+/*MyContainer {
+    background-image: url(myimage.png);
+    cn1-background-type: cn1-image-scaled-fill;
+}*/
+
+

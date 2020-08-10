@@ -1,0 +1,108 @@
+
+/* C:\Users\serge\Documents\NetBeansProjects\KitchenSinkDemo\css\theme.css */
+#Constants {
+    includeNativeBool: true; 
+}
+
+Images{
+    background-image: url(images/icon.png);
+}
+
+MainWindowComponent{
+    margin: 3mm;
+}
+
+
+Command{
+    color: white;
+}
+
+TitleArea{
+    border: none;
+    background: linear-gradient(to left, #fcdd89, #e0647b);
+    margin: 0;
+    padding-top: 5mm;
+    padding-bottom: 4mm;
+}
+
+Button{
+    border: cn1-pill-border;
+    background-color: #E4757D;
+    color: white;
+    text-align:center;
+    padding : 2mm;
+}
+
+Button.pressed{
+    background-color: #EB9390;
+}
+
+SideCommand{
+    border: cn1-pill-border;
+    color: black;
+    text-align:left;
+    font-family: "native:MainThin";
+    background-color: #E4757D;
+    font-size: 3mm;
+    margin-top: 1mm;
+    margin-right: 2mm;
+    margin-left: 2mm;
+}
+
+SideCommand.pressed{
+    background-color: #EB9390;
+}
+
+Title{
+    color: black;
+}
+
+SideBarTitleArea{
+    border: none;
+    background: linear-gradient(to right, #fcdd89, #e0647b);
+    margin: 0;
+    padding-top: 15mm;
+}
+
+SideNavigationPanel{
+    border: none;
+    margin: 0;
+    background-color: whitesmoke;
+}
+
+
+Costum1{
+    border: none;
+    background-color: #ff0000;  
+}
+
+Costum2{
+    border: none;
+    background-color: #ffff00;  
+}
+
+Costum3{
+    border: none;
+    background-color: #00ffff;  
+}
+
+Costum4{
+    border: none;
+    background-color: #0000ff;  
+}
+
+Costum5{
+    border: none;
+    background-color: #00ff00;  
+}
+
+
+/*not in use //*/
+/*MyContainer {
+    background-image: url(myimage.png);
+    cn1-background-type: cn1-image-scaled-fill;
+}*/
+
+
+
+/* End C:\Users\serge\Documents\NetBeansProjects\KitchenSinkDemo\css\theme.css */
