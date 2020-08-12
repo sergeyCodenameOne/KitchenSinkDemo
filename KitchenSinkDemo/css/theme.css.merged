@@ -1,33 +1,61 @@
 
 /* C:\Users\serge\Documents\NetBeansProjects\KitchenSinkDemo\css\theme.css */
+/*
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *  
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ * 
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ * 
+ * Please contact Codename One through http://www.codenameone.com/ if you 
+ * need additional information or have any questions.
+ */
+
 #Constants {
     includeNativeBool: true; 
 }
 
 Images{
     background-image: url(images/icon.png);
+    
 }
 
 MainWindowComponent{
     margin: 3mm;
 }
 
-
 Command{
     color: white;
 }
 
-TitleArea{
+Title{
+    text-align:center;
+}
+
+/*TitleArea{
     border: none;
     background: linear-gradient(to left, #fcdd89, #e0647b);
     margin: 0;
     padding-top: 5mm;
     padding-bottom: 4mm;
-}
+    text-align:center;
+}*/
 
 Button{
-    border: cn1-pill-border;
-    background-color: #E4757D;
+    border-image: url('peach-title-background.png');
+    border-image-slice:40% 48% 40% 48%;
     color: white;
     text-align:center;
     padding : 2mm;
@@ -59,7 +87,8 @@ Title{
 
 SideBarTitleArea{
     border: none;
-    background: linear-gradient(to right, #fcdd89, #e0647b);
+    background-image: url(images/peach-title-background.png);
+    cn1-background-type: cn1-image-scaled-fill;
     margin: 0;
     padding-top: 15mm;
 }
@@ -67,41 +96,53 @@ SideBarTitleArea{
 SideNavigationPanel{
     border: none;
     margin: 0;
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 
-Costum1{
+RedLabel{
     border: none;
     background-color: #ff0000;  
 }
 
-Costum2{
+YellowLabel{
     border: none;
     background-color: #ffff00;  
 }
 
-Costum3{
+CyanLabel{
     border: none;
     background-color: #00ffff;  
 }
 
-Costum4{
+BlueLabel{
     border: none;
     background-color: #0000ff;  
 }
 
-Costum5{
+GreenLabel{
     border: none;
     background-color: #00ff00;  
 }
 
-
-/*not in use //*/
-/*MyContainer {
-    background-image: url(myimage.png);
+InputDemoContentPane{
+    border: none;
+    background-image: url(images/input-background.png);
     cn1-background-type: cn1-image-scaled-fill;
-}*/
+}
+
+MyToolbar{
+    background-image: url(images/peach-title-background.png);
+    cn1-background-type: cn1-image-scaled-fill;
+    margin: 0;
+    padding-top: 5mm;
+    padding-bottom: 15mm;
+}
+
+MainWindowContentPane{
+    background-color: #ffffff;
+}
+
 
 
 

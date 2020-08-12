@@ -1,47 +1,62 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *  
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ * 
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ * 
+ * Please contact Codename One through http://www.codenameone.com/ if you 
+ * need additional information or have any questions.
  */
 package com.codename1.demos.kitchen;
 
-import com.codename1.components.ScaleImageLabel;
-import com.codename1.properties.Property;
-import com.codename1.properties.PropertyBusinessObject;
-import com.codename1.ui.Button;
 import com.codename1.ui.Component;
-import com.codename1.ui.Container;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
-import com.codename1.ui.Label;
-import com.codename1.ui.layouts.BorderLayout;
-import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.util.Resources;
+
 
 /**
  *
  * @author serge
  */
-public abstract class Demo implements PropertyBusinessObject {
-    public final Property<String, Demo> id = new Property<>("name"); 
-    public final Property<Image, Demo> image = new Property<>("image");
-    public final Property<Form, Demo> form = new Property<>("form");
-    public final Property<Form, Demo> fatherForm = new Property<>("fatherForm");
-    public final Property<Resources , Demo> resource = new Property<>("resources");
+
+// This is the base class for all the demos. 
+public abstract class Demo{
     
+    protected String id;
+    protected Image demoComponentImage;
+    protected Form parentForm;
     
-    public Component makeComponent(){
-        ScaleImageLabel imageLabel = new ScaleImageLabel(image.get());
-        //TODO remove that 300 300 hardcoded params.
-        imageLabel.setIcon(imageLabel.getIcon().scaled(300, 300));
-        Button button = new Button(id.get());
-        button.addActionListener(e-> {
-            form.get().show();
-        });
+    abstract public Component makeDemo();
         
-        Container themeMainWindowComponent = BoxLayout.encloseY(imageLabel, 
-                                                                button);
-        themeMainWindowComponent.setUIID("MainWindowComponent");
-        return themeMainWindowComponent;
-    }
+        
+    
+
+    
+//    public Component makeComponent(){
+//        ScaleImageLabel imageLabel = new ScaleImageLabel(image.get());
+//        //TODO remove that 300 300 hardcoded params.
+//        imageLabel.setIcon(imageLabel.getIcon().scaled(300, 300));
+//        Button button = new Button(id.get());
+//        button.addActionListener(e-> {
+//            form.get().show();
+//        });
+//        
+//        Container themeMainWindowComponent = BoxLayout.encloseY(imageLabel, 
+//                                                                button);
+//        themeMainWindowComponent.setUIID("MainWindowComponent");
+//        return themeMainWindowComponent;
+//    }
 }

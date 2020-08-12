@@ -1,61 +1,63 @@
+/*
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *  
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ * 
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ * 
+ * Please contact Codename One through http://www.codenameone.com/ if you 
+ * need additional information or have any questions.
+ */
 package com.codename1.demos.kitchen;
 
-import com.codename1.ui.Button;
+
 import static com.codename1.ui.CN.execute;
 import static com.codename1.ui.CN.getPlatformName;
 import static com.codename1.ui.CN.isNativeShareSupported;
 import static com.codename1.ui.CN.share;
-import com.codename1.ui.Command;
-import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
-import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
-import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
-import com.codename1.ui.plaf.UIManager;
-import com.codename1.ui.util.Resources;
 
 
 public class MainWindow {
-    private static Form gridForm = null;
-    private static Form boxForm = null;
     
-    public static Form buildGridForm(Resources theme){
-        Form gridMainWindow = new Form("Kitchen Sink", new GridLayout(3));
-        initToolBar(gridMainWindow.getToolbar());
-        
-        
+    public static Form buildForm(){
+        Form mainWindow = new Form("Kitchen Sink", new GridLayout(3));
+        mainWindow.getContentPane().setUIID("MainWindowContentPane");
+        initToolBar(mainWindow.getToolbar());
+
         //create demos
-        Demo themeDemo = new ThemesDemo(gridMainWindow, theme);
-        Demo layoutsDemo = new LayoutsDemo(gridMainWindow, theme);    
+        Demo layoutsDemo = new LayoutsDemo(mainWindow);   
+        Demo inputDemo = new InputDemo(mainWindow);
         
         //add demos components
-        gridMainWindow.add(themeDemo.makeComponent());
-        gridMainWindow.add(layoutsDemo.makeComponent());
+        mainWindow.add(inputDemo.makeDemo());
+        mainWindow.add(layoutsDemo.makeDemo());
         
-        gridForm = gridMainWindow;
-        return gridMainWindow;
-    }
-    
-    public static Form buildBoxForm(Resources theme){
-        
-        Form boxMainWindow = new Form("Kitchen Sink", BoxLayout.y());
-        initToolBar(boxMainWindow.getToolbar());
-        // add component
-        
-        
-        boxForm = boxMainWindow;
-        return boxMainWindow;
+        return mainWindow;
     }
     
     //TODO add search and reorder butten
     private static void initToolBar(Toolbar toolbar){
+        toolbar.setUIID("MyToolbar");
         Label sideBarTitle = new Label("KitchenSink Demo");
         sideBarTitle.setUIID("SideBarTitle");
                 
@@ -80,7 +82,6 @@ public class MainWindow {
         });
     }
     
-    
     private static String getAppstoreURL() {
         if(getPlatformName().equals("ios")) {
             return "https://itunes.apple.com/us/app/kitchen-sink-codename-one/id635048865";
@@ -90,5 +91,4 @@ public class MainWindow {
         }
         return null;
     }
-    
 }
