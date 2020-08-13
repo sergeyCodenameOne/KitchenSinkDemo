@@ -22,13 +22,23 @@
  */
 package com.codename1.demos.kitchen;
 
+import com.codename1.capture.Capture;
+import com.codename1.components.FloatingActionButton;
+import com.codename1.components.OnOffSwitch;
 import com.codename1.components.ScaleImageLabel;
+import com.codename1.components.Switch;
+import com.codename1.components.ToastBar;
+import com.codename1.components.ToastBar.Status;
 import com.codename1.ui.Button;
+import com.codename1.ui.CN1Constants;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Graphics;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.PickerComponent;
 import com.codename1.ui.TextArea;
@@ -36,8 +46,14 @@ import com.codename1.ui.TextComponent;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.layouts.TextModeLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
+import com.codename1.ui.validation.RegexConstraint;
+import com.codename1.ui.validation.Validator;
+import java.io.IOException;
+import static java.lang.Thread.sleep;
 
 public class InputDemo extends Demo{
     
@@ -64,12 +80,12 @@ public class InputDemo extends Demo{
         Form inputForm = new Form("Input", new BorderLayout());
         Toolbar toolBar = inputForm.getToolbar();
         
-         //add back button
+        // Toolbar add back button
         toolBar.addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e->{
             parentForm.show();
         });
         
-        //add info button
+        // Toolbar add info button 
         toolBar.addMaterialCommandToRightBar("", FontImage.MATERIAL_INFO, e->{
             Dialog.show("Information", "Demonstrates basic usage of input facilities, device orientation behavior as well as adapting the UI to tablets." +
                         " This demo shows off a typical form with user information, different keyboard types, ability to capture an " +
@@ -97,26 +113,112 @@ public class InputDemo extends Demo{
         
         PickerComponent birthday = PickerComponent.createDate(null).label("Birthday");
         
+        Switch joinEmailSwitch = new Switch(); 
+        Label joinEmailLabel = new Label("Join Mailing List");
+        Container joinEmailList = BorderLayout.centerCenterEastWest(null, joinEmailSwitch, joinEmailLabel);
+        
         textFields.add(name);
         textFields.add(birthday);
         textFields.add(email);
         textFields.add(password);
         textFields.add(bio);
+        textFields.add(joinEmailList);
         inputForm.setEditOnShow(name.getField());
 
         Button saveButton = new Button("save");
+        
+        // Add validation to the save Button
+        Validator saveValidation = new Validator();
+        saveValidation.addConstraint(email, RegexConstraint.validEmail());
+        saveValidation.addSubmitButtons(saveButton);
+        
         saveButton.addActionListener(e ->{
-            //TODO add clear all fields and and a toast bar;
+            // Show saving status
+            Status savingStatus = ToastBar.getInstance().createStatus();
+            savingStatus.setMessage("Saving");
+            savingStatus.setExpires(3000);
+            savingStatus.setShowProgressIndicator(true);
+            savingStatus.show();
+            
+            // Show saved 
+            Status saved = ToastBar.getInstance().createStatus();
+            saved.setMessage("Input was successfully saved");
+            saved.showDelayed(4000);  
+            saved.setExpires(2000);
+            System.out.println(saved.getUiid());
+            saved.show();
+            
+            name.getField().clear();
+            email.getField().clear();
+            bio.getField().clear();
+            password.getField().clear();
         });
         
         Container textFieldsAndSaveButton = BorderLayout.south(saveButton);
         textFieldsAndSaveButton.add(BorderLayout.CENTER, textFields);
         
-        //TODO move to css
-        textFieldsAndSaveButton.getAllStyles().setMargin(100, 100, 100, 100);
-        textFieldsAndSaveButton.getAllStyles().setBgTransparency(255);
+        textFieldsAndSaveButton.setUIID("InputDemoTextFieldsAndSaveButton");
         inputForm.add(BorderLayout.CENTER, textFieldsAndSaveButton);
         
+        // Create button for the camera
+        Image defaultImage = FontImage.createMaterial(FontImage.MATERIAL_CAMERA, "InputPicture", 8);
+        Image circleMaskImage = getGlobalResources().getImage("circle-mask.png").scaled(Display.getInstance().convertToPixels(8),
+                                                                                        Display.getInstance().convertToPixels(8));
+//        //TODO fix the mask;
+//        Object mask = circleMaskImage.createMask();
+//        defaultImage.applyMask(mask);
+        Button cameraButton = new Button("");
+        cameraButton.getAllStyles().setPadding(0, 0, 0, 0);
+        
+        cameraButton.setIcon(defaultImage);
+        cameraButton.addActionListener(e-> {
+            if(Dialog.show("Camera or Gallery", "Would you like to use the camera or the gallery for the picture?", "Camera", "Gallery")) {
+                try {
+                    Image capturedImage = Image.createImage(Capture.capturePhoto(cameraButton.getHeight(), cameraButton.getWidth()));    
+                    cameraButton.setIcon(capturedImage);
+                } catch(IOException error) {
+                    ToastBar.showErrorMessage("An error occured while loading the image");
+                }
+            } else {
+                Display.getInstance().openGallery(ee -> {
+                    if(ee.getSource() != null) {
+                        try {
+                            Image img = Image.createImage((String)ee.getSource()).scaled(cameraButton.getIcon().getWidth(), cameraButton.getIcon().getHeight());
+                            cameraButton.setIcon(img);
+                        } catch(IOException err) {
+                            ToastBar.showErrorMessage("An error occured while loading the image: " + err);
+                        }
+                    }                    
+                }, CN1Constants.GALLERY_IMAGE);
+            }
+            inputForm.revalidate();
+        });
+        
+//            if(Dialog.show("Camera or Gallery", "Would you like to use the camera or choose picture from the gallery", "Camera", "Gallery")){
+//                try{
+//                    Image capturedImage = Image.createImage(Capture.capturePhoto(cameraButton.getWidth(), cameraButton.getHeight()));
+//                    cameraButton.setIcon(capturedImage.applyMask(cameraButton.getIcon().createMask()));
+//                }catch(IOException exception){
+//                    ToastBar.showErrorMessage("An error occured while loading the image: " + exception.getMessage());
+//                 }     
+//            }else{
+//                Display.getInstance().openGallery(response -> {
+//                    if(response.getSource() != null) {
+//                        try {
+//                            Image img = Image.createImage((String)response.getSource()).fill(cameraButton.getWidth(), cameraButton.getHeight());
+//                            cameraButton.setIcon(img.applyMask(cameraButton.getIcon().createMask()));
+//                        } catch(IOException exception) {
+//                            ToastBar.showErrorMessage("An error occured while loading the image: " + exception.getMessage());
+//                        }
+//                    }
+//                }, CN1Constants.GALLERY_IMAGE);
+//            }
+//        });
+        
+        inputForm.getLayeredPane().addComponent(cameraButton);
+        FlowLayout ll = (FlowLayout)(inputForm.getLayeredPane().getLayout());
+        ll.setAlign(Component.CENTER);
+
         return inputForm;
     }
 

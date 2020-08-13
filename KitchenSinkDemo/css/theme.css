@@ -26,8 +26,8 @@
 }
 
 Images{
-    background-image: url(images/icon.png);
-    
+    background-image: url(images/icon.png),
+                      url("images/circle-mask.png");
 }
 
 MainWindowComponent{
@@ -37,19 +37,21 @@ MainWindowComponent{
 Command{
     color: white;
 }
-
-Title{
-    text-align:center;
+ToastBar{
+    text-align: center;
 }
 
+Title{
+    text-align: center;
+}
 
 Button{
     border: none;
-    background-color: #E4757D;
+    font-family: "native:MainThin";
     background: linear-gradient(to left, #fcdd89, #e0647b);
-    color: white;
+    color: black;
     text-align:center;
-    padding : 2mm;
+    padding : 1mm;
 }
 
 Button.pressed{
@@ -116,8 +118,9 @@ GreenLabel{
 
 InputDemoContentPane{
     border: none;
-    background-image: url(images/input-background.png);
+    /*background-image: url(images/input-demo-background.jpg);*/
     cn1-background-type: cn1-image-scaled-fill;
+    margin: 0;
 }
 
 MyToolbar{
@@ -130,6 +133,15 @@ MyToolbar{
 
 MainWindowContentPane{
     background-color: #ffffff;
+}
+
+InputDemoTextFieldsAndSaveButton{
+    border: none;
+    margin-bottom: 3mm;
+    margin-left: 3mm;
+    margin-right: 3mm;
+    margin-top: 5mm;
+    background-color: white;
 }
 
 /*SideCommand{
