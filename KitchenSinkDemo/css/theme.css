@@ -42,18 +42,11 @@ Title{
     text-align:center;
 }
 
-/*TitleArea{
-    border: none;
-    background: linear-gradient(to left, #fcdd89, #e0647b);
-    margin: 0;
-    padding-top: 5mm;
-    padding-bottom: 4mm;
-    text-align:center;
-}*/
 
 Button{
-    border-image: url('peach-title-background.png');
-    border-image-slice:40% 48% 40% 48%;
+    border: none;
+    background-color: #E4757D;
+    background: linear-gradient(to left, #fcdd89, #e0647b);
     color: white;
     text-align:center;
     padding : 2mm;
@@ -64,15 +57,11 @@ Button.pressed{
 }
 
 SideCommand{
-    border: cn1-pill-border;
+    border: none;
     color: black;
-    text-align:left;
+    text-align: left;
     font-family: "native:MainThin";
-    background-color: #E4757D;
-    font-size: 3mm;
-    margin-top: 1mm;
-    margin-right: 2mm;
-    margin-left: 2mm;
+    background: linear-gradient(to left, #fcdd89, #e0647b);
 }
 
 SideCommand.pressed{
@@ -88,12 +77,14 @@ SideBarTitleArea{
     background-image: url(images/peach-title-background.png);
     cn1-background-type: cn1-image-scaled-fill;
     margin: 0;
+    margin-bottom: 3mm;
     padding-top: 15mm;
 }
 
 SideNavigationPanel{
     border: none;
     margin: 0;
+    
     background-color: white;
 }
 
@@ -141,5 +132,24 @@ MainWindowContentPane{
     background-color: #ffffff;
 }
 
+/*SideCommand{
+    border: cn1-pill-border;
+    color: black;
+    text-align:left;
+    font-family: "native:MainThin";
+    background-color: #E4757D;
+    font-size: 3mm;
+    margin-top: 1mm;
+    margin-right: 2mm;
+    margin-left: 2mm;
+}*/
 
+/*TitleArea{
+    border: none;
+    background: linear-gradient(to left, #fcdd89, #e0647b);
+    margin: 0;
+    padding-top: 5mm;
+    padding-bottom: 4mm;
+    text-align:center;
+}*/
 
