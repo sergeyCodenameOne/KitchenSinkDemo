@@ -47,10 +47,12 @@ public class MainWindow {
         //create demos
         Demo layoutsDemo = new LayoutsDemo(mainWindow);   
         Demo inputDemo = new InputDemo(mainWindow);
+        Demo contactsDemo = new ContactsDemo(mainWindow);
         
         //add demos components
         mainWindow.add(inputDemo.createDemo());
         mainWindow.add(layoutsDemo.createDemo());
+        mainWindow.add(contactsDemo.createDemo());
         
         return mainWindow;
     }

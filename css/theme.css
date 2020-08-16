@@ -26,7 +26,8 @@
 }
 
 Images{
-    background-image: url(images/icon.png);
+    background-image: url(images/icon.png),
+                      url(images/default-contact-pic.jpg);
 }
 
 MainWindowComponent{

@@ -35,10 +35,8 @@ import com.codename1.ui.CN1Constants;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
-import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.PickerComponent;
@@ -48,13 +46,11 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
-import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.layouts.TextModeLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 import com.codename1.ui.validation.RegexConstraint;
 import com.codename1.ui.validation.Validator;
 import java.io.IOException;
-import static java.lang.Thread.sleep;
 
 public class InputDemo extends Demo{
     
@@ -88,6 +84,7 @@ public class InputDemo extends Demo{
                         " This demo shows off a typical form with user information, different keyboard types, ability to capture an " +
                         "avatar image and style it etc.", "OK", null);
         });
+        
         // Set UIID for background image.
         Container contentPane = inputForm.getContentPane();
         contentPane.setUIID("InputDemoContentPane");
