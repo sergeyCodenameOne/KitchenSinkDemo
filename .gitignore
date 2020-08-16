@@ -1,0 +1,9 @@
+*.class
+*.jar
+.cn1_css_checksums
+*.checksums
+/build/
+/dist/
+/nbproject/private/
+Versions.properties
+*css.merged

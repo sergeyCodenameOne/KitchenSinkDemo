@@ -54,7 +54,7 @@ public class LayoutsDemo extends Demo {
     public LayoutsDemo(Form parentForm){
         super.parentForm = parentForm;
         id = "Layouts";
-        demoComponentImage = getGlobalResources().getImage("icon.png").scaled(CommonBehavior.IMAGE_WIDTH, CommonBehavior.IMAGE_HEIGHT);
+        demoComponentImage = getGlobalResources().getImage("icon.png").scaled(CommonBehavior.getImageWidth(), CommonBehavior.getImageHeight());
     }
     
     public Component makeDemo(){

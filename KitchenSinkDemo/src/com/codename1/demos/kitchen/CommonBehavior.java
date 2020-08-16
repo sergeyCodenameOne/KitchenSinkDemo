@@ -22,9 +22,42 @@
  */
 package com.codename1.demos.kitchen;
 
+import com.codename1.ui.CN;
 import com.codename1.ui.Display;
+import com.codename1.ui.Graphics;
+import com.codename1.ui.Image;
 
 public class CommonBehavior {
-    public static final int IMAGE_WIDTH = Display.getInstance().convertToPixels(15);
-    public static final int IMAGE_HEIGHT = Display.getInstance().convertToPixels(20);
+    
+    private static int imageWidth = -1;
+    private static int imageHeight = -1;
+    private static Image roundMaskImage = null;
+    
+    public static int getImageWidth() {
+        if(imageWidth < 0) {
+             imageWidth = CN.convertToPixels(15);
+        }
+        return imageWidth;
+    }
+    
+    public static int getImageHeight() {
+        if(imageHeight < 0) {
+             imageHeight = CN.convertToPixels(20);
+        }
+        return imageHeight;
+    }
+    
+    public static Object getRoundMask(int width){
+        if (roundMaskImage == null)
+        {
+            roundMaskImage = Image.createImage(width, width, 0xff000000);
+            Graphics gr = roundMaskImage.getGraphics();
+            gr.setColor(0xffffff);
+            gr.setAntiAliased(true);
+            gr.fillArc(0, 0, width, width, 0, 360);
+        }else{
+            roundMaskImage = roundMaskImage.scaled(width, width);
+        }
+        return roundMaskImage.createMask();
+    }
 }

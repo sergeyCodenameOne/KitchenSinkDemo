@@ -29,7 +29,8 @@
 
 Images{
     background-image: url(images/icon.png),
-                      url("images/circle-mask.png");
+                      url("images/circle-mask.png"),
+                      url("images/camera-icon.png");
 }
 
 MainWindowComponent{
@@ -144,6 +145,10 @@ InputDemoTextFieldsAndSaveButton{
     margin-right: 3mm;
     margin-top: 5mm;
     background-color: white;
+}
+
+CameraAvatar{
+    background-color: #ff0000;
 }
 
 /*SideCommand{

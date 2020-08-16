@@ -30,6 +30,7 @@ import com.codename1.components.Switch;
 import com.codename1.components.ToastBar;
 import com.codename1.components.ToastBar.Status;
 import com.codename1.ui.Button;
+import static com.codename1.ui.CN.openGallery;
 import com.codename1.ui.CN1Constants;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
@@ -60,7 +61,7 @@ public class InputDemo extends Demo{
     public InputDemo(Form parentForm){
         super.parentForm = parentForm;
         id = "Input";
-        demoComponentImage = getGlobalResources().getImage("icon.png").scaled(CommonBehavior.IMAGE_WIDTH, CommonBehavior.IMAGE_HEIGHT);
+        demoComponentImage = getGlobalResources().getImage("icon.png").scaled(CommonBehavior.getImageWidth(), CommonBehavior.getImageHeight());
     }
     
     public Component makeDemo(){
@@ -159,67 +160,41 @@ public class InputDemo extends Demo{
         
         textFieldsAndSaveButton.setUIID("InputDemoTextFieldsAndSaveButton");
         inputForm.add(BorderLayout.CENTER, textFieldsAndSaveButton);
-        
-        // Create button for the camera
-        Image defaultImage = FontImage.createMaterial(FontImage.MATERIAL_CAMERA, "InputPicture", 8);
-        Image circleMaskImage = getGlobalResources().getImage("circle-mask.png").scaled(Display.getInstance().convertToPixels(8),
-                                                                                        Display.getInstance().convertToPixels(8));
-//        //TODO fix the mask;
-//        Object mask = circleMaskImage.createMask();
-//        defaultImage.applyMask(mask);
-        Button cameraButton = new Button("");
-        cameraButton.getAllStyles().setPadding(0, 0, 0, 0);
-        
-        cameraButton.setIcon(defaultImage);
-        cameraButton.addActionListener(e-> {
-            if(Dialog.show("Camera or Gallery", "Would you like to use the camera or the gallery for the picture?", "Camera", "Gallery")) {
-                try {
-                    Image capturedImage = Image.createImage(Capture.capturePhoto(cameraButton.getHeight(), cameraButton.getWidth()));    
-                    cameraButton.setIcon(capturedImage);
-                } catch(IOException error) {
-                    ToastBar.showErrorMessage("An error occured while loading the image");
-                }
-            } else {
-                Display.getInstance().openGallery(ee -> {
-                    if(ee.getSource() != null) {
+
+        // Add camera button to the inout so the user can input his avatar photo. 
+        FloatingActionButton.setIconDefaultSize(10);
+        FloatingActionButton.setAutoSizing(false);
+        FloatingActionButton cameraButton = FloatingActionButton.createFAB(FontImage.MATERIAL_CAMERA);
+
+        cameraButton.addActionListener(e->{
+            if(Dialog.show("Camera or Gallery", "Would you like to use the camera or the gallery for the picture?", "Camera", "Gallery")){
+                try{
+                   Image capturedImage = Image.createImage(Capture.capturePhoto()).fill(cameraButton.getIcon().getWidth(), cameraButton.getIcon().getHeight());
+                   capturedImage = capturedImage.applyMask(CommonBehavior.getRoundMask(cameraButton.getIcon().getWidth()));
+                   cameraButton.setIcon(capturedImage);
+               }catch(IOException eeee){
+                   ToastBar.showErrorMessage("An error occured while loading the image");
+               }
+            }else{
+                openGallery(ee -> {
+                    if(ee != null && ee.getSource() != null) {
                         try {
-                            Image img = Image.createImage((String)ee.getSource()).scaled(cameraButton.getIcon().getWidth(), cameraButton.getIcon().getHeight());
-                            cameraButton.setIcon(img);
+                            Image capturedImage = Image.createImage((String)ee.getSource()).fill(cameraButton.getIcon().getWidth(), cameraButton.getIcon().getHeight());
+                            capturedImage = capturedImage.applyMask(CommonBehavior.getRoundMask(cameraButton.getIcon().getWidth()));
+                            cameraButton.setIcon(capturedImage);
                         } catch(IOException err) {
-                            ToastBar.showErrorMessage("An error occured while loading the image: " + err);
+                            ToastBar.showErrorMessage("An error occured while loading the image");
                         }
                     }                    
                 }, CN1Constants.GALLERY_IMAGE);
             }
             inputForm.revalidate();
         });
-        
-//            if(Dialog.show("Camera or Gallery", "Would you like to use the camera or choose picture from the gallery", "Camera", "Gallery")){
-//                try{
-//                    Image capturedImage = Image.createImage(Capture.capturePhoto(cameraButton.getWidth(), cameraButton.getHeight()));
-//                    cameraButton.setIcon(capturedImage.applyMask(cameraButton.getIcon().createMask()));
-//                }catch(IOException exception){
-//                    ToastBar.showErrorMessage("An error occured while loading the image: " + exception.getMessage());
-//                 }     
-//            }else{
-//                Display.getInstance().openGallery(response -> {
-//                    if(response.getSource() != null) {
-//                        try {
-//                            Image img = Image.createImage((String)response.getSource()).fill(cameraButton.getWidth(), cameraButton.getHeight());
-//                            cameraButton.setIcon(img.applyMask(cameraButton.getIcon().createMask()));
-//                        } catch(IOException exception) {
-//                            ToastBar.showErrorMessage("An error occured while loading the image: " + exception.getMessage());
-//                        }
-//                    }
-//                }, CN1Constants.GALLERY_IMAGE);
-//            }
-//        });
-        
+       
         inputForm.getLayeredPane().addComponent(cameraButton);
         FlowLayout ll = (FlowLayout)(inputForm.getLayeredPane().getLayout());
         ll.setAlign(Component.CENTER);
 
         return inputForm;
     }
-
 }

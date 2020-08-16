@@ -22,6 +22,8 @@
  */
 package com.codename1.demos.kitchen;
 
+import com.codename1.capture.Capture;
+import com.codename1.components.FloatingActionButton;
 import static com.codename1.ui.ComponentSelector.$;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Form;
@@ -33,8 +35,14 @@ import com.codename1.ui.Button;
 import com.codename1.ui.Toolbar;
 import static com.codename1.ui.Button.setButtonRippleEffectDefault;
 import static com.codename1.ui.ComponentSelector.select;
+import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
+import com.codename1.ui.Graphics;
+import com.codename1.ui.Image;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import static com.codename1.ui.util.Resources.getGlobalResources;
+import java.io.IOException;
 
 
 
@@ -74,7 +82,6 @@ public class KitchenSink {
             return;
         }
         MainWindow.buildForm().show();
-
     }
     
 
