@@ -35,28 +35,27 @@ import com.codename1.ui.Image;
 // This is the base class for all the demos. 
 public abstract class Demo{
     
-    protected String id;
-    protected Image demoComponentImage;
-    protected Form parentForm;
+    private String id;
+    private Image demoImage;
+    private Form parentForm;
     
-    abstract public Component makeDemo();
-        
-        
+    protected void init(String id, Image demoImage, Form parentForm){
+        this.id = id;
+        this.demoImage = demoImage;
+        this.parentForm = parentForm;
+    }
+     
+    protected String getDemoId(){
+        return id;
+    }
+   
+    protected Image getDemoImage(){
+        return demoImage;
+    }
     
-
+    protected Form getParentForm(){
+        return parentForm;
+    }
     
-//    public Component makeComponent(){
-//        ScaleImageLabel imageLabel = new ScaleImageLabel(image.get());
-//        //TODO remove that 300 300 hardcoded params.
-//        imageLabel.setIcon(imageLabel.getIcon().scaled(300, 300));
-//        Button button = new Button(id.get());
-//        button.addActionListener(e-> {
-//            form.get().show();
-//        });
-//        
-//        Container themeMainWindowComponent = BoxLayout.encloseY(imageLabel, 
-//                                                                button);
-//        themeMainWindowComponent.setUIID("MainWindowComponent");
-//        return themeMainWindowComponent;
-//    }
+    abstract public Component createDemo();
 }

@@ -59,17 +59,13 @@ import static java.lang.Thread.sleep;
 public class InputDemo extends Demo{
     
     public InputDemo(Form parentForm){
-        super.parentForm = parentForm;
-        id = "Input";
-        demoComponentImage = getGlobalResources().getImage("icon.png").scaled(CommonBehavior.getImageWidth(), CommonBehavior.getImageHeight());
+        init("Input", getGlobalResources().getImage("icon.png"), parentForm);
     }
     
-    public Component makeDemo(){
-        ScaleImageLabel imageLabel = new ScaleImageLabel(demoComponentImage);
-        Button button = new Button(id);
-        button.addActionListener(e-> {
-            createForm().show();
-        });
+    public Component createDemo(){
+        ScaleImageLabel imageLabel = new ScaleImageLabel(getDemoImage().scaled(CommonBehavior.getImageWidth(), CommonBehavior.getImageHeight()));
+        Button button = new Button(getDemoId());
+        button.addActionListener(e-> createForm().show());
         
         Container mainWindowComponent = BoxLayout.encloseY(imageLabel, 
                                                                 button);
@@ -83,7 +79,7 @@ public class InputDemo extends Demo{
         
         // Toolbar add back button
         toolBar.addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e->{
-            parentForm.show();
+            getParentForm().show();
         });
         
         // Toolbar add info button 
@@ -116,7 +112,7 @@ public class InputDemo extends Demo{
         
         Switch joinEmailSwitch = new Switch(); 
         Label joinEmailLabel = new Label("Join Mailing List");
-        Container joinEmailList = BorderLayout.centerCenterEastWest(null, joinEmailSwitch, joinEmailLabel);
+        Container joinEmailList = BorderLayout.centerEastWest(null, joinEmailSwitch, joinEmailLabel);
         
         textFields.add(name);
         textFields.add(birthday);

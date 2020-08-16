@@ -52,14 +52,12 @@ public class LayoutsDemo extends Demo {
     private Container colorsContainer;
 
     public LayoutsDemo(Form parentForm){
-        super.parentForm = parentForm;
-        id = "Layouts";
-        demoComponentImage = getGlobalResources().getImage("icon.png").scaled(CommonBehavior.getImageWidth(), CommonBehavior.getImageHeight());
+        init("Layouts", getGlobalResources().getImage("icon.png"), parentForm);
     }
     
-    public Component makeDemo(){
-        ScaleImageLabel imageLabel = new ScaleImageLabel(demoComponentImage);
-        Button button = new Button(id);
+    public Component createDemo(){
+        ScaleImageLabel imageLabel = new ScaleImageLabel(getDemoImage().scaled(CommonBehavior.getImageWidth(), CommonBehavior.getImageHeight()));
+        Button button = new Button(getDemoId());
         button.addActionListener(e-> {
             createForm().show();
         });
@@ -72,14 +70,14 @@ public class LayoutsDemo extends Demo {
     }
     
     private Form createForm(){
-        Form themesForm = new Form(id, new BorderLayout());
+        Form themesForm = new Form(getDemoId(), new BorderLayout());
         Toolbar toolBar = themesForm.getToolbar();
         
         //add back button
         toolBar.addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e->{
             colorsContainer = null;
             colorLabelList = null;
-            parentForm.show();
+            getParentForm().show();
         });
         
         //add info button
@@ -99,14 +97,14 @@ public class LayoutsDemo extends Demo {
         flow.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.setLayout(new FlowLayout());
-            colorsContainer.animateLayoutAndWait(1000);
+            colorsContainer.animateLayout(1000);
         });
         
         Button flowCenter = new Button("Flow Center Layout");
         flowCenter.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.setLayout(new FlowLayout(Component.CENTER));
-            colorsContainer.animateLayoutAndWait(1000);
+            colorsContainer.animateLayout(1000);
         });
         
         Button border = new Button("border Layout");
@@ -119,7 +117,7 @@ public class LayoutsDemo extends Demo {
                             add(BorderLayout.EAST, colorLabelList.get(2)).
                             add(BorderLayout.NORTH, colorLabelList.get(3)).
                             add(BorderLayout.SOUTH, colorLabelList.get(4));
-            colorsContainer.animateLayoutAndWait(1000);
+            colorsContainer.animateLayout(1000);
         });
         
         Button absoluteBorder = new Button("Absolute Border Layout");
@@ -132,14 +130,14 @@ public class LayoutsDemo extends Demo {
                             add(BorderLayout.EAST, colorLabelList.get(2)).
                             add(BorderLayout.NORTH, colorLabelList.get(3)).
                             add(BorderLayout.SOUTH, colorLabelList.get(4));
-            colorsContainer.animateLayoutAndWait(1000);
+            colorsContainer.animateLayout(1000);
         });
 
         Button boxX = new Button("Box X Layout");
         boxX.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.setLayout(new BoxLayout(BoxLayout.X_AXIS));
-            colorsContainer.animateLayoutAndWait(1000);
+            colorsContainer.animateLayout(1000);
         });
         
   
@@ -147,14 +145,14 @@ public class LayoutsDemo extends Demo {
         boxY.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-            colorsContainer.animateLayoutAndWait(1000);
+            colorsContainer.animateLayout(1000);
         });
         
         Button grid = new Button("Grid Layout");
         grid.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.setLayout(new GridLayout(1, 1));
-            colorsContainer.animateLayoutAndWait(1000);
+            colorsContainer.animateLayout(1000);
         });
         
         Button simpleTable = new Button("Table Layout(simple)");
@@ -169,7 +167,7 @@ public class LayoutsDemo extends Demo {
                                    colorLabelList.get(4));
             
             
-            colorsContainer.animateLayoutAndWait(1000);
+            colorsContainer.animateLayout(1000);
         });
         
         Button complexTable = new Button("Table Layout(complex)");
@@ -177,7 +175,7 @@ public class LayoutsDemo extends Demo {
             resetMargin(colorsContainer);
             colorsContainer.removeAll();
             buildComplexTableUI(colorsContainer);
-            colorsContainer.animateLayoutAndWait(1000);
+            colorsContainer.animateLayout(1000);
         });
         
         Button layered = new Button("Layered Layout");
@@ -188,7 +186,7 @@ public class LayoutsDemo extends Demo {
             // Increese the margin by 3 mm for every Component in the container for better
             //   visual effect of the LayeredLayout.
             setMarginForLayeredLayout(colorsContainer);
-            colorsContainer.animateLayoutAndWait(1000);
+            colorsContainer.animateLayout(1000);
         });
         
         // Make a Button container 
@@ -216,7 +214,7 @@ public class LayoutsDemo extends Demo {
 
         // Make an anonymous claas that overide calcPreferredSize to fit exactly a half of the screen.
         // Altervatively you could use TableLayout instead of BorderLayout where i could explicitly define the height in percentages.
-        //   or GridLayout that would devine the ContentPane by 2 for every Component within it. 
+        //   or GridLayout that would divide the ContentPane by 2 for every Component within it. 
         colorsContainer = new Container (new BoxLayout(BoxLayout.Y_AXIS)){
             @Override
             protected Dimension calcPreferredSize(){

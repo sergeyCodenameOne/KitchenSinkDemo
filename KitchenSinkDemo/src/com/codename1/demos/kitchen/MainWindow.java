@@ -49,8 +49,8 @@ public class MainWindow {
         Demo inputDemo = new InputDemo(mainWindow);
         
         //add demos components
-        mainWindow.add(inputDemo.makeDemo());
-        mainWindow.add(layoutsDemo.makeDemo());
+        mainWindow.add(inputDemo.createDemo());
+        mainWindow.add(layoutsDemo.createDemo());
         
         return mainWindow;
     }
