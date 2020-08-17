@@ -149,3 +149,25 @@ InputDemoTextFieldsAndSaveButton{
 CameraAvatar{
     background-color: #ff0000;
 }
+
+ContactMainInfo{
+    background-color: #ffffff;
+}
+
+ContactsRedButton{
+    background-color: #ff0000;
+    border-radius: 2mm;
+    color: white;
+}
+
+ContactsGreenButton{
+    background-color: #00ff00;
+    border-radius: 2mm;
+    color: black;
+}
+
+ContactsBlueButton{
+    background-color: #37a0ff;
+    border-radius: 2mm;
+    color: black;
+}

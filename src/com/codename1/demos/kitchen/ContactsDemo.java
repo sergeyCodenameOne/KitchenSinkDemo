@@ -26,12 +26,15 @@ import static com.codename1.ui.util.Resources.getGlobalResources;
 import static com.codename1.contacts.ContactsManager.deleteContact;
 import static com.codename1.ui.CN.dial;
 import com.codename1.components.FloatingActionButton;
+import com.codename1.components.InfiniteProgress;
 import com.codename1.components.MultiButton;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.ShareButton;
 import com.codename1.contacts.Contact;
 import com.codename1.ui.Button;
 import com.codename1.ui.CN;
+import static com.codename1.ui.CN.callSerially;
+import static com.codename1.ui.CN.invokeAndBlock;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
@@ -42,8 +45,8 @@ import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.SwipeableContainer;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.layouts.FlowLayout;
 
 public class ContactsDemo extends Demo{
 
@@ -51,12 +54,11 @@ public class ContactsDemo extends Demo{
         init("Contacts", getGlobalResources().getImage("icon.png"), parentForm);
     }
 
-    
     @Override
     public Component createDemo() {
         ScaleImageLabel imageLabel = new ScaleImageLabel(getDemoImage().scaled(CommonBehavior.getImageWidth(), CommonBehavior.getImageHeight()));
         Button button = new Button(getDemoId());
-        button.addActionListener(e-> createForm().show());
+        button.addActionListener(e-> createAndShowForm());
         
         Container mainWindowComponent = BoxLayout.encloseY(imageLabel, 
                                                                 button);
@@ -64,14 +66,12 @@ public class ContactsDemo extends Demo{
         return mainWindowComponent;
     }
 
-    private Form createForm(){
-        Form contactsForm = new Form(new BoxLayout(BoxLayout.Y_AXIS));
+    private void createAndShowForm(){
+        Form contactsForm = new Form("Contacts", new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER));
         Toolbar toolBar = contactsForm.getToolbar();
         
         // Toolbar add back button
-        toolBar.addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e->{
-            getParentForm().show();
-        });
+        toolBar.addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> getParentForm().show());
         
         // Toolbar add info button 
         toolBar.addMaterialCommandToRightBar("", FontImage.MATERIAL_INFO, e->{
@@ -80,34 +80,53 @@ public class ContactsDemo extends Demo{
                         "JavaScript) in which case we fallback to fake contacts.", "OK", null);
         });
         
-        Contact contacts[] = Display.getInstance().getAllContacts(true, true, false, true, false, false);
-        for (Contact currentContact : contacts){
-            contactsForm.add(createContactComponent(currentContact));
-        }
-        
         // Add new Contact button.
-        FloatingActionButton addNew = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD, "AddNewContactButton");
-        addNew.bindFabToContainer(contactsForm.getContentPane(), Component.RIGHT, Component.BOTTOM);
+        FloatingActionButton addNewButton = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
+        Container bindFabToContainer = addNewButton.bindFabToContainer(contactsForm.getContentPane(), Component.RIGHT, Component.BOTTOM);
         
-        return contactsForm;
+        // getAllContacts can take long time so we add infiniteProgress to modify user experience.
+        contactsForm.add(BorderLayout.CENTER, new InfiniteProgress());
+        contactsForm.show();
+        
+        // Create new background Thread that will get all the contacts.
+        invokeAndBlock(()->{
+            Contact contacts[] = Display.getInstance().getAllContacts(true, true, false, true, false, false);
+                
+            // Return to the EDT for edit the UI (the UI should be edited only within the EDT).
+            callSerially(()->{
+                contactsForm.removeAll();
+                contactsForm.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+               
+                // Tip: set container as scrollable on Y axis when the 
+                //   container hold swipeable contant can have bad influence on the UX.
+                contactsForm.getContentPane().setScrollableY(true);
+                for (Contact currentContact : contacts){
+                    contactsForm.add(createContactComponent(currentContact));
+                    contactsForm.revalidate();
+                }
+            });
+        }); 
     }
     
     private Component createContactComponent(Contact contact){
-        MultiButton button = new MultiButton(contact.getDisplayName());
+        MultiButton contactInfo = new MultiButton(contact.getDisplayName());
+        contactInfo.setUIID("ContactMainInfo");
         Image contactImage = contact.getPhoto();
+        
+        // Set default avatar for contacts without avatar picture.
         if (contactImage == null){
             contactImage = getGlobalResources().getImage("default-contact-pic.jpg");
         }
         contactImage = contactImage.fill(CN.convertToPixels(10), CN.convertToPixels(10));
         contactImage = contactImage.applyMask(CommonBehavior.getRoundMask(contactImage.getHeight()));
-        button.setIcon(contactImage);
+        contactInfo.setIcon(contactImage);
         
         // Add call button. 
-        Button call = new Button(FontImage.MATERIAL_CALL, 6f, "ContactsButton");
+        Button call = new Button(FontImage.MATERIAL_CALL, 6f, "ContactsGreenButton");
         call.addActionListener(e-> dial(contact.getPrimaryPhoneNumber()));
         
         // Add info button.
-        Button info = new Button(FontImage.MATERIAL_INFO, 6f, "ContactsButton");
+        Button info = new Button(FontImage.MATERIAL_INFO, 6f, "ContactsBlueButton");
         info.addActionListener(e->{
             Dialog infoDialog = new Dialog(contact.getDisplayName(), new BoxLayout(BoxLayout.Y_AXIS));
             infoDialog.add(new Label("Phone: " + contact.getPrimaryPhoneNumber()));
@@ -123,26 +142,26 @@ public class ContactsDemo extends Demo{
 
         // Add share button.
         ShareButton share = new ShareButton();
+        share.setUIID("ContactsGreenButton");
         share.setMaterialIcon(FontImage.MATERIAL_SHARE, 6f);  // Change the size of the icon.
         share.setTextToShare(contact.getDisplayName() + " phone: " + contact.getPrimaryPhoneNumber());
         
         // Add delete Button.
-        Button delete = new Button(FontImage.MATERIAL_DELETE, 6f, "ContactsButton");
+        Button delete = new Button(FontImage.MATERIAL_DELETE, 6f, "ContactsRedButton");
      
-        Container callInfoShare = FlowLayout.encloseCenter(call, info, share);
-        SwipeableContainer cantactComponent = new SwipeableContainer(callInfoShare, delete, button);
+        Container callInfoShare = BoxLayout.encloseX(call, share, info);
+        SwipeableContainer contactComponent = new SwipeableContainer(callInfoShare, delete, contactInfo);
         
         // Add action listener to delete button so it will delete the contacts from the mobile contats and from the app contacts. 
         delete.addActionListener(e->{
             if (Dialog.show("Delete", "This will delete the contact permanently!\nAre you sure?", "Delete", "Cancel")){
                 if (contact.getId()!= null){
-                
+                    deleteContact(contact.getId());
+                    contactComponent.remove();
+                    Display.getInstance().getCurrent().revalidate();
                 }
-                deleteContact(contact.getId());
-                cantactComponent.remove();
-                Display.getInstance().getCurrent().revalidate();
             }
         });
-        return cantactComponent;
+        return contactComponent;
     }
 }

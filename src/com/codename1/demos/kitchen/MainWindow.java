@@ -45,15 +45,15 @@ public class MainWindow {
         initToolBar(mainWindow.getToolbar());
 
         //create demos
-        Demo layoutsDemo = new LayoutsDemo(mainWindow);   
-        Demo inputDemo = new InputDemo(mainWindow);
-        Demo contactsDemo = new ContactsDemo(mainWindow);
+        Demo demos[] = {new LayoutsDemo(mainWindow),
+                        new InputDemo(mainWindow),
+                        new ContactsDemo(mainWindow),
+                        new VideoDemo(mainWindow)
+        };
         
-        //add demos components
-        mainWindow.add(inputDemo.createDemo());
-        mainWindow.add(layoutsDemo.createDemo());
-        mainWindow.add(contactsDemo.createDemo());
-        
+        for(Demo demo : demos){
+            mainWindow.add(demo.createDemo());
+        }
         return mainWindow;
     }
     

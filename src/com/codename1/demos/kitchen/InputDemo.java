@@ -29,6 +29,7 @@ import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.Switch;
 import com.codename1.components.ToastBar;
 import com.codename1.components.ToastBar.Status;
+import com.codename1.io.Log;
 import com.codename1.ui.Button;
 import static com.codename1.ui.CN.openGallery;
 import com.codename1.ui.CN1Constants;
@@ -165,8 +166,9 @@ public class InputDemo extends Demo{
                    Image capturedImage = Image.createImage(Capture.capturePhoto()).fill(cameraButton.getIcon().getWidth(), cameraButton.getIcon().getHeight());
                    capturedImage = capturedImage.applyMask(CommonBehavior.getRoundMask(cameraButton.getIcon().getWidth()));
                    cameraButton.setIcon(capturedImage);
-               }catch(IOException eeee){
+               }catch(IOException err){
                    ToastBar.showErrorMessage("An error occured while loading the image");
+                   Log.e(err);
                }
             }else{
                 openGallery(ee -> {
@@ -177,6 +179,7 @@ public class InputDemo extends Demo{
                             cameraButton.setIcon(capturedImage);
                         } catch(IOException err) {
                             ToastBar.showErrorMessage("An error occured while loading the image");
+                            Log.e(err);
                         }
                     }                    
                 }, CN1Constants.GALLERY_IMAGE);
