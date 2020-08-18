@@ -27,11 +27,6 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 
 
-/**
- *
- * @author serge
- */
-
 // This is the base class for all the demos. 
 public abstract class Demo{
     

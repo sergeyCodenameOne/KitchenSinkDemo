@@ -48,7 +48,8 @@ public class MainWindow {
         Demo demos[] = {new LayoutsDemo(mainWindow),
                         new InputDemo(mainWindow),
                         new ContactsDemo(mainWindow),
-                        new VideoDemo(mainWindow)
+                        new VideoDemo(mainWindow),
+                        new SalesDemo(mainWindow)
         };
         
         for(Demo demo : demos){

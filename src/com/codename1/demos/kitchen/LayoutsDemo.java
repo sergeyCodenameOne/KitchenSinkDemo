@@ -22,7 +22,6 @@
  */
 package com.codename1.demos.kitchen;
 
-import static com.codename1.ui.CN.*;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;

@@ -171,3 +171,24 @@ ContactsBlueButton{
     border-radius: 2mm;
     color: black;
 }
+
+PieChartHeadline{
+    border: none;
+    background-color: #dee3e9;
+    text-align: center;
+    font-size: 4mm;
+}
+
+PieChartEvenTextField{
+    /*cn1-derive: TextField;*/
+    font-size: 3mm;
+    margin: 0;
+}
+
+PieChartOddTextField{
+    /*cn1-derive: TextField;*/
+    margin: 0;
+    font-size: 3mm;
+    background-color: #eeeeef;
+}
+
