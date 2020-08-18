@@ -23,12 +23,15 @@
 package com.codename1.demos.kitchen;
 
 import com.codename1.capture.Capture;
+import com.codename1.components.InfiniteProgress;
 import com.codename1.components.MediaPlayer;
 import com.codename1.components.MultiButton;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.ToastBar;
+import com.codename1.io.ConnectionRequest;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.io.Log;
+import com.codename1.io.NetworkManager;
 import com.codename1.io.Util;
 import com.codename1.media.Media;
 import com.codename1.media.MediaManager;
@@ -44,10 +47,12 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 public class VideoDemo extends Demo {
-    private static final String CAPTURED_VIDEO_NAME = FileSystemStorage.getInstance().getAppHomePath() + "captured.mp4";
+    private static final String CAPTURED_VIDEO = FileSystemStorage.getInstance().getAppHomePath() + "captured.mp4";
+    private static final String DOWNLOADED_VIDEO = FileSystemStorage.getInstance().getAppHomePath() + "hello-codenameone.mp4";
     
     public VideoDemo(Form parentForm) {
         init("Video", getGlobalResources().getImage("icon.png"), parentForm);
@@ -77,13 +82,28 @@ public class VideoDemo extends Demo {
                         "show the ability to record a video that can play later.", "OK", null);
         });
         
+        MultiButton downloadButton = new MultiButton("Download for offline mode");
+        downloadButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_SYSTEM_UPDATE, downloadButton.getAllStyles()));
+        downloadButton.addActionListener(e->{
+            ToastBar.showMessage("Downloading", FontImage.MATERIAL_SYSTEM_UPDATE, 3000);
+            invokeAndBlock(()->{
+                downLoadFile("https://www.codenameone.com/files/hello-codenameone.mp4");
+            });
+        });
+        
         MultiButton playOfflineButton = new MultiButton("Play offline video");
         playOfflineButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_VIDEO_COLLECTION, playOfflineButton.getAllStyles()));
-//        playOfflineButton.addActionListener();
+        playOfflineButton.addActionListener(e->{
+            if (existsInFileSystem(DOWNLOADED_VIDEO)){
+                playVideoOnNewForm(DOWNLOADED_VIDEO, videoDemoForm);
+            }else{
+                ToastBar.showErrorMessage("For playing the video in offline mode you should first to download the video");
+            }
+        });
         
         MultiButton playOnlineButton = new MultiButton("Play online video");
         playOnlineButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_VIDEO_COLLECTION, playOnlineButton.getAllStyles()));
-//        playOnlineButton.addActionListener();
+        playOnlineButton.addActionListener(e -> playVideoOnNewForm("https://www.codenameone.com/files/hello-codenameone.mp4", videoDemoForm));
         
         MultiButton captureVideoButton = new MultiButton("Record Video");
         captureVideoButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_VIDEO_CALL, captureVideoButton.getAllStyles()));
@@ -91,7 +111,7 @@ public class VideoDemo extends Demo {
             String capturedVideo = Capture.captureVideo();
             if(capturedVideo != null){
                 try{
-                    Util.copy(openFileInputStream(capturedVideo), openFileOutputStream(CAPTURED_VIDEO_NAME));
+                    Util.copy(openFileInputStream(capturedVideo), openFileOutputStream(CAPTURED_VIDEO));
                 }catch(IOException err) {
                     Log.e(err);
                 }
@@ -101,19 +121,21 @@ public class VideoDemo extends Demo {
         MultiButton playCaptured = new MultiButton("Play last recorded Video");
         playCaptured.setIcon(FontImage.createMaterial(FontImage.MATERIAL_VIDEO_LABEL, playCaptured.getAllStyles()));
         playCaptured.addActionListener(e->{
-            if (existsInFileSystem(CAPTURED_VIDEO_NAME)){
-                playVideoOnNewForm(CAPTURED_VIDEO_NAME, videoDemoForm);
+            if (existsInFileSystem(CAPTURED_VIDEO)){
+                playVideoOnNewForm(CAPTURED_VIDEO, videoDemoForm);
             }
             else{
                 ToastBar.showErrorMessage("you should to capture video first");
             }
         });
         
-        videoDemoForm.addAll(playOfflineButton, playOnlineButton, captureVideoButton, playCaptured);
+        videoDemoForm.addAll(downloadButton, playOfflineButton, playOnlineButton, captureVideoButton, playCaptured);
         videoDemoForm.show();
     }
     private void playVideoOnNewForm(String fileURI, Form parentForm){
         Form videoForm = new Form("Video", new BorderLayout());
+        videoForm.add(CENTER, new InfiniteProgress());
+        videoForm.show();
         videoForm.getToolbar().setBackCommand("", e->{
             parentForm.show();
         });
@@ -124,15 +146,40 @@ public class VideoDemo extends Demo {
                     if(capturedVideo != null){
                         capturedVideo.setNativePlayerMode(true);
                         capturedVideo.prepare();
-                        videoForm.add(BorderLayout.CENTER, new MediaPlayer(capturedVideo));
-                        videoForm.show();
+                        MediaPlayer mediaPlayer = new MediaPlayer(capturedVideo);
+                        mediaPlayer.setAutoplay(true);
+                        videoForm.removeAll();
+                        videoForm.add(BorderLayout.CENTER, mediaPlayer);
+                        videoForm.getContentPane().revalidate();
                     }
                 });
             }catch(IOException error){
                 Log.e(error);
                 ToastBar.showErrorMessage("Error loading video");
             }
-            
         });
+    }
+    
+    private void downLoadFile(String file){
+        ConnectionRequest request = new ConnectionRequest(file){
+            
+            // This method run on network thread and cannot modify the UI.
+            @Override
+            protected void readResponse(InputStream input) {
+                try{
+                    Util.copy(input, openFileOutputStream(DOWNLOADED_VIDEO));
+                }catch(IOException err) {
+                    Log.e(err);
+                }
+            }
+            
+            // This method run on EDT and it can modify the UI.
+            // Another approach is to wrap the UI modification with callSerially in readResponse mothod.
+            @Override
+            protected void postResponse() {
+                 ToastBar.showInfoMessage("Your download has completed");
+            }
+        };
+        NetworkManager.getInstance().addToQueue(request);
     }
 }
