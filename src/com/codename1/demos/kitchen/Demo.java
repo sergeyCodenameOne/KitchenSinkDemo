@@ -26,8 +26,9 @@ import com.codename1.ui.Component;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 
-
-// This is the base class for all the demos. 
+/** 
+ * This is the base class for all the demos.
+ */
 public abstract class Demo{
     
     private String id;

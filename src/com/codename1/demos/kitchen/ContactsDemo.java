@@ -24,7 +24,6 @@ package com.codename1.demos.kitchen;
 
 import static com.codename1.ui.util.Resources.getGlobalResources;
 import static com.codename1.contacts.ContactsManager.deleteContact;
-import static com.codename1.ui.CN.dial;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.InfiniteProgress;
 import com.codename1.components.MultiButton;
@@ -33,8 +32,7 @@ import com.codename1.components.ShareButton;
 import com.codename1.contacts.Contact;
 import com.codename1.ui.Button;
 import com.codename1.ui.CN;
-import static com.codename1.ui.CN.callSerially;
-import static com.codename1.ui.CN.invokeAndBlock;
+import static com.codename1.ui.CN.*;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
@@ -82,14 +80,14 @@ public class ContactsDemo extends Demo{
         
         // Add new Contact button.
         FloatingActionButton addNewButton = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
-        Container bindFabToContainer = addNewButton.bindFabToContainer(contactsForm.getContentPane(), Component.RIGHT, Component.BOTTOM);
+        addNewButton.bindFabToContainer(contactsForm.getContentPane(), Component.RIGHT, Component.BOTTOM);
         
         // getAllContacts can take long time so we add infiniteProgress to modify user experience.
         contactsForm.add(BorderLayout.CENTER, new InfiniteProgress());
         contactsForm.show();
         
         // Create new background Thread that will get all the contacts.
-        invokeAndBlock(()->{
+        scheduleBackgroundTask(()->{
             Contact contacts[] = Display.getInstance().getAllContacts(true, true, false, true, false, false);
                 
             // Return to the EDT for edit the UI (the UI should be edited only within the EDT).
@@ -97,8 +95,6 @@ public class ContactsDemo extends Demo{
                 contactsForm.removeAll();
                 contactsForm.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
                
-                // Tip: set container as scrollable on Y axis when the 
-                //   container hold swipeable contant can have bad influence on the UX.
                 contactsForm.getContentPane().setScrollableY(true);
                 for (Contact currentContact : contacts){
                     contactsForm.add(createContactComponent(currentContact));

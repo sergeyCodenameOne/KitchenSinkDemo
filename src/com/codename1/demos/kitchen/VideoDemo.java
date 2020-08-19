@@ -28,11 +28,10 @@ import com.codename1.components.MediaPlayer;
 import com.codename1.components.MultiButton;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.ToastBar;
-import com.codename1.io.ConnectionRequest;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.io.Log;
-import com.codename1.io.NetworkManager;
 import com.codename1.io.Util;
+import static com.codename1.io.Util.downloadUrlToFileSystemInBackground;
 import com.codename1.media.Media;
 import com.codename1.media.MediaManager;
 import com.codename1.ui.Button;
@@ -47,7 +46,6 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 import java.io.IOException;
-import java.io.InputStream;
 
 
 public class VideoDemo extends Demo {
@@ -85,10 +83,11 @@ public class VideoDemo extends Demo {
         MultiButton downloadButton = new MultiButton("Download for offline mode");
         downloadButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_SYSTEM_UPDATE, downloadButton.getAllStyles()));
         downloadButton.addActionListener(e->{
-            ToastBar.showMessage("Downloading", FontImage.MATERIAL_SYSTEM_UPDATE, 3000);
-            invokeAndBlock(()->{
-                downLoadFile("https://www.codenameone.com/files/hello-codenameone.mp4");
-            });
+            if (!existsInFileSystem(DOWNLOADED_VIDEO)){
+                ToastBar.showMessage("Downloading", FontImage.MATERIAL_SYSTEM_UPDATE, 3000);
+                downloadFile("https://www.codenameone.com/files/hello-codenameone.mp4");
+            }
+
         });
         
         MultiButton playOfflineButton = new MultiButton("Play offline video");
@@ -160,26 +159,10 @@ public class VideoDemo extends Demo {
         });
     }
     
-    private void downLoadFile(String file){
-        ConnectionRequest request = new ConnectionRequest(file){
-            
-            // This method run on network thread and cannot modify the UI.
-            @Override
-            protected void readResponse(InputStream input) {
-                try{
-                    Util.copy(input, openFileOutputStream(DOWNLOADED_VIDEO));
-                }catch(IOException err) {
-                    Log.e(err);
-                }
-            }
-            
-            // This method run on EDT and it can modify the UI.
-            // Another approach is to wrap the UI modification with callSerially in readResponse mothod.
-            @Override
-            protected void postResponse() {
-                 ToastBar.showInfoMessage("Your download has completed");
-            }
-        };
-        NetworkManager.getInstance().addToQueue(request);
+    private void downloadFile(String Url){
+        
+        downloadUrlToFileSystemInBackground(Url, DOWNLOADED_VIDEO, (e)-> {
+            callSerially(()-> ToastBar.showInfoMessage("Your download has completed"));
+        });
     }
 }
