@@ -23,49 +23,62 @@
 package com.codename1.demos.kitchen;
 
 
-import static com.codename1.ui.CN.execute;
-import static com.codename1.ui.CN.getPlatformName;
-import static com.codename1.ui.CN.isNativeShareSupported;
-import static com.codename1.ui.CN.share;
+import com.codename1.components.ScaleImageLabel;
+import com.codename1.ui.Button;
+import static com.codename1.ui.CN.*;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.animations.CommonTransitions;
 import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
 
 
 public class MainWindow {
     
-    public static Form buildForm(){
-        Form mainWindow = new Form("Kitchen Sink", new GridLayout(3));
-        mainWindow.getContentPane().setUIID("MainWindowContentPane");
-        initToolBar(mainWindow.getToolbar());
+    private Container tabletContentPane; 
+    
+    public Form buildForm(){
+        Form mainWindow = new Form("Kitchen Sink", new BorderLayout());
 
         //create demos
-        Demo demos[] = {new LayoutsDemo(mainWindow),
+        Demo[] demos = {new LayoutsDemo(mainWindow),
                         new InputDemo(mainWindow),
                         new ContactsDemo(mainWindow),
                         new VideoDemo(mainWindow),
                         new SalesDemo(mainWindow)
+                        
         };
         
-        for(Demo demo : demos){
-            mainWindow.add(demo.createDemo());
+        if (isTablet()){
+            Toolbar.setPermanentSideMenu(true);
+            tabletContentPane = mainWindow.getContentPane();
+            tabletContentPane.add(BorderLayout.CENTER, demos[0].createContentPane());
+            initToolbarForTablet(mainWindow.getToolbar(), demos);
+            return mainWindow;
+            
+        }else{
+            mainWindow.setLayout(new GridLayout(3));
+            initToolbarForPhone(mainWindow.getToolbar());
+
+            for(Demo demo : demos){
+                mainWindow.add(createDemoComponentForPhone(demo));
+            }
+            return mainWindow;
         }
-        return mainWindow;
     }
     
-    //TODO add search and reorder butten
-    private static void initToolBar(Toolbar toolbar){
+    private void initToolbarForPhone(Toolbar toolbar){
         toolbar.setUIID("MyToolbar");
-        Label sideBarTitle = new Label("KitchenSink Demo");
-        sideBarTitle.setUIID("SideBarTitle");
-                
+        Label sideBarTitle = new Label("KitchenSink");
+
         Container sideBarTitleArea = BorderLayout.center(sideBarTitle);
-        sideBarTitleArea.setUIID("SideBarTitleArea");
         toolbar.addComponentToSideMenu(sideBarTitleArea);
 
         // add side bar components        
@@ -85,7 +98,42 @@ public class MainWindow {
         });
     }
     
-    private static String getAppstoreURL() {
+    private void initToolbarForTablet(Toolbar toolbar, Demo[] demos){
+        Label sideBarTitle = new Label("KitchenSink");
+                
+        Container sideBarTitleArea = BorderLayout.center(sideBarTitle);
+        toolbar.addComponentToSideMenu(sideBarTitleArea);
+        
+        for (Demo demo : demos){
+            toolbar.addComponentToLeftSideMenu(createDemoComponentForTablet(demo));
+        }
+    }
+    
+    private Component createDemoComponentForTablet(Demo demo){
+        Button demoComponent = new Button(demo.getDemoId());
+        demoComponent.setUIID("TabletSideNavigationButton");
+        Image demoImage = demo.getDemoImage().fill(CommonBehavior.getDemoImageWidthForTablet(), CommonBehavior.getDemoImageWidthForTablet());
+        demoImage = demoImage.applyMask(CommonBehavior.getRoundMask(demoImage.getWidth()));
+        demoComponent.setIcon(demoImage);
+        demoComponent.addActionListener(e->{
+            tabletContentPane.replace(tabletContentPane.getComponentAt(0), demo.createContentPane(), CommonTransitions.createSlide(CommonTransitions.SLIDE_HORIZONTAL, true, 200));
+        });
+        return demoComponent;
+    }
+    
+    private Component createDemoComponentForPhone(Demo demo){
+        ScaleImageLabel imageLabel = new ScaleImageLabel(demo.getDemoImage().scaled(CommonBehavior.getDemoImageWidthForPhone(), CommonBehavior.getDemoImageHeightForPhone()));
+        Button button = new Button(demo.getDemoId());
+        button.addActionListener(e-> createAndShowForm(demo));
+        
+        Container demoComponent = BoxLayout.encloseY(imageLabel, 
+                                                                button);
+        demoComponent.setUIID("DemoComponent");
+        
+        return demoComponent;
+    }
+    
+    private String getAppstoreURL() {
         if(getPlatformName().equals("ios")) {
             return "https://itunes.apple.com/us/app/kitchen-sink-codename-one/id635048865";
         }
@@ -93,5 +141,19 @@ public class MainWindow {
             return "https://play.google.com/store/apps/details?id=com.codename1.demos.kitchen";
         }
         return null;
+    }
+    
+    private void createAndShowForm(Demo demo){
+        Form demoForm = new Form(demo.getDemoId(), new BorderLayout());
+        Toolbar toolbar = demoForm.getToolbar();
+        
+        // Toolbar add info and back buttons.
+        toolbar.setBackCommand("", e-> demo.getParentForm().show());
+        toolbar.addMaterialCommandToRightBar("", FontImage.MATERIAL_INFO, e->{
+            Dialog.show("Information", demo.getDemoId(), "OK", null);
+        });
+        
+        demoForm.add(BorderLayout.CENTER, demo.createContentPane());
+        demoForm.show();
     }
 }

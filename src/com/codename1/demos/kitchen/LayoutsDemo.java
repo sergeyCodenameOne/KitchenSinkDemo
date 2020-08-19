@@ -22,16 +22,12 @@
  */
 package com.codename1.demos.kitchen;
 
-import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
-import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
-import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
-import com.codename1.ui.Toolbar;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import static com.codename1.ui.layouts.BorderLayout.CENTER_BEHAVIOR_CENTER;
@@ -51,47 +47,14 @@ public class LayoutsDemo extends Demo {
     private Container colorsContainer;
 
     public LayoutsDemo(Form parentForm){
-        init("Layouts", getGlobalResources().getImage("icon.png"), parentForm);
-    }
-    
-    public Component createDemo(){
-        ScaleImageLabel imageLabel = new ScaleImageLabel(getDemoImage().scaled(CommonBehavior.getImageWidth(), CommonBehavior.getImageHeight()));
-        Button button = new Button(getDemoId());
-        button.addActionListener(e-> {
-            createForm().show();
-        });
-        
-        Container mainWindowComponent = BoxLayout.encloseY(imageLabel, 
-                                                                button);
-        mainWindowComponent.setUIID("DemoComponent");
-        return mainWindowComponent;
-    
-    }
-    
-    private Form createForm(){
-        Form themesForm = new Form(getDemoId(), new BorderLayout());
-        Toolbar toolBar = themesForm.getToolbar();
-        
-        //add back button
-        toolBar.addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e->{
-            colorsContainer = null;
-            colorLabelList = null;
-            getParentForm().show();
-        });
-        
-        //add info button
-        toolBar.addMaterialCommandToRightBar("", FontImage.MATERIAL_INFO, e->{
-            Dialog.show("Information", "Layouts allow the UI of Codename One to adapt to the different resolutions and DPI's supported" +
+        init("Layouts", getGlobalResources().getImage("icon.png"), parentForm,
+                        "Layouts allow the UI of Codename One to adapt to the different resolutions and DPI's supported" +
                         " by the various OS's. This is just the tip of the iceberg. Layouts can be nested deeply and there are very " +
-                        "complex layouts such as MiG, Group, GridBag etc. that aren't fully represented here...", "OK", null);
-        });
-        
-        initContentPane(themesForm.getContentPane());      
-        return themesForm;
+                        "complex layouts such as MiG, Group, GridBag etc. that aren't fully represented here...");
     }
-        
-    private void initContentPane(Container contentPane){
-        
+    
+    public Container createContentPane(){
+        Container contentPane = new Container(new BorderLayout());
         Button flow = new Button("Flow Layout");
         flow.addActionListener(e-> {
             resetMargin(colorsContainer);
@@ -233,6 +196,8 @@ public class LayoutsDemo extends Demo {
         
         contentPane.add(BorderLayout.NORTH, colorsContainer);
         contentPane.add(BorderLayout.CENTER, buttonList);
+        
+        return contentPane;
     }
     
     // Reset the margin for all the components inside the given container.

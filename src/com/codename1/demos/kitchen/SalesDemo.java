@@ -22,6 +22,7 @@
  */
 package com.codename1.demos.kitchen;
 
+import static com.codename1.ui.CN.*;
 import com.codename1.charts.ChartComponent;
 import com.codename1.charts.models.CategorySeries;
 import com.codename1.charts.renderers.DefaultRenderer;
@@ -31,7 +32,6 @@ import com.codename1.charts.views.PieChart;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.l10n.L10NManager;
 import com.codename1.ui.Button;
-import static com.codename1.ui.CN.convertToPixels;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
@@ -53,40 +53,18 @@ import static com.codename1.ui.util.Resources.getGlobalResources;
 public class SalesDemo extends Demo {
 
     public SalesDemo(Form parentForm) {
-        init("Sales", getGlobalResources().getImage("icon.png"), parentForm);
+        init("Sales", getGlobalResources().getImage("icon.png"), parentForm,
+                        "You can play videos either from remote or local sources very easily in Codename One, here we also " +
+                        "show the ability to record a video that can play later.");
     }
 
-    @Override
-    public Component createDemo() {
-        ScaleImageLabel imageLabel = new ScaleImageLabel(getDemoImage().scaled(CommonBehavior.getImageWidth(), CommonBehavior.getImageHeight()));
-        Button button = new Button(getDemoId());
-        button.addActionListener(e-> createAndShowForm());
-        
-        Container mainWindowComponent = BoxLayout.encloseY(imageLabel, 
-                                                                button);
-        mainWindowComponent.setUIID("DemoComponent");
-        return mainWindowComponent;
-    }
     
-    private void createAndShowForm(){
-        Form SalesForm = new Form("Sales", new BorderLayout());
+    public Container createContentPane(){
+        Tabs demoContainer = new Tabs();
 
-        // Toolbar add back button
-        Toolbar toolBar = SalesForm.getToolbar();
-        toolBar.addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> getParentForm().show());
-        
-        // Toolbar add info button 
-        toolBar.addMaterialCommandToRightBar("", FontImage.MATERIAL_INFO, e->{
-            Dialog.show("Information", "You can play videos either from remote or local sources very easily in Codename One, here we also " +
-                        "show the ability to record a video that can play later.", "OK", null);
-        });
-        
-        Tabs tabs = new Tabs();
-
-        tabs.addTab("Categories", FontImage.createMaterial(FontImage.MATERIAL_PIE_CHART, tabs.getUnselectedStyle()), createCategoriesContainer());
-        tabs.addTab("Annual review", FontImage.createMaterial(FontImage.MATERIAL_SHOW_CHART, tabs.getUnselectedStyle()), createAnnualContainer());
-        SalesForm.add(BorderLayout.CENTER, tabs);
-        SalesForm.show();
+        demoContainer.addTab("Categories", FontImage.createMaterial(FontImage.MATERIAL_PIE_CHART, demoContainer.getUnselectedStyle()), createCategoriesContainer());
+        demoContainer.addTab("Annual review", FontImage.createMaterial(FontImage.MATERIAL_SHOW_CHART, demoContainer.getUnselectedStyle()), createAnnualContainer());
+        return demoContainer;
     }
     
     private Container createCategoriesContainer(){

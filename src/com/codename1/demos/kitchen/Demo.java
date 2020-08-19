@@ -22,7 +22,7 @@
  */
 package com.codename1.demos.kitchen;
 
-import com.codename1.ui.Component;
+import com.codename1.ui.Container;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 
@@ -34,11 +34,17 @@ public abstract class Demo{
     private String id;
     private Image demoImage;
     private Form parentForm;
+    private String info;
     
-    protected void init(String id, Image demoImage, Form parentForm){
+    protected void init(String id, Image demoImage, Form parentForm, String info){
         this.id = id;
         this.demoImage = demoImage;
         this.parentForm = parentForm;
+        this.info = info;
+    }
+
+    protected String getInfo() {
+        return info;
     }
      
     protected String getDemoId(){
@@ -53,5 +59,5 @@ public abstract class Demo{
         return parentForm;
     }
     
-    abstract public Component createDemo();
+    abstract public Container createContentPane();
 }

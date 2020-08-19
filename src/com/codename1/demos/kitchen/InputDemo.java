@@ -22,18 +22,16 @@
  */
 package com.codename1.demos.kitchen;
 
+import static com.codename1.ui.CN.*;
+import static com.codename1.ui.util.Resources.getGlobalResources;
 import com.codename1.capture.Capture;
 import com.codename1.components.FloatingActionButton;
-import com.codename1.components.OnOffSwitch;
-import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.Switch;
 import com.codename1.components.ToastBar;
 import com.codename1.components.ToastBar.Status;
 import com.codename1.io.Log;
 import com.codename1.ui.Button;
-import static com.codename1.ui.CN.openGallery;
 import com.codename1.ui.CN1Constants;
-import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
@@ -43,12 +41,10 @@ import com.codename1.ui.Label;
 import com.codename1.ui.PickerComponent;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.TextComponent;
-import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
-import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.layouts.TextModeLayout;
-import static com.codename1.ui.util.Resources.getGlobalResources;
 import com.codename1.ui.validation.RegexConstraint;
 import com.codename1.ui.validation.Validator;
 import java.io.IOException;
@@ -56,39 +52,17 @@ import java.io.IOException;
 public class InputDemo extends Demo{
     
     public InputDemo(Form parentForm){
-        init("Input", getGlobalResources().getImage("icon.png"), parentForm);
-    }
-    
-    public Component createDemo(){
-        ScaleImageLabel imageLabel = new ScaleImageLabel(getDemoImage().scaled(CommonBehavior.getImageWidth(), CommonBehavior.getImageHeight()));
-        Button button = new Button(getDemoId());
-        button.addActionListener(e-> createForm().show());
-        
-        Container mainWindowComponent = BoxLayout.encloseY(imageLabel, 
-                                                                button);
-        mainWindowComponent.setUIID("DemoComponent");
-        return mainWindowComponent;
-    }
-    
-    private Form createForm(){
-        Form inputForm = new Form("Input", new BorderLayout());
-        Toolbar toolBar = inputForm.getToolbar();
-        
-        // Toolbar add back button
-        toolBar.addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e->{
-            getParentForm().show();
-        });
-        
-        // Toolbar add info button 
-        toolBar.addMaterialCommandToRightBar("", FontImage.MATERIAL_INFO, e->{
-            Dialog.show("Information", "Demonstrates basic usage of input facilities, device orientation behavior as well as adapting the UI to tablets." +
+        init("Input", getGlobalResources().getImage("icon.png"), parentForm,
+                        "Demonstrates basic usage of input facilities, device orientation behavior as well as adapting the UI to tablets." +
                         " This demo shows off a typical form with user information, different keyboard types, ability to capture an " +
-                        "avatar image and style it etc.", "OK", null);
-        });
+                        "avatar image and style it etc.");
+    }
+    
+    public Container createContentPane(){
         
+        Container demoContainer = new Container(new LayeredLayout());
         // Set UIID for background image.
-        Container contentPane = inputForm.getContentPane();
-        contentPane.setUIID("InputDemoContentPane");
+        demoContainer.setUIID("InputDemoContentPane");
         
         TextModeLayout textLayout = new TextModeLayout(6, 1);
         Container textFields = new Container(textLayout);
@@ -118,7 +92,6 @@ public class InputDemo extends Demo{
         textFields.add(password);
         textFields.add(bio);
         textFields.add(joinEmailList);
-        inputForm.setEditOnShow(name.getField());
 
         Button saveButton = new Button("save");
         
@@ -153,7 +126,7 @@ public class InputDemo extends Demo{
         textFieldsAndSaveButton.add(BorderLayout.CENTER, textFields);
         
         textFieldsAndSaveButton.setUIID("InputDemoTextFieldsAndSaveButton");
-        inputForm.add(BorderLayout.CENTER, textFieldsAndSaveButton);
+        demoContainer.add(BorderLayout.CENTER, textFieldsAndSaveButton);
 
         // Add camera button to the inout so the user can input his avatar photo. 
         FloatingActionButton.setIconDefaultSize(10);
@@ -184,13 +157,11 @@ public class InputDemo extends Demo{
                     }                    
                 }, CN1Constants.GALLERY_IMAGE);
             }
-            inputForm.revalidate();
+            getCurrentForm().revalidate();
         });
-       
-        inputForm.getLayeredPane().addComponent(cameraButton);
-        FlowLayout ll = (FlowLayout)(inputForm.getLayeredPane().getLayout());
-        ll.setAlign(Component.CENTER);
+        Container cameraButtonContainer = FlowLayout.encloseCenter(cameraButton);
+        demoContainer.addComponent(cameraButtonContainer);
 
-        return inputForm;
+        return demoContainer;
     }
 }

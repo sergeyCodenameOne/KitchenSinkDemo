@@ -27,7 +27,6 @@ import static com.codename1.contacts.ContactsManager.deleteContact;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.InfiniteProgress;
 import com.codename1.components.MultiButton;
-import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.ShareButton;
 import com.codename1.contacts.Contact;
 import com.codename1.ui.Button;
@@ -42,49 +41,27 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.SwipeableContainer;
-import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 
 public class ContactsDemo extends Demo{
 
     public ContactsDemo(Form parentForm) {
-        init("Contacts", getGlobalResources().getImage("icon.png"), parentForm);
+        init("Contacts", getGlobalResources().getImage("icon.png"), parentForm,
+                                "A list of contacts is a very common use case for developers, we tried to make this list as realistic as possible allowing" +
+                                " you to dial, email, share and even delete contacts. Notice that some platforms might not support contacts access (e.g. " +
+                                "JavaScript) in which case we fallback to fake contacts.");
     }
 
-    @Override
-    public Component createDemo() {
-        ScaleImageLabel imageLabel = new ScaleImageLabel(getDemoImage().scaled(CommonBehavior.getImageWidth(), CommonBehavior.getImageHeight()));
-        Button button = new Button(getDemoId());
-        button.addActionListener(e-> createAndShowForm());
-        
-        Container mainWindowComponent = BoxLayout.encloseY(imageLabel, 
-                                                                button);
-        mainWindowComponent.setUIID("DemoComponent");
-        return mainWindowComponent;
-    }
-
-    private void createAndShowForm(){
-        Form contactsForm = new Form("Contacts", new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER));
-        Toolbar toolBar = contactsForm.getToolbar();
-        
-        // Toolbar add back button
-        toolBar.addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> getParentForm().show());
-        
-        // Toolbar add info button 
-        toolBar.addMaterialCommandToRightBar("", FontImage.MATERIAL_INFO, e->{
-            Dialog.show("Information", "A list of contacts is a very common use case for developers, we tried to make this list as realistic as possible allowing" +
-                        " you to dial, email, share and even delete contacts. Notice that some platforms might not support contacts access (e.g. " +
-                        "JavaScript) in which case we fallback to fake contacts.", "OK", null);
-        });
-        
-        // Add new Contact button.
-        FloatingActionButton addNewButton = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
-        addNewButton.bindFabToContainer(contactsForm.getContentPane(), Component.RIGHT, Component.BOTTOM);
+    public Container createContentPane(){
+        Container demoContainer = new Container(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
         
         // getAllContacts can take long time so we add infiniteProgress to modify user experience.
-        contactsForm.add(BorderLayout.CENTER, new InfiniteProgress());
-        contactsForm.show();
+        demoContainer.add(BorderLayout.CENTER, new InfiniteProgress());
+
+        // Add new Contact button.
+        FloatingActionButton addNewButton = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
+        Container LayeredDemoContainer = addNewButton.bindFabToContainer(demoContainer, Component.RIGHT, Component.BOTTOM);
         
         // Create new background Thread that will get all the contacts.
         scheduleBackgroundTask(()->{
@@ -92,16 +69,16 @@ public class ContactsDemo extends Demo{
                 
             // Return to the EDT for edit the UI (the UI should be edited only within the EDT).
             callSerially(()->{
-                contactsForm.removeAll();
-                contactsForm.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-               
-                contactsForm.getContentPane().setScrollableY(true);
+                demoContainer.removeAll();
+                demoContainer.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+                demoContainer.setScrollableY(true);
                 for (Contact currentContact : contacts){
-                    contactsForm.add(createContactComponent(currentContact));
-                    contactsForm.revalidate();
+                    demoContainer.add(createContactComponent(currentContact));
+                    demoContainer.revalidate();
                 }
             });
         }); 
+        return LayeredDemoContainer;
     }
     
     private Component createContactComponent(Contact contact){

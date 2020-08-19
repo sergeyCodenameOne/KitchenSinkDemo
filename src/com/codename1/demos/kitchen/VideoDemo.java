@@ -26,7 +26,6 @@ import com.codename1.capture.Capture;
 import com.codename1.components.InfiniteProgress;
 import com.codename1.components.MediaPlayer;
 import com.codename1.components.MultiButton;
-import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.io.Log;
@@ -34,14 +33,10 @@ import com.codename1.io.Util;
 import static com.codename1.io.Util.downloadUrlToFileSystemInBackground;
 import com.codename1.media.Media;
 import com.codename1.media.MediaManager;
-import com.codename1.ui.Button;
 import static com.codename1.ui.CN.*;
-import com.codename1.ui.Component;
 import com.codename1.ui.Container;
-import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
@@ -53,33 +48,14 @@ public class VideoDemo extends Demo {
     private static final String DOWNLOADED_VIDEO = FileSystemStorage.getInstance().getAppHomePath() + "hello-codenameone.mp4";
     
     public VideoDemo(Form parentForm) {
-        init("Video", getGlobalResources().getImage("icon.png"), parentForm);
+        init("Video", getGlobalResources().getImage("icon.png"), parentForm, 
+                                                "You can play videos either from remote or local sources very easily in Codename One, here we also " +
+                                                "show the ability to record a video that can play later.");
     }
     
-    @Override
-    public Component createDemo() {
-        ScaleImageLabel imageLabel = new ScaleImageLabel(getDemoImage().scaled(CommonBehavior.getImageWidth(), CommonBehavior.getImageHeight()));
-        Button button = new Button(getDemoId());
-        button.addActionListener(e-> createAndShowForm());
-        
-        Container mainWindowComponent = BoxLayout.encloseY(imageLabel, 
-                                                                button);
-        mainWindowComponent.setUIID("DemoComponent");
-        return mainWindowComponent;
-    }
-    private void createAndShowForm(){
-        Form videoDemoForm = new Form("Video", new BoxLayout(BoxLayout.Y_AXIS));
-        
-        // Toolbar add back button
-        Toolbar toolBar = videoDemoForm.getToolbar();
-        toolBar.addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> getParentForm().show());
-        
-        // Toolbar add info button 
-        toolBar.addMaterialCommandToRightBar("", FontImage.MATERIAL_INFO, e->{
-            Dialog.show("Information", "You can play videos either from remote or local sources very easily in Codename One, here we also " +
-                        "show the ability to record a video that can play later.", "OK", null);
-        });
-        
+    public Container createContentPane(){
+        Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+      
         MultiButton downloadButton = new MultiButton("Download for offline mode");
         downloadButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_SYSTEM_UPDATE, downloadButton.getAllStyles()));
         downloadButton.addActionListener(e->{
@@ -94,7 +70,7 @@ public class VideoDemo extends Demo {
         playOfflineButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_VIDEO_COLLECTION, playOfflineButton.getAllStyles()));
         playOfflineButton.addActionListener(e->{
             if (existsInFileSystem(DOWNLOADED_VIDEO)){
-                playVideoOnNewForm(DOWNLOADED_VIDEO, videoDemoForm);
+                playVideoOnNewForm(DOWNLOADED_VIDEO, demoContainer.getComponentForm());
             }else{
                 ToastBar.showErrorMessage("For playing the video in offline mode you should first to download the video");
             }
@@ -102,7 +78,7 @@ public class VideoDemo extends Demo {
         
         MultiButton playOnlineButton = new MultiButton("Play online video");
         playOnlineButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_VIDEO_COLLECTION, playOnlineButton.getAllStyles()));
-        playOnlineButton.addActionListener(e -> playVideoOnNewForm("https://www.codenameone.com/files/hello-codenameone.mp4", videoDemoForm));
+        playOnlineButton.addActionListener(e -> playVideoOnNewForm("https://www.codenameone.com/files/hello-codenameone.mp4", demoContainer.getComponentForm()));
         
         MultiButton captureVideoButton = new MultiButton("Record Video");
         captureVideoButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_VIDEO_CALL, captureVideoButton.getAllStyles()));
@@ -121,15 +97,15 @@ public class VideoDemo extends Demo {
         playCaptured.setIcon(FontImage.createMaterial(FontImage.MATERIAL_VIDEO_LABEL, playCaptured.getAllStyles()));
         playCaptured.addActionListener(e->{
             if (existsInFileSystem(CAPTURED_VIDEO)){
-                playVideoOnNewForm(CAPTURED_VIDEO, videoDemoForm);
+                playVideoOnNewForm(CAPTURED_VIDEO, demoContainer.getComponentForm());
             }
             else{
                 ToastBar.showErrorMessage("you should to capture video first");
             }
         });
         
-        videoDemoForm.addAll(downloadButton, playOfflineButton, playOnlineButton, captureVideoButton, playCaptured);
-        videoDemoForm.show();
+        demoContainer.addAll(downloadButton, playOfflineButton, playOnlineButton, captureVideoButton, playCaptured);
+        return demoContainer;
     }
     private void playVideoOnNewForm(String fileURI, Form parentForm){
         Form videoForm = new Form("Video", new BorderLayout());

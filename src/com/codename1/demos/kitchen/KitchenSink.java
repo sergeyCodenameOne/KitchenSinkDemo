@@ -66,7 +66,8 @@ public class KitchenSink {
             current.show();
             return;
         }
-        MainWindow.buildForm().show();
+        MainWindow mw = new MainWindow();
+        mw.buildForm().show();
     }
     
     public void stop() {
