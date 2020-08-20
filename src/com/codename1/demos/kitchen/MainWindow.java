@@ -52,7 +52,8 @@ public class MainWindow {
                         new InputDemo(mainWindow),
                         new ContactsDemo(mainWindow),
                         new VideoDemo(mainWindow),
-                        new SalesDemo(mainWindow)
+                        new SalesDemo(mainWindow),
+                        new WebServicesDemo(mainWindow)
                         
         };
         
@@ -110,11 +111,9 @@ public class MainWindow {
     }
     
     private Component createDemoComponentForTablet(Demo demo){
-        Button demoComponent = new Button(demo.getDemoId());
-        demoComponent.setUIID("TabletSideNavigationButton");
         Image demoImage = demo.getDemoImage().fill(CommonBehavior.getDemoImageWidthForTablet(), CommonBehavior.getDemoImageWidthForTablet());
         demoImage = demoImage.applyMask(CommonBehavior.getRoundMask(demoImage.getWidth()));
-        demoComponent.setIcon(demoImage);
+        Button demoComponent = new Button(demo.getDemoId(), demoImage, "TabletSideNavigationButton");
         demoComponent.addActionListener(e->{
             tabletContentPane.replace(tabletContentPane.getComponentAt(0), demo.createContentPane(), CommonTransitions.createSlide(CommonTransitions.SLIDE_HORIZONTAL, true, 200));
         });
@@ -150,7 +149,7 @@ public class MainWindow {
         // Toolbar add info and back buttons.
         toolbar.setBackCommand("", e-> demo.getParentForm().show());
         toolbar.addMaterialCommandToRightBar("", FontImage.MATERIAL_INFO, e->{
-            Dialog.show("Information", demo.getDemoId(), "OK", null);
+            Dialog.show("Information", demo.getInfo(), "OK", null);
         });
         
         demoForm.add(BorderLayout.CENTER, demo.createContentPane());
