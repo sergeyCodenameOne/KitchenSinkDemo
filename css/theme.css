@@ -23,11 +23,28 @@
 
 #Constants {
     includeNativeBool: true; 
+    backIconImage: "back-icon.png";
 }
 
 Images{
     background-image: url(images/icon.png),
-                      url(images/default-contact-pic.jpg);
+                      url(images/default-contact-pic.jpg),
+                      url(images/blured-puppy.jpg);
+    cn1-source-dpi: 0;
+}
+
+ImagesHighRes{
+    background-image: url(images/download-icon.png),
+                      url(images/play-icon.png),
+                      url(images/video-icon.png),
+                      url(images/back-icon.png);
+    cn1-source-dpi: 480;
+}
+
+Dialog{
+    background-color: white;
+    border-radius: 2mm;
+    
 }
 
 MainWindowComponent{
@@ -37,6 +54,7 @@ MainWindowComponent{
 Command{
     color: white;
 }
+
 ToastBar{
     text-align: center;
 }
@@ -45,17 +63,13 @@ Title{
     text-align: center;
 }
 
-Button{
+MainWindowButton{
     border: none;
     font-family: "native:MainThin";
     background: linear-gradient(to left, #fcdd89, #e0647b);
     color: black;
     text-align:center;
     padding : 1mm;
-}
-
-Button.pressed{
-    background-color: #EB9390;
 }
 
 SideCommand{
@@ -91,29 +105,29 @@ SideNavigationPanel{
 }
 
 
-RedLabel{
+PurpleLabel{
     border: none;
-    background-color: #ff0000;  
-}
-
-YellowLabel{
-    border: none;
-    background-color: #ffff00;  
-}
-
-CyanLabel{
-    border: none;
-    background-color: #00ffff;  
-}
-
-BlueLabel{
-    border: none;
-    background-color: #0000ff;  
+    background-color: #9e27b2;  
 }
 
 GreenLabel{
     border: none;
-    background-color: #00ff00;  
+    background-color: #019786;  
+}
+
+RedLabel{
+    border: none;
+    background-color: #ea1e63;  
+}
+
+BlueLabel{
+    border: none;
+    background-color: #3e51b8;  
+}
+
+OrangeLabel{
+    border: none;
+    background-color: #f44236;  
 }
 
 InputDemoContentPane{
@@ -122,6 +136,14 @@ InputDemoContentPane{
     cn1-source-dpi: 0;
     cn1-background-type: cn1-image-scaled-fill;
     margin: 0;
+}
+
+InputSaveButton{
+    background-color: #d32f2f;
+    margin: 0;
+    text-align: center;
+    padding: 2mm;
+    color: white;
 }
 
 MyToolbar{
@@ -144,6 +166,7 @@ InputDemoTextFieldsAndSaveButton{
     margin-right: 3mm;
     margin-top: 5mm;
     background-color: white;
+    padding: 0;
 }
 
 CameraAvatar{
@@ -177,6 +200,21 @@ TabletSideNavigationButton{
     
 }
 
+VideoContainer{
+    border: none;
+    background-color: #efeff4;
+    margin: 0;
+}
+
+VideoComponent{
+    background-color: white;
+    border-radius: 2mm;
+    margin-top: 2mm;
+    margin-left: 2mm;
+    margin-right: 2mm;
+    padding:1mm;
+}
+
 SalesTableHeader{
     background-color: #dee3e9;
     text-align: center;
@@ -193,6 +231,15 @@ SalesTableOddRow{
 SalesTableEvenRow{
     font-family: "native:MainRegular";
     font-size: 4mm;
+}
+
+
+WebServicesButtonTitle{
+    boeder: none;
+    text-align: center;
+    background-color: rgba(0,0,0,140);
+    color: white;
+    padding: 1mm
 }
 
 

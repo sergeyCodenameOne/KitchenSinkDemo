@@ -34,6 +34,8 @@ import com.codename1.charts.renderers.XYSeriesRenderer;
 import com.codename1.charts.util.ColorUtil;
 import com.codename1.charts.views.LineChart;
 import com.codename1.charts.views.PieChart;
+import com.codename1.charts.views.PointStyle;
+import static com.codename1.charts.views.PointStyle.POINT;
 import com.codename1.l10n.L10NManager;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
@@ -55,8 +57,7 @@ public class SalesDemo extends Demo {
 
     public SalesDemo(Form parentForm) {
         init("Sales", getGlobalResources().getImage("icon.png"), parentForm,
-                        "You can play videos either from remote or local sources very easily in Codename One, here we also " +
-                        "show the ability to record a video that can play later.");
+                        "Demonstrates a typical chart/graph UI that is editable using Tables. Common for business applications");
     }
 
     public Container createContentPane(){
@@ -83,37 +84,7 @@ public class SalesDemo extends Demo {
             }
         };
         
-        Table dataTable = new Table(model) {
-            @Override
-            protected Component createCell(Object value, int row, int column, boolean editable) {
-                Component cell = super.createCell(value, row, column, editable);
-                if(row == -1){
-                    cell.setUIID("SalesTableHeader");
-                }else if(row % 2 != 0) {
-                    cell.setUIID("SalesTableOddRow");
-                }else{
-                    cell.setUIID("SalesTableEvenRow");
-                }
-                
-                if (column == 1 && 0 <= row){
-                    TextField tx = (TextField)cell;
-                    tx.setConstraint(TextArea.DECIMAL);
-                    tx.setText(L10NManager.getInstance().formatCurrency(((Double)value).doubleValue()));
-                    tx.addActionListener((e)->{
-                        model.setValueAt(row, column, tx.getText());
-                        tx.setText(L10NManager.getInstance().formatCurrency((Double)model.getValueAt(row, column)));
-                    });
-                }
-                return cell;
-            }
-            
-            @Override
-            protected TableLayout.Constraint createCellConstraint(Object value, int row, int column) {
-                TableLayout.Constraint constraint = super.createCellConstraint(value, row, column);
-                constraint.setWidthPercentage(50);
-                return constraint;
-            }
-        };
+        Table dataTable = createTable(model);
         dataTable.setDrawBorder(false);
         
         CategorySeries series = new CategorySeries("Sales");
@@ -153,42 +124,8 @@ public class SalesDemo extends Demo {
             }
         };
         
-        Table dataTable = new Table(model) {
-            @Override
-            protected Component createCell(Object value, int row, int column, boolean editable) {
-                
-                Component cell = super.createCell(value, row, column, editable);
-                if(row == -1){
-                    cell.setUIID("SalesTableHeader");
-                }else if(row % 2 != 0) {
-                    cell.setUIID("SalesTableOddRow");
-                }else{
-                    cell.setUIID("SalesTableEvenRow");
-                }
-                
-                if (column == 1 && 0 <= row){
-                    TextField tx = (TextField)cell;
-                    tx.setConstraint(TextArea.DECIMAL);
-                    tx.setText(L10NManager.getInstance().formatCurrency(((Double)value)));
-                    tx.addActionListener((e)->{
-                        model.setValueAt(row, column, tx.getText());
-                        tx.setText(L10NManager.getInstance().formatCurrency((Double)model.getValueAt(row, column)));
-                    });
-                }else if (column == 0 && 0 <= row){
-                    TextField tx = (TextField)cell;
-                    tx.setConstraint(TextArea.DECIMAL);
-                }
-                return cell;
-            }
+        Table dataTable = createTable(model);
             
-            @Override
-            protected TableLayout.Constraint createCellConstraint(Object value, int row, int column) {
-                TableLayout.Constraint constraint =  super.createCellConstraint(value, row, column);
-                constraint.setWidthPercentage(50);
-                return constraint;
-            }
-        };
-        
         XYSeries annualSeries = new XYSeries("Sales");
         updateAnnualSeries(annualSeries, model);
         XYMultipleSeriesDataset series = new XYMultipleSeriesDataset();
@@ -219,13 +156,16 @@ public class SalesDemo extends Demo {
     
     private DefaultRenderer CreatePieChartRenderer(){
         DefaultRenderer renderer = new DefaultRenderer();
-        int[] colors = new int[]{ColorUtil.BLUE, ColorUtil.GREEN, ColorUtil.MAGENTA};
+        int[] colors = new int[]{0xff6096, 0xff6096, 0xff6096};
         for (int color : colors) {
             SimpleSeriesRenderer r = new SimpleSeriesRenderer();
             r.setColor(color);
+            r.setHighlighted(true);
             renderer.addSeriesRenderer(r);
         }
         renderer.setLabelsColor(0x000000);
+        renderer.setBackgroundColor(0xe91e63);
+        renderer.setApplyBackgroundColor(true);
         renderer.setShowLegend(false);
         renderer.setLabelsTextSize(convertToPixels(3));
         return renderer;
@@ -235,7 +175,7 @@ public class SalesDemo extends Demo {
         Object[][] dataCells = new Object[][]{
             {"Products", Double.valueOf(10000)},
             {"Virtual", Double.valueOf(20000)},
-            {"Services", Double.valueOf(30000)}
+            {"Services", Double.valueOf(22000)}
         };
         return dataCells;
     }
@@ -271,23 +211,24 @@ public class SalesDemo extends Demo {
     private XYMultipleSeriesRenderer createChartMultiRenderer(TableModel tm) {
         XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
         XYSeriesRenderer r = new XYSeriesRenderer();
-        r.setColor(0x0060ff);
+        r.setColor(0x2ebbae);
         r.setLineWidth(7);
+        r.setFillPoints(true);
+        r.setPointStyle(PointStyle.CIRCLE);
         renderer.addSeriesRenderer(r);
+        renderer.setPointSize(15f);
 
-        renderer.setLabelsColor(0xffffff);
-        renderer.setBackgroundColor(0xeeeeee);
+        renderer.setBackgroundColor(0x009688);
         renderer.setApplyBackgroundColor(true);
         renderer.setLabelsTextFont(Font.createTrueTypeFont("native:MainRegular", "native:MainRegular"));
         renderer.setLabelsTextSize(convertToPixels(3));
         renderer.setLabelsColor(0x000000);
-
         renderer.setZoomEnabled(false, false);
-        renderer.setAxesColor(0x000000);
 
         renderer.setShowGrid(true);
         renderer.setXLabels(tm.getRowCount());
         renderer.setYLabels(tm.getRowCount());
+        renderer.setMarginsColor(0x009688);
         updateRendererMinMax(tm, renderer);
         return renderer;
     }
@@ -309,5 +250,45 @@ public class SalesDemo extends Demo {
         renderer.setXAxisMax(xmax);
         renderer.setYAxisMin(ymin);
         renderer.setYAxisMax(ymax);
+    }
+    
+    private Table createTable(TableModel tm){
+        Table dataTable = new Table(tm) {
+            @Override
+            protected Component createCell(Object value, int row, int column, boolean editable) {
+                
+                Component cell = super.createCell(value, row, column, editable);
+                if(row == -1){
+                    cell.setUIID("SalesTableHeader");
+                }else if(row % 2 != 0) {
+                    cell.setUIID("SalesTableOddRow");
+                }else{
+                    cell.setUIID("SalesTableEvenRow");
+                }
+                
+                if (column == 1 && 0 <= row){
+                    TextField tx = (TextField)cell;
+                    tx.setConstraint(TextArea.DECIMAL);
+                    tx.setText(L10NManager.getInstance().formatCurrency(((Double)value)));
+                    tx.addActionListener((e)->{
+                        tm.setValueAt(row, column, tx.getText());
+                        tx.setText(L10NManager.getInstance().formatCurrency((Double)tm.getValueAt(row, column)));
+                    });
+                }else if ((tm.getValueAt(0, 0) instanceof Integer) && column == 0 && 0 <= row){
+                    TextField tx = (TextField)cell;
+                    tx.setConstraint(TextArea.DECIMAL);
+                }
+                return cell;
+            }
+            
+            @Override
+            protected TableLayout.Constraint createCellConstraint(Object value, int row, int column) {
+                TableLayout.Constraint constraint =  super.createCellConstraint(value, row, column);
+                constraint.setWidthPercentage(50);
+                return constraint;
+            }
+        };
+        
+        return dataTable;
     }
 }

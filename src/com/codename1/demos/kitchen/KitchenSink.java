@@ -22,6 +22,7 @@
  */
 package com.codename1.demos.kitchen;
 
+import com.codename1.components.ImageViewer;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Form;
 import com.codename1.ui.Dialog;
@@ -30,6 +31,10 @@ import com.codename1.ui.util.Resources;
 import com.codename1.io.Log;
 import com.codename1.ui.Toolbar;
 import static com.codename1.ui.Button.setButtonRippleEffectDefault;
+import com.codename1.ui.Image;
+import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.list.DefaultListModel;
+import com.codename1.ui.list.ListModel;
 
 public class KitchenSink {
     

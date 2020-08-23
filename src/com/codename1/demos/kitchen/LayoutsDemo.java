@@ -23,6 +23,7 @@
 package com.codename1.demos.kitchen;
 
 import com.codename1.ui.Button;
+import static com.codename1.ui.CN.*;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
@@ -171,8 +172,8 @@ public class LayoutsDemo extends Demo {
         colorLabelList.add(new Label("                    ", "RedLabel"));
         colorLabelList.add(new Label("                    ", "BlueLabel"));
         colorLabelList.add(new Label("                    ", "GreenLabel"));
-        colorLabelList.add(new Label("                    ", "YellowLabel"));
-        colorLabelList.add(new Label("                    ", "CyanLabel"));
+        colorLabelList.add(new Label("                    ", "OrangeLabel"));
+        colorLabelList.add(new Label("                    ", "PurpleLabel"));
 
         // Make an anonymous claas that overide calcPreferredSize to fit exactly a half of the screen.
         // Altervatively you could use TableLayout instead of BorderLayout where i could explicitly define the height in percentages.
@@ -192,6 +193,7 @@ public class LayoutsDemo extends Demo {
                                 colorLabelList.get(3),
                                 colorLabelList.get(4)
         );
+        resetMargin(colorsContainer);
         colorsContainer.setShouldCalcPreferredSize(true);
         
         contentPane.add(BorderLayout.NORTH, colorsContainer);
@@ -202,8 +204,9 @@ public class LayoutsDemo extends Demo {
     
     // Reset the margin for all the components inside the given container.
     private void resetMargin(Container colorsContainer){
+        int margin = convertToPixels(1) / 2;
         for(Component cmp : colorsContainer){
-            cmp.getAllStyles().setMargin(0, 0, 0, 0);
+            cmp.getAllStyles().setMargin(margin, margin, margin, margin);
         }
     }
     
@@ -211,7 +214,7 @@ public class LayoutsDemo extends Demo {
         int margin = 0;
         for(Component cmp : colorsContainer){
             cmp.getAllStyles().setMargin(margin, margin, margin, margin);
-            margin += Display.getInstance().convertToPixels(3);
+            margin += convertToPixels(3);
         }
     }
     

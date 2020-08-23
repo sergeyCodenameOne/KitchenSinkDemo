@@ -93,7 +93,7 @@ public class InputDemo extends Demo{
         textFields.add(bio);
         textFields.add(joinEmailList);
 
-        Button saveButton = new Button("save");
+        Button saveButton = new Button("Save", "InputSaveButton");
         
         // Add validation to the save Button
         Validator saveValidation = new Validator();

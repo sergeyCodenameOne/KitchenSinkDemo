@@ -122,7 +122,7 @@ public class MainWindow {
     
     private Component createDemoComponentForPhone(Demo demo){
         ScaleImageLabel imageLabel = new ScaleImageLabel(demo.getDemoImage().scaled(CommonBehavior.getDemoImageWidthForPhone(), CommonBehavior.getDemoImageHeightForPhone()));
-        Button button = new Button(demo.getDemoId());
+        Button button = new Button(demo.getDemoId(), "MainWindowButton");
         button.addActionListener(e-> createAndShowForm(demo));
         
         Container demoComponent = BoxLayout.encloseY(imageLabel, 

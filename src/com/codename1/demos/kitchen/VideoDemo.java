@@ -34,9 +34,11 @@ import static com.codename1.io.Util.downloadUrlToFileSystemInBackground;
 import com.codename1.media.Media;
 import com.codename1.media.MediaManager;
 import static com.codename1.ui.CN.*;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
@@ -54,56 +56,51 @@ public class VideoDemo extends Demo {
     }
     
     public Container createContentPane(){
-        Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "VideoContainer");
       
-        MultiButton downloadButton = new MultiButton("Download for offline mode");
-        downloadButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_SYSTEM_UPDATE, downloadButton.getAllStyles()));
-        downloadButton.addActionListener(e->{
-            if (!existsInFileSystem(DOWNLOADED_VIDEO)){
-                ToastBar.showMessage("Downloading", FontImage.MATERIAL_SYSTEM_UPDATE, 3000);
-                downloadFile("https://www.codenameone.com/files/hello-codenameone.mp4");
-            }
-
-        });
+        Component downloadButton = createVideoComponent("Hello (Online)", "Download to FileSystem", "download-icon.png",
+                                        e-> {
+                                            if (!existsInFileSystem(DOWNLOADED_VIDEO)){
+                                                ToastBar.showMessage("Downloading", FontImage.MATERIAL_SYSTEM_UPDATE, 3000);
+                                                downloadFile("https://www.codenameone.com/files/hello-codenameone.mp4");
+                                            }
+                                        });
         
-        MultiButton playOfflineButton = new MultiButton("Play offline video");
-        playOfflineButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_VIDEO_COLLECTION, playOfflineButton.getAllStyles()));
-        playOfflineButton.addActionListener(e->{
-            if (existsInFileSystem(DOWNLOADED_VIDEO)){
-                playVideoOnNewForm(DOWNLOADED_VIDEO, demoContainer.getComponentForm());
-            }else{
-                ToastBar.showErrorMessage("For playing the video in offline mode you should first to download the video");
-            }
-        });
+        Component playOfflineButton = createVideoComponent("Hello (Offline)", "Play from FileSystem", "play-icon.png",
+                                        e-> {
+                                            if (existsInFileSystem(DOWNLOADED_VIDEO)){
+                                                playVideoOnNewForm(DOWNLOADED_VIDEO, demoContainer.getComponentForm());
+                                            }else{
+                                                ToastBar.showErrorMessage("For playing the video in offline mode you should first to download the video");
+                                            }
+                                        });
+                                            
         
-        MultiButton playOnlineButton = new MultiButton("Play online video");
-        playOnlineButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_VIDEO_COLLECTION, playOnlineButton.getAllStyles()));
-        playOnlineButton.addActionListener(e -> playVideoOnNewForm("https://www.codenameone.com/files/hello-codenameone.mp4", demoContainer.getComponentForm()));
+        Component playOnlineButton = createVideoComponent("Hello (Online)", "Play thru http", "play-icon.png",
+                                        e -> playVideoOnNewForm("https://www.codenameone.com/files/hello-codenameone.mp4", demoContainer.getComponentForm()));
         
-        MultiButton captureVideoButton = new MultiButton("Record Video");
-        captureVideoButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_VIDEO_CALL, captureVideoButton.getAllStyles()));
-        captureVideoButton.addActionListener(e->{
-            String capturedVideo = Capture.captureVideo();
-            if(capturedVideo != null){
-                try{
-                    Util.copy(openFileInputStream(capturedVideo), openFileOutputStream(CAPTURED_VIDEO));
-                }catch(IOException err) {
-                    Log.e(err);
-                }
-            }
-        });
+        Component captureVideoButton = createVideoComponent("Capture", "Record video and save to FileSystem", "video-icon.png",
+                                        e-> {
+                                            String capturedVideo = Capture.captureVideo();
+                                            if(capturedVideo != null){
+                                                try{
+                                                    Util.copy(openFileInputStream(capturedVideo), openFileOutputStream(CAPTURED_VIDEO));
+                                                }catch(IOException err) {
+                                                    Log.e(err);
+                                                }
+                                            }
+                                        });
         
-        MultiButton playCaptured = new MultiButton("Play last recorded Video");
-        playCaptured.setIcon(FontImage.createMaterial(FontImage.MATERIAL_VIDEO_LABEL, playCaptured.getAllStyles()));
-        playCaptured.addActionListener(e->{
-            if (existsInFileSystem(CAPTURED_VIDEO)){
-                playVideoOnNewForm(CAPTURED_VIDEO, demoContainer.getComponentForm());
-            }
-            else{
-                ToastBar.showErrorMessage("you should to capture video first");
-            }
-        });
-        
+        Component playCaptured = createVideoComponent("Play", "Play captured video", "play-icon.png",
+                                        e-> {
+                                            if (existsInFileSystem(CAPTURED_VIDEO)){
+                                                playVideoOnNewForm(CAPTURED_VIDEO, demoContainer.getComponentForm());
+                                            }
+                                            else{
+                                                ToastBar.showErrorMessage("you should to capture video first");
+                                            }
+                                        });
+  
         demoContainer.addAll(downloadButton, playOfflineButton, playOnlineButton, captureVideoButton, playCaptured);
         return demoContainer;
     }
@@ -140,5 +137,15 @@ public class VideoDemo extends Demo {
         downloadUrlToFileSystemInBackground(Url, DOWNLOADED_VIDEO, (e)-> {
             callSerially(()-> ToastBar.showInfoMessage("Your download has completed"));
         });
+    }
+    
+    private Component createVideoComponent(String firstLine, String secondLine, String iconName, ActionListener actionListener){
+        MultiButton videoComponent = new MultiButton(firstLine);
+        videoComponent.setTextLine2(secondLine);
+        videoComponent.setUIID("VideoComponent");
+        videoComponent.setIcon(getGlobalResources().getImage(iconName).fill(convertToPixels(5), convertToPixels(5)));
+        videoComponent.setIconPosition("East");
+        videoComponent.addActionListener(actionListener);
+        return videoComponent;
     }
 }
