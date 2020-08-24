@@ -53,8 +53,8 @@ public class MainWindow {
                         new ContactsDemo(mainWindow),
                         new VideoDemo(mainWindow),
                         new SalesDemo(mainWindow),
-                        new WebServicesDemo(mainWindow)
-                        
+                        new WebServicesDemo(mainWindow),
+                        new ClockDemo(mainWindow)
         };
         
         if (isTablet()){
