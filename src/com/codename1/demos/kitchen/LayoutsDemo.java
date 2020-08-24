@@ -204,17 +204,17 @@ public class LayoutsDemo extends Demo {
     
     // Reset the margin for all the components inside the given container.
     private void resetMargin(Container colorsContainer){
-        int margin = convertToPixels(1) / 2;
+        float margin = 0.5f;
         for(Component cmp : colorsContainer){
             cmp.getAllStyles().setMargin(margin, margin, margin, margin);
         }
     }
     
     private void setMarginForLayeredLayout(Container colorsContainer){
-        int margin = 0;
+        float margin = 0f;
         for(Component cmp : colorsContainer){
             cmp.getAllStyles().setMargin(margin, margin, margin, margin);
-            margin += convertToPixels(3);
+            margin += 3f;
         }
     }
     

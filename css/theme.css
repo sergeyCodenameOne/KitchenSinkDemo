@@ -242,4 +242,12 @@ WebServicesButtonTitle{
     padding: 1mm
 }
 
+WebServicesDetails{
+    padding: 3mm;
+    text-align: center;
+    background-color: rgba(0,0,0,80);
+    margin: 0;
+    color: white;
+}
+
 
