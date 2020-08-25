@@ -27,9 +27,13 @@ import com.codename1.components.ScaleImageButton;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.io.Storage;
-import com.codename1.io.rest.RequestBuilder;
 import com.codename1.io.rest.Response;
 import com.codename1.io.rest.Rest;
+import com.codename1.properties.IntProperty;
+import com.codename1.properties.ListProperty;
+import com.codename1.properties.Property;
+import com.codename1.properties.PropertyBusinessObject;
+import com.codename1.properties.PropertyIndex;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.EncodedImage;
@@ -48,8 +52,6 @@ import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.list.ListModel;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.EventDispatcher;
-
-
 
 import static com.codename1.ui.util.Resources.getGlobalResources;
 import java.util.ArrayList;
@@ -78,7 +80,7 @@ public class WebServicesDemo extends Demo {
         }
         
         Set pages = new HashSet();
-        List allItemsList = new ArrayList();
+        List<Item> allItemsList = new ArrayList();
         
         InfiniteContainer webServicesContainer = new InfiniteContainer(10) {
             String nextURL = WEBSERVICE_URL;            
@@ -95,35 +97,46 @@ public class WebServicesDemo extends Demo {
                 }
                 
                 // Request the data from the server.
-                RequestBuilder rb = Rest.get(nextURL).acceptJson();
-                Response<Map> resultData = rb.getAsJsonMap();
+                Response<Map> resultData = Rest.get(nextURL).acceptJson().getAsJsonMap();
+                ItemList itemListData = new ItemList();
+                itemListData.getPropertyIndex().populateFromMap(resultData.getResponseData());
+
+                        
                 if(resultData.getResponseCode() != 200) {
                     callSerially(() -> {
                         ToastBar.showErrorMessage("Error code from the server");
                     });
                     return null;
                 }
+       
+                nextURL = itemListData.nextPage.get();
+                String currPage = itemListData.page.get();
+                int itemsCount = itemListData.elements.get();
                 
-                List itemList = (List)resultData.getResponseData().get("items");
-                nextURL = (String)resultData.getResponseData().get("nextPage");
-                String currPage = ((Double)resultData.getResponseData().get("page")).toString();
-                if (!pages.contains(currPage)){
-                    pages.add(currPage);
-                    allItemsList.addAll(itemList);
-                }
-                
-                if(itemList == null) {
+                if(itemListData.items.asList() == null) {
                     return null;
                 }
                 
-                int itemsCount = itemList.size();
+                List<Item> itemList = new ArrayList();
+                for(Map currItemMap : itemListData.items.asList()){
+                    Item currItem = new Item();
+                    currItem.getPropertyIndex().populateFromMap(currItemMap);
+                    itemList.add(currItem);
+                }
+                
+                if (!pages.contains(currPage)){
+                    pages.add(currPage);                
+                    allItemsList.addAll(itemList);
+                }
+                                
                 Component[] result = new Component[itemsCount];
                 
                 for(int i = 0; i < itemsCount; ++i) {
                     // Get all the necessary data.
-                    Map<String, String> item = (Map<String, String>)itemList.get(i);
-                    String title = item.get("title");
-                    String url = item.get("url");
+                    Item currItem = itemList.get(i);
+
+                    String title = currItem.title.get();
+                    String url = currItem.url.get();
                     String fileName = url.substring(url.lastIndexOf("/") + 1);
                     URLImage ButtonImage = URLImage.createToStorage(placeholder, fileName, url, URLImage.RESIZE_SCALE_TO_FILL);
                     
@@ -152,7 +165,7 @@ public class WebServicesDemo extends Demo {
                         imageViewer.setImageList(model);
                         
                         viewerForm.setTitle(title);
-                        SpanLabel details = new SpanLabel(item.get("details"), "WebServicesDetails");
+                        SpanLabel details = new SpanLabel(currItem.details.get(), "WebServicesDetails");
                         viewerForm.add(BorderLayout.SOUTH, details);
                         viewerForm.add(BorderLayout.CENTER, imageViewer);
                         
@@ -163,7 +176,6 @@ public class WebServicesDemo extends Demo {
                             viewerForm.setTitle(currTitle);
                             details.setText(currDetails);
                             viewerForm.revalidate();
-                            
                         });
                         viewerForm.setTitle(title + " " + (currButtonIndex + 1) + " of " + model.getSize());
                         viewerForm.show();
@@ -187,19 +199,19 @@ public class WebServicesDemo extends Demo {
      * Image model for the ImageViewer
      */
     private class ImageList implements ListModel<Image>{
-        private List itemList;
+        private List<Item> itemList;
         private int selection;
         private EventDispatcher selectionListeners = new EventDispatcher();
 
-        public ImageList(List itemList, int selection) {
+        public ImageList(List<Item> itemList, int selection) {
             this.itemList = itemList;
             this.selection = selection;
         }
         
         @Override
         public Image getItemAt(int index) {
-            Map<String, String> item = (Map<String, String>)itemList.get(index);
-            String url = item.get("url");
+            Item item = itemList.get(index);
+            String url = item.url.get();
             String fileName = url.substring(url.lastIndexOf("/") + 1);
             Image currImage;
             if (!existsInStorage(getAppHomePath() + fileName)){
@@ -237,11 +249,11 @@ public class WebServicesDemo extends Demo {
         }
         
         public String getTitle(int index){
-            return ((Map<String, String>)itemList.get(index)).get("title");
+            return itemList.get(index).title.get();
         }
         
         public String getDetails(int index){
-            return ((Map<String, String>)itemList.get(index)).get("details");
+            return itemList.get(index).details.get();
         }
 
         @Override
@@ -262,6 +274,36 @@ public class WebServicesDemo extends Demo {
         @Override
         public void removeItem(int index) {
             
+        }
+    }
+    
+    private class ItemList implements PropertyBusinessObject {
+        public final Property<String, ItemList> title = new Property<>("title");
+        public final IntProperty<ItemList> elements = new IntProperty<>("elements");
+        public final Property<String, ItemList> copyright = new Property<>("copyright");
+        public final Property<String, ItemList>  page = new Property<>("page");
+        public final Property<String, ItemList> nextPage = new Property<>("nextPage");
+        public final ListProperty<Map, ItemList> items = new ListProperty<>("items");
+        
+        private final PropertyIndex idx = new PropertyIndex(this, "Item", title, elements, copyright, page, nextPage, items);
+        
+        @Override 
+        public PropertyIndex getPropertyIndex() {
+            return idx;     
+        }
+    }
+    
+    private class Item implements PropertyBusinessObject{
+        public final Property<String, ItemList> title = new Property<>("title");
+        public final Property<String, ItemList> details = new Property<>("details");
+        public final Property<String, ItemList> url = new Property<>("url");
+        public final Property<String, ItemList> thumb = new Property<>("thumb");
+        
+        private final PropertyIndex idx = new PropertyIndex(this, "Item", title, details, url, thumb);
+        
+        @Override 
+        public PropertyIndex getPropertyIndex() {
+            return idx;     
         }
     }
     

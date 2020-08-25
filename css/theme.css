@@ -106,26 +106,31 @@ SideNavigationPanel{
 
 
 PurpleLabel{
+    margin: 0.5mm;
     border: none;
     background-color: #9e27b2;  
 }
 
 GreenLabel{
+    margin: 0.5mm;
     border: none;
     background-color: #019786;  
 }
 
 RedLabel{
+    margin: 0.5mm;
     border: none;
     background-color: #ea1e63;  
 }
 
 BlueLabel{
+    margin: 0.5mm;
     border: none;
     background-color: #3e51b8;  
 }
 
 OrangeLabel{
+    margin: 0.5mm;
     border: none;
     background-color: #f44236;  
 }
@@ -248,6 +253,11 @@ WebServicesDetails{
     background-color: rgba(0,0,0,80);
     margin: 0;
     color: white;
+}
+
+ClockComponent{
+    color: blue;
+    background-color: white;
 }
 
 

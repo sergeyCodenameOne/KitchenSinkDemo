@@ -23,7 +23,6 @@
 package com.codename1.demos.kitchen;
 
 import com.codename1.ui.Button;
-import static com.codename1.ui.CN.*;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
@@ -193,7 +192,6 @@ public class LayoutsDemo extends Demo {
                                 colorLabelList.get(3),
                                 colorLabelList.get(4)
         );
-        resetMargin(colorsContainer);
         colorsContainer.setShouldCalcPreferredSize(true);
         
         contentPane.add(BorderLayout.NORTH, colorsContainer);

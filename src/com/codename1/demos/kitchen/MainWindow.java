@@ -121,7 +121,7 @@ public class MainWindow {
     }
     
     private Component createDemoComponentForPhone(Demo demo){
-        ScaleImageLabel imageLabel = new ScaleImageLabel(demo.getDemoImage().scaled(CommonBehavior.getDemoImageWidthForPhone(), CommonBehavior.getDemoImageHeightForPhone()));
+        ScaleImageLabel imageLabel = new ScaleImageLabel(demo.getDemoImage().fill(CommonBehavior.getDemoImageWidthForPhone(), CommonBehavior.getDemoImageHeightForPhone()));
         Button button = new Button(demo.getDemoId(), "MainWindowButton");
         button.addActionListener(e-> createAndShowForm(demo));
         
