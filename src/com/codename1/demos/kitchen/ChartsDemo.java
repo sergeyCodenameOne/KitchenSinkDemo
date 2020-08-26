@@ -20,16 +20,24 @@
  * Please contact Codename One through http://www.codenameone.com/ if you 
  * need additional information or have any questions.
  */
-
 package com.codename1.demos.kitchen;
-import com.codename1.ui.Form;
 
-/**
- *
- * @author serge
- */
-public class IntroAnimation {
-    public static void playIntro(Form nextForm){
-        
+import com.codename1.ui.Container;
+import com.codename1.ui.Form;
+import com.codename1.ui.layouts.BorderLayout;
+import static com.codename1.ui.util.Resources.getGlobalResources;
+
+public class ChartsDemo extends Demo {
+
+    public ChartsDemo(Form parentForm) {
+        init("Charts", getGlobalResources().getImage("charts-demo-icon.png"), parentForm, "");
     }
+    
+    public Container createContentPane(){
+        Container demoContainer = new Container(new BorderLayout(), "DemoContainer");
+
+        return demoContainer;
+    }
+    
+    
 }

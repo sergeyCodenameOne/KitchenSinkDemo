@@ -23,136 +23,85 @@
 package com.codename1.demos.kitchen;
 
 
-import com.codename1.components.ScaleImageLabel;
-import com.codename1.ui.Button;
+
+import com.codename1.components.MultiButton;
 import static com.codename1.ui.CN.*;
+import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
-import com.codename1.ui.Dialog;
-import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.Image;
-import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
-import com.codename1.ui.animations.CommonTransitions;
 import com.codename1.ui.layouts.BorderLayout;
-import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
+import static com.codename1.ui.util.Resources.getGlobalResources;
 
 
 public class MainWindow {
-    
-    private Container tabletContentPane; 
-    
+       
     public Form buildForm(){
-        Form mainWindow = new Form("Kitchen Sink", new BorderLayout());
+        Form mainWindow = new Form("Components", new GridLayout(7, 2));
+        Container contentPane = mainWindow.getContentPane();
+        contentPane.setUIID("MainWindowContainer");
+        contentPane.setScrollableY(true);
+        Toolbar tb = mainWindow.getToolbar();
+        tb.setUIID("MainWindowToolbar");
+        tb.getTitleComponent().setUIID("MainWindowTitle");
 
         //create demos
-        Demo[] demos = {new LayoutsDemo(mainWindow),
-                        new InputDemo(mainWindow),
-                        new ContactsDemo(mainWindow),
-                        new VideoDemo(mainWindow),
-                        new SalesDemo(mainWindow),
-                        new WebServicesDemo(mainWindow),
-                        new ClockDemo(mainWindow)
+        Demo[] demos = {new ChartsDemo(mainWindow),
+                        new MediaDemo(mainWindow),
+                        new MediaDemo(mainWindow),
+                        new MediaDemo(mainWindow),
+                        new MediaDemo(mainWindow),
+                        new MediaDemo(mainWindow),
+                        new MediaDemo(mainWindow),
+                        new MediaDemo(mainWindow),
+                        new MediaDemo(mainWindow),
+                        new MediaDemo(mainWindow),
+                        new MediaDemo(mainWindow),
+                        new MediaDemo(mainWindow),
+                        new MediaDemo(mainWindow),
+                        new MediaDemo(mainWindow)
+                
         };
         
         if (isTablet()){
-            Toolbar.setPermanentSideMenu(true);
-            tabletContentPane = mainWindow.getContentPane();
-            tabletContentPane.add(BorderLayout.CENTER, demos[0].createContentPane());
-            initToolbarForTablet(mainWindow.getToolbar(), demos);
-            return mainWindow;
-            
-        }else{
-            mainWindow.setLayout(new GridLayout(3));
-            initToolbarForPhone(mainWindow.getToolbar());
-
-            for(Demo demo : demos){
-                mainWindow.add(createDemoComponentForPhone(demo));
-            }
-            return mainWindow;
+            mainWindow.setLayout(new GridLayout(5, 3));
         }
-    }
-    
-    private void initToolbarForPhone(Toolbar toolbar){
-        toolbar.setUIID("MyToolbar");
-        Label sideBarTitle = new Label("KitchenSink");
-
-        Container sideBarTitleArea = BorderLayout.center(sideBarTitle);
-        toolbar.addComponentToSideMenu(sideBarTitleArea);
-
-        // add side bar components        
-        toolbar.addMaterialCommandToSideMenu("CodeNameOne.com", FontImage.MATERIAL_WEB, e -> execute("https://www.codenameone.com/")); 
-        toolbar.addMaterialCommandToSideMenu("Getting Started", FontImage.MATERIAL_WEB, e -> execute("https://www.codenameone.com/files/developer-guide.pdf"));
-        toolbar.addMaterialCommandToSideMenu("JavaDoc (REFERENCE)", FontImage.MATERIAL_WEB, e -> execute("https://www.codenameone.com/javadoc/"));
-        toolbar.addMaterialCommandToSideMenu("Source Code", FontImage.MATERIAL_WEB, e -> execute("https://github.com/codenameone/KitchenSink"));
-
-        if(isNativeShareSupported() && getAppstoreURL() != null) {
-            toolbar.addMaterialCommandToSideMenu("Spread the Word!", FontImage.MATERIAL_SHARE, e -> {
-                share("Check out the kitchen sink app from Codename One: " + getAppstoreURL(), null, null);
-            });
-        }
-        toolbar.addMaterialCommandToSideMenu("About", FontImage.MATERIAL_INFO, e -> {
-                Dialog.show("About", "KitchenSink provides an overview of the core Codename One capaiblities. "
-                + "Codename One allows Java developers to create native mobile applications that work everywhere!", "OK", null);
-        });
-    }
-    
-    private void initToolbarForTablet(Toolbar toolbar, Demo[] demos){
-        Label sideBarTitle = new Label("KitchenSink");
-                
-        Container sideBarTitleArea = BorderLayout.center(sideBarTitle);
-        toolbar.addComponentToSideMenu(sideBarTitleArea);
         
-        for (Demo demo : demos){
-            toolbar.addComponentToLeftSideMenu(createDemoComponentForTablet(demo));
+        for(Demo demo : demos){
+            mainWindow.add(createDemoComponent(demo));
         }
+        return mainWindow;
     }
     
-    private Component createDemoComponentForTablet(Demo demo){
-        Image demoImage = demo.getDemoImage().fill(CommonBehavior.getDemoImageWidthForTablet(), CommonBehavior.getDemoImageWidthForTablet());
-        demoImage = demoImage.applyMask(CommonBehavior.getRoundMask(demoImage.getWidth()));
-        Button demoComponent = new Button(demo.getDemoId(), demoImage, "TabletSideNavigationButton");
-        demoComponent.addActionListener(e->{
-            tabletContentPane.replace(tabletContentPane.getComponentAt(0), demo.createContentPane(), CommonTransitions.createSlide(CommonTransitions.SLIDE_HORIZONTAL, true, 200));
-        });
+    private Component createDemoComponent(Demo demo){
+        MultiButton demoComponent = new MultiButton(demo.getDemoId());
+        demoComponent.setUIID("VideoComponent");
+        demoComponent.setIcon(demo.getDemoImage().scaled(CommonBehavior.getDemoImageWidth(), CommonBehavior.getDemoImageHeight()));
+        demoComponent.setIconPosition("North");
+        demoComponent.addActionListener(e-> createAndShowForm(demo));
+        demoComponent.setIconUIID("DemoComponentIcon");
+        demoComponent.setUIIDLine1("MainWindowDemoName");
         return demoComponent;
-    }
-    
-    private Component createDemoComponentForPhone(Demo demo){
-        ScaleImageLabel imageLabel = new ScaleImageLabel(demo.getDemoImage().fill(CommonBehavior.getDemoImageWidthForPhone(), CommonBehavior.getDemoImageHeightForPhone()));
-        Button button = new Button(demo.getDemoId(), "MainWindowButton");
-        button.addActionListener(e-> createAndShowForm(demo));
-        
-        Container demoComponent = BoxLayout.encloseY(imageLabel, 
-                                                                button);
-        demoComponent.setUIID("DemoComponent");
-        
-        return demoComponent;
-    }
-    
-    private String getAppstoreURL() {
-        if(getPlatformName().equals("ios")) {
-            return "https://itunes.apple.com/us/app/kitchen-sink-codename-one/id635048865";
-        }
-        if(getPlatformName().equals("and")) {
-            return "https://play.google.com/store/apps/details?id=com.codename1.demos.kitchen";
-        }
-        return null;
     }
     
     private void createAndShowForm(Demo demo){
         Form demoForm = new Form(demo.getDemoId(), new BorderLayout());
         Toolbar toolbar = demoForm.getToolbar();
+        toolbar.getTitleComponent().setUIID("DemoTitle");
         
-        // Toolbar add info and back buttons.
-        toolbar.setBackCommand("", e-> demo.getParentForm().show());
-        toolbar.addMaterialCommandToRightBar("", FontImage.MATERIAL_INFO, e->{
-            Dialog.show("Information", demo.getInfo(), "OK", null);
-        });
+        // Toolbar add source and back buttons.
+        Command backCommand = Command.create("", getGlobalResources().getImage("back-icon.png").scaled(convertToPixels(5), convertToPixels(5)),
+                e-> demo.getParentForm().show());
+        toolbar.addCommandToLeftBar(backCommand);
+        
+        Command sourceCommand = Command.create("", getGlobalResources().getImage("source-icon.png").scaled(convertToPixels(5), convertToPixels(5)),
+                e->{});
+        toolbar.addCommandToRightBar(sourceCommand);
         
         demoForm.add(BorderLayout.CENTER, demo.createContentPane());
+        
         demoForm.show();
     }
 }

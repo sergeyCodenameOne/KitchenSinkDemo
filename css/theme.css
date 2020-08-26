@@ -23,186 +23,18 @@
 
 #Constants {
     includeNativeBool: true; 
-    backIconImage: "back-icon.png";
-}
-
-Images{
-    background-image: url(images/icon.png),
-                      url(images/default-contact-pic.jpg),
-                      url(images/blured-puppy.jpg);
-    cn1-source-dpi: 0;
 }
 
 ImagesHighRes{
     background-image: url(images/download-icon.png),
                       url(images/play-icon.png),
                       url(images/video-icon.png),
-                      url(images/back-icon.png);
+                      url(images/back-icon.png),
+                      url(images/source-icon.png),
+                      url(images/media-demo-icon.png),
+                      url(images/chart-1.png),
+                      url(images/charts-demo-icon.png);
     cn1-source-dpi: 480;
-}
-
-Dialog{
-    background-color: white;
-    border-radius: 2mm;
-    
-}
-
-MainWindowComponent{
-    margin: 3mm;
-}
-
-Command{
-    color: white;
-}
-
-ToastBar{
-    text-align: center;
-}
-
-Title{
-    text-align: center;
-}
-
-MainWindowButton{
-    border: none;
-    font-family: "native:MainThin";
-    background: linear-gradient(to left, #fcdd89, #e0647b);
-    color: black;
-    text-align:center;
-    padding : 1mm;
-}
-
-SideCommand{
-    border: none;
-    color: black;
-    text-align: left;
-    font-family: "native:MainThin";
-    background: linear-gradient(to left, #fcdd89, #e0647b);
-}
-
-SideCommand.pressed{
-    background-color: #EB9390;
-}
-
-Title{
-    color: black;
-}
-
-SideBarTitleArea{
-    border: none;
-    background-image: url(images/peach-title-background.png);
-    cn1-background-type: cn1-image-scaled-fill;
-    cn1-source-dpi: 0;
-    margin: 0;
-    margin-bottom: 3mm;
-    padding-top: 15mm;
-}
-
-SideNavigationPanel{
-    border: none;
-    margin: 0;
-    background-color: white;
-}
-
-
-PurpleLabel{
-    margin: 0.5mm;
-    border: none;
-    background-color: #9e27b2;  
-}
-
-GreenLabel{
-    margin: 0.5mm;
-    border: none;
-    background-color: #019786;  
-}
-
-RedLabel{
-    margin: 0.5mm;
-    border: none;
-    background-color: #ea1e63;  
-}
-
-BlueLabel{
-    margin: 0.5mm;
-    border: none;
-    background-color: #3e51b8;  
-}
-
-OrangeLabel{
-    margin: 0.5mm;
-    border: none;
-    background-color: #f44236;  
-}
-
-InputDemoContentPane{
-    border: none;
-    background-image: url(images/input-demo-background.jpg);
-    cn1-source-dpi: 0;
-    cn1-background-type: cn1-image-scaled-fill;
-    margin: 0;
-}
-
-InputSaveButton{
-    background-color: #d32f2f;
-    margin: 0;
-    text-align: center;
-    padding: 2mm;
-    color: white;
-}
-
-MyToolbar{
-    background-image: url(images/peach-title-background.png);
-    cn1-background-type: cn1-image-scaled-fill;
-    cn1-source-dpi: 0;
-    margin: 0;
-    padding-top: 5mm;
-    padding-bottom: 15mm;
-}
-
-MainWindowContentPane{
-    background-color: #ffffff;
-}
-
-InputDemoTextFieldsAndSaveButton{
-    border: none;
-    margin-bottom: 3mm;
-    margin-left: 3mm;
-    margin-right: 3mm;
-    margin-top: 5mm;
-    background-color: white;
-    padding: 0;
-}
-
-CameraAvatar{
-    background-color: #ff0000;
-}
-
-ContactMainInfo{
-    background-color: #ffffff;
-}
-
-ContactsRedButton{
-    background-color: #ff0000;
-    border-radius: 2mm;
-    color: white;
-}
-
-ContactsGreenButton{
-    background-color: #00ff00;
-    border-radius: 2mm;
-    color: black;
-}
-
-ContactsBlueButton{
-    background-color: #37a0ff;
-    border-radius: 2mm;
-    color: black;
-}
-
-
-TabletSideNavigationButton{
-    
 }
 
 VideoContainer{
@@ -217,47 +49,48 @@ VideoComponent{
     margin-top: 2mm;
     margin-left: 2mm;
     margin-right: 2mm;
-    padding:1mm;
+    padding:2mm;
 }
 
-SalesTableHeader{
-    background-color: #dee3e9;
+MainWindowContainer{
+    background-color: #efeff4;
+}
+
+MainWindowDemoComponent{
+    background-color: white;
+
+}
+
+MainWindowDemoName{
     text-align: center;
-    font-family: "native:MainBold";
-    font-size: 5mm;
+    font-family: "native:MainThin";
 }
 
-SalesTableOddRow{
-    background-color: #eeeeee;
-    font-family: "native:MainRegular";
-    font-size: 4mm;
-}
-
-SalesTableEvenRow{
-    font-family: "native:MainRegular";
-    font-size: 4mm;
-}
-
-
-WebServicesButtonTitle{
-    boeder: none;
-    text-align: center;
-    background-color: rgba(0,0,0,140);
-    color: white;
-    padding: 1mm
-}
-
-WebServicesDetails{
-    padding: 3mm;
-    text-align: center;
-    background-color: rgba(0,0,0,80);
-    margin: 0;
-    color: white;
-}
-
-ClockComponent{
-    color: blue;
+MainWindowToolbar{
     background-color: white;
 }
 
+MainWindowTitle{
+   text-align: center;
+   font-family: "native:MainBold";
+   margin: 3mm;
+}
 
+DemoContainer{
+    margin: 0;
+    background-color: #efeff4;
+    padding: 3mm;
+}
+
+DemoAccordion{
+    background-color: #efeff4;
+}
+
+AccordionItem{
+    border-radius: 2mm;
+    background-color: white;
+}
+
+DemoTitle{
+    text-align: center;
+}

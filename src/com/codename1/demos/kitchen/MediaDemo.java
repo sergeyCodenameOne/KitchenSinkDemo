@@ -45,14 +45,12 @@ import static com.codename1.ui.util.Resources.getGlobalResources;
 import java.io.IOException;
 
 
-public class VideoDemo extends Demo {
+public class MediaDemo extends Demo {
     private static final String CAPTURED_VIDEO = FileSystemStorage.getInstance().getAppHomePath() + "captured.mp4";
     private static final String DOWNLOADED_VIDEO = FileSystemStorage.getInstance().getAppHomePath() + "hello-codenameone.mp4";
     
-    public VideoDemo(Form parentForm) {
-        init("Video", getGlobalResources().getImage("icon.png"), parentForm, 
-                                                "You can play videos either from remote or local sources very easily in Codename One, here we also " +
-                                                "show the ability to record a video that can play later.");
+    public MediaDemo(Form parentForm) {
+        init("media", getGlobalResources().getImage("media-demo-icon.png"), parentForm, "");
     }
     
     public Container createContentPane(){

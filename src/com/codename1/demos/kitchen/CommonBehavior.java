@@ -23,49 +23,23 @@
 package com.codename1.demos.kitchen;
 
 import com.codename1.ui.CN;
-import com.codename1.ui.Graphics;
-import com.codename1.ui.Image;
 
 public class CommonBehavior {
     
     private static int imageWidth = -1;
     private static int imageHeight = -1;
-    private static int tabletImageWidth = -1;
-    private static Image roundMaskImage = null;
     
-    public static int getDemoImageWidthForPhone() {
+    public static int getDemoImageWidth() {
         if(imageWidth < 0) {
-             imageWidth = CN.convertToPixels(15);
+             imageWidth = CN.convertToPixels(23);
         }
         return imageWidth;
     }
     
-    public static int getDemoImageHeightForPhone() {
+    public static int getDemoImageHeight() {
         if(imageHeight < 0) {
              imageHeight = CN.convertToPixels(20);
         }
         return imageHeight;
-    }
-    
-    public static int getDemoImageWidthForTablet() {
-        if(tabletImageWidth < 0) {
-             tabletImageWidth = CN.convertToPixels(5);
-        }
-        return tabletImageWidth;
-    }
-    
-    
-    public static Object getRoundMask(int width){
-        if (roundMaskImage == null)
-        {
-            roundMaskImage = Image.createImage(width, width, 0xff000000);
-            Graphics gr = roundMaskImage.getGraphics();
-            gr.setColor(0xffffff);
-            gr.setAntiAliased(true);
-            gr.fillArc(0, 0, width, width, 0, 360);
-        }else{
-            roundMaskImage = roundMaskImage.scaled(width, width);
-        }
-        return roundMaskImage.createMask();
     }
 }
