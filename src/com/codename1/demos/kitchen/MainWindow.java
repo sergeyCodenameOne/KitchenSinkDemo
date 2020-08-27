@@ -22,8 +22,6 @@
  */
 package com.codename1.demos.kitchen;
 
-
-
 import com.codename1.components.MultiButton;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Command;
@@ -49,7 +47,7 @@ public class MainWindow {
 
         //create demos
         Demo[] demos = {new ChartsDemo(mainWindow),
-                        new MediaDemo(mainWindow),
+                        new AdvancedDemo(mainWindow),
                         new MediaDemo(mainWindow),
                         new MediaDemo(mainWindow),
                         new MediaDemo(mainWindow),
@@ -72,6 +70,7 @@ public class MainWindow {
         for(Demo demo : demos){
             mainWindow.add(createDemoComponent(demo));
         }
+        
         return mainWindow;
     }
     
@@ -89,6 +88,7 @@ public class MainWindow {
     private void createAndShowForm(Demo demo){
         Form demoForm = new Form(demo.getDemoId(), new BorderLayout());
         Toolbar toolbar = demoForm.getToolbar();
+        toolbar.setUIID("DemoToolbar");
         toolbar.getTitleComponent().setUIID("DemoTitle");
         
         // Toolbar add source and back buttons.
@@ -99,9 +99,7 @@ public class MainWindow {
         Command sourceCommand = Command.create("", getGlobalResources().getImage("source-icon.png").scaled(convertToPixels(5), convertToPixels(5)),
                 e->{});
         toolbar.addCommandToRightBar(sourceCommand);
-        
         demoForm.add(BorderLayout.CENTER, demo.createContentPane());
-        
         demoForm.show();
     }
 }

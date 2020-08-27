@@ -22,22 +22,78 @@
  */
 package com.codename1.demos.kitchen;
 
+import static com.codename1.ui.CN.*;
 import com.codename1.ui.Container;
 import com.codename1.ui.Form;
-import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.table.TableLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class ChartsDemo extends Demo {
 
     public ChartsDemo(Form parentForm) {
-        init("Charts", getGlobalResources().getImage("charts-demo-icon.png"), parentForm, "");
+        init("Charts", getGlobalResources().getImage("charts-demo-icon.png"), parentForm);
     }
     
     public Container createContentPane(){
-        Container demoContainer = new Container(new BorderLayout(), "DemoContainer");
+        Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
+        if (isTablet()){
+            demoContainer.setLayout(new TableLayout(2, 2));
+        }
+        demoContainer.setScrollableY(true);
+        ContentBuilder builder = ContentBuilder.getInstance();
+        
+        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-bar.png"),
+                                                                "Bar Chart",
+                                                                "The bar chart rendering class"
+                                                                ));
+        
+        
+        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-bubble.png"),
+                                                                "Bubble Chart",
+                                                                "The bubble chart rendering class"));
+        
+        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-combined-xy.png"),
+                                                                "CombinedXY Chart",
+                                                                "The combinedXY chart rendering class"));
+        
+        demoContainer.add(builder.createAcordionComponent(getGlobalResources().getImage("chart-cubic-line.png"),
+                                                                "CunicLine Chart",
+                                                                "The interpolated (cubic) line chart rendering",
+                                                                " class"));
 
+        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-donut.png"),
+                                                                "Donut Chart",
+                                                                "The donut chart rendering class"));
+        
+        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-line.png"),
+                                                                "Line Chart",
+                                                                "The linechart rendering class"));
+        
+        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-pie.png"),
+                                                                "Pie Chart",
+                                                                "The pie chart rendering class"));
+        
+        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-radar.png"),
+                                                                "Radar Chart",
+                                                                "The radar chart rendering class"));
+        
+        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-round.png"),
+                                                                "Round Chart",
+                                                                "The round chart rendering class"));
+        
+        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-scatter.png"),
+                                                                "Scatter Chart",
+                                                                "The scater chart rendering class"));
+        
+        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-time.png"),
+                                                                "Time Chart",
+                                                                "The Time chart rendering class"));
+        
         return demoContainer;
     }
+    
+    
     
     
 }

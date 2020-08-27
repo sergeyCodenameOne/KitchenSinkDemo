@@ -26,14 +26,30 @@
 }
 
 ImagesHighRes{
-    background-image: url(images/download-icon.png),
-                      url(images/play-icon.png),
-                      url(images/video-icon.png),
-                      url(images/back-icon.png),
-                      url(images/source-icon.png),
-                      url(images/media-demo-icon.png),
-                      url(images/chart-1.png),
-                      url(images/charts-demo-icon.png);
+background-image: url(images/download-icon.png),
+                    url(images/play-icon.png),
+                    url(images/back-icon.png),
+                    url(images/video-icon.png),
+                    url(images/source-icon.png),
+                    url(images/media-demo-icon.png),
+                    url(images/chart-bar.png),
+                    url(images/chart-bubble.png),
+                    url(images/chart-radar.png),
+                    url(images/chart-combined-xy.png),
+                    url(images/chart-cubic-line.png),
+                    url(images/chart-dial.png),
+                    url(images/chart-donut.png),
+                    url(images/chart-line.png),
+                    url(images/chart-pie.png),
+                    url(images/chart-round.png),
+                    url(images/chart-scatter.png),
+                    url(images/chart-time.png),
+                    url(images/charts-demo-icon.png),
+                    url(images/advanced-calendar.png),
+                    url(images/advanced-browser.png),
+                    url(images/advanced-image-viewer.png),
+                    url(images/advanced-singnature.png),
+                    url(images/advanced-tree-file.png);
     cn1-source-dpi: 480;
 }
 
@@ -79,11 +95,44 @@ MainWindowTitle{
 DemoContainer{
     margin: 0;
     background-color: #efeff4;
-    padding: 3mm;
+    padding: 0;
 }
 
-DemoAccordion{
-    background-color: #efeff4;
+DemoToolbar{
+    background-color: white;
+    padding:3mm;
+}
+
+DemoContentAccordion{
+    background-color: white;
+    border-radius: 2mm;
+    padding-bottom: 2mm;
+    margin: 3mm;
+}
+
+DemoContentRegular{
+    background-color: white;
+    border-radius: 2mm;
+    padding-bottom: 2mm;
+    margin: 3mm;
+}
+
+DemoContentImage{
+    margin: 3mm;
+    padding: 0;
+}
+
+DemoContentHeader{
+    margin-left: 2mm;
+    font-size: 4mm;
+    font-family: "native:MainBold";
+}
+
+DemoContentBody{
+    font-family: "native:MainRegular";
+    font-size: 2.6mm;
+    margin-left: 2mm;
+    color: #707070;
 }
 
 AccordionItem{
@@ -93,4 +142,9 @@ AccordionItem{
 
 DemoTitle{
     text-align: center;
+    font-family: "native:MainBold";
 }
+
+
+
+

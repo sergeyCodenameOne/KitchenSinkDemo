@@ -34,19 +34,13 @@ public abstract class Demo{
     private String id;
     private Image demoImage;
     private Form parentForm;
-    private String info;
     
-    protected void init(String id, Image demoImage, Form parentForm, String info){
+    protected void init(String id, Image demoImage, Form parentForm){
         this.id = id;
         this.demoImage = demoImage;
         this.parentForm = parentForm;
-        this.info = info;
     }
 
-    protected String getInfo() {
-        return info;
-    }
-     
     protected String getDemoId(){
         return id;
     }
