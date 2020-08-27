@@ -31,14 +31,14 @@ public class CommonBehavior {
     
     public static int getDemoImageWidth() {
         if(imageWidth < 0) {
-             imageWidth = CN.convertToPixels(23);
+             imageWidth = CN.convertToPixels(18);
         }
         return imageWidth;
     }
     
     public static int getDemoImageHeight() {
         if(imageHeight < 0) {
-             imageHeight = CN.convertToPixels(20);
+             imageHeight = CN.convertToPixels(18);
         }
         return imageHeight;
     }

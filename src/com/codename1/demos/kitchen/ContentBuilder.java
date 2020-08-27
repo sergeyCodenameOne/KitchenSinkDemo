@@ -30,6 +30,7 @@ import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
@@ -48,13 +49,14 @@ public class ContentBuilder {
         return instance;
     }
     
-    public Component createAcordionComponent(Image image, String header, String firstLine, String body){
-        Container demoContent = new AccordionComponent(image, header, firstLine, body);
+    public Component createAcordionComponent(Image image, String header, String firstLine, String body, ActionListener listener){
+        Container demoContent = new AccordionComponent(image, header, firstLine, body, listener);
         return demoContent;
     }
     
-    public Component createRegularComponent(Image image, String header, String firstLine){
+    public Component createRegularComponent(Image image, String header, String firstLine, ActionListener listener){
         ScaleImageLabel contentImage = new ScaleImageLabel(image);
+        contentImage.addPointerPressedListener(listener);
         contentImage.setUIID("DemoContentImage");
         Label contentHeader = new Label(header, "DemoContentHeader");
         Label contentFirstLine = new Label(firstLine, "DemoContentBody");
@@ -73,7 +75,7 @@ public class ContentBuilder {
         private Image closedIcon;
         
 
-        private AccordionComponent(Image image, String header, String firstLine, String body) {
+        private AccordionComponent(Image image, String header, String firstLine, String body, ActionListener listener) {
             super(new BorderLayout());   
             this.firstLine = new Label(firstLine, "DemoContentBody");
             this.body = new SpanLabel(body, "DemoContentBody");
@@ -81,6 +83,7 @@ public class ContentBuilder {
     
             setUIID("DemoContentAccordion");
             ScaleImageLabel contentImage = new ScaleImageLabel(image);
+            contentImage.addPointerPressedListener(listener);
             contentImage.setUIID("DemoContentImage");
             Label contentHeader = new Label(header, "DemoContentHeader");
 

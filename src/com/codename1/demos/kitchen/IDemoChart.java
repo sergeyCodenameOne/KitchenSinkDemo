@@ -22,42 +22,39 @@
  */
 package com.codename1.demos.kitchen;
 
-import com.codename1.ui.Container;
-import com.codename1.ui.Form;
-import com.codename1.ui.Image;
+import com.codename1.ui.Component;
 
-/** 
- * This is the base class for all the demos.
+/**
+ * Defines the demo charts.
  */
-public abstract class Demo{
-    
-    private String id;
-    private Image demoImage;
-    private Form parentForm;
-    private String sourceCode;
-    
-    protected void init(String id, Image demoImage, Form parentForm, String sourceCode){
-        this.id = id;
-        this.demoImage = demoImage;
-        this.parentForm = parentForm;
-        this.sourceCode = sourceCode;
-    }
-    
-    protected String getSourceCode(){
-        return sourceCode;
-    }
+public interface IDemoChart {
+  /** A constant for the name field in a list activity. */
+  String NAME = "name";
+  /** A constant for the description field in a list activity. */
+  String DESC = "desc";
 
-    protected String getDemoId(){
-        return id;
-    }
-   
-    protected Image getDemoImage(){
-        return demoImage;
-    }
+  /**
+   * Returns the chart name.
+   * 
+   * @return the chart name
+   */
+  String getName();
+
+  /**
+   * Returns the chart description.
+   * 
+   * @return the chart description
+   */
+  String getDesc();
+
+  /**
+   * Executes the chart demo.
+   * 
+   * @return the built UI
+   */
+    Component execute();
+
+    public String getChartTitle();
     
-    protected Form getParentForm(){
-        return parentForm;
-    }
-    
-    abstract public Container createContentPane();
+    public Component getChartModelEditor();
 }

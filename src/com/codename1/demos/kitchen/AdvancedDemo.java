@@ -34,7 +34,7 @@ import static com.codename1.ui.util.Resources.getGlobalResources;
 public class AdvancedDemo extends Demo{
     
      public AdvancedDemo(Form parentForm) {
-        init("Advanced", getGlobalResources().getImage("charts-demo-icon.png"), parentForm);
+        init("Advanced", getGlobalResources().getImage("advanced-icon.png"), parentForm, "");
     }
      
      public Container createContentPane(){
@@ -51,15 +51,47 @@ public class AdvancedDemo extends Demo{
                                                                 "to an embeddable native platform browser on "+
                                                                 "platforms that support embedding the native browser in place, if you need wide "+
                                                                 "compatibility and flexibility you should check out the HTML Component which provides "+
-                                                                "a lightweight 100% cross platform web component. This component will only work on "+
+                                                                "a lightweight 100% cross platform web component.\n\nThis component will only work on "+
                                                                 "platforms that support embedding a native browser which exclude earlier versions of "+
-                                                                "Blackberry devices and J2ME devices. It's recommended that you place this component in "+
+                                                                "Blackberry devices and J2ME devices.\n\nIt's recommended that you place this component in "+
                                                                 "a fixed position (none scrollable) on the screen without other focusable components to "+
                                                                 "prevent confusion between focus authority and allow the component to scroll itself rather "+
-                                                                "than CodenameOne making that decision for it. On Android this component might show a native progress "+
+                                                                "than CodenameOne making that decision for it.\n\nOn Android this component might show a native progress "+
                                                                 "indicator dialog. You can disable that functionality using the call."
                                                                 ));
-         
+        
+        demoContainer.add(builder.createAcordionComponent(getGlobalResources().getImage("advanced-singnature.png"),
+                                                                "Signature Component",
+                                                                "A component to allow a user to enter",
+                                                                "their signature. This is just a button that, when pressed, will pop up a dialog where the user can draw "+
+                                                                "their signature with their finger. The user is given the option to save/reset/cancel the signature. On save, "+
+                                                                "the signatureImamge property will be set with a full-size of the signature, and the icon on the button will "+
+                                                                "show a thumbnail of the image."
+                                                                ));
+        
+        demoContainer.add(builder.createAcordionComponent(getGlobalResources().getImage("advanced-calendar.png"),
+                                                                "Calendar",
+                                                                "Date widget for selecting a date/time value.",
+                                                                "To localize stings for month names use the values Calendar. Month using 3 first characters of the month name in "+
+                                                                "the resource localization e.g. Calendar. Jan, Calendar.Feb etc … To localize stings for day names use the values "+
+                                                                "Calendar. Day in the resource localization e.g. \"Calendar.Sunday\", \"Calendar.Monday\" etc … Note that we "+
+                                                                "recommend using the picker class which is superior when running on the device for most use cases."
+                                                                ));
+        
+        demoContainer.add(builder.createAcordionComponent(getGlobalResources().getImage("advanced-tree-file.png"),
+                                                                "File Tree",
+                                                                "Simple class showing off the file system as",
+                                                                "a tree component."
+                                                                ));
+        
+        demoContainer.add(builder.createAcordionComponent(getGlobalResources().getImage("advanced-image-viewer.png"),
+                                                                "Image Viewer",
+                                                                "Image Viewer allows zooming/panning an",
+                                                                "image and potentially flicking between multiple images within a list of images"
+                                                                ));
+        
+
+        
         return demoContainer;
      }
 }

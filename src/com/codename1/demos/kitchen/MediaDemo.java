@@ -50,7 +50,7 @@ public class MediaDemo extends Demo {
     private static final String DOWNLOADED_VIDEO = FileSystemStorage.getInstance().getAppHomePath() + "hello-codenameone.mp4";
     
     public MediaDemo(Form parentForm) {
-        init("media", getGlobalResources().getImage("media-demo-icon.png"), parentForm);
+        init("media", getGlobalResources().getImage("media-demo-icon.png"), parentForm, "");
     }
     
     public Container createContentPane(){

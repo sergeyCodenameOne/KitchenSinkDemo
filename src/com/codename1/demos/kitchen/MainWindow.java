@@ -27,11 +27,12 @@ import static com.codename1.ui.CN.*;
 import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.GridLayout;
-import static com.codename1.ui.util.Resources.getGlobalResources;
+import com.codename1.ui.plaf.Style;
 
 
 public class MainWindow {
@@ -92,13 +93,16 @@ public class MainWindow {
         toolbar.getTitleComponent().setUIID("DemoTitle");
         
         // Toolbar add source and back buttons.
-        Command backCommand = Command.create("", getGlobalResources().getImage("back-icon.png").scaled(convertToPixels(5), convertToPixels(5)),
+        Style iconStyle = new Style();
+        iconStyle.setFgColor(0x157EFB);
+        Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, iconStyle),
                 e-> demo.getParentForm().show());
         toolbar.addCommandToLeftBar(backCommand);
         
-        Command sourceCommand = Command.create("", getGlobalResources().getImage("source-icon.png").scaled(convertToPixels(5), convertToPixels(5)),
+        Command sourceCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_CODE, iconStyle),
                 e->{});
         toolbar.addCommandToRightBar(sourceCommand);
+        
         demoForm.add(BorderLayout.CENTER, demo.createContentPane());
         demoForm.show();
     }

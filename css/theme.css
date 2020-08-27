@@ -32,6 +32,7 @@ background-image: url(images/download-icon.png),
                     url(images/video-icon.png),
                     url(images/source-icon.png),
                     url(images/media-demo-icon.png),
+                    url(images/advanced-icon.png),
                     url(images/chart-bar.png),
                     url(images/chart-bubble.png),
                     url(images/chart-radar.png),
@@ -74,7 +75,12 @@ MainWindowContainer{
 
 MainWindowDemoComponent{
     background-color: white;
+    padding: 2mm;
+}
 
+DemoComponentIcon{
+    margin: 2mm;
+    
 }
 
 MainWindowDemoName{
