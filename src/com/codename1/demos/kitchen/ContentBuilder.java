@@ -51,6 +51,15 @@ public class ContentBuilder {
     
     public Component createAcordionComponent(Image image, String header, String firstLine, String body, ActionListener listener){
         Container demoContent = new AccordionComponent(image, header, firstLine, body, listener);
+//        Accordion ac = new Accordion();
+//        ScaleImageLabel contentImage = new ScaleImageLabel(image);
+//        contentImage.addPointerDraggedListener(listener);
+//        Label contentHeader = new Label(header, "DemoContentHeader");
+//        Label contentFirstLine = new Label(firstLine, "DemoContentBody");
+//        SpanLabel bodyy = new SpanLabel(body, "DemoContentBody");
+//        ac.addContent(BoxLayout.encloseY(contentImage, contentHeader, contentFirstLine), bodyy);
+//        ac.setUIID("DemoContentAccordion");
+//        ac.addOnClickItemListener(listener);
         return demoContent;
     }
     
@@ -80,6 +89,7 @@ public class ContentBuilder {
             this.firstLine = new Label(firstLine, "DemoContentBody");
             this.body = new SpanLabel(body, "DemoContentBody");
             this.body.setHidden(true);
+            
     
             setUIID("DemoContentAccordion");
             ScaleImageLabel contentImage = new ScaleImageLabel(image);

@@ -20,7 +20,7 @@
  * Please contact Codename One through http://www.codenameone.com/ if you 
  * need additional information or have any questions.
  */
-package com.codename1.demos.kitchen;
+package com.codename1.demos.kitchen.charts;
 
 import com.codename1.charts.ChartComponent;
 import com.codename1.charts.models.CategorySeries;
