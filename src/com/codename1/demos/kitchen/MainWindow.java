@@ -49,19 +49,18 @@ public class MainWindow {
         //create demos
         Demo[] demos = {new ChartsDemo(mainWindow),
                         new AdvancedDemo(mainWindow),
-                        new MediaDemo(mainWindow),
-                        new MediaDemo(mainWindow),
-                        new MediaDemo(mainWindow),
-                        new MediaDemo(mainWindow),
-                        new MediaDemo(mainWindow),
-                        new MediaDemo(mainWindow),
-                        new MediaDemo(mainWindow),
-                        new MediaDemo(mainWindow),
-                        new MediaDemo(mainWindow),
-                        new MediaDemo(mainWindow),
-                        new MediaDemo(mainWindow),
+                        new MapsDemo(mainWindow),
+                        new LabelsDemo(mainWindow),
+                        new ButtonsDemo(mainWindow),
+                        new TogglesDemo(mainWindow),
+                        new ToggleListDemo(mainWindow),
+                        new SelectionDemo(mainWindow),
+                        new TextFieldDemo(mainWindow),
+                        new ContainersDemo(mainWindow),
+                        new DialogDemo(mainWindow),
+                        new ProgressDemo(mainWindow),
+                        new ToolbarDemo(mainWindow),
                         new MediaDemo(mainWindow)
-                
         };
         
         if (isTablet()){
@@ -97,12 +96,12 @@ public class MainWindow {
         iconStyle.setFgColor(0x157EFB);
         Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, iconStyle),
                 e-> demo.getParentForm().show());
-        toolbar.addCommandToLeftBar(backCommand);
         
         Command sourceCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_CODE, iconStyle),
                 e->{});
-        toolbar.addCommandToRightBar(sourceCommand);
         
+        toolbar.addCommandToRightBar(sourceCommand);
+        toolbar.addCommandToLeftBar(backCommand);
         demoForm.add(BorderLayout.CENTER, demo.createContentPane());
         demoForm.show();
     }

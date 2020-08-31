@@ -88,7 +88,7 @@ public class TrigonometricFunctionsChart extends AbstractDemoChart {
 
     @Override
     public String getChartTitle() {
-        return "";
+        return "Trigonometric function";
     }
 
     @Override

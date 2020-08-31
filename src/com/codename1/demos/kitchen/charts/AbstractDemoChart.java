@@ -21,7 +21,7 @@
  * need additional information or have any questions.
  */
 package com.codename1.demos.kitchen.charts;
-
+import static com.codename1.ui.CN.*;
 import com.codename1.charts.ChartComponent;
 import com.codename1.charts.models.CategorySeries;
 import com.codename1.charts.models.MultipleCategorySeries;
@@ -34,10 +34,8 @@ import com.codename1.charts.renderers.XYMultipleSeriesRenderer;
 import com.codename1.charts.renderers.XYSeriesRenderer;
 import com.codename1.charts.views.AbstractChart;
 import com.codename1.charts.views.PointStyle;
-
 import com.codename1.ui.Display;
 import com.codename1.ui.Font;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,9 +47,9 @@ import java.util.List;
 public abstract class AbstractDemoChart implements IDemoChart {
 
     private boolean drawOnMutableImage;
-    Font smallFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.SIZE_SMALL, Font.STYLE_PLAIN);
-    Font medFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.SIZE_MEDIUM, Font.STYLE_PLAIN);
-    Font largeFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.SIZE_LARGE, Font.STYLE_PLAIN);
+    Font smallFont = Font.createTrueTypeFont("native:MainRegular", "native:MainRegular").derive(convertToPixels(0.5f), Font.STYLE_PLAIN);
+    Font medFont = Font.createTrueTypeFont("native:MainRegular", "native:MainRegular").derive(convertToPixels(1f), Font.STYLE_PLAIN);
+    Font largeFont = Font.createTrueTypeFont("native:MainRegular", "native:MainRegular").derive(convertToPixels(1.5f), Font.STYLE_PLAIN);
 
     protected XYMultipleSeriesDataset createTemperatureDataset() {
         String[] titles = new String[]{"Crete", "Corfu", "Thassos", "Skiathos"};

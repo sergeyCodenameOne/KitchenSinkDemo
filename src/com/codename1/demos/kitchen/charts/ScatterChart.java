@@ -90,7 +90,7 @@ public class ScatterChart extends AbstractDemoChart {
     
     @Override
     public String getChartTitle() {
-        return "";
+        return "Scatter chart";
     }
 
     @Override

@@ -49,7 +49,7 @@ public class ContentBuilder {
         return instance;
     }
     
-    public Component createAcordionComponent(Image image, String header, String firstLine, String body, ActionListener listener){
+    public Component createComponent(Image image, String header, String firstLine, String body, ActionListener listener){
         Container demoContent = new AccordionComponent(image, header, firstLine, body, listener);
 //        Accordion ac = new Accordion();
 //        ScaleImageLabel contentImage = new ScaleImageLabel(image);
@@ -63,7 +63,7 @@ public class ContentBuilder {
         return demoContent;
     }
     
-    public Component createRegularComponent(Image image, String header, String firstLine, ActionListener listener){
+    public Component createComponent(Image image, String header, String firstLine, ActionListener listener){
         ScaleImageLabel contentImage = new ScaleImageLabel(image);
         contentImage.addPointerPressedListener(listener);
         contentImage.setUIID("DemoContentImage");

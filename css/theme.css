@@ -28,6 +28,7 @@
 ImagesHighRes{
 background-image: url(images/download-icon.png),
                     url(images/play-icon.png),
+                    url(images/blured-puppy.jpg),
                     url(images/back-icon.png),
                     url(images/video-icon.png),
                     url(images/source-icon.png),
@@ -50,7 +51,22 @@ background-image: url(images/download-icon.png),
                     url(images/advanced-browser.png),
                     url(images/advanced-image-viewer.png),
                     url(images/advanced-singnature.png),
-                    url(images/advanced-tree-file.png);
+                    url(images/advanced-tree-file.png),
+                    url(images/demo-maps.png),
+                    url(images/containers-demo.png),
+                    url(images/demo-labels.png),
+                    url(images/dialog-demo.png),
+                    url(images/progress-demo.png),
+                    url(images/selection-demo.png),
+                    url(images/text-field-demo.png),
+                    url(images/toggle-list-demo.png),
+                    url(images/toggles-demo.png),
+                    url(images/toolbar-demo.png),
+                    url(images/file.png),
+                    url(images/folder-opened.png),
+                    url(images/folder-closed.png),
+                    url(images/demo-buttons.png);
+
     cn1-source-dpi: 480;
 }
 
@@ -71,6 +87,7 @@ VideoComponent{
 
 MainWindowContainer{
     background-color: #efeff4;
+    padding: 3mm;
 }
 
 MainWindowDemoComponent{
@@ -86,6 +103,22 @@ DemoComponentIcon{
 MainWindowDemoName{
     text-align: center;
     font-family: "native:MainThin";
+}
+
+@media device-tablet {
+    DemoToolbar{
+        background-color: white;
+        padding: 3mm;
+        font-size: 5mm;
+    }
+}
+
+@media device-phone {
+    DemoToolbar{
+        background-color: white;
+        padding: 3mm;
+        font-size: 3mm;
+    }
 }
 
 MainWindowToolbar{
@@ -151,6 +184,16 @@ DemoTitle{
     font-family: "native:MainBold";
 }
 
+WhiteContainer{
+    background-color: white;
+    border-radius: 2mm;
+    margin: 3mm;
+}
 
-
-
+WebServicesDetails{
+    padding: 3mm;
+    text-align: center;
+    background-color: rgba(0,0,0,80);
+    margin: 0;
+    color: white;
+}

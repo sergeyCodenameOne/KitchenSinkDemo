@@ -101,7 +101,7 @@ public class SensorValuesChart extends AbstractDemoChart {
 
     @Override
     public String getChartTitle() {
-        return "h:mm a";
+        return "Temperature";
     }
 
     @Override

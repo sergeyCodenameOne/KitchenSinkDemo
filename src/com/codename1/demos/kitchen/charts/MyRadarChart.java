@@ -123,7 +123,7 @@ public class MyRadarChart extends RoundChart {
             canvas.drawLine(centerX, centerY, centerX - (float) Math.sin(thisRad) * radius, centerY - (float) Math.cos(thisRad) * radius, paint);
 
             paint.setColor(ColorUtil.GRAY);
-            if(cLength % 2 == 0){// Bug no 3 
+            if(cLength % 2 == 0){
                 drawLabel(canvas, categories[i], mRenderer, prevLabelsBounds, mCenterX, mCenterY,
                     shortRadius, longRadius, currentAngle - angle / 2 , angle, left, right, mRenderer.getLabelsColor(),
                     paint, true, false);
@@ -138,13 +138,13 @@ public class MyRadarChart extends RoundChart {
 
 // Draw area
         int sLength = mDataset.getSeriesCount();
-        int coefficient = cLength / 2; /// bug number 2;
+        int alignment = cLength / 2;
         for (int i = 0; i < sLength; i++) {
             currentAngle = mRenderer.getStartAngle();
             paint.setColor(mRenderer.getSeriesRendererAt(i).getColor());
             for (int j = 0; j < cLength; j++) {
-                float thisValue = (float) mDataset.getValue(i, categories[(j + coefficient) % cLength]);
-                float nextValue = (float) mDataset.getValue(i, categories[(j + coefficient + 1) % cLength]); // bug nimber 1
+                float thisValue = (float) mDataset.getValue(i, categories[(j + alignment) % cLength]);
+                float nextValue = (float) mDataset.getValue(i, categories[(j + alignment + 1) % cLength]); // bug nimber 1
                 float thisRad = (float) Math.toRadians(90 - currentAngle);
                 float nextRad = (float) Math.toRadians(90 - (currentAngle + angle));
                 float thisX = (float) (centerX - Math.sin(thisRad) * radius * thisValue);

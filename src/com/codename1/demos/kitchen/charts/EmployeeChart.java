@@ -25,8 +25,6 @@ package com.codename1.demos.kitchen.charts;
 import com.codename1.charts.models.AreaSeries;
 import com.codename1.charts.models.CategorySeries;
 import com.codename1.charts.renderers.DefaultRenderer;
-import com.codename1.charts.renderers.DialRenderer;
-import com.codename1.charts.renderers.SimpleSeriesRenderer;
 import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Component;
 
@@ -56,7 +54,7 @@ public class EmployeeChart extends AbstractDemoChart {
 
     @Override
     public String getChartTitle() {
-        return "";
+        return "Employee";
     }
 
     @Override

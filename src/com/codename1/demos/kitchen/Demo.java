@@ -22,9 +22,17 @@
  */
 package com.codename1.demos.kitchen;
 
+import com.codename1.demos.kitchen.charts.AbstractDemoChart;
+import static com.codename1.ui.CN.getCurrentForm;
+import com.codename1.ui.Command;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
+import com.codename1.ui.Toolbar;
+import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.plaf.Style;
 
 /** 
  * This is the base class for all the demos.
@@ -60,4 +68,39 @@ public abstract class Demo{
     }
     
     abstract public Container createContentPane();
+    
+    private void showChart(AbstractDemoChart demo) {
+            Form chartForm = new Form(demo.getChartTitle(), new BorderLayout());
+            Toolbar toolbar = chartForm.getToolbar();
+            toolbar.setUIID("DemoToolbar");
+            toolbar.getTitleComponent().setUIID("DemoTitle");
+            
+            Form lastForm = getCurrentForm();
+            Style iconStyle = new Style();
+            iconStyle.setFgColor(0x157EFB);
+            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, iconStyle),
+                    e-> lastForm.showBack());
+            
+            toolbar.addCommandToLeftBar(backCommand);
+            chartForm.add(BorderLayout.CENTER, demo.execute());
+            chartForm.show();      
+    }
+    
+    
+    protected void showDemo(String title, Component content){
+        Form chartForm = new Form(title, new BorderLayout());
+            Toolbar toolbar = chartForm.getToolbar();
+            toolbar.setUIID("DemoToolbar");
+            toolbar.getTitleComponent().setUIID("DemoTitle");
+            
+            Form lastForm = getCurrentForm();
+            Style iconStyle = new Style();
+            iconStyle.setFgColor(0x157EFB);
+            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, iconStyle),
+                    e-> lastForm.showBack());
+            
+            toolbar.addCommandToLeftBar(backCommand);
+            chartForm.add(BorderLayout.CENTER, content);
+            chartForm.show();      
+    }
 }

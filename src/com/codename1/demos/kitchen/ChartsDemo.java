@@ -36,23 +36,19 @@ import com.codename1.demos.kitchen.charts.SensorValuesChart;
 import com.codename1.demos.kitchen.charts.TrigonometricFunctionsChart;
 import com.codename1.demos.kitchen.charts.WeightDialChart;
 import static com.codename1.ui.CN.*;
-import com.codename1.ui.Component;
+import com.codename1.ui.Command;
 import com.codename1.ui.Container;
-import com.codename1.ui.Display;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.Graphics;
-import com.codename1.ui.Image;
-import com.codename1.ui.Label;
-import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.table.TableLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class ChartsDemo extends Demo {
-    private boolean drawOnMutableImages;
-
-
+    
     public ChartsDemo(Form parentForm) {
         init("Charts", getGlobalResources().getImage("charts-demo-icon.png"), parentForm, "");
     }
@@ -65,32 +61,28 @@ public class ChartsDemo extends Demo {
         demoContainer.setScrollableY(true);
         ContentBuilder builder = ContentBuilder.getInstance();
         
-        ActionListener al = e->{
-            System.out.println("change me i am here just for the debag");
-        };
-        
-        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-bar.png"),
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-bar.png"),
                                                                 "Bar Chart",
                                                                 "The bar chart rendering class", e->{
                                                                     AbstractDemoChart chart = new SalesBarChart();
                                                                     showChart(chart);
                                                                 }));
        
-        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-bubble.png"),
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-bubble.png"),
                                                                 "Bubble Chart",
                                                                 "The bubble chart rendering class", e-> {
                                                                     AbstractDemoChart chart = new ProjectStatusBubbleChart();
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-combined-xy.png"),
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-combined-xy.png"),
                                                                 "CombinedXY Chart",
                                                                 "The combinedXY chart rendering class",e->{
                                                                     AbstractDemoChart chart = new CombinedTemperatureChart();
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createAcordionComponent(getGlobalResources().getImage("chart-cubic-line.png"),
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-cubic-line.png"),
                                                                 "CunicLine Chart",
                                                                 "The interpolated (cubic) line chart rendering",
                                                                 " class", e->{
@@ -98,14 +90,14 @@ public class ChartsDemo extends Demo {
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-dial.png"),
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-dial.png"),
                                                                 "Dial Chart",
                                                                 "The dial chart rendering class", e->{
                                                                     WeightDialChart chart = new WeightDialChart();
                                                                     showChart(chart);
                                                                 }));
 
-        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-donut.png"),
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-donut.png"),
                                                                 "Donut Chart",
                                                                 "The donut chart rendering class", e->{
                                                                     BudgetDoughnutChart chart = new BudgetDoughnutChart();
@@ -113,39 +105,35 @@ public class ChartsDemo extends Demo {
 
                                                                 }));
         
-        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-line.png"),
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-line.png"),
                                                                 "Line Chart",
                                                                 "The linechart rendering class", e->{
                                                                     TrigonometricFunctionsChart chart = new TrigonometricFunctionsChart();
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-pie.png"),
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-pie.png"),
                                                                 "Pie Chart",
                                                                 "The pie chart rendering class", e->{
                                                                     BudgetPieChart chart = new BudgetPieChart();
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-radar.png"),
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-radar.png"),
                                                                 "Radar Chart",
                                                                 "The radar chart rendering class", e->{
                                                                     EmployeeChart chart = new EmployeeChart();
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-round.png"),
-                                                                "Round Chart",
-                                                                "The round chart rendering class", al));
-        
-        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-scatter.png"),
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-scatter.png"),
                                                                 "Scatter Chart",
                                                                 "The scater chart rendering class", e->{
                                                                     ScatterChart chart = new ScatterChart();
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createRegularComponent(getGlobalResources().getImage("chart-time.png"),
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-time.png"),
                                                                 "Time Chart",
                                                                 "The Time chart rendering class", e->{
                                                                     SensorValuesChart chart = new SensorValuesChart();
@@ -154,61 +142,21 @@ public class ChartsDemo extends Demo {
         
         return demoContainer;
     }
-    
-    class ListOption {
-        Class<AbstractDemoChart> chartClass;
-        String name;
-        
-        ListOption(Class cls, String name){
-            this.chartClass = cls;
-            this.name = name;
-        }
-        
-        public String toString(){
-            return this.name;
-        }
-    }
-    
             
     private void showChart(AbstractDemoChart demo) {
-
-            demo.setDrawOnMutableImage(drawOnMutableImages);
-            Form intent = wrap(demo.getChartTitle(), demo.execute());
-            intent.getToolbar().getTitleComponent().setUIID("DemoTitle");
-            if ( "".equals(intent.getTitle())){
-                intent.setTitle(demo.getName());
-            }
+            Form chartForm = new Form(demo.getChartTitle(), new BorderLayout());
+            Toolbar toolbar = chartForm.getToolbar();
+            toolbar.setUIID("DemoToolbar");
+            toolbar.getTitleComponent().setUIID("DemoTitle");
+            
             Form lastForm = getCurrentForm();
-            intent.getToolbar().setBackCommand("Menu", e -> lastForm.showBack());
-            intent.getStyle().setBgColor(0x0);
-            intent.getStyle().setBgTransparency(0xff);
-            int numComponents = intent.getComponentCount();
-            for (int i = 0; i < numComponents; i++) {
-                intent.getComponentAt(i).getStyle().setBgColor(0x0);
-                intent.getComponentAt(i).getStyle().setBgTransparency(0xff);
-            }
-            intent.show();
-       
-           
+            Style iconStyle = new Style();
+            iconStyle.setFgColor(0x157EFB);
+            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, iconStyle),
+                    e-> lastForm.showBack());
+            
+            toolbar.addCommandToLeftBar(backCommand);
+            chartForm.add(BorderLayout.CENTER, demo.execute());
+            chartForm.show();      
     }
-    
-    protected Form wrap(String title, Component c){
-        c.getStyle().setBgColor(0xff0000);
-        Form f = new Form(title);
-        f.setLayout(new BorderLayout());
-        if (drawOnMutableImages) {
-            int dispW = Display.getInstance().getDisplayWidth();
-            int dispH = Display.getInstance().getDisplayHeight();
-            Image img = Image.createImage((int)(dispW * 0.8), (int)(dispH * 0.8), 0x0);
-            Graphics g = img.getGraphics();
-            c.setWidth((int)(dispW * 0.8));
-            c.setHeight((int)(dispH * 0.8));
-            c.paint(g);
-            f.addComponent(BorderLayout.CENTER, new Label(img));
-        } else {
-          f.addComponent(BorderLayout.CENTER, c);
-        }
-        return f;
-    }
-    
 }

@@ -22,24 +22,22 @@
  */
 package com.codename1.demos.kitchen;
 
-import com.codename1.ui.CN;
+import com.codename1.ui.Container;
+import com.codename1.ui.Form;
+import static com.codename1.ui.util.Resources.getGlobalResources;
 
-public class CommonBehavior {
+/**
+ *
+ * @author serge
+ */
+public class MapsDemo extends Demo {
     
-    private static int imageWidth = -1;
-    private static int imageHeight = -1;
-    
-    public static int getDemoImageWidth() {
-        if(imageWidth < 0) {
-             imageWidth = CN.convertToPixels(15);
-        }
-        return imageWidth;
+    public MapsDemo(Form parentForm) {
+        init("Maps", getGlobalResources().getImage("demo-maps.png"), parentForm, "");
     }
-    
-    public static int getDemoImageHeight() {
-        if(imageHeight < 0) {
-             imageHeight = CN.convertToPixels(12);
-        }
-        return imageHeight;
+     
+    @Override
+    public Container createContentPane() {
+        return new Container();
     }
 }

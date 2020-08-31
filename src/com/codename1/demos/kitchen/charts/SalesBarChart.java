@@ -64,7 +64,7 @@ public class SalesBarChart extends AbstractDemoChart {
 
     @Override
     public String getChartTitle() {
-        return "";
+        return "Sales";
     }
 
     @Override
