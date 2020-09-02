@@ -26,46 +26,55 @@
 }
 
 ImagesHighRes{
-background-image: url(images/download-icon.png),
-                    url(images/play-icon.png),
-                    url(images/blured-puppy.jpg),
-                    url(images/back-icon.png),
-                    url(images/video-icon.png),
-                    url(images/source-icon.png),
-                    url(images/media-demo-icon.png),
-                    url(images/advanced-icon.png),
-                    url(images/chart-bar.png),
-                    url(images/chart-bubble.png),
-                    url(images/chart-radar.png),
-                    url(images/chart-combined-xy.png),
-                    url(images/chart-cubic-line.png),
-                    url(images/chart-dial.png),
-                    url(images/chart-donut.png),
-                    url(images/chart-line.png),
-                    url(images/chart-pie.png),
-                    url(images/chart-round.png),
-                    url(images/chart-scatter.png),
-                    url(images/chart-time.png),
-                    url(images/charts-demo-icon.png),
-                    url(images/advanced-calendar.png),
-                    url(images/advanced-browser.png),
-                    url(images/advanced-image-viewer.png),
-                    url(images/advanced-singnature.png),
-                    url(images/advanced-tree-file.png),
-                    url(images/demo-maps.png),
-                    url(images/containers-demo.png),
-                    url(images/demo-labels.png),
-                    url(images/dialog-demo.png),
-                    url(images/progress-demo.png),
-                    url(images/selection-demo.png),
-                    url(images/text-field-demo.png),
-                    url(images/toggle-list-demo.png),
-                    url(images/toggles-demo.png),
-                    url(images/toolbar-demo.png),
-                    url(images/file.png),
-                    url(images/folder-opened.png),
-                    url(images/folder-closed.png),
-                    url(images/demo-buttons.png);
+background-image: url(images/media/download-icon.png),
+                    url(images/media/play-icon.png),
+                    url(images/media/video-icon.png),
+                    url(images/charts/chart-bar.png),
+                    url(images/charts/chart-bubble.png),
+                    url(images/charts/chart-radar.png),
+                    url(images/charts/chart-combined-xy.png),
+                    url(images/charts/chart-cubic-line.png),
+                    url(images/charts/chart-dial.png),
+                    url(images/charts/chart-donut.png),
+                    url(images/charts/chart-line.png),
+                    url(images/charts/chart-pie.png),
+                    url(images/charts/chart-scatter.png),
+                    url(images/charts/chart-time.png),
+                    url(images/advanced/blured-puppy.jpg),
+                    url(images/advanced/advanced-calendar.png),
+                    url(images/advanced/advanced-browser.png),
+                    url(images/advanced/advanced-image-viewer.png),
+                    url(images/advanced/advanced-singnature.png),
+                    url(images/advanced/advanced-tree-file.png),
+                    url(images/advanced/file.png),
+                    url(images/advanced/folder-opened.png),
+                    url(images/advanced/folder-closed.png),
+                    url(images/demos/demo-maps.png),
+                    url(images/demos/advanced-icon.png),
+                    url(images/demos/media-demo-icon.png),
+                    url(images/demos/charts-demo-icon.png),
+                    url(images/demos/containers-demo.png),
+                    url(images/demos/demo-labels.png),
+                    url(images/demos/dialog-demo.png),
+                    url(images/demos/progress-demo.png),
+                    url(images/demos/selection-demo.png),
+                    url(images/demos/text-field-demo.png),
+                    url(images/demos/toggle-list-demo.png),
+                    url(images/demos/toggles-demo.png),
+                    url(images/demos/toolbar-demo.png),
+                    url(images/demos/demo-buttons.png),
+                    url(images/labels/floating-hint.png),
+                    url(images/labels/label.png),
+                    url(images/labels/span-label.png),
+                    url(images/labels/scale-image-label.png),
+                    url(images/buttons/buttons.png),
+                    url(images/buttons/floating-action-button.png),
+                    url(images/buttons/multi-buttons.png),
+                    url(images/buttons/share-button.png),
+                    url(images/buttons/span-button.png),
+                    url(images/maps/maps-pin.png),
+                    url(images/maps/map-component.png),
+                    url(images/maps/map-google-component.png);
 
     cn1-source-dpi: 480;
 }
@@ -163,7 +172,7 @@ DemoContentImage{
 
 DemoContentHeader{
     margin-left: 2mm;
-    font-size: 4mm;
+    font-size: 3mm;
     font-family: "native:MainBold";
 }
 
@@ -195,5 +204,33 @@ WebServicesDetails{
     text-align: center;
     background-color: rgba(0,0,0,80);
     margin: 0;
+    color: white;
+}
+
+YellowBgLabel{
+    background-color: #ffbc58;
+    margin: 3mm;
+    padding: 2mm;
+    border-radius: 2mm;
+}
+
+InputContainer{
+    border: none;
+    background-image: url(images/labels/input-demo-background.jpg);
+    cn1-source-dpi: 0;
+    cn1-background-type: cn1-image-scaled-fill;
+    margin: 0;
+}
+
+TextComponents{
+    background-color: white;
+    margin: 3mm;
+}
+
+InputSaveButton{
+    background-color: #d32f2f;
+    margin: 0;
+    text-align: center;
+    padding: 2mm;
     color: white;
 }

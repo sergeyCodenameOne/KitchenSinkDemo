@@ -27,11 +27,14 @@ import static com.codename1.ui.CN.getCurrentForm;
 import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
 
 /** 
@@ -102,5 +105,38 @@ public abstract class Demo{
             toolbar.addCommandToLeftBar(backCommand);
             chartForm.add(BorderLayout.CENTER, content);
             chartForm.show();      
+    }
+    
+    public static void adjustToTablet(Container cnt){
+        // Create anonymous class and override the calcPreferredSize() function to fit execly half of the scree.
+        Container leftSide = new Container(new BoxLayout(BoxLayout.Y_AXIS)){
+            @Override
+            protected Dimension calcPreferredSize() {
+                Dimension dim = super.calcPreferredSize();
+                dim.setWidth(Display.getInstance().getDisplayWidth() / 2);
+                return dim;
+            }
+        };
+        
+        Container rightSide = new Container(new BoxLayout(BoxLayout.Y_AXIS)){
+            @Override
+            protected Dimension calcPreferredSize() {
+                Dimension dim = super.calcPreferredSize();
+                dim.setWidth(Display.getInstance().getDisplayWidth() / 2);
+                return dim;
+            }
+            
+        };
+        int i = 0;
+        for(Component currComponent : cnt.getChildrenAsList(true)){
+            cnt.removeComponent(currComponent);
+            if(i++ % 2 == 0){
+                leftSide.add(currComponent);
+            }else{
+                rightSide.add(currComponent);
+            }
+        }
+        cnt.setLayout(new BoxLayout(BoxLayout.X_AXIS));
+        cnt.addAll(leftSide, rightSide);
     }
 }

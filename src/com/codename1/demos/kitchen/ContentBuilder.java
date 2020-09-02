@@ -26,6 +26,7 @@ import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
+import static com.codename1.ui.ComponentSelector.select;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
@@ -34,6 +35,7 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
+import java.util.List;
 
 
 public class ContentBuilder {
@@ -51,15 +53,6 @@ public class ContentBuilder {
     
     public Component createComponent(Image image, String header, String firstLine, String body, ActionListener listener){
         Container demoContent = new AccordionComponent(image, header, firstLine, body, listener);
-//        Accordion ac = new Accordion();
-//        ScaleImageLabel contentImage = new ScaleImageLabel(image);
-//        contentImage.addPointerDraggedListener(listener);
-//        Label contentHeader = new Label(header, "DemoContentHeader");
-//        Label contentFirstLine = new Label(firstLine, "DemoContentBody");
-//        SpanLabel bodyy = new SpanLabel(body, "DemoContentBody");
-//        ac.addContent(BoxLayout.encloseY(contentImage, contentHeader, contentFirstLine), bodyy);
-//        ac.setUIID("DemoContentAccordion");
-//        ac.addOnClickItemListener(listener);
         return demoContent;
     }
     
@@ -82,43 +75,69 @@ public class ContentBuilder {
         private SpanLabel body;
         private Image openedIcon;
         private Image closedIcon;
+        private Button openClose;
         
-
+        /**
+         * Demo component that have more then one line of description.
+         * 
+         * @param image the image of the component.
+         * @param header the header of the component. 
+         * @param firstLine first line of description.
+         * @param body the rest of the description.
+         * @param listener add ActionListener to the image of the component.
+         */
         private AccordionComponent(Image image, String header, String firstLine, String body, ActionListener listener) {
             super(new BorderLayout());   
             this.firstLine = new Label(firstLine, "DemoContentBody");
             this.body = new SpanLabel(body, "DemoContentBody");
             this.body.setHidden(true);
             
-    
             setUIID("DemoContentAccordion");
             ScaleImageLabel contentImage = new ScaleImageLabel(image);
             contentImage.addPointerPressedListener(listener);
             contentImage.setUIID("DemoContentImage");
             Label contentHeader = new Label(header, "DemoContentHeader");
 
-            Button showMoreButton = new Button("", FontImage.MATERIAL_KEYBOARD_ARROW_DOWN, "AccordionButton");
-            Style buttonStyle = showMoreButton.getAllStyles();
+            openClose = new Button("", FontImage.MATERIAL_KEYBOARD_ARROW_DOWN, "AccordionButton");
+            Style buttonStyle = openClose.getAllStyles();
             openedIcon = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_UP, buttonStyle);
             closedIcon = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_DOWN, buttonStyle);
-            showMoreButton.addActionListener(e->{
+            openClose.addActionListener(e->{
                 if(isOpen){
-                    isOpen = false;
-                    showMoreButton.setIcon(closedIcon);
-                    this.body.setHidden(true);
-                    animateLayout(200);
+                    close();
                 }else{
-                    isOpen = true;
-                    showMoreButton.setIcon(openedIcon);
-                    this.body.setHidden(false);
-                    animateLayout(200);
+                    open();
                 }
             });
 
             add(BorderLayout.NORTH, contentImage);
             add(BorderLayout.WEST, contentHeader);
-            add(BorderLayout.EAST, showMoreButton);
+            add(BorderLayout.EAST, openClose);
             add(BorderLayout.SOUTH, BoxLayout.encloseY(this.firstLine, this.body));
         }
+        
+        public void open(){
+            // Select all AccordionComponent objects to close them when we open another one. 
+            List<Component> accordionList = select("DemoContentAccordion").asList();
+            for(Component currComponent: accordionList){
+                ((AccordionComponent)currComponent).close();
+        }
+                    
+            if (!isOpen){
+                isOpen = true;
+                openClose.setIcon(openedIcon);
+                body.setHidden(false);
+                animateLayout(200);
+            }
+        }
+        
+        public void close(){
+            if (isOpen){
+                isOpen = false;
+                openClose.setIcon(closedIcon);
+                body.setHidden(true);
+                animateLayout(200);
+            }
+        } 
     }
 }

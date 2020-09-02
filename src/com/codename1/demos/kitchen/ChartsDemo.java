@@ -44,7 +44,6 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
-import com.codename1.ui.table.TableLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class ChartsDemo extends Demo {
@@ -55,9 +54,7 @@ public class ChartsDemo extends Demo {
     
     public Container createContentPane(){
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
-        if (isTablet()){
-            demoContainer.setLayout(new TableLayout(2, 2));
-        }
+        
         demoContainer.setScrollableY(true);
         ContentBuilder builder = ContentBuilder.getInstance();
         
@@ -83,7 +80,7 @@ public class ChartsDemo extends Demo {
                                                                 }));
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-cubic-line.png"),
-                                                                "CunicLine Chart",
+                                                                "CubicLine Chart",
                                                                 "The interpolated (cubic) line chart rendering",
                                                                 " class", e->{
                                                                     AbstractDemoChart chart = new AverageCubicTemperatureChart();

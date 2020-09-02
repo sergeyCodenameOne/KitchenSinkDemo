@@ -128,6 +128,7 @@ public class SensorValuesChart extends AbstractDemoChart {
         renderer.setShowGrid(true);
         renderer.setXLabelsAlign(Component.CENTER);
         renderer.setYLabelsAlign(Component.RIGHT);
+        renderer.setMargins(new int[]{20, 30, 80, 0});
         initRendererer(renderer);
 
         TimeChart chart = new TimeChart(getDataSet(),

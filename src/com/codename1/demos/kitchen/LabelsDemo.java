@@ -22,9 +22,26 @@
  */
 package com.codename1.demos.kitchen;
 
+import com.codename1.components.ScaleImageLabel;
+import com.codename1.components.SpanLabel;
+import com.codename1.components.ToastBar;
+import com.codename1.components.ToastBar.Status;
+import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Label;
+import com.codename1.ui.TextArea;
+import com.codename1.ui.TextComponent;
+import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.layouts.TextModeLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
+import com.codename1.ui.validation.RegexConstraint;
+import com.codename1.ui.validation.Validator;
 
 public class LabelsDemo extends Demo {
     
@@ -34,6 +51,146 @@ public class LabelsDemo extends Demo {
      
     @Override
     public Container createContentPane() {
-        return new Container();
+        Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
+        demoContainer.setScrollableY(true);
+        ContentBuilder builder = ContentBuilder.getInstance();
+        
+        
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("label.png"),
+                                                                "Label",
+                                                                "Allows displaying a single line of text and",
+                                                                "icon (both optional) with different alignment options. This class is a base class for several "+ 
+                                                                "components allowing them to declare alignment/icon appearance universally.", e->{
+                                                                    Container labelContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+                                                                    
+                                                                    labelContainer.add(new Label("Text Label:"));
+                                                                    labelContainer.add(new Label("label", "YellowBgLabel"));
+                                                                    labelContainer.add(new Label("Image Label:"));
+                                                                    labelContainer.add(new Label(getGlobalResources().getImage("label.png").scaled(Display.getInstance().getDisplayWidth() / 2, -1), "YellowBgLabel"));
+                                                                    labelContainer.add(new Label("text and image Label:"));
+                                                                    labelContainer.add(new Label("label", getGlobalResources().getImage("label.png").scaled(Display.getInstance().getDisplayWidth() / 2, -1), "YellowBgLabel"));
+                                                                    showDemo("Label", labelContainer);
+                                                                }));
+        
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("span-label.png"),
+                                                                "Span Label",
+                                                                "A multi line label component that can be",
+                                                                "easily localized, this is simply based on a text area combined with a label.", e->{
+                                                                    Container labelContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+                                                                    
+                                                                    labelContainer.add(new Label("SpanLabel:"));
+                                                                    labelContainer.add(new SpanLabel("A multi line label component that can be easily localized, this is simply based on a text area combined with a label.", "YellowBgLabel"));
+                                                                    labelContainer.add(new Label("SpanLabel with icon (West):"));
+                                                                    SpanLabel labelWithIconWest = new SpanLabel("A multi line label component that can be easily localized, this is simply based on a text area combined with a label.", "YellowBgLabel");
+                                                                    labelWithIconWest.setMaterialIcon(FontImage.MATERIAL_INFO);
+                                                                    labelWithIconWest.setIconPosition("West");
+                                                                    labelContainer.add(labelWithIconWest);
+                                                                    labelContainer.add(new Label("SpanLabel with icon (North):"));
+                                                                    SpanLabel labelWithIconNorth = new SpanLabel("A multi line label component that can be easily localized, this is simply based on a text area combined with a label.", "YellowBgLabel");
+                                                                    labelWithIconNorth.setMaterialIcon(FontImage.MATERIAL_INFO);
+                                                                    labelWithIconNorth.setIconPosition("North");
+                                                                    labelContainer.add(labelWithIconNorth);
+                                                                    showDemo("SpanLabel", labelContainer);
+                                                                }));
+        
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("scale-image-label.png"),
+                                                                "Scale Image Label",
+                                                                "Label that simplifies the usage of scale to",
+                                                                "fill/fit. This is effectively equivalent to just setting "+
+                                                                "the style image on a label but more convenient for some special circumstances\n\nOne major difference is "+
+                                                                "that preferred size equals the image in this case. The default UIID for this component is label", e->{
+                                                                    Container labelContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+                                                                    labelContainer.add(new Label("Scale image label:"));
+                                                                    ScaleImageLabel imageLabel = new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png"));
+                                                                    labelContainer.add(imageLabel);
+                                                                    labelContainer.add(new Label("3 Scale image labels:"));
+                                                                    Container threeImagesContainer = new Container(new GridLayout(1, 3));
+                                                                    threeImagesContainer.addAll(new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png")),
+                                                                                                new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png")),
+                                                                                                new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png")));
+                                                                    labelContainer.add(threeImagesContainer);
+    
+                                                                    
+                                                                    
+                                                                    
+                                                                    showDemo("Scale image label", labelContainer);
+                                                                }));
+        
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("floating-hint.png"),
+                                                                "Text Component",
+                                                                "Text Component Encapsulates a text field",
+                                                                "and label into a single component. This allows the UI to adapt for IOS/Android behavior differences and "+
+                                                                "support features like floating hint when necessary.\n\nIt also includes platform specific error handling "+
+                                                                "logic. It is highly recommended to use text component in the context of a TextModeLayout this allows "+
+                                                                "the layout to implicitly adapt to the on-top mode and use a box layout Y mode for iOS and other platforms. "+
+                                                                "This class supports several theme constants.", e->{
+                                                                    
+                                                                    showDemo("Text Component", createTextComponentContainer());
+                                                                }));
+        
+        return demoContainer;
+    }
+    
+    
+    private Container createTextComponentContainer(){
+        Container textContainer = new Container(new LayeredLayout());
+        // Set UIID for background image.
+        textContainer.setUIID("InputContainer");
+        
+        Container textFields = new Container(new TextModeLayout(6, 1));
+
+        // Add some text fields to the page
+        TextComponent name = new TextComponent().labelAndHint("Name");
+        FontImage.setMaterialIcon(name.getField().getHintLabel(), FontImage.MATERIAL_PERSON);
+
+        TextComponent email = new TextComponent().labelAndHint("E-mail").constraint(TextArea.EMAILADDR);
+        FontImage.setMaterialIcon(email.getField().getHintLabel(), FontImage.MATERIAL_EMAIL);
+
+        TextComponent password = new TextComponent().labelAndHint("Password").constraint(TextArea.PASSWORD);
+        FontImage.setMaterialIcon(password.getField().getHintLabel(), FontImage.MATERIAL_LOCK);
+
+        TextComponent bio = new TextComponent().labelAndHint("Bio").multiline(true);
+        FontImage.setMaterialIcon(bio.getField().getHintLabel(), FontImage.MATERIAL_LIBRARY_BOOKS);
+
+        textFields.add(name);
+        textFields.add(email);
+        textFields.add(password);
+        textFields.add(bio);
+
+        Button saveButton = new Button("Save", "InputSaveButton");
+
+        // Add validation to the save Button
+        Validator saveValidation = new Validator();
+        saveValidation.addConstraint(email, RegexConstraint.validEmail());
+        saveValidation.addSubmitButtons(saveButton);
+
+        saveButton.addActionListener(ee ->{
+            // Show saving status
+            Status savingStatus = ToastBar.getInstance().createStatus();
+            savingStatus.setMessage("Saving");
+            savingStatus.setExpires(3000);
+            savingStatus.setShowProgressIndicator(true);
+            savingStatus.show();
+
+            // Show saved 
+            Status saved = ToastBar.getInstance().createStatus();
+            saved.setMessage("Input was successfully saved");
+            saved.showDelayed(4000);  
+            saved.setExpires(2000);
+            System.out.println(saved.getUiid());
+            saved.show();
+
+            name.getField().clear();
+            email.getField().clear();
+            bio.getField().clear();
+            password.getField().clear();
+        });
+
+        Container textFieldsAndSaveButton = BorderLayout.south(saveButton);
+        textFieldsAndSaveButton.setUIID("TextComponents");
+        textFieldsAndSaveButton.add(BorderLayout.CENTER, textFields);
+        
+        textContainer.add(textFieldsAndSaveButton);
+        return textContainer;
     }
 }

@@ -87,7 +87,7 @@ public class ProjectStatusBubbleChart extends AbstractDemoChart {
         renderer.setChartTitleTextFont(largeFont);
         renderer.setLabelsTextFont(medFont);
         renderer.setLegendTextFont(medFont);
-        renderer.setMargins(new int[]{20, 30, 15, 0});
+        renderer.setMargins(new int[]{20, 30, 80, 0});
         XYSeriesRenderer newTicketRenderer = new XYSeriesRenderer();
         newTicketRenderer.setColor(ColorUtil.BLUE);
         renderer.addSeriesRenderer(newTicketRenderer);

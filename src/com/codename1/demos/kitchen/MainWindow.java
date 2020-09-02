@@ -102,7 +102,11 @@ public class MainWindow {
         
         toolbar.addCommandToRightBar(sourceCommand);
         toolbar.addCommandToLeftBar(backCommand);
-        demoForm.add(BorderLayout.CENTER, demo.createContentPane());
+        Container demoContent = demo.createContentPane();
+        if(isTablet()){
+            Demo.adjustToTablet(demoContent);
+        }
+        demoForm.add(BorderLayout.CENTER, demoContent);
         demoForm.show();
     }
 }

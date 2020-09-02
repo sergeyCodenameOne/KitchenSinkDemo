@@ -100,6 +100,7 @@ public class CombinedTemperatureChart extends AbstractDemoChart {
         renderer.setXLabels(12);
         renderer.setYLabels(10);
         renderer.setShowGrid(true);
+        renderer.setMargins(new int[]{20, 30, 80, 0});
         renderer.setXLabelsAlign(Component.RIGHT);
         renderer.setYLabelsAlign(Component.RIGHT);
         renderer.setZoomButtonsVisible(true);

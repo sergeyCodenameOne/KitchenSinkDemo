@@ -22,14 +22,21 @@
  */
 package com.codename1.demos.kitchen;
 
+
+import com.codename1.location.Location;
+import com.codename1.location.LocationManager;
+import com.codename1.maps.Coord;
+import com.codename1.maps.MapComponent;
+import com.codename1.maps.layers.PointLayer;
+import com.codename1.maps.layers.PointsLayer;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
+import com.codename1.ui.layouts.BoxLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
+import java.io.IOException;
 
-/**
- *
- * @author serge
- */
 public class MapsDemo extends Demo {
     
     public MapsDemo(Form parentForm) {
@@ -38,6 +45,45 @@ public class MapsDemo extends Demo {
      
     @Override
     public Container createContentPane() {
-        return new Container();
+        Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
+        ContentBuilder builder = ContentBuilder.getInstance();
+        
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("map-component.png"),
+                                                                "Map Component",
+                                                                "The Map Component class", e->{
+                                                                    
+                                                                    showDemo("Map Component", createMapComponent());
+                                                                }));
+        
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("map-google-component.png"),
+                                                                "Google Map",
+                                                                "Google Map class", e->{
+                                          
+                                                                }));
+        return demoContainer;
+    }
+    
+    private Component createMapComponent(){
+        
+        MapComponent mc = new MapComponent();
+
+        try {
+            //get the current location from the Location API
+            Location loc = LocationManager.getLocationManager().getCurrentLocation();
+
+            Coord lastLocation = new Coord(loc.getLatitude(), loc.getLongtitude());
+            Image i = getGlobalResources().getImage("maps-pin.png");
+            PointsLayer pl = new PointsLayer();
+            pl.setPointIcon(i);
+            PointLayer p = new PointLayer(lastLocation, "You Are Here", i);
+            p.setDisplayName(true);
+            pl.addPoint(p);
+            mc.addLayer(pl);
+         } catch (IOException ex) {
+            ex.printStackTrace();
+         }
+         mc.zoomToLayers();
+
+        return mc;
     }
 }

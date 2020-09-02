@@ -97,6 +97,7 @@ public class AverageCubicTemperatureChart extends AbstractDemoChart {
         renderer.setPanEnabled(true);
         renderer.setZoomEnabled(true);
         renderer.setZoomLimits(new double[]{-10, 20, -10, 40});
+        renderer.setMargins(new int[]{20, 30, 80, 0});
         initRendererer(renderer);
         CubicLineChart chart = new CubicLineChart(
                 getDataSet(),
