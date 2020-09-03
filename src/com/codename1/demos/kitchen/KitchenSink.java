@@ -32,6 +32,7 @@ import com.codename1.ui.Toolbar;
 import static com.codename1.ui.Button.setButtonRippleEffectDefault;
 
 
+
 public class KitchenSink {
     
     private Form current;
@@ -42,7 +43,6 @@ public class KitchenSink {
         updateNetworkThreadCount(2);
 
         theme = UIManager.initFirstTheme("/theme");
-
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
 

@@ -27,6 +27,7 @@
 
 ImagesHighRes{
 background-image: url(images/media/download-icon.png),
+                    url(images/codename-one-icon.png),
                     url(images/media/play-icon.png),
                     url(images/media/video-icon.png),
                     url(images/charts/chart-bar.png),
@@ -233,4 +234,33 @@ InputSaveButton{
     text-align: center;
     padding: 2mm;
     color: white;
+}
+
+ButtonDemo{
+    background: cn1-pill-border;
+    background-color: #3399ff;
+    color:white;
+    padding: 3mm;
+    text-align:center;
+    margin: 3mm;
+}
+
+ButtonDemo.pressed{
+    background: cn1-pill-border;
+    background-color: #4da4fb;
+    color:white;
+    text-align:center;
+    margin: 3mm;
+}
+
+WhiteText{
+    color: white;
+}
+
+ButtonShareDemo{
+    cn1-derive: ButtonDemo;
+    color: black;
+}
+
+ScaleImageButtonContainer{
 }

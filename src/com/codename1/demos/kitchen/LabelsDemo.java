@@ -103,7 +103,8 @@ public class LabelsDemo extends Demo {
                                                                     labelContainer.add(new Label("Scale image label:"));
                                                                     ScaleImageLabel imageLabel = new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png"));
                                                                     labelContainer.add(imageLabel);
-                                                                    labelContainer.add(new Label("3 Scale image labels:"));
+                                                                    labelContainer.add(new Label("   "));
+                                                                    labelContainer.add(new Label("3 Scale image labels(auto scaled to fit the screen size):"));
                                                                     Container threeImagesContainer = new Container(new GridLayout(1, 3));
                                                                     threeImagesContainer.addAll(new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png")),
                                                                                                 new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png")),
