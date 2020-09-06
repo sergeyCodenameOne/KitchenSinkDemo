@@ -73,6 +73,10 @@ background-image: url(images/media/download-icon.png),
                     url(images/buttons/multi-buttons.png),
                     url(images/buttons/share-button.png),
                     url(images/buttons/span-button.png),
+                    url(images/toggles/check-box.png),
+                    url(images/toggles/switch.png),
+                    url(images/toggles/on-off-switch.png),
+                    url(images/toggles/radio-button.png),
                     url(images/maps/maps-pin.png),
                     url(images/maps/map-component.png),
                     url(images/maps/map-google-component.png);
@@ -255,11 +259,16 @@ ButtonDemo.pressed{
 
 WhiteText{
     color: white;
+    text-align: center;
 }
 
 ButtonShareDemo{
     cn1-derive: ButtonDemo;
     color: black;
+}
+
+MultiButtonsContainer{
+    padding: 2mm;
 }
 
 ScaleImageButtonContainer{

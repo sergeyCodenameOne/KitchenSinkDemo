@@ -22,8 +22,17 @@
  */
 package com.codename1.demos.kitchen;
 
+import com.codename1.components.Switch;
+import com.codename1.ui.ButtonGroup;
+import com.codename1.ui.CheckBox;
 import com.codename1.ui.Container;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
+import com.codename1.ui.RadioButton;
+import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class TogglesDemo extends Demo {
@@ -34,7 +43,59 @@ public class TogglesDemo extends Demo {
      
     @Override
     public Container createContentPane() {
-        return new Container();
+        Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
+        demoContainer.setScrollableY(true);
+        ContentBuilder builder = ContentBuilder.getInstance();
+        
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("check-box.png"),
+                                                                "Checkbox",
+                                                                "Checkbox is a button that can be selected",
+                                                                "or deselected and display its state to the user. Check out RadioButton for a more exclusive selection "+
+                                                                "approach. Both components support a toggle button mode using the Button.setToggle (Boolean) API.", e->{
+                                                                    showDemo("Buttons", createCheckboxDemo());
+                                                                }));
+        
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("radio-button.png"),
+                                                                "Radio Button",
+                                                                "Checkbox is a button that can be selected",
+                                                                "or deselected and display its state to the user. Check out RadioButton for a more exclusive selection "+
+                                                                "approach. Both components support a toggle button mode using the Button.setToggle (Boolean) API.", e->{
+                                                                    showDemo("Buttons", createRadioButtonDemo());
+                                                                }));
+        
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("switch.png"),
+                                                                "Switch",
+                                                                "Button is the base class for several UI",
+                                                                "The on/off switch is a checkbox of sort (although it derives container) that represents its state as a switch "+
+                                                                "when using the android native theme this implementation follows the Material Design Switch "+
+                                                                "guidelines: https://material.io/guidelines/components/ selection-controls.html#selection-controls- radio-button",
+                                                                e->{
+                                                                    Switch s = new Switch();
+                                                                    showDemo("Buttons", BorderLayout.centerAbsolute(s));
+                                                                }));
+        
+        return demoContainer;
+    }
+    private Container createCheckboxDemo(){
+        Image icon = FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("CheckBox"));
+        CheckBox cb1 = new CheckBox("CheckBox No Icon");
+        cb1.setSelected(true);
+        CheckBox cb2 = new CheckBox("CheckBox With Icon", icon);
+        CheckBox cb3 = new CheckBox("CheckBox Opposite True", icon);
+        CheckBox cb4 = new CheckBox("CheckBox Opposite False", icon);
+        cb3.setOppositeSide(true);
+        cb4.setOppositeSide(false);
+        
+        return BoxLayout.encloseY(cb1, cb2, cb3, cb4);
     }
     
+    private Container createRadioButtonDemo(){
+        Image icon = FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("RadioButton"));
+        RadioButton rb1 = new RadioButton("Radio Button 1");
+        RadioButton rb2 = new RadioButton("Radio Button 2");
+        RadioButton rb3 = new RadioButton("Radio Button 3", icon);
+        new ButtonGroup(rb1, rb2, rb3);
+        rb2.setSelected(true);
+        return BoxLayout.encloseY(rb1, rb2, rb3);
+    }
 }

@@ -22,7 +22,7 @@
  */
 package com.codename1.demos.kitchen;
 
-import com.codename1.components.ScaleImageLabel;
+import com.codename1.components.ScaleImageButton;
 import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
@@ -57,8 +57,8 @@ public class ContentBuilder {
     }
     
     public Component createComponent(Image image, String header, String firstLine, ActionListener listener){
-        ScaleImageLabel contentImage = new ScaleImageLabel(image);
-        contentImage.addPointerPressedListener(listener);
+        ScaleImageButton contentImage = new ScaleImageButton(image);
+        contentImage.addActionListener(listener);
         contentImage.setUIID("DemoContentImage");
         Label contentHeader = new Label(header, "DemoContentHeader");
         Label contentFirstLine = new Label(firstLine, "DemoContentBody");
@@ -93,8 +93,8 @@ public class ContentBuilder {
             this.body.setHidden(true);
             
             setUIID("DemoContentAccordion");
-            ScaleImageLabel contentImage = new ScaleImageLabel(image);
-            contentImage.addPointerPressedListener(listener);
+            ScaleImageButton contentImage = new ScaleImageButton(image);
+            contentImage.addActionListener(listener);
             contentImage.setUIID("DemoContentImage");
             Label contentHeader = new Label(header, "DemoContentHeader");
 

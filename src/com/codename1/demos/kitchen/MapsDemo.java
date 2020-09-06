@@ -69,7 +69,7 @@ public class MapsDemo extends Demo {
     }
     
     private Component createGoogleMapComponent(){
-        final MapContainer cnt = new MapContainer();
+        final MapContainer cnt = new MapContainer("AIzaSyAvMh8_ihHqqAOGPN7hXPUdbSHEPA9XOhI");
 
         Button btnMoveCamera = new Button("Move Camera");
         btnMoveCamera.addActionListener(e->{

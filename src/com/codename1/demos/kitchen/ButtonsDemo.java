@@ -178,6 +178,7 @@ public class ButtonsDemo extends Demo{
                                                     twoLinesIconEmblemHorizontal,
                                                     twoLinesIconCheckBox,
                                                     fourLinesIcon);
+        demoContainer.setUIID("MultiButtonsContainer");
         return demoContainer;
     }
     
