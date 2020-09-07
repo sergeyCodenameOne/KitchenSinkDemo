@@ -47,9 +47,6 @@ background-image: url(images/media/download-icon.png),
                     url(images/advanced/advanced-image-viewer.png),
                     url(images/advanced/advanced-singnature.png),
                     url(images/advanced/advanced-tree-file.png),
-                    url(images/advanced/file.png),
-                    url(images/advanced/folder-opened.png),
-                    url(images/advanced/folder-closed.png),
                     url(images/demos/demo-maps.png),
                     url(images/demos/advanced-icon.png),
                     url(images/demos/media-demo-icon.png),
@@ -106,12 +103,15 @@ MainWindowContainer{
 
 MainWindowDemoComponent{
     background-color: white;
-    padding: 2mm;
+    border-radius: 2mm;
+    margin-top: 2mm;
+    margin-left: 2mm;
+    margin-right: 2mm;
+    padding:2mm;
 }
 
 DemoComponentIcon{
     margin: 2mm;
-    
 }
 
 MainWindowDemoName{
@@ -149,11 +149,6 @@ DemoContainer{
     margin: 0;
     background-color: #efeff4;
     padding: 0;
-}
-
-DemoToolbar{
-    background-color: white;
-    padding:3mm;
 }
 
 DemoContentAccordion{
@@ -271,5 +266,31 @@ MultiButtonsContainer{
     padding: 2mm;
 }
 
-ScaleImageButtonContainer{
+@media device-tablet {
+    ComponentDemoToolbar{
+        background-color: white;
+        padding: 3mm;
+        font-size: 5mm;
+    }
+}
+
+@media device-phone {
+    ComponentDemoToolbar{
+        background-color: white;
+        padding: 3mm;
+        font-size: 3mm;
+    }
+}
+
+ComponentDemoTitle{
+    text-align: center;
+    font-family: "native:MainBold";
+}
+
+MediaComponentLine1{
+    color: black;
+}
+
+MediaComponentLine2{
+    color: grey;
 }

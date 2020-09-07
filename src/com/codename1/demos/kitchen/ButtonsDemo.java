@@ -22,7 +22,7 @@
  */
 package com.codename1.demos.kitchen;
 
-
+import com.codename1.components.FloatingActionButton;
 import com.codename1.components.MultiButton;
 import com.codename1.components.ScaleImageButton;
 import com.codename1.components.ScaleImageLabel;
@@ -38,6 +38,7 @@ import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
@@ -97,7 +98,7 @@ public class ButtonsDemo extends Demo{
                                                                 "Floating action buttons are a material design",
                                                                 "element used to promote a special action in a form. They are represented as a floating circle with a "+
                                                                 "flat icon floating above the UI typically in the bottom right area.", e->{
-                                                                   showDemo("Floating Action Button", createMultiButtonsDemo());
+                                                                   showDemo("Floating Action Button", createFloatingActionButtonDemo());
                                                                 }));
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("share-button.png"),
@@ -230,4 +231,12 @@ public class ButtonsDemo extends Demo{
         return demoContainer;
     }
     
+    private Container createFloatingActionButtonDemo(){
+        Container demoContainer = new Container(new BorderLayout());
+        FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
+        fab.createSubFAB(FontImage.MATERIAL_PEOPLE, "");
+        fab.createSubFAB(FontImage.MATERIAL_IMPORT_CONTACTS, "");
+        return fab.bindFabToContainer(demoContainer);
+
+    }
 }

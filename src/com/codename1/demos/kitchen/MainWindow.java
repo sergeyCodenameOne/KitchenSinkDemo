@@ -33,6 +33,7 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 
 
 public class MainWindow {
@@ -76,7 +77,7 @@ public class MainWindow {
     
     private Component createDemoComponent(Demo demo){
         MultiButton demoComponent = new MultiButton(demo.getDemoId());
-        demoComponent.setUIID("VideoComponent");
+        demoComponent.setUIID("MainWindowDemoComponent");
         demoComponent.setIcon(demo.getDemoImage().scaled(CommonBehavior.getDemoImageWidth(), CommonBehavior.getDemoImageHeight()));
         demoComponent.setIconPosition("North");
         demoComponent.addActionListener(e-> createAndShowForm(demo));
@@ -92,12 +93,11 @@ public class MainWindow {
         toolbar.getTitleComponent().setUIID("DemoTitle");
         
         // Toolbar add source and back buttons.
-        Style iconStyle = new Style();
-        iconStyle.setFgColor(0x157EFB);
-        Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, iconStyle),
+        Style commandStyle = UIManager.getInstance().getComponentStyle("DemoTitle");
+        Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, commandStyle),
                 e-> demo.getParentForm().show());
         
-        Command sourceCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_CODE, iconStyle),
+        Command sourceCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_CODE, commandStyle),
                 e->{});
         
         toolbar.addCommandToRightBar(sourceCommand);

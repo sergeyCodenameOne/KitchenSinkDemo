@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <image name="advanced-browser.png" type="multi"  />
+    <image name="advanced-calendar.png" type="multi"  />
+    <image name="advanced-icon.png" type="multi"  />
+    <image name="advanced-image-viewer.png" type="multi"  />
+    <image name="advanced-singnature.png" type="multi"  />
+    <image name="advanced-tree-file.png" type="multi"  />
+    <image name="blured-puppy.jpg" type="multi"  />
+    <image name="buttons.png" type="multi"  />
+    <image name="chart-bar.png" type="multi"  />
+    <image name="chart-bubble.png" type="multi"  />
+    <image name="chart-combined-xy.png" type="multi"  />
+    <image name="chart-cubic-line.png" type="multi"  />
+    <image name="chart-dial.png" type="multi"  />
+    <image name="chart-donut.png" type="multi"  />
+    <image name="chart-line.png" type="multi"  />
+    <image name="chart-pie.png" type="multi"  />
+    <image name="chart-radar.png" type="multi"  />
+    <image name="chart-scatter.png" type="multi"  />
+    <image name="chart-time.png" type="multi"  />
+    <image name="charts-demo-icon.png" type="multi"  />
+    <image name="check-box.png" type="multi"  />
+    <image name="codename-one-icon.png" type="multi"  />
+    <image name="containers-demo.png" type="multi"  />
+    <image name="demo-buttons.png" type="multi"  />
+    <image name="demo-labels.png" type="multi"  />
+    <image name="demo-maps.png" type="multi"  />
+    <image name="dialog-demo.png" type="multi"  />
+    <image name="download-icon.png" type="multi"  />
+    <image name="file.png" type="multi"  />
+    <image name="floating-action-button.png" type="multi"  />
+    <image name="floating-hint.png" type="multi"  />
+    <image name="folder-closed.png" type="multi"  />
+    <image name="folder-opened.png" type="multi"  />
+    <image name="label.png" type="multi"  />
+    <image name="map-component.png" type="multi"  />
+    <image name="map-google-component.png" type="multi"  />
+    <image name="maps-pin.png" type="multi"  />
+    <image name="media-demo-icon.png" type="multi"  />
+    <image name="multi-buttons.png" type="multi"  />
+    <image name="on-off-switch.png" type="multi"  />
+    <image name="play-icon.png" type="multi"  />
+    <image name="progress-demo.png" type="multi"  />
+    <image name="radio-button.png" type="multi"  />
+    <image name="scale-image-label.png" type="multi"  />
+    <image name="selection-demo.png" type="multi"  />
+    <image name="share-button.png" type="multi"  />
+    <image name="span-button.png" type="multi"  />
+    <image name="span-label.png" type="multi"  />
+    <image name="switch.png" type="multi"  />
+    <image name="text-field-demo.png" type="multi"  />
+    <theme name="Theme">
+        <val key="@imageMetadata" value="{
+  "download-icon.png": {
+    "imageName": "download-icon.png",
+    "sourceDpi": 480
+  },
+  "codename-one-icon.png": {
+    "imageName": "codename-one-icon.png",
+    "sourceDpi": 480
+  },
+  "play-icon.png": {
+    "imageName": "play-icon.png",
+    "sourceDpi": 480
+  },
+  "video-icon.png": {
+    "imageName": "video-icon.png",
+    "sourceDpi": 480
+  },
+  "chart-bar.png": {
+    "imageName": "chart-bar.png",
+    "sourceDpi": 480
+  },
+  "chart-bubble.png": {
+    "imageName": "chart-bubble.png",
+    "sourceDpi": 480
+  },
+  "chart-radar.png": {
+    "imageName": "chart-radar.png",
+    "sourceDpi": 480
+  },
+  "chart-combined-xy.png": {
+    "imageName": "chart-combined-xy.png",
+    "sourceDpi": 480
+  },
+  "chart-cubic-line.png": {
+    "imageName": "chart-cubic-line.png",
+    "sourceDpi": 480
+  },
+  "chart-dial.png": {
+    "imageName": "chart-dial.png",
+    "sourceDpi": 480
+  },
+  "chart-donut.png": {
+    "imageName": "chart-donut.png",
+    "sourceDpi": 480
+  },
+  "chart-line.png": {
+    "imageName": "chart-line.png",
+    "sourceDpi": 480
+  },
+  "chart-pie.png": {
+    "imageName": "chart-pie.png",
+    "sourceDpi": 480
+  },
+  "chart-scatter.png": {
+    "imageName": "chart-scatter.png",
+    "sourceDpi": 480
+  },
+  "chart-time.png": {
+    "imageName": "chart-time.png",
+    "sourceDpi": 480
+  },
+  "blured-puppy.jpg": {
+    "imageName": "blured-puppy.jpg",
+    "sourceDpi": 480
+  },
+  "advanced-calendar.png": {
+    "imageName": "advanced-calendar.png",
+    "sourceDpi": 480
+  },
+  "advanced-browser.png": {
+    "imageName": "advanced-browser.png",
+    "sourceDpi": 480
+  },
+  "advanced-image-viewer.png": {
+    "imageName": "advanced-image-viewer.png",
+    "sourceDpi": 480
+  },
+  "advanced-singnature.png": {
+    "imageName": "advanced-singnature.png",
+    "sourceDpi": 480
+  },
+  "advanced-tree-file.png": {
+    "imageName": "advanced-tree-file.png",
+    "sourceDpi": 480
+  },
+  "file.png": {
+    "imageName": "file.png",
+    "sourceDpi": 480
+  },
+  "folder-opened.png": {
+    "imageName": "folder-opened.png",
+    "sourceDpi": 480
+  },
+  "folder-closed.png": {
+    "imageName": "folder-closed.png",
+    "sourceDpi": 480
+  },
+  "demo-maps.png": {
+    "imageName": "demo-maps.png",
+    "sourceDpi": 480
+  },
+  "advanced-icon.png": {
+    "imageName": "advanced-icon.png",
+    "sourceDpi": 480
+  },
+  "media-demo-icon.png": {
+    "imageName": "media-demo-icon.png",
+    "sourceDpi": 480
+  },
+  "charts-demo-icon.png": {
+    "imageName": "charts-demo-icon.png",
+    "sourceDpi": 480
+  },
+  "containers-demo.png": {
+    "imageName": "containers-demo.png",
+    "sourceDpi": 480
+  },
+  "demo-labels.png": {
+    "imageName": "demo-labels.png",
+    "sourceDpi": 480
+  },
+  "dialog-demo.png": {
+    "imageName": "dialog-demo.png",
+    "sourceDpi": 480
+  },
+  "progress-demo.png": {
+    "imageName": "progress-demo.png",
+    "sourceDpi": 480
+  },
+  "selection-demo.png": {
+    "imageName": "selection-demo.png",
+    "sourceDpi": 480
+  },
+  "text-field-demo.png": {
+    "imageName": "text-field-demo.png",
+    "sourceDpi": 480
+  },
+  "toggle-list-demo.png": {
+    "imageName": "toggle-list-demo.png",
+    "sourceDpi": 480
+  },
+  "toggles-demo.png": {
+    "imageName": "toggles-demo.png",
+    "sourceDpi": 480
+  },
+  "toolbar-demo.png": {
+    "imageName": "toolbar-demo.png",
+    "sourceDpi": 480
+  },
+  "demo-buttons.png": {
+    "imageName": "demo-buttons.png",
+    "sourceDpi": 480
+  },
+  "floating-hint.png": {
+    "imageName": "floating-hint.png",
+    "sourceDpi": 480
+  },
+  "label.png": {
+    "imageName": "label.png",
+    "sourceDpi": 480
+  },
+  "span-label.png": {
+    "imageName": "span-label.png",
+    "sourceDpi": 480
+  },
+  "scale-image-label.png": {
+    "imageName": "scale-image-label.png",
+    "sourceDpi": 480
+  },
+  "buttons.png": {
+    "imageName": "buttons.png",
+    "sourceDpi": 480
+  },
+  "floating-action-button.png": {
+    "imageName": "floating-action-button.png",
+    "sourceDpi": 480
+  },
+  "multi-buttons.png": {
+    "imageName": "multi-buttons.png",
+    "sourceDpi": 480
+  },
+  "share-button.png": {
+    "imageName": "share-button.png",
+    "sourceDpi": 480
+  },
+  "span-button.png": {
+    "imageName": "span-button.png",
+    "sourceDpi": 480
+  },
+  "check-box.png": {
+    "imageName": "check-box.png",
+    "sourceDpi": 480
+  },
+  "switch.png": {
+    "imageName": "switch.png",
+    "sourceDpi": 480
+  },
+  "on-off-switch.png": {
+    "imageName": "on-off-switch.png",
+    "sourceDpi": 480
+  },
+  "radio-button.png": {
+    "imageName": "radio-button.png",
+    "sourceDpi": 480
+  },
+  "maps-pin.png": {
+    "imageName": "maps-pin.png",
+    "sourceDpi": 480
+  },
+  "map-component.png": {
+    "imageName": "map-component.png",
+    "sourceDpi": 480
+  },
+  "map-google-component.png": {
+    "imageName": "map-google-component.png",
+    "sourceDpi": 480
+  }
+}" />
+        <val key="AccordionButton.bgColor" value="112d78" />
+        <val key="AccordionButton.dis#bgColor" value="112d78" />
+        <val key="AccordionButton.dis#fgColor" value="ffffff" />
+        <val key="AccordionButton.dis#transparency" value="255" />
+        <val key="AccordionButton.fgColor" value="ffffff" />
+        <val key="AccordionButton.press#bgColor" value="112d78" />
+        <val key="AccordionButton.press#fgColor" value="ffffff" />
+        <val key="AccordionButton.press#transparency" value="255" />
+        <val key="AccordionButton.sel#bgColor" value="112d78" />
+        <val key="AccordionButton.sel#fgColor" value="ffffff" />
+        <val key="AccordionButton.sel#transparency" value="255" />
+        <val key="AccordionButton.transparency" value="255" />
+        <val key="DemoComponentIcon.bgColor" value="112d78" />
+        <val key="DemoComponentIcon.dis#bgColor" value="112d78" />
+        <val key="DemoComponentIcon.dis#marUnit" value="2,2,2,2" />
+        <val key="DemoComponentIcon.dis#margin" value="2.0,2.0,2.0,2.0" />
+        <val key="DemoComponentIcon.dis#transparency" value="255" />
+        <val key="DemoComponentIcon.marUnit" value="2,2,2,2" />
+        <val key="DemoComponentIcon.margin" value="2.0,2.0,2.0,2.0" />
+        <val key="DemoComponentIcon.press#bgColor" value="112d78" />
+        <val key="DemoComponentIcon.press#marUnit" value="2,2,2,2" />
+        <val key="DemoComponentIcon.press#margin" value="2.0,2.0,2.0,2.0" />
+        <val key="DemoComponentIcon.press#transparency" value="255" />
+        <val key="DemoComponentIcon.sel#bgColor" value="112d78" />
+        <val key="DemoComponentIcon.sel#marUnit" value="2,2,2,2" />
+        <val key="DemoComponentIcon.sel#margin" value="2.0,2.0,2.0,2.0" />
+        <val key="DemoComponentIcon.sel#transparency" value="255" />
+        <val key="DemoComponentIcon.transparency" value="255" />
+        <val key="DemoContainer.bgColor" value="91545" />
+        <val key="DemoContainer.dis#bgColor" value="91545" />
+        <val key="DemoContainer.dis#marUnit" value="0,0,0,0" />
+        <val key="DemoContainer.dis#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoContainer.dis#padUnit" value="0,0,0,0" />
+        <val key="DemoContainer.dis#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoContainer.dis#transparency" value="255" />
+        <val key="DemoContainer.marUnit" value="0,0,0,0" />
+        <val key="DemoContainer.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoContainer.padUnit" value="0,0,0,0" />
+        <val key="DemoContainer.padding" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoContainer.press#bgColor" value="91545" />
+        <val key="DemoContainer.press#marUnit" value="0,0,0,0" />
+        <val key="DemoContainer.press#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoContainer.press#padUnit" value="0,0,0,0" />
+        <val key="DemoContainer.press#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoContainer.press#transparency" value="255" />
+        <val key="DemoContainer.sel#bgColor" value="91545" />
+        <val key="DemoContainer.sel#marUnit" value="0,0,0,0" />
+        <val key="DemoContainer.sel#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoContainer.sel#padUnit" value="0,0,0,0" />
+        <val key="DemoContainer.sel#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoContainer.sel#transparency" value="255" />
+        <val key="DemoContainer.transparency" value="255" />
+        <val key="DemoContentAccordion.bgColor" value="112d78" />
+        <border key="DemoContentAccordion.border" type="css" css="background-color:#112d78ff;border-radius:2mm 2mm 2mm 2mm / 2mm 2mm 2mm 2mm;border-width:0px 0px 0px 0px;border-style:none none none none;border-color:#00000000 #00000000 #00000000 #00000000;"/>
+        <val key="DemoContentAccordion.dis#bgColor" value="112d78" />
+        <border key="DemoContentAccordion.dis#border" type="css" css="background-color:#112d78ff;border-radius:2mm 2mm 2mm 2mm / 2mm 2mm 2mm 2mm;border-width:0px 0px 0px 0px;border-style:none none none none;border-color:#00000000 #00000000 #00000000 #00000000;"/>
+        <val key="DemoContentAccordion.dis#marUnit" value="2,2,2,2" />
+        <val key="DemoContentAccordion.dis#margin" value="3.0,3.0,3.0,3.0" />
+        <val key="DemoContentAccordion.dis#padUnit" value="0,0,2,0" />
+        <val key="DemoContentAccordion.dis#padding" value="0.0,2.0,0.0,0.0" />
+        <val key="DemoContentAccordion.dis#transparency" value="255" />
+        <val key="DemoContentAccordion.marUnit" value="2,2,2,2" />
+        <val key="DemoContentAccordion.margin" value="3.0,3.0,3.0,3.0" />
+        <val key="DemoContentAccordion.padUnit" value="0,0,2,0" />
+        <val key="DemoContentAccordion.padding" value="0.0,2.0,0.0,0.0" />
+        <val key="DemoContentAccordion.press#bgColor" value="112d78" />
+        <border key="DemoContentAccordion.press#border" type="css" css="background-color:#112d78ff;border-radius:2mm 2mm 2mm 2mm / 2mm 2mm 2mm 2mm;border-width:0px 0px 0px 0px;border-style:none none none none;border-color:#00000000 #00000000 #00000000 #00000000;"/>
+        <val key="DemoContentAccordion.press#marUnit" value="2,2,2,2" />
+        <val key="DemoContentAccordion.press#margin" value="3.0,3.0,3.0,3.0" />
+        <val key="DemoContentAccordion.press#padUnit" value="0,0,2,0" />
+        <val key="DemoContentAccordion.press#padding" value="0.0,2.0,0.0,0.0" />
+        <val key="DemoContentAccordion.press#transparency" value="255" />
+        <val key="DemoContentAccordion.sel#bgColor" value="112d78" />
+        <border key="DemoContentAccordion.sel#border" type="css" css="background-color:#112d78ff;border-radius:2mm 2mm 2mm 2mm / 2mm 2mm 2mm 2mm;border-width:0px 0px 0px 0px;border-style:none none none none;border-color:#00000000 #00000000 #00000000 #00000000;"/>
+        <val key="DemoContentAccordion.sel#marUnit" value="2,2,2,2" />
+        <val key="DemoContentAccordion.sel#margin" value="3.0,3.0,3.0,3.0" />
+        <val key="DemoContentAccordion.sel#padUnit" value="0,0,2,0" />
+        <val key="DemoContentAccordion.sel#padding" value="0.0,2.0,0.0,0.0" />
+        <val key="DemoContentAccordion.sel#transparency" value="255" />
+        <val key="DemoContentAccordion.transparency" value="255" />
+        <val key="DemoContentBody.bgColor" value="112d78" />
+        <val key="DemoContentBody.dis#bgColor" value="112d78" />
+        <val key="DemoContentBody.dis#fgColor" value="ffffff" />
+        <font key="DemoContentBody.dis#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.6" />
+        <val key="DemoContentBody.dis#marUnit" value="0,2,0,0" />
+        <val key="DemoContentBody.dis#margin" value="0.0,0.0,2.0,0.0" />
+        <val key="DemoContentBody.dis#transparency" value="255" />
+        <val key="DemoContentBody.fgColor" value="ffffff" />
+        <font key="DemoContentBody.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.6" />
+        <val key="DemoContentBody.marUnit" value="0,2,0,0" />
+        <val key="DemoContentBody.margin" value="0.0,0.0,2.0,0.0" />
+        <val key="DemoContentBody.press#bgColor" value="112d78" />
+        <val key="DemoContentBody.press#fgColor" value="ffffff" />
+        <font key="DemoContentBody.press#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.6" />
+        <val key="DemoContentBody.press#marUnit" value="0,2,0,0" />
+        <val key="DemoContentBody.press#margin" value="0.0,0.0,2.0,0.0" />
+        <val key="DemoContentBody.press#transparency" value="255" />
+        <val key="DemoContentBody.sel#bgColor" value="112d78" />
+        <val key="DemoContentBody.sel#fgColor" value="ffffff" />
+        <font key="DemoContentBody.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.6" />
+        <val key="DemoContentBody.sel#marUnit" value="0,2,0,0" />
+        <val key="DemoContentBody.sel#margin" value="0.0,0.0,2.0,0.0" />
+        <val key="DemoContentBody.sel#transparency" value="255" />
+        <val key="DemoContentBody.transparency" value="255" />
+        <val key="DemoContentHeader.bgColor" value="112d78" />
+        <val key="DemoContentHeader.dis#bgColor" value="112d78" />
+        <val key="DemoContentHeader.dis#fgColor" value="ffffff" />
+        <font key="DemoContentHeader.dis#font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="3" actualSize="3.0" />
+        <val key="DemoContentHeader.dis#marUnit" value="0,2,0,0" />
+        <val key="DemoContentHeader.dis#margin" value="0.0,0.0,2.0,0.0" />
+        <val key="DemoContentHeader.dis#transparency" value="255" />
+        <val key="DemoContentHeader.fgColor" value="ffffff" />
+        <font key="DemoContentHeader.font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="3" actualSize="3.0" />
+        <val key="DemoContentHeader.marUnit" value="0,2,0,0" />
+        <val key="DemoContentHeader.margin" value="0.0,0.0,2.0,0.0" />
+        <val key="DemoContentHeader.press#bgColor" value="112d78" />
+        <val key="DemoContentHeader.press#fgColor" value="ffffff" />
+        <font key="DemoContentHeader.press#font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="3" actualSize="3.0" />
+        <val key="DemoContentHeader.press#marUnit" value="0,2,0,0" />
+        <val key="DemoContentHeader.press#margin" value="0.0,0.0,2.0,0.0" />
+        <val key="DemoContentHeader.press#transparency" value="255" />
+        <val key="DemoContentHeader.sel#bgColor" value="112d78" />
+        <val key="DemoContentHeader.sel#fgColor" value="ffffff" />
+        <font key="DemoContentHeader.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="3" actualSize="3.0" />
+        <val key="DemoContentHeader.sel#marUnit" value="0,2,0,0" />
+        <val key="DemoContentHeader.sel#margin" value="0.0,0.0,2.0,0.0" />
+        <val key="DemoContentHeader.sel#transparency" value="255" />
+        <val key="DemoContentHeader.transparency" value="255" />
+        <val key="DemoContentImage.bgColor" value="112d78" />
+        <val key="DemoContentImage.dis#bgColor" value="112d78" />
+        <val key="DemoContentImage.dis#marUnit" value="2,2,2,2" />
+        <val key="DemoContentImage.dis#margin" value="3.0,3.0,3.0,3.0" />
+        <val key="DemoContentImage.dis#padUnit" value="0,0,0,0" />
+        <val key="DemoContentImage.dis#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoContentImage.dis#transparency" value="255" />
+        <val key="DemoContentImage.marUnit" value="2,2,2,2" />
+        <val key="DemoContentImage.margin" value="3.0,3.0,3.0,3.0" />
+        <val key="DemoContentImage.padUnit" value="0,0,0,0" />
+        <val key="DemoContentImage.padding" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoContentImage.press#bgColor" value="112d78" />
+        <val key="DemoContentImage.press#marUnit" value="2,2,2,2" />
+        <val key="DemoContentImage.press#margin" value="3.0,3.0,3.0,3.0" />
+        <val key="DemoContentImage.press#padUnit" value="0,0,0,0" />
+        <val key="DemoContentImage.press#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoContentImage.press#transparency" value="255" />
+        <val key="DemoContentImage.sel#bgColor" value="112d78" />
+        <val key="DemoContentImage.sel#marUnit" value="2,2,2,2" />
+        <val key="DemoContentImage.sel#margin" value="3.0,3.0,3.0,3.0" />
+        <val key="DemoContentImage.sel#padUnit" value="0,0,0,0" />
+        <val key="DemoContentImage.sel#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoContentImage.sel#transparency" value="255" />
+        <val key="DemoContentImage.transparency" value="255" />
+        <val key="DemoContentRegular.bgColor" value="112d78" />
+        <border key="DemoContentRegular.border" type="css" css="background-color:#112d78ff;border-radius:2mm 2mm 2mm 2mm / 2mm 2mm 2mm 2mm;border-width:0px 0px 0px 0px;border-style:none none none none;border-color:#00000000 #00000000 #00000000 #00000000;"/>
+        <val key="DemoContentRegular.dis#bgColor" value="112d78" />
+        <border key="DemoContentRegular.dis#border" type="css" css="background-color:#112d78ff;border-radius:2mm 2mm 2mm 2mm / 2mm 2mm 2mm 2mm;border-width:0px 0px 0px 0px;border-style:none none none none;border-color:#00000000 #00000000 #00000000 #00000000;"/>
+        <val key="DemoContentRegular.dis#marUnit" value="2,2,2,2" />
+        <val key="DemoContentRegular.dis#margin" value="3.0,3.0,3.0,3.0" />
+        <val key="DemoContentRegular.dis#padUnit" value="0,0,2,0" />
+        <val key="DemoContentRegular.dis#padding" value="0.0,2.0,0.0,0.0" />
+        <val key="DemoContentRegular.dis#transparency" value="255" />
+        <val key="DemoContentRegular.marUnit" value="2,2,2,2" />
+        <val key="DemoContentRegular.margin" value="3.0,3.0,3.0,3.0" />
+        <val key="DemoContentRegular.padUnit" value="0,0,2,0" />
+        <val key="DemoContentRegular.padding" value="0.0,2.0,0.0,0.0" />
+        <val key="DemoContentRegular.press#bgColor" value="112d78" />
+        <border key="DemoContentRegular.press#border" type="css" css="background-color:#112d78ff;border-radius:2mm 2mm 2mm 2mm / 2mm 2mm 2mm 2mm;border-width:0px 0px 0px 0px;border-style:none none none none;border-color:#00000000 #00000000 #00000000 #00000000;"/>
+        <val key="DemoContentRegular.press#marUnit" value="2,2,2,2" />
+        <val key="DemoContentRegular.press#margin" value="3.0,3.0,3.0,3.0" />
+        <val key="DemoContentRegular.press#padUnit" value="0,0,2,0" />
+        <val key="DemoContentRegular.press#padding" value="0.0,2.0,0.0,0.0" />
+        <val key="DemoContentRegular.press#transparency" value="255" />
+        <val key="DemoContentRegular.sel#bgColor" value="112d78" />
+        <border key="DemoContentRegular.sel#border" type="css" css="background-color:#112d78ff;border-radius:2mm 2mm 2mm 2mm / 2mm 2mm 2mm 2mm;border-width:0px 0px 0px 0px;border-style:none none none none;border-color:#00000000 #00000000 #00000000 #00000000;"/>
+        <val key="DemoContentRegular.sel#marUnit" value="2,2,2,2" />
+        <val key="DemoContentRegular.sel#margin" value="3.0,3.0,3.0,3.0" />
+        <val key="DemoContentRegular.sel#padUnit" value="0,0,2,0" />
+        <val key="DemoContentRegular.sel#padding" value="0.0,2.0,0.0,0.0" />
+        <val key="DemoContentRegular.sel#transparency" value="255" />
+        <val key="DemoContentRegular.transparency" value="255" />
+        <val key="DemoTitle.align" value="4" />
+        <val key="DemoTitle.bgColor" value="112d78" />
+        <val key="DemoTitle.dis#align" value="4" />
+        <val key="DemoTitle.dis#bgColor" value="112d78" />
+        <val key="DemoTitle.dis#fgColor" value="ffffff" />
+        <font key="DemoTitle.dis#font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="1" actualSize="0.0" />
+        <val key="DemoTitle.dis#marUnit" value="0,0,0,0" />
+        <val key="DemoTitle.dis#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoTitle.dis#padUnit" value="0,0,0,0" />
+        <val key="DemoTitle.dis#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoTitle.dis#transparency" value="255" />
+        <val key="DemoTitle.fgColor" value="ffffff" />
+        <font key="DemoTitle.font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="1" actualSize="0.0" />
+        <val key="DemoTitle.marUnit" value="0,0,0,0" />
+        <val key="DemoTitle.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoTitle.padUnit" value="0,0,0,0" />
+        <val key="DemoTitle.padding" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoTitle.press#align" value="4" />
+        <val key="DemoTitle.press#bgColor" value="112d78" />
+        <val key="DemoTitle.press#fgColor" value="ffffff" />
+        <font key="DemoTitle.press#font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="1" actualSize="0.0" />
+        <val key="DemoTitle.press#marUnit" value="0,0,0,0" />
+        <val key="DemoTitle.press#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoTitle.press#padUnit" value="0,0,0,0" />
+        <val key="DemoTitle.press#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoTitle.press#transparency" value="255" />
+        <val key="DemoTitle.sel#align" value="4" />
+        <val key="DemoTitle.sel#bgColor" value="112d78" />
+        <val key="DemoTitle.sel#fgColor" value="ffffff" />
+        <font key="DemoTitle.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="1" actualSize="0.0" />
+        <val key="DemoTitle.sel#marUnit" value="0,0,0,0" />
+        <val key="DemoTitle.sel#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoTitle.sel#padUnit" value="0,0,0,0" />
+        <val key="DemoTitle.sel#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="DemoTitle.sel#transparency" value="255" />
+        <val key="DemoTitle.transparency" value="255" />
+        <val key="ImagesHighRes.bgImage" value="download-icon.png" />
+        <val key="ImagesHighRes.bgType" value="2" />
+        <val key="ImagesHighRes.dis#bgImage" value="download-icon.png" />
+        <val key="ImagesHighRes.dis#bgType" value="2" />
+        <val key="ImagesHighRes.press#bgImage" value="download-icon.png" />
+        <val key="ImagesHighRes.press#bgType" value="2" />
+        <val key="ImagesHighRes.sel#bgImage" value="download-icon.png" />
+        <val key="ImagesHighRes.sel#bgType" value="2" />
+        <val key="MainWindowContainer.bgColor" value="91545" />
+        <val key="MainWindowContainer.dis#bgColor" value="91545" />
+        <val key="MainWindowContainer.dis#marUnit" value="0,0,0,0" />
+        <val key="MainWindowContainer.dis#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="MainWindowContainer.dis#padUnit" value="2,2,2,2" />
+        <val key="MainWindowContainer.dis#padding" value="3.0,3.0,3.0,3.0" />
+        <val key="MainWindowContainer.dis#transparency" value="255" />
+        <val key="MainWindowContainer.marUnit" value="0,0,0,0" />
+        <val key="MainWindowContainer.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="MainWindowContainer.padUnit" value="2,2,2,2" />
+        <val key="MainWindowContainer.padding" value="3.0,3.0,3.0,3.0" />
+        <val key="MainWindowContainer.press#bgColor" value="91545" />
+        <val key="MainWindowContainer.press#marUnit" value="0,0,0,0" />
+        <val key="MainWindowContainer.press#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="MainWindowContainer.press#padUnit" value="2,2,2,2" />
+        <val key="MainWindowContainer.press#padding" value="3.0,3.0,3.0,3.0" />
+        <val key="MainWindowContainer.press#transparency" value="255" />
+        <val key="MainWindowContainer.sel#bgColor" value="91545" />
+        <val key="MainWindowContainer.sel#marUnit" value="0,0,0,0" />
+        <val key="MainWindowContainer.sel#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="MainWindowContainer.sel#padUnit" value="2,2,2,2" />
+        <val key="MainWindowContainer.sel#padding" value="3.0,3.0,3.0,3.0" />
+        <val key="MainWindowContainer.sel#transparency" value="255" />
+        <val key="MainWindowContainer.transparency" value="255" />
+        <val key="MainWindowDemoComponent.bgColor" value="112d78" />
+        <border key="MainWindowDemoComponent.border" type="css" css="background-color:#112d78ff;border-radius:2mm 2mm 2mm 2mm / 2mm 2mm 2mm 2mm;border-width:0px 0px 0px 0px;border-style:none none none none;border-color:#00000000 #00000000 #00000000 #00000000;"/>
+        <val key="MainWindowDemoComponent.dis#bgColor" value="112d78" />
+        <border key="MainWindowDemoComponent.dis#border" type="css" css="background-color:#112d78ff;border-radius:2mm 2mm 2mm 2mm / 2mm 2mm 2mm 2mm;border-width:0px 0px 0px 0px;border-style:none none none none;border-color:#00000000 #00000000 #00000000 #00000000;"/>
+        <val key="MainWindowDemoComponent.dis#marUnit" value="2,2,0,2" />
+        <val key="MainWindowDemoComponent.dis#margin" value="2.0,0.0,2.0,2.0" />
+        <val key="MainWindowDemoComponent.dis#padUnit" value="2,2,2,2" />
+        <val key="MainWindowDemoComponent.dis#padding" value="2.0,2.0,2.0,2.0" />
+        <val key="MainWindowDemoComponent.dis#transparency" value="255" />
+        <val key="MainWindowDemoComponent.marUnit" value="2,2,0,2" />
+        <val key="MainWindowDemoComponent.margin" value="2.0,0.0,2.0,2.0" />
+        <val key="MainWindowDemoComponent.padUnit" value="2,2,2,2" />
+        <val key="MainWindowDemoComponent.padding" value="2.0,2.0,2.0,2.0" />
+        <val key="MainWindowDemoComponent.press#bgColor" value="112d78" />
+        <border key="MainWindowDemoComponent.press#border" type="css" css="background-color:#112d78ff;border-radius:2mm 2mm 2mm 2mm / 2mm 2mm 2mm 2mm;border-width:0px 0px 0px 0px;border-style:none none none none;border-color:#00000000 #00000000 #00000000 #00000000;"/>
+        <val key="MainWindowDemoComponent.press#marUnit" value="2,2,0,2" />
+        <val key="MainWindowDemoComponent.press#margin" value="2.0,0.0,2.0,2.0" />
+        <val key="MainWindowDemoComponent.press#padUnit" value="2,2,2,2" />
+        <val key="MainWindowDemoComponent.press#padding" value="2.0,2.0,2.0,2.0" />
+        <val key="MainWindowDemoComponent.press#transparency" value="255" />
+        <val key="MainWindowDemoComponent.sel#bgColor" value="112d78" />
+        <border key="MainWindowDemoComponent.sel#border" type="css" css="background-color:#112d78ff;border-radius:2mm 2mm 2mm 2mm / 2mm 2mm 2mm 2mm;border-width:0px 0px 0px 0px;border-style:none none none none;border-color:#00000000 #00000000 #00000000 #00000000;"/>
+        <val key="MainWindowDemoComponent.sel#marUnit" value="2,2,0,2" />
+        <val key="MainWindowDemoComponent.sel#margin" value="2.0,0.0,2.0,2.0" />
+        <val key="MainWindowDemoComponent.sel#padUnit" value="2,2,2,2" />
+        <val key="MainWindowDemoComponent.sel#padding" value="2.0,2.0,2.0,2.0" />
+        <val key="MainWindowDemoComponent.sel#transparency" value="255" />
+        <val key="MainWindowDemoComponent.transparency" value="255" />
+        <val key="MainWindowDemoName.align" value="4" />
+        <val key="MainWindowDemoName.bgColor" value="112d78" />
+        <val key="MainWindowDemoName.dis#align" value="4" />
+        <val key="MainWindowDemoName.dis#bgColor" value="112d78" />
+        <val key="MainWindowDemoName.dis#fgColor" value="ffffff" />
+        <font key="MainWindowDemoName.dis#font" type="ttf" face="0" style="0" size="0" name="native:MainThin" family="native:MainThin" sizeSettings="1" actualSize="0.0" />
+        <val key="MainWindowDemoName.dis#transparency" value="255" />
+        <val key="MainWindowDemoName.fgColor" value="ffffff" />
+        <font key="MainWindowDemoName.font" type="ttf" face="0" style="0" size="0" name="native:MainThin" family="native:MainThin" sizeSettings="1" actualSize="0.0" />
+        <val key="MainWindowDemoName.press#align" value="4" />
+        <val key="MainWindowDemoName.press#bgColor" value="112d78" />
+        <val key="MainWindowDemoName.press#fgColor" value="ffffff" />
+        <font key="MainWindowDemoName.press#font" type="ttf" face="0" style="0" size="0" name="native:MainThin" family="native:MainThin" sizeSettings="1" actualSize="0.0" />
+        <val key="MainWindowDemoName.press#transparency" value="255" />
+        <val key="MainWindowDemoName.sel#align" value="4" />
+        <val key="MainWindowDemoName.sel#bgColor" value="112d78" />
+        <val key="MainWindowDemoName.sel#fgColor" value="ffffff" />
+        <font key="MainWindowDemoName.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainThin" family="native:MainThin" sizeSettings="1" actualSize="0.0" />
+        <val key="MainWindowDemoName.sel#transparency" value="255" />
+        <val key="MainWindowDemoName.transparency" value="255" />
+        <val key="MainWindowTitle.align" value="4" />
+        <val key="MainWindowTitle.bgColor" value="112d78" />
+        <val key="MainWindowTitle.dis#align" value="4" />
+        <val key="MainWindowTitle.dis#bgColor" value="112d78" />
+        <val key="MainWindowTitle.dis#fgColor" value="ffffff" />
+        <font key="MainWindowTitle.dis#font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="1" actualSize="0.0" />
+        <val key="MainWindowTitle.dis#marUnit" value="2,2,2,2" />
+        <val key="MainWindowTitle.dis#margin" value="3.0,3.0,3.0,3.0" />
+        <val key="MainWindowTitle.dis#transparency" value="255" />
+        <val key="MainWindowTitle.fgColor" value="ffffff" />
+        <font key="MainWindowTitle.font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="1" actualSize="0.0" />
+        <val key="MainWindowTitle.marUnit" value="2,2,2,2" />
+        <val key="MainWindowTitle.margin" value="3.0,3.0,3.0,3.0" />
+        <val key="MainWindowTitle.press#align" value="4" />
+        <val key="MainWindowTitle.press#bgColor" value="112d78" />
+        <val key="MainWindowTitle.press#fgColor" value="ffffff" />
+        <font key="MainWindowTitle.press#font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="1" actualSize="0.0" />
+        <val key="MainWindowTitle.press#marUnit" value="2,2,2,2" />
+        <val key="MainWindowTitle.press#margin" value="3.0,3.0,3.0,3.0" />
+        <val key="MainWindowTitle.press#transparency" value="255" />
+        <val key="MainWindowTitle.sel#align" value="4" />
+        <val key="MainWindowTitle.sel#bgColor" value="112d78" />
+        <val key="MainWindowTitle.sel#fgColor" value="ffffff" />
+        <font key="MainWindowTitle.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="1" actualSize="0.0" />
+        <val key="MainWindowTitle.sel#marUnit" value="2,2,2,2" />
+        <val key="MainWindowTitle.sel#margin" value="3.0,3.0,3.0,3.0" />
+        <val key="MainWindowTitle.sel#transparency" value="255" />
+        <val key="MainWindowTitle.transparency" value="255" />
+        <val key="MainWindowToolbar.bgColor" value="112d78" />
+        <val key="MainWindowToolbar.dis#bgColor" value="112d78" />
+        <val key="MainWindowToolbar.dis#marUnit" value="0,0,0,0" />
+        <val key="MainWindowToolbar.dis#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="MainWindowToolbar.dis#padUnit" value="0,0,0,0" />
+        <val key="MainWindowToolbar.dis#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="MainWindowToolbar.dis#transparency" value="255" />
+        <val key="MainWindowToolbar.marUnit" value="0,0,0,0" />
+        <val key="MainWindowToolbar.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="MainWindowToolbar.padUnit" value="0,0,0,0" />
+        <val key="MainWindowToolbar.padding" value="0.0,0.0,0.0,0.0" />
+        <val key="MainWindowToolbar.press#bgColor" value="112d78" />
+        <val key="MainWindowToolbar.press#marUnit" value="0,0,0,0" />
+        <val key="MainWindowToolbar.press#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="MainWindowToolbar.press#padUnit" value="0,0,0,0" />
+        <val key="MainWindowToolbar.press#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="MainWindowToolbar.press#transparency" value="255" />
+        <val key="MainWindowToolbar.sel#bgColor" value="112d78" />
+        <val key="MainWindowToolbar.sel#marUnit" value="0,0,0,0" />
+        <val key="MainWindowToolbar.sel#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="MainWindowToolbar.sel#padUnit" value="0,0,0,0" />
+        <val key="MainWindowToolbar.sel#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="MainWindowToolbar.sel#transparency" value="255" />
+        <val key="MainWindowToolbar.transparency" value="255" />
+        <val key="TitleCommand.dis#marUnit" value="0,0,0,0" />
+        <val key="TitleCommand.dis#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="TitleCommand.dis#padUnit" value="0,0,0,0" />
+        <val key="TitleCommand.dis#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="TitleCommand.marUnit" value="0,0,0,0" />
+        <val key="TitleCommand.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="TitleCommand.padUnit" value="0,0,0,0" />
+        <val key="TitleCommand.padding" value="0.0,0.0,0.0,0.0" />
+        <val key="TitleCommand.press#marUnit" value="0,0,0,0" />
+        <val key="TitleCommand.press#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="TitleCommand.press#padUnit" value="0,0,0,0" />
+        <val key="TitleCommand.press#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="TitleCommand.sel#marUnit" value="0,0,0,0" />
+        <val key="TitleCommand.sel#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="TitleCommand.sel#padUnit" value="0,0,0,0" />
+        <val key="TitleCommand.sel#padding" value="0.0,0.0,0.0,0.0" />
+        <val key="device-phone-DemoToolbar.bgColor" value="112d78" />
+        <val key="device-phone-DemoToolbar.dis#bgColor" value="112d78" />
+        <font key="device-phone-DemoToolbar.dis#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.0" />
+        <val key="device-phone-DemoToolbar.dis#marUnit" value="0,0,0,0" />
+        <val key="device-phone-DemoToolbar.dis#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="device-phone-DemoToolbar.dis#padUnit" value="2,2,2,2" />
+        <val key="device-phone-DemoToolbar.dis#padding" value="3.0,3.0,3.0,3.0" />
+        <val key="device-phone-DemoToolbar.dis#transparency" value="255" />
+        <font key="device-phone-DemoToolbar.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.0" />
+        <val key="device-phone-DemoToolbar.marUnit" value="0,0,0,0" />
+        <val key="device-phone-DemoToolbar.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="device-phone-DemoToolbar.padUnit" value="2,2,2,2" />
+        <val key="device-phone-DemoToolbar.padding" value="3.0,3.0,3.0,3.0" />
+        <val key="device-phone-DemoToolbar.press#bgColor" value="112d78" />
+        <font key="device-phone-DemoToolbar.press#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.0" />
+        <val key="device-phone-DemoToolbar.press#marUnit" value="0,0,0,0" />
+        <val key="device-phone-DemoToolbar.press#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="device-phone-DemoToolbar.press#padUnit" value="2,2,2,2" />
+        <val key="device-phone-DemoToolbar.press#padding" value="3.0,3.0,3.0,3.0" />
+        <val key="device-phone-DemoToolbar.press#transparency" value="255" />
+        <val key="device-phone-DemoToolbar.sel#bgColor" value="112d78" />
+        <font key="device-phone-DemoToolbar.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.0" />
+        <val key="device-phone-DemoToolbar.sel#marUnit" value="0,0,0,0" />
+        <val key="device-phone-DemoToolbar.sel#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="device-phone-DemoToolbar.sel#padUnit" value="2,2,2,2" />
+        <val key="device-phone-DemoToolbar.sel#padding" value="3.0,3.0,3.0,3.0" />
+        <val key="device-phone-DemoToolbar.sel#transparency" value="255" />
+        <val key="device-phone-DemoToolbar.transparency" value="255" />
+        <val key="device-tablet-DemoToolbar.bgColor" value="112d78" />
+        <val key="device-tablet-DemoToolbar.dis#bgColor" value="112d78" />
+        <font key="device-tablet-DemoToolbar.dis#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="5.0" />
+        <val key="device-tablet-DemoToolbar.dis#marUnit" value="0,0,0,0" />
+        <val key="device-tablet-DemoToolbar.dis#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="device-tablet-DemoToolbar.dis#padUnit" value="2,2,2,2" />
+        <val key="device-tablet-DemoToolbar.dis#padding" value="3.0,3.0,3.0,3.0" />
+        <val key="device-tablet-DemoToolbar.dis#transparency" value="255" />
+        <font key="device-tablet-DemoToolbar.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="5.0" />
+        <val key="device-tablet-DemoToolbar.marUnit" value="0,0,0,0" />
+        <val key="device-tablet-DemoToolbar.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="device-tablet-DemoToolbar.padUnit" value="2,2,2,2" />
+        <val key="device-tablet-DemoToolbar.padding" value="3.0,3.0,3.0,3.0" />
+        <val key="device-tablet-DemoToolbar.press#bgColor" value="112d78" />
+        <font key="device-tablet-DemoToolbar.press#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="5.0" />
+        <val key="device-tablet-DemoToolbar.press#marUnit" value="0,0,0,0" />
+        <val key="device-tablet-DemoToolbar.press#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="device-tablet-DemoToolbar.press#padUnit" value="2,2,2,2" />
+        <val key="device-tablet-DemoToolbar.press#padding" value="3.0,3.0,3.0,3.0" />
+        <val key="device-tablet-DemoToolbar.press#transparency" value="255" />
+        <val key="device-tablet-DemoToolbar.sel#bgColor" value="112d78" />
+        <font key="device-tablet-DemoToolbar.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="5.0" />
+        <val key="device-tablet-DemoToolbar.sel#marUnit" value="0,0,0,0" />
+        <val key="device-tablet-DemoToolbar.sel#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="device-tablet-DemoToolbar.sel#padUnit" value="2,2,2,2" />
+        <val key="device-tablet-DemoToolbar.sel#padding" value="3.0,3.0,3.0,3.0" />
+        <val key="device-tablet-DemoToolbar.sel#transparency" value="255" />
+        <val key="device-tablet-DemoToolbar.transparency" value="255" />
+    </theme>
+    <image name="toggle-list-demo.png" type="multi"  />
+    <image name="toggles-demo.png" type="multi"  />
+    <image name="toolbar-demo.png" type="multi"  />
+    <image name="video-icon.png" type="multi"  />
+</resource>

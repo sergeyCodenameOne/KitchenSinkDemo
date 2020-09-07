@@ -30,19 +30,22 @@ import com.codename1.ui.util.Resources;
 import com.codename1.io.Log;
 import com.codename1.ui.Toolbar;
 import static com.codename1.ui.Button.setButtonRippleEffectDefault;
-
-
+import com.codename1.ui.CN;
+import com.codename1.ui.Display;
+import java.io.IOException;
 
 public class KitchenSink {
     
     private Form current;
     private Resources theme;
+    private boolean isDarkMode = false;
 
     public void init(Object context) {
         // use two network threads instead of one
         updateNetworkThreadCount(2);
-
-        theme = UIManager.initFirstTheme("/theme");
+        
+        theme = UIManager.initNamedTheme("/theme", "Theme");
+        
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
 
@@ -67,6 +70,9 @@ public class KitchenSink {
             current.show();
             return;
         }
+        
+     
+        applyDarkMode();
         MainWindow mw = new MainWindow();
         mw.buildForm().show();
     }
@@ -80,5 +86,45 @@ public class KitchenSink {
     }
     
     public void destroy() {
+    }
+    
+    private void applyDarkMode(){
+        new Thread() {
+            public void run() { 
+                while(true){
+                    try{
+                        // check every 0.5 seconds if the user set the dark mode.
+                        sleep(500);
+                    }catch(InterruptedException error){
+                        Log.e(error);
+                    }
+                    if(isDarkMode){
+                        if (CN.isDarkMode()!= null && !CN.isDarkMode()){
+                            isDarkMode = false;
+                            CN.setDarkMode(false);
+                            try {
+                                Resources theme = Resources.openLayered("/theme");
+                                UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
+                            } catch(IOException e){
+                                Log.e(e);
+                            }
+                            Display.getInstance().getCurrent().refreshTheme();
+                        }
+                    }else{
+                        if (CN.isDarkMode()!= null && CN.isDarkMode()){
+                            isDarkMode = true;
+                            CN.setDarkMode(true);
+                            try {
+                                Resources darkTheme = Resources.openLayered("/dark-theme");
+                                UIManager.getInstance().addThemeProps(darkTheme.getTheme(darkTheme.getThemeResourceNames()[0]));
+                            } catch(IOException e){
+                                Log.e(e);
+                            }
+                            Display.getInstance().getCurrent().refreshTheme();
+                        }
+                    }
+                }
+            }
+        }.start();
     }
 }

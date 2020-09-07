@@ -74,8 +74,8 @@ public abstract class Demo{
     protected void showDemo(String title, Component content){
         Form chartForm = new Form(title, new BorderLayout());
             Toolbar toolbar = chartForm.getToolbar();
-            toolbar.setUIID("DemoToolbar");
-            toolbar.getTitleComponent().setUIID("DemoTitle");
+            toolbar.setUIID("ComponentDemoToolbar");
+            toolbar.getTitleComponent().setUIID("ComponentDemoTitle");
             
             Form lastForm = getCurrentForm();
             Style iconStyle = new Style();

@@ -52,7 +52,7 @@ public class TogglesDemo extends Demo {
                                                                 "Checkbox is a button that can be selected",
                                                                 "or deselected and display its state to the user. Check out RadioButton for a more exclusive selection "+
                                                                 "approach. Both components support a toggle button mode using the Button.setToggle (Boolean) API.", e->{
-                                                                    showDemo("Buttons", createCheckboxDemo());
+                                                                    showDemo("Checkbox", createCheckboxDemo());
                                                                 }));
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("radio-button.png"),
@@ -60,7 +60,7 @@ public class TogglesDemo extends Demo {
                                                                 "Checkbox is a button that can be selected",
                                                                 "or deselected and display its state to the user. Check out RadioButton for a more exclusive selection "+
                                                                 "approach. Both components support a toggle button mode using the Button.setToggle (Boolean) API.", e->{
-                                                                    showDemo("Buttons", createRadioButtonDemo());
+                                                                    showDemo("Radio Button", createRadioButtonDemo());
                                                                 }));
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("switch.png"),
@@ -71,7 +71,7 @@ public class TogglesDemo extends Demo {
                                                                 "guidelines: https://material.io/guidelines/components/ selection-controls.html#selection-controls- radio-button",
                                                                 e->{
                                                                     Switch s = new Switch();
-                                                                    showDemo("Buttons", BorderLayout.centerAbsolute(s));
+                                                                    showDemo("Switch", BorderLayout.centerAbsolute(s));
                                                                 }));
         
         return demoContainer;

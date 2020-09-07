@@ -144,6 +144,8 @@ public class MediaDemo extends Demo {
         videoComponent.setIcon(getGlobalResources().getImage(iconName).fill(convertToPixels(5), convertToPixels(5)));
         videoComponent.setIconPosition("East");
         videoComponent.addActionListener(actionListener);
+        videoComponent.setUIIDLine1("MediaComponentLine1");
+        videoComponent.setUIIDLine2("MediaComponentLine2");
         return videoComponent;
     }
 }

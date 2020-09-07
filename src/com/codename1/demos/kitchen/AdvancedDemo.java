@@ -45,7 +45,7 @@ public class AdvancedDemo extends Demo{
     }
      
     public Container createContentPane(){
-        Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "VideoContainer");
+        Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
         if (isTablet()){
             demoContainer.setLayout(new TableLayout(2, 2));
         }
@@ -105,9 +105,6 @@ public class AdvancedDemo extends Demo{
                                                                 "a tree component.",
                                                                 e->{
                                                                     FileTree xmlTree = new FileTree(new FileTreeModel(true));
-                                                                    xmlTree.setFolderIcon(getGlobalResources().getImage("folder-closed.png"));
-                                                                    xmlTree.setFolderOpenIcon(getGlobalResources().getImage("folder-opened.png"));
-                                                                    xmlTree.setNodeIcon(getGlobalResources().getImage("file.png"));
                                                                     Container treeContainer = BorderLayout.center(xmlTree);
                                                                     treeContainer.setUIID("TreeContainer");
                                                                     showDemo("File Tree", treeContainer);

@@ -1,0 +1,167 @@
+/*
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *  
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ * 
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ * 
+ * Please contact Codename One through http://www.codenameone.com/ if you 
+ * need additional information or have any questions.
+ */
+
+MainWindowContainer{
+    background-color: #091545;
+    padding: 3mm;
+    margin: 0;
+}
+
+
+MainWindowDemoComponent{
+    background-color: #112d78;
+    border-radius: 2mm;
+    margin-top: 2mm;
+    margin-left: 2mm;
+    margin-right: 2mm;
+    padding:2mm;
+}
+
+MainWindowToolbar{
+    background-color: #112d78;
+    margin: 0;
+    padding: 0;
+}
+
+MainWindowTitle{
+   text-align: center;
+   font-family: "native:MainBold";
+   color: white;
+   background-color: #112d78;
+   
+   margin: 3mm;
+}
+
+MainWindowDemoName{
+    color: white;
+    background-color: #112d78;
+    text-align: center;
+    font-family: "native:MainThin";
+}
+
+DemoComponentIcon{
+    background-color: #112d78;
+    margin: 2mm;
+}
+
+@media device-tablet {
+    DemoToolbar{
+        margin: 0;
+        background-color: #112d78;
+        padding: 3mm;
+        font-size: 5mm;
+    }
+}
+
+@media device-phone {
+    DemoToolbar{
+        margin: 0;
+        background-color: #112d78;
+        padding: 3mm;
+        font-size: 3mm;
+    }
+}
+
+DemoContainer{
+    margin: 0;
+    background-color: #091545;
+    padding: 0;
+}
+
+DemoContentAccordion{
+    background-color: #112d78;
+    border-radius: 2mm;
+    padding-bottom: 2mm;
+    margin: 3mm;
+}
+
+DemoContentRegular{
+    background-color: #112d78;
+    border-radius: 2mm;
+    padding-bottom: 2mm;
+    margin: 3mm;
+}
+
+DemoContentImage{
+    margin: 3mm;
+    padding: 0;
+    background-color: #112d78;
+}
+
+DemoContentHeader{
+    margin-left: 2mm;
+    font-size: 3mm;
+    font-family: "native:MainBold";
+    background-color: #112d78;
+    color: white;
+}
+
+DemoContentBody{
+    font-family: "native:MainRegular";
+    font-size: 2.6mm;
+    margin-left: 2mm;
+    background-color: #112d78;
+    color: white;
+}
+
+DemoTitle{
+    margin: 0;
+    padding: 0;
+    background-color: #112d78;
+    text-align: center;
+    color: white;
+    font-family: "native:MainBold";
+}
+
+AccordionButton{
+    color: white;
+    background-color: #112d78;
+}
+
+TitleCommand{
+    margin: 0;
+    padding: 0;
+}
+
+VideoContainer{
+    border: none;
+    background-color: #091545;
+    margin: 0;
+}
+
+VideoComponent{
+    background-color: #112d78;
+    border-radius: 2mm;
+    margin-top: 2mm;
+    margin-left: 2mm;
+    margin-right: 2mm;
+    padding:2mm;
+}
+
+MediaComponentLine1{
+    color: white;
+}
+
+MediaComponentLine2{
+    color: #acc0f9;
+}

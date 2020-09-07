@@ -35,6 +35,7 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 import java.util.List;
 
 
@@ -98,10 +99,10 @@ public class ContentBuilder {
             contentImage.setUIID("DemoContentImage");
             Label contentHeader = new Label(header, "DemoContentHeader");
 
-            openClose = new Button("", FontImage.MATERIAL_KEYBOARD_ARROW_DOWN, "AccordionButton");
-            Style buttonStyle = openClose.getAllStyles();
+            Style buttonStyle = UIManager.getInstance().getComponentStyle("AccordionButton");
             openedIcon = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_UP, buttonStyle);
             closedIcon = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_DOWN, buttonStyle);
+            openClose = new Button("", closedIcon, "AccordionButton");
             openClose.addActionListener(e->{
                 if(isOpen){
                     close();
