@@ -78,7 +78,7 @@ background-image: url(images/media/download-icon.png),
                     url(images/maps/map-component.png),
                     url(images/maps/map-google-component.png);
 
-    cn1-source-dpi: 480;
+    cn1-source-dpi: 0;
 }
 
 VideoContainer{
@@ -118,20 +118,16 @@ MainWindowDemoName{
     text-align: center;
     font-family: "native:MainThin";
 }
+DemoToolbar{
+    background-color: white;
+    padding: 3mm;
+    font-size: 3mm;
+}
+
 
 @media device-tablet {
     DemoToolbar{
-        background-color: white;
-        padding: 3mm;
         font-size: 5mm;
-    }
-}
-
-@media device-phone {
-    DemoToolbar{
-        background-color: white;
-        padding: 3mm;
-        font-size: 3mm;
     }
 }
 
@@ -266,19 +262,15 @@ MultiButtonsContainer{
     padding: 2mm;
 }
 
-@media device-tablet {
-    ComponentDemoToolbar{
-        background-color: white;
-        padding: 3mm;
-        font-size: 5mm;
-    }
+ComponentDemoToolbar{
+    background-color: white;
+    padding: 3mm;
+    font-size: 3mm;
 }
 
-@media device-phone {
+@media device-tablet {
     ComponentDemoToolbar{
-        background-color: white;
-        padding: 3mm;
-        font-size: 3mm;
+        font-size: 5mm;
     }
 }
 

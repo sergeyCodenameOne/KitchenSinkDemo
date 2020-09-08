@@ -30,8 +30,6 @@ import com.codename1.ui.util.Resources;
 import com.codename1.io.Log;
 import com.codename1.ui.Toolbar;
 import static com.codename1.ui.Button.setButtonRippleEffectDefault;
-import com.codename1.ui.CN;
-import com.codename1.ui.Display;
 import java.io.IOException;
 
 public class KitchenSink {
@@ -45,6 +43,17 @@ public class KitchenSink {
         updateNetworkThreadCount(2);
         
         theme = UIManager.initNamedTheme("/theme", "Theme");
+        
+        if (isDarkMode()!= null && isDarkMode()){
+            isDarkMode = true;
+            try {
+                isDarkMode = true;
+                Resources darkTheme = Resources.openLayered("/dark-theme");
+                UIManager.getInstance().addThemeProps(darkTheme.getTheme(darkTheme.getThemeResourceNames()[0]));
+            } catch(IOException e){
+                Log.e(e);
+            }
+        }
         
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
@@ -98,33 +107,33 @@ public class KitchenSink {
                     }catch(InterruptedException error){
                         Log.e(error);
                     }
-                    if(isDarkMode){
-                        if (CN.isDarkMode()!= null && !CN.isDarkMode()){
-                            isDarkMode = false;
-                            CN.setDarkMode(false);
-                            try {
-                                Resources theme = Resources.openLayered("/theme");
-                                UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
-                            } catch(IOException e){
-                                Log.e(e);
-                            }
-                            Display.getInstance().getCurrent().refreshTheme();
-                        }
-                    }else{
-                        if (CN.isDarkMode()!= null && CN.isDarkMode()){
-                            isDarkMode = true;
-                            CN.setDarkMode(true);
-                            try {
-                                Resources darkTheme = Resources.openLayered("/dark-theme");
-                                UIManager.getInstance().addThemeProps(darkTheme.getTheme(darkTheme.getThemeResourceNames()[0]));
-                            } catch(IOException e){
-                                Log.e(e);
-                            }
-                            Display.getInstance().getCurrent().refreshTheme();
-                        }
-                    }
+                    
                 }
             }
         }.start();
+    }
+}
+
+if(isDarkMode){
+    if (isDarkMode()!= null && !isDarkMode()){
+        isDarkMode = false;
+        try {
+            Resources theme = Resources.openLayered("/theme");
+            UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
+        } catch(IOException e){
+            Log.e(e);
+        }
+        Display.getInstance().getCurrent().refreshTheme();
+    }
+}else{
+    if (isDarkMode()!= null && isDarkMode()){
+        isDarkMode = true;
+        try {
+            Resources darkTheme = Resources.openLayered("/dark-theme");
+            UIManager.getInstance().addThemeProps(darkTheme.getTheme(darkTheme.getThemeResourceNames()[0]));
+        } catch(IOException e){
+            Log.e(e);
+        }
+        Display.getInstance().getCurrent().refreshTheme();
     }
 }

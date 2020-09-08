@@ -69,6 +69,7 @@ public class MapsDemo extends Demo {
     }
     
     private Component createGoogleMapComponent(){
+        //TODO remove the key.
         final MapContainer cnt = new MapContainer("AIzaSyAvMh8_ihHqqAOGPN7hXPUdbSHEPA9XOhI");
 
         Button btnMoveCamera = new Button("Move Camera");

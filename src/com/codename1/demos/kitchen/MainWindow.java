@@ -79,7 +79,7 @@ public class MainWindow {
         MultiButton demoComponent = new MultiButton(demo.getDemoId());
         demoComponent.setUIID("MainWindowDemoComponent");
         demoComponent.setIcon(demo.getDemoImage().scaled(CommonBehavior.getDemoImageWidth(), CommonBehavior.getDemoImageHeight()));
-        demoComponent.setIconPosition("North");
+        demoComponent.setIconPosition(BorderLayout.NORTH);
         demoComponent.addActionListener(e-> createAndShowForm(demo));
         demoComponent.setIconUIID("DemoComponentIcon");
         demoComponent.setUIIDLine1("MainWindowDemoName");
