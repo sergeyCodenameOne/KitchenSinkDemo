@@ -34,7 +34,7 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 
 /** 
  * This is the base class for all the demos.
@@ -73,14 +73,13 @@ public abstract class Demo{
 
     protected void showDemo(String title, Component content){
         Form chartForm = new Form(title, new BorderLayout());
+            content.setUIID("ComponentDemoContainer");
             Toolbar toolbar = chartForm.getToolbar();
             toolbar.setUIID("ComponentDemoToolbar");
             toolbar.getTitleComponent().setUIID("ComponentDemoTitle");
             
             Form lastForm = getCurrentForm();
-            Style iconStyle = new Style();
-            iconStyle.setFgColor(0x157EFB);
-            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, iconStyle),
+            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("ComponentDemoTitle")),
                     e-> lastForm.showBack());
             
             toolbar.addCommandToLeftBar(backCommand);

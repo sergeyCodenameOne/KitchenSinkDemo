@@ -96,7 +96,7 @@ public class AdvancedDemo extends Demo{
                                                                 e->{
                                                                     Calendar cld = new Calendar();
                                                                     cld.setUIID("Calendar");
-                                                                    showDemo("Calendar", cld);
+                                                                    showDemo("Calendar", BorderLayout.center(cld));
                                                                 }));
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("advanced-tree-file.png"),
@@ -107,7 +107,7 @@ public class AdvancedDemo extends Demo{
                                                                     FileTree xmlTree = new FileTree(new FileTreeModel(true));
                                                                     Container treeContainer = BorderLayout.center(xmlTree);
                                                                     treeContainer.setUIID("TreeContainer");
-                                                                    showDemo("File Tree", treeContainer);
+                                                                    showDemo("File Tree", BorderLayout.center(treeContainer));
                                                                 }));
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("advanced-image-viewer.png"),

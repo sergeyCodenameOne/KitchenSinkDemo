@@ -74,10 +74,12 @@ background-image: url(images/media/download-icon.png),
                     url(images/toggles/switch.png),
                     url(images/toggles/on-off-switch.png),
                     url(images/toggles/radio-button.png),
+                    url(images/toggle-list/check-box-list.png),
+                    url(images/toggle-list/radio-button-list.png),
+                    url(images/toggle-list/switch-list.png),
                     url(images/maps/maps-pin.png),
                     url(images/maps/map-component.png),
                     url(images/maps/map-google-component.png);
-
     cn1-source-dpi: 0;
 }
 
@@ -285,4 +287,39 @@ MediaComponentLine1{
 
 MediaComponentLine2{
     color: grey;
+}
+
+MediaIcon{
+    color: green;
+    font-size: 5mm;
+}
+
+Calendar{
+    color: white;
+}
+
+ComponentDemoContainer{
+    margin: 0;
+    padding: 0;
+    background-color: #efeff4;
+}
+
+DemoCheckBox{
+    marge: 2mm;
+}
+
+CheckBoxContainer{
+    background-color: #efeff4;
+}
+
+RadioButtonsContainer{
+    background-color: #efeff4;
+}
+
+SwitchContainer{
+    background-color: #efeff4;
+}
+
+DemoSwitch{
+    margin: 2mm;
 }

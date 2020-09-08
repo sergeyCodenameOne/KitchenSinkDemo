@@ -22,6 +22,7 @@
  */
 package com.codename1.demos.kitchen;
 
+import static com.codename1.ui.CN.*;
 import com.codename1.components.Switch;
 import com.codename1.ui.ButtonGroup;
 import com.codename1.ui.CheckBox;
@@ -32,6 +33,7 @@ import com.codename1.ui.Image;
 import com.codename1.ui.RadioButton;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
@@ -71,22 +73,41 @@ public class TogglesDemo extends Demo {
                                                                 "guidelines: https://material.io/guidelines/components/ selection-controls.html#selection-controls- radio-button",
                                                                 e->{
                                                                     Switch s = new Switch();
-                                                                    showDemo("Switch", BorderLayout.centerAbsolute(s));
+                                                                    s.setOn();
+                                                                    if (isDarkMode()!= null && !isDarkMode()){
+                                                                        s.setOff();
+                                                                    }
+                                                                    Container switchContainer = FlowLayout.encloseCenter(s);
+                                                                    s.addChangeListener(ee->{
+                                                                        if(s.isOn()){
+                                                                            switchContainer.getAllStyles().setBgColor(0xefeff4);
+                                                                        }else{
+                                                                            switchContainer.getAllStyles().setBgColor(0x091545);
+                                                                        }
+                                                                        switchContainer.revalidate();
+                                                                    });
+                                                                    showDemo("Switch", switchContainer);
                                                                 }));
         
         return demoContainer;
     }
     private Container createCheckboxDemo(){
-        Image icon = FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("CheckBox"));
+        Image icon = FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("DemoCheckBox"));
         CheckBox cb1 = new CheckBox("CheckBox No Icon");
+        cb1.setUIID("DemoCheckBox");
         cb1.setSelected(true);
         CheckBox cb2 = new CheckBox("CheckBox With Icon", icon);
+        cb2.setUIID("DemoCheckBox");
         CheckBox cb3 = new CheckBox("CheckBox Opposite True", icon);
+        cb3.setUIID("DemoCheckBox");
         CheckBox cb4 = new CheckBox("CheckBox Opposite False", icon);
+        cb4.setUIID("DemoCheckBox");
         cb3.setOppositeSide(true);
         cb4.setOppositeSide(false);
         
-        return BoxLayout.encloseY(cb1, cb2, cb3, cb4);
+        Container checkBoxContainer = BoxLayout.encloseY(cb1, cb2, cb3, cb4);
+        checkBoxContainer.setUIID("CheckBoxContainer");
+        return BorderLayout.center(checkBoxContainer);
     }
     
     private Container createRadioButtonDemo(){
@@ -96,6 +117,8 @@ public class TogglesDemo extends Demo {
         RadioButton rb3 = new RadioButton("Radio Button 3", icon);
         new ButtonGroup(rb1, rb2, rb3);
         rb2.setSelected(true);
-        return BoxLayout.encloseY(rb1, rb2, rb3);
+        Container radioButtonsContainer = BoxLayout.encloseY(rb1, rb2, rb3);
+        radioButtonsContainer.setUIID("RadioButtonsContainer");
+        return BorderLayout.center(radioButtonsContainer);
     }
 }

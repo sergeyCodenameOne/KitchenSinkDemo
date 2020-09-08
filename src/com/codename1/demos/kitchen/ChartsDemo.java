@@ -44,6 +44,7 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class ChartsDemo extends Demo {
@@ -149,7 +150,7 @@ public class ChartsDemo extends Demo {
             Form lastForm = getCurrentForm();
             Style iconStyle = new Style();
             iconStyle.setFgColor(0x157EFB);
-            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, iconStyle),
+            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("ComponentDemoTitle")),
                     e-> lastForm.showBack());
             
             toolbar.addCommandToLeftBar(backCommand);

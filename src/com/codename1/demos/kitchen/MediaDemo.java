@@ -38,9 +38,12 @@ import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 import java.io.IOException;
 
@@ -56,7 +59,8 @@ public class MediaDemo extends Demo {
     public Container createContentPane(){
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "VideoContainer");
       
-        Component downloadButton = createVideoComponent("Hello (Online)", "Download to FileSystem", "download-icon.png",
+        Style iconStyle = UIManager.getInstance().getComponentStyle("MediaIcon");
+        Component downloadButton = createVideoComponent("Hello (Online)", "Download to FileSystem", FontImage.createMaterial(FontImage.MATERIAL_ARROW_DROP_DOWN_CIRCLE, iconStyle),
                                         e-> {
                                             if (!existsInFileSystem(DOWNLOADED_VIDEO)){
                                                 ToastBar.showMessage("Downloading", FontImage.MATERIAL_SYSTEM_UPDATE, 3000);
@@ -64,7 +68,7 @@ public class MediaDemo extends Demo {
                                             }
                                         });
         
-        Component playOfflineButton = createVideoComponent("Hello (Offline)", "Play from FileSystem", "play-icon.png",
+        Component playOfflineButton = createVideoComponent("Hello (Offline)", "Play from FileSystem", FontImage.createMaterial(FontImage.MATERIAL_PLAY_CIRCLE_FILLED, iconStyle),
                                         e-> {
                                             if (existsInFileSystem(DOWNLOADED_VIDEO)){
                                                 playVideoOnNewForm(DOWNLOADED_VIDEO, demoContainer.getComponentForm());
@@ -74,10 +78,10 @@ public class MediaDemo extends Demo {
                                         });
                                             
         
-        Component playOnlineButton = createVideoComponent("Hello (Online)", "Play thru http", "play-icon.png",
+        Component playOnlineButton = createVideoComponent("Hello (Online)", "Play thru http", FontImage.createMaterial(FontImage.MATERIAL_PLAY_CIRCLE_FILLED, iconStyle),
                                         e -> playVideoOnNewForm("https://www.codenameone.com/files/hello-codenameone.mp4", demoContainer.getComponentForm()));
         
-        Component captureVideoButton = createVideoComponent("Capture", "Record video and save to FileSystem", "video-icon.png",
+        Component captureVideoButton = createVideoComponent("Capture", "Record video and save to FileSystem", FontImage.createMaterial(FontImage.MATERIAL_VIDEOCAM, iconStyle),
                                         e-> {
                                             String capturedVideo = Capture.captureVideo();
                                             if(capturedVideo != null){
@@ -89,7 +93,7 @@ public class MediaDemo extends Demo {
                                             }
                                         });
         
-        Component playCaptured = createVideoComponent("Play", "Play captured video", "play-icon.png",
+        Component playCaptured = createVideoComponent("Play", "Play captured video", FontImage.createMaterial(FontImage.MATERIAL_PLAY_CIRCLE_FILLED, iconStyle),
                                         e-> {
                                             if (existsInFileSystem(CAPTURED_VIDEO)){
                                                 playVideoOnNewForm(CAPTURED_VIDEO, demoContainer.getComponentForm());
@@ -137,11 +141,11 @@ public class MediaDemo extends Demo {
         });
     }
     
-    private Component createVideoComponent(String firstLine, String secondLine, String iconName, ActionListener actionListener){
+    private Component createVideoComponent(String firstLine, String secondLine, Image icon, ActionListener actionListener){
         MultiButton videoComponent = new MultiButton(firstLine);
         videoComponent.setTextLine2(secondLine);
         videoComponent.setUIID("VideoComponent");
-        videoComponent.setIcon(getGlobalResources().getImage(iconName).fill(convertToPixels(5), convertToPixels(5)));
+        videoComponent.setIcon(icon);
         videoComponent.setIconPosition("East");
         videoComponent.addActionListener(actionListener);
         videoComponent.setUIIDLine1("MediaComponentLine1");

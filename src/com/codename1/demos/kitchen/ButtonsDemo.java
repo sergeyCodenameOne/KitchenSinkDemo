@@ -123,11 +123,11 @@ public class ButtonsDemo extends Demo{
         Button thirdButton = new Button("Button", FontImage.MATERIAL_INFO, "ButtonDemo");
         thirdButton.addActionListener(e-> ToastBar.showInfoMessage("third Button has pressed") );
 
-        Container demoContainer =  BoxLayout.encloseY(new Label("button with text:"),
+        Container demoContainer =  BoxLayout.encloseY(new Label("button with text:", "ComponentDemoLabel"),
                                                         firstButton,
-                                                        new Label("button with icon:"),
+                                                        new Label("button with icon:", "ComponentDemoLabel"),
                                                         secondButton,
-                                                        new Label("button with text and icon:"),
+                                                        new Label("button with text and icon:", "ComponentDemoLabel"),
                                                         thirdButton);
         return demoContainer;
     }
@@ -138,15 +138,15 @@ public class ButtonsDemo extends Demo{
                                                 "span buttons has the UIID style of a button.", "WhiteText");
         button.setUIID("ButtonDemo");
         button.addActionListener(e-> ToastBar.showInfoMessage("Button has pressed") );
-        return BoxLayout.encloseY( new Label("SpanButton: "), button);
+        return BoxLayout.encloseY( new Label("SpanButton:", "ComponentDemoLabel"), button);
     }
     
     private Container createMultiButtonsDemo(){ 
         MultiButton twoLinesNoIcon = new MultiButton("MultiButton");
         twoLinesNoIcon.setTextLine2("Line 2");
         
-        Image emblem = FontImage.createMaterial(FontImage.MATERIAL_ARROW_RIGHT, twoLinesNoIcon.getAllStyles());
-        Image icon = FontImage.createMaterial(FontImage.MATERIAL_INFO, twoLinesNoIcon.getAllStyles());
+        Image emblem = FontImage.createMaterial(FontImage.MATERIAL_ARROW_RIGHT, UIManager.getInstance().getComponentStyle("MultiLineEmblem"));
+        Image icon = FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("MultiLineIcon"));
 
         MultiButton oneLineIconEmblem = new MultiButton("Icon + Emblem");
         oneLineIconEmblem.setIcon(icon);
@@ -221,11 +221,11 @@ public class ButtonsDemo extends Demo{
         fillButton.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
 
         demoContainer.add(tableLayout.createConstraint().widthPercentage(20), new ScaleImageButton(icon)).
-                add(tableLayout.createConstraint().widthPercentage(80), new Label("<- 20% of the screen")).
-                add(new SpanLabel("80% of the screen->")).
+                add(tableLayout.createConstraint().widthPercentage(80), new Label("<- 20% of the screen", "ComponentDemoLabel")).
+                add(new SpanLabel("80% of the screen->", "ComponentDemoLabel")).
                 add(new ScaleImageButton(icon)).
                 add(fillLabel).
-                add(new Label("<-image fill")).
+                add(new Label("<-image fill", "ComponentDemoLabel")).
                 add(new Label("")).
                 add(fillButton);
         return demoContainer;

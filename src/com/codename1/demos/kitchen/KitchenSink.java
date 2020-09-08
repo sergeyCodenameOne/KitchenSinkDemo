@@ -44,7 +44,7 @@ public class KitchenSink {
         
         theme = UIManager.initNamedTheme("/theme", "Theme");
         
-        if (isDarkMode()!= null && isDarkMode()){
+        if (false){//isDarkMode()!= null && isDarkMode()
             isDarkMode = true;
             try {
                 isDarkMode = true;
@@ -76,12 +76,30 @@ public class KitchenSink {
     
     public void start() {
         if(current != null){
+            if(isDarkMode){
+                if (isDarkMode()!= null && !isDarkMode()){
+                    isDarkMode = false;
+                    try {
+                        Resources theme = Resources.openLayered("/theme");
+                        UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
+                    } catch(IOException e){
+                        Log.e(e);
+                    }
+                }
+            }else{
+                if (isDarkMode()!= null && isDarkMode()){
+                    isDarkMode = true;
+                    try {
+                        Resources darkTheme = Resources.openLayered("/dark-theme");
+                        UIManager.getInstance().addThemeProps(darkTheme.getTheme(darkTheme.getThemeResourceNames()[0]));
+                    } catch(IOException e){
+                        Log.e(e);
+                    }
+                }
+            }
             current.show();
             return;
         }
-        
-     
-        applyDarkMode();
         MainWindow mw = new MainWindow();
         mw.buildForm().show();
     }
@@ -96,44 +114,6 @@ public class KitchenSink {
     
     public void destroy() {
     }
-    
-    private void applyDarkMode(){
-        new Thread() {
-            public void run() { 
-                while(true){
-                    try{
-                        // check every 0.5 seconds if the user set the dark mode.
-                        sleep(500);
-                    }catch(InterruptedException error){
-                        Log.e(error);
-                    }
-                    
-                }
-            }
-        }.start();
-    }
 }
 
-if(isDarkMode){
-    if (isDarkMode()!= null && !isDarkMode()){
-        isDarkMode = false;
-        try {
-            Resources theme = Resources.openLayered("/theme");
-            UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
-        } catch(IOException e){
-            Log.e(e);
-        }
-        Display.getInstance().getCurrent().refreshTheme();
-    }
-}else{
-    if (isDarkMode()!= null && isDarkMode()){
-        isDarkMode = true;
-        try {
-            Resources darkTheme = Resources.openLayered("/dark-theme");
-            UIManager.getInstance().addThemeProps(darkTheme.getTheme(darkTheme.getThemeResourceNames()[0]));
-        } catch(IOException e){
-            Log.e(e);
-        }
-        Display.getInstance().getCurrent().refreshTheme();
-    }
-}
+

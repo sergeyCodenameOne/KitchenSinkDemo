@@ -64,22 +64,11 @@ DemoComponentIcon{
     margin: 2mm;
 }
 
-@media device-tablet {
-    DemoToolbar{
-        margin: 0;
-        background-color: #112d78;
-        padding: 3mm;
-        font-size: 5mm;
-    }
-}
-
-@media device-phone {
-    DemoToolbar{
+DemoToolbar{
         margin: 0;
         background-color: #112d78;
         padding: 3mm;
         font-size: 3mm;
-    }
 }
 
 DemoContainer{
@@ -164,4 +153,101 @@ MediaComponentLine1{
 
 MediaComponentLine2{
     color: #acc0f9;
+}
+
+ComponentDemoToolbar{
+    background-color: #112d78;
+    padding: 3mm;
+    font-size: 3mm;
+    margin: 0;
+}
+
+ComponentDemoTitle{
+    text-align: center;
+    font-family: "native:MainBold";
+    color: white;
+}
+
+ComponentDemoContainer{
+    background-color: #091545;
+    margin: 0;
+}
+
+@media device-tablet {
+    ComponentDemoToolbar{
+        font-size: 5mm;
+    }
+    
+    DemoToolbar{
+        font-size: 5mm;
+    }
+}
+
+CalendarDay{
+    color : white;
+}
+
+CalendarSelectedDay{
+    color: white;
+}
+
+CalendarTitle{
+    color: white;
+}
+
+TreeNode{
+    color: white;
+}
+
+ComponentDemoLabel{
+    color: white;
+    background-color: #091545;
+}
+
+MultiLine1{
+    color: white;
+    background-color: #091545;}
+
+MultiLine2{
+    color: white;
+    background-color: #091545;}
+
+MultiLine3{
+    color: white;
+    background-color: #091545;
+}
+
+MultiLine4{
+    color: white;
+    background-color: #091545;
+}
+
+MultiLineIcon{
+    color: white;
+    background-color: #091545;
+}
+
+MultiLineEmblem{
+    color: white;
+    background-color: #091545;
+}
+
+DemoCheckBox{
+    marge: 2mm;
+}
+
+CheckBoxContainer{
+    background-color: #efeff4;
+}
+
+RadioButtonsContainer{
+    background-color: #efeff4;
+}
+
+SwitchContainer{
+    background-color: #efeff4;
+}
+
+DemoSwitch{
+    margin: 2mm;
 }
