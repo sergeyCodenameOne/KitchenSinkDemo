@@ -32,6 +32,7 @@ import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
@@ -58,7 +59,18 @@ public class ContentBuilder {
     }
     
     public Component createComponent(Image image, String header, String firstLine, ActionListener listener){
-        ScaleImageButton contentImage = new ScaleImageButton(image);
+        ScaleImageButton contentImage = new ScaleImageButton(image){
+            @Override
+            protected Dimension calcPreferredSize() {
+                
+                Dimension preferredSize =  super.calcPreferredSize(); 
+                preferredSize.setHeight(preferredSize.getHeight() * 4);
+                return preferredSize;
+            }
+            
+        };
+        contentImage.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED);
+
         contentImage.addActionListener(listener);
         contentImage.setUIID("DemoContentImage");
         Label contentHeader = new Label(header, "DemoContentHeader");
@@ -94,7 +106,17 @@ public class ContentBuilder {
             this.body.setHidden(true);
             
             setUIID("DemoContentAccordion");
-            ScaleImageButton contentImage = new ScaleImageButton(image);
+            ScaleImageButton contentImage = new ScaleImageButton(image){
+                @Override
+                protected Dimension calcPreferredSize() {
+
+                    Dimension preferredSize =  super.calcPreferredSize(); 
+                    preferredSize.setHeight(preferredSize.getHeight() * 4);
+                    return preferredSize;
+                }
+
+            };
+            contentImage.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED);
             contentImage.addActionListener(listener);
             contentImage.setUIID("DemoContentImage");
             Label contentHeader = new Label(header, "DemoContentHeader");

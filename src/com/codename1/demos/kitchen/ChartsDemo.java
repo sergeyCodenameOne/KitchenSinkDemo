@@ -148,9 +148,7 @@ public class ChartsDemo extends Demo {
             toolbar.getTitleComponent().setUIID("ComponentDemoTitle");
             
             Form lastForm = getCurrentForm();
-            Style iconStyle = new Style();
-            iconStyle.setFgColor(0x157EFB);
-            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("ComponentDemoTitle")),
+            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, lastForm.getUIManager().getComponentStyle("ComponentDemoTitle")),
                     e-> lastForm.showBack());
             
             toolbar.addCommandToLeftBar(backCommand);

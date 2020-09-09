@@ -251,3 +251,11 @@ SwitchContainer{
 DemoSwitch{
     margin: 2mm;
 }
+
+BrightContainer{
+    background-color: #efeff4;
+}
+
+DarkContainer{
+    background-color: #091545;
+}

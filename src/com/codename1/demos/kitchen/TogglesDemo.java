@@ -80,9 +80,9 @@ public class TogglesDemo extends Demo {
                                                                     Container switchContainer = FlowLayout.encloseCenter(s);
                                                                     s.addChangeListener(ee->{
                                                                         if(s.isOn()){
-                                                                            switchContainer.getAllStyles().setBgColor(0xefeff4);
+                                                                            switchContainer.setUIID("BrightContainer");
                                                                         }else{
-                                                                            switchContainer.getAllStyles().setBgColor(0x091545);
+                                                                            switchContainer.setUIID("DarkContainer");
                                                                         }
                                                                         switchContainer.revalidate();
                                                                     });

@@ -43,17 +43,7 @@ public class KitchenSink {
         updateNetworkThreadCount(2);
         
         theme = UIManager.initNamedTheme("/theme", "Theme");
-        
-        if (false){//isDarkMode()!= null && isDarkMode()
-            isDarkMode = true;
-            try {
-                isDarkMode = true;
-                Resources darkTheme = Resources.openLayered("/dark-theme");
-                UIManager.getInstance().addThemeProps(darkTheme.getTheme(darkTheme.getThemeResourceNames()[0]));
-            } catch(IOException e){
-                Log.e(e);
-            }
-        }
+        initTheme();
         
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
@@ -76,27 +66,7 @@ public class KitchenSink {
     
     public void start() {
         if(current != null){
-            if(isDarkMode){
-                if (isDarkMode()!= null && !isDarkMode()){
-                    isDarkMode = false;
-                    try {
-                        Resources theme = Resources.openLayered("/theme");
-                        UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
-                    } catch(IOException e){
-                        Log.e(e);
-                    }
-                }
-            }else{
-                if (isDarkMode()!= null && isDarkMode()){
-                    isDarkMode = true;
-                    try {
-                        Resources darkTheme = Resources.openLayered("/dark-theme");
-                        UIManager.getInstance().addThemeProps(darkTheme.getTheme(darkTheme.getThemeResourceNames()[0]));
-                    } catch(IOException e){
-                        Log.e(e);
-                    }
-                }
-            }
+            initTheme();
             current.show();
             return;
         }
@@ -113,6 +83,20 @@ public class KitchenSink {
     }
     
     public void destroy() {
+    }
+    
+    private void initTheme() {
+        Boolean systemDarkMode = isDarkMode();
+        if(systemDarkMode != null && systemDarkMode != isDarkMode){// systemDarkMode != null && systemDarkMode != isDarkMode
+            isDarkMode = !isDarkMode;
+            String themeFilename = isDarkMode ? "/dark-theme" : "/theme";
+            try {
+                Resources theme = Resources.openLayered(themeFilename);
+                UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
+            }catch(IOException e){
+                Log.e(e);
+            }
+        }
     }
 }
 

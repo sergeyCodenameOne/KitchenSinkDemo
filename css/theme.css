@@ -26,11 +26,7 @@
 }
 
 ImagesHighRes{
-background-image: url(images/media/download-icon.png),
-                    url(images/codename-one-icon.png),
-                    url(images/media/play-icon.png),
-                    url(images/media/video-icon.png),
-                    url(images/charts/chart-bar.png),
+background-image:   url(images/charts/chart-bar.png),
                     url(images/charts/chart-bubble.png),
                     url(images/charts/chart-radar.png),
                     url(images/charts/chart-combined-xy.png),
@@ -78,7 +74,6 @@ background-image: url(images/media/download-icon.png),
                     url(images/toggle-list/radio-button-list.png),
                     url(images/toggle-list/switch-list.png),
                     url(images/maps/maps-pin.png),
-                    url(images/maps/map-component.png),
                     url(images/maps/map-google-component.png);
     cn1-source-dpi: 0;
 }
@@ -322,4 +317,12 @@ SwitchContainer{
 
 DemoSwitch{
     margin: 2mm;
+}
+
+BrightContainer{
+    background-color: #efeff4;
+}
+
+DarkContainer{
+    background-color: #091545;
 }

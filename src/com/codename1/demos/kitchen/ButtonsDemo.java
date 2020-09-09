@@ -190,7 +190,7 @@ public class ButtonsDemo extends Demo{
         textShare.setText("share text");
         
         String imagePath = FileSystemStorage.getInstance().getAppHomePath() + "icon.png";
-        Image imageToShare = getGlobalResources().getImage("codename-one-icon.png");
+        Image imageToShare = getGlobalResources().getImage("blured-puppy.png");
         
         try {
             OutputStream os = FileSystemStorage.getInstance().openOutputStream(imagePath);
