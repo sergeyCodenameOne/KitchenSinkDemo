@@ -73,6 +73,12 @@ background-image:   url(images/charts/chart-bar.png),
                     url(images/toggle-list/check-box-list.png),
                     url(images/toggle-list/radio-button-list.png),
                     url(images/toggle-list/switch-list.png),
+                    url(images/selection/combo-box.png),
+                    url(images/selection/date-picker.png),
+                    url(images/selection/date-time-picker.png),
+                    url(images/selection/hour-picker.png),
+                    url(images/selection/minute-picker.png),
+                    url(images/selection/time-picker.png),
                     url(images/maps/maps-pin.png),
                     url(images/maps/map-google-component.png);
     cn1-source-dpi: 0;
@@ -120,7 +126,6 @@ DemoToolbar{
     padding: 3mm;
     font-size: 3mm;
 }
-
 
 @media device-tablet {
     DemoToolbar{
@@ -300,19 +305,22 @@ ComponentDemoContainer{
 }
 
 DemoCheckBox{
-    marge: 2mm;
+    margin: 2mm;
 }
 
 CheckBoxContainer{
     background-color: #efeff4;
+    margin: 0;
 }
 
 RadioButtonsContainer{
     background-color: #efeff4;
+    margin: 0;
 }
 
 SwitchContainer{
     background-color: #efeff4;
+    margin: 0;
 }
 
 DemoSwitch{
@@ -321,8 +329,97 @@ DemoSwitch{
 
 BrightContainer{
     background-color: #efeff4;
+    margin: 0;
 }
 
 DarkContainer{
     background-color: #091545;
+    margin: 0;
+}
+
+
+RedContainer{
+    background-color: #ff0000;
+    margin: 0;
+}
+
+GreenContainer{
+    background-color: #00ff00;
+    margin: 0;
+}
+
+BlueContainer{
+    background-color: #0000ff;
+    margin: 0;
+}
+
+ComboBoxContainer{
+    margin: 0;
+    background-color: #efeff4;
+}
+
+PopupContentPane{
+    margin: 0;
+    background-color: white;
+}
+
+DemoMultiButton{
+    background-color: white;
+    color: black;
+}
+
+DemoMultiEmblem{
+    background-color: white;
+    color: black;
+}
+
+DemoMultiIcon{
+    background-color: white;
+    color: black;
+    padding: 0;
+    margin: 0;
+}
+
+DemoMultiLine1{
+    background-color: white;
+    color: black;
+}
+
+DemoMultiLine2{
+    background-color: white;
+    color: black;
+}
+
+DemoMultiLine3{
+    background-color: white;
+    color: black;
+}
+
+DemoMultiLine4{
+    background-color: white;
+    color: black;
+}
+DemoMultiButton.pressed {
+    background-color: #efeff4;
+}
+
+DemoMultiIconPressed{
+    background-color: #efeff4;
+    margin: 0;
+}
+
+DemoMultiLine1.pressed {
+    background-color: #efeff4;
+}
+
+DemoMultiLine2.pressed {
+    background-color: #efeff4;
+}
+
+DemoMultiLine3.pressed {
+    background-color: #efeff4;
+}
+
+DemoMultiLine4.pressed{
+    background-color: #efeff4;
 }

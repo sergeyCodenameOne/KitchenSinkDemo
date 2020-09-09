@@ -27,7 +27,6 @@ MainWindowContainer{
     margin: 0;
 }
 
-
 MainWindowDemoComponent{
     background-color: #112d78;
     border-radius: 2mm;
@@ -204,48 +203,23 @@ ComponentDemoLabel{
     background-color: #091545;
 }
 
-MultiLine1{
-    color: white;
-    background-color: #091545;}
-
-MultiLine2{
-    color: white;
-    background-color: #091545;}
-
-MultiLine3{
-    color: white;
-    background-color: #091545;
-}
-
-MultiLine4{
-    color: white;
-    background-color: #091545;
-}
-
-MultiLineIcon{
-    color: white;
-    background-color: #091545;
-}
-
-MultiLineEmblem{
-    color: white;
-    background-color: #091545;
-}
-
 DemoCheckBox{
-    marge: 2mm;
+    matgin: 2mm;
 }
 
 CheckBoxContainer{
     background-color: #efeff4;
+    margin: 0;
 }
 
 RadioButtonsContainer{
     background-color: #efeff4;
+    margin: 0;
 }
 
 SwitchContainer{
     background-color: #efeff4;
+    margin: 0;
 }
 
 DemoSwitch{
@@ -254,8 +228,65 @@ DemoSwitch{
 
 BrightContainer{
     background-color: #efeff4;
+    margin: 0;
 }
 
 DarkContainer{
     background-color: #091545;
+    margin: 0;
+}
+
+RedContainer{
+    background-color: #ff0000;
+    margin: 0;
+}
+
+GreenContainer{
+    background-color: #00ff00;
+    margin: 0;
+}
+
+BlueContainer{
+    background-color: #0000ff;
+    margin: 0;
+}
+
+PopupContentPane{
+    margin: 0;
+    background-color: #091545;
+}
+
+DemoMultiButton{
+    background-color: #091545;
+    color: white;
+}
+
+DemoMultiEmblem{
+    background-color: #091545;
+    color: white;
+}
+
+DemoMultiIcon{
+    background-color: #091545;
+    color: white;
+}
+
+DemoMultiLine1{
+    background-color: #091545;
+    color: white;
+}
+
+DemoMultiLine2{
+    background-color: #091545;
+    color: white;
+}
+
+DemoMultiLine3{
+    background-color: #091545;
+    color: white;
+}
+
+DemoMultiLine4{
+    background-color: #091545;
+    color: white;
 }

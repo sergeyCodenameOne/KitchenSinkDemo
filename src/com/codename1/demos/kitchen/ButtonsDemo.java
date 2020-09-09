@@ -142,15 +142,26 @@ public class ButtonsDemo extends Demo{
     }
     
     private Container createMultiButtonsDemo(){ 
+        // TODO rewrite the whole Demo.
         MultiButton twoLinesNoIcon = new MultiButton("MultiButton");
         twoLinesNoIcon.setTextLine2("Line 2");
+        twoLinesNoIcon.setUIID("DemoMultiButton");
+        twoLinesNoIcon.setUIIDLine1("DemoMultiLine1");
+        twoLinesNoIcon.setUIIDLine2("DemoMultiLine2");
         
-        Image emblem = FontImage.createMaterial(FontImage.MATERIAL_ARROW_RIGHT, UIManager.getInstance().getComponentStyle("MultiLineEmblem"));
-        Image icon = FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("MultiLineIcon"));
+        Image emblem = FontImage.createMaterial(FontImage.MATERIAL_ARROW_RIGHT, UIManager.getInstance().getComponentStyle("DemoMultiEmblem"));
+        Image icon = FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("DemoMultiIcon"));
+        Image pressedIcon = FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("DemoMultiIconPressed"));
 
         MultiButton oneLineIconEmblem = new MultiButton("Icon + Emblem");
         oneLineIconEmblem.setIcon(icon);
+        oneLineIconEmblem.setPressedIcon(pressedIcon);
         oneLineIconEmblem.setEmblem(emblem);
+        oneLineIconEmblem.setUIID("DemoMultiButton");
+        oneLineIconEmblem.setUIIDLine1("DemoMultiLine1");
+        oneLineIconEmblem.setEmblemUIID("DemoMultiEmblem");
+        oneLineIconEmblem.setIconUIID("DemoMultiIcon");
+        
         MultiButton twoLinesIconEmblem = new MultiButton("Icon + Emblem");
         twoLinesIconEmblem.setIcon(icon);
         twoLinesIconEmblem.setEmblem(emblem);

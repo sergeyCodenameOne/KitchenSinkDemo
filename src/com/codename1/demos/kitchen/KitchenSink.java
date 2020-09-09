@@ -67,6 +67,7 @@ public class KitchenSink {
     public void start() {
         if(current != null){
             initTheme();
+            current.refreshTheme();
             current.show();
             return;
         }
@@ -87,7 +88,7 @@ public class KitchenSink {
     
     private void initTheme() {
         Boolean systemDarkMode = isDarkMode();
-        if(systemDarkMode != null && systemDarkMode != isDarkMode){// systemDarkMode != null && systemDarkMode != isDarkMode
+        if(systemDarkMode != null && systemDarkMode != isDarkMode){
             isDarkMode = !isDarkMode;
             String themeFilename = isDarkMode ? "/dark-theme" : "/theme";
             try {

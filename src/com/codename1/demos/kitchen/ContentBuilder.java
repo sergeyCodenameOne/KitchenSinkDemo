@@ -64,7 +64,7 @@ public class ContentBuilder {
             protected Dimension calcPreferredSize() {
                 
                 Dimension preferredSize =  super.calcPreferredSize(); 
-                preferredSize.setHeight(preferredSize.getHeight() * 4);
+                preferredSize.setHeight(preferredSize.getHeight() * 3);
                 return preferredSize;
             }
             
@@ -111,7 +111,7 @@ public class ContentBuilder {
                 protected Dimension calcPreferredSize() {
 
                     Dimension preferredSize =  super.calcPreferredSize(); 
-                    preferredSize.setHeight(preferredSize.getHeight() * 4);
+                    preferredSize.setHeight(preferredSize.getHeight() * 3);
                     return preferredSize;
                 }
 
