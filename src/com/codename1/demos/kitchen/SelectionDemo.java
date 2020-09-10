@@ -28,12 +28,15 @@ import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Container;
 import com.codename1.ui.Form;
+import com.codename1.ui.PickerComponent;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.list.GenericListCellRenderer;
 import static com.codename1.ui.util.Resources.getGlobalResources;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 
 public class SelectionDemo extends Demo{
@@ -82,14 +85,14 @@ public class SelectionDemo extends Demo{
                                                                 "Minute Duration Picker",
                                                                 "Minute Picker is a PickerComponent use",
                                                                 "PickerComponent.createDurationMMInutes (0).label(\"Select Duration\")", e->{
-                                                                    showDemo("Minute Duration Picker", createMinuteHourPickerDemo());
+                                                                    showDemo("Minute Duration Picker", createMinuteDurationPickerDemo());
                                                                 }));
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("hour-picker.png"),
                                                                 "Minute, Hour, Duration Picker",
                                                                 "Hour Minute Picker is a PickerComponent",
-                                                                "use PickerComponent.createDurationHours Minutes(0,0).label(\"Select Duration\")", e->{
-                                                                    showDemo("Minute, Hour, Duration Picker", createMinuteDurationPickerDemo());                                                           
+                                                                "use PickerComponent.createDurationHoursMinutes(0,0).label(\"Select Duration\")", e->{
+                                                                    showDemo("Minute, Hour, Duration Picker", createMinuteHourPickerDemo());                                                           
                                                                 }));
         return demoContainer;
     }
@@ -105,7 +108,18 @@ public class SelectionDemo extends Demo{
             createListEntry("The Winds of Winter", "2016", "4.40"),
             createListEntry("A Dream of Spring", "Unpublished", "unknown")
         );
-        combo.setRenderer(new GenericListCellRenderer<>(new MultiButton(), new MultiButton()));
+        
+        MultiButton mb1 = new MultiButton();
+        mb1.setUIID("DemoMultiButton");
+        mb1.setUIIDLine1("DemoMultiLine1");
+        mb1.setUIIDLine2("DemoMultiLine2");
+        
+        MultiButton mb2 = new MultiButton();
+        mb2.setUIID("DemoMultiButton");
+        mb2.setUIIDLine1("DemoMultiLine1");
+        mb2.setUIIDLine2("DemoMultiLine2");
+        
+        combo.setRenderer(new GenericListCellRenderer<>(mb1, mb2));
         combo.setSelectedIndex(0);
         demoContainer.add(BorderLayout.CENTER, BoxLayout.encloseY(combo));
         
@@ -120,23 +134,75 @@ public class SelectionDemo extends Demo{
     }
     
     private Container createDatePickerDemo(){
-        return new Container();
+        PickerComponent datePicker = PickerComponent.createDate(null).label("Select Birthday: ");
+        datePicker.setUIID("DemoPicker");
+        
+        Button save = new Button("save Birthday");
+        save.addActionListener(e->{
+            ToastBar.showInfoMessage("Birthday was saved: " + datePicker.getPicker().getText());
+        });
+        Container demoContainer = BorderLayout.center(BoxLayout.encloseY(datePicker));
+        demoContainer.add(BorderLayout.SOUTH, save);
+        return demoContainer;
     }
     
     private Container createTimePickerDemo(){
-        return new Container();
+        Calendar calendar =  Calendar.getInstance(TimeZone.getDefault());
+        int minutes = calendar.get(Calendar.MINUTE);
+        int hours = calendar.get(Calendar.HOUR);
+        
+        PickerComponent timePicker = PickerComponent.createTime(hours * 60 + minutes).label("Select Alarm Time ");
+        timePicker.setUIID("DemoPicker");
+        Button setAlarm = new Button("Set Alarm");
+        setAlarm.addActionListener(e->{
+            ToastBar.showInfoMessage("Alarm set for: " + timePicker.getPicker().getText());
+        });
+        Container demoContainer = BorderLayout.center(BoxLayout.encloseY(timePicker));
+        demoContainer.add(BorderLayout.SOUTH, setAlarm);
+        return demoContainer;
     }
     
     private Container createDateTimePickerDemo(){
-        return new Container();
+        Calendar calendar =  Calendar.getInstance(TimeZone.getDefault());
+        int minutes = calendar.get(Calendar.MINUTE);
+        int hours = calendar.get(Calendar.HOUR);
+        
+        PickerComponent meetingPicker = PickerComponent.createDateTime(null).label("Select Meeting schedule");
+        meetingPicker.setUIID("DemoPicker");
+        Button scheduleMeeting = new Button("Schedule Meeting");
+        scheduleMeeting.addActionListener(e->{
+            ToastBar.showInfoMessage("Meeting has scheduled at : " + meetingPicker.getPicker().getText());
+        });
+        Container demoContainer = BorderLayout.center(BoxLayout.encloseY(meetingPicker));
+        demoContainer.add(BorderLayout.SOUTH, scheduleMeeting);
+        return demoContainer;
+        
     }
     
     private Container createMinuteDurationPickerDemo(){
-        return new Container();
+        PickerComponent durationPicker = PickerComponent.createDurationMinutes(0).label("Select Duration");
+        durationPicker.setUIID("DemoPicker");
+        
+        Button setTimer = new Button("Set Timer");
+        setTimer.addActionListener(e->{
+            ToastBar.showInfoMessage("Timer set for: " + durationPicker.getPicker().getText());
+        });
+        Container demoContainer = BorderLayout.center(BoxLayout.encloseY(durationPicker));
+        demoContainer.add(BorderLayout.SOUTH, setTimer);
+        return demoContainer;
     }
     
     private Container createMinuteHourPickerDemo(){
-        return new Container();
+        PickerComponent durationPicker = PickerComponent.createDurationHoursMinutes(0, 0).label("Select Duration");
+        durationPicker.setUIID("DemoPicker");
+
+        Button setTimer = new Button("Set Timer");
+        setTimer.addActionListener(e->{
+            ToastBar.showInfoMessage("Timer set for: " + durationPicker.getPicker().getText());
+        });
+        Container demoContainer = BorderLayout.center(BoxLayout.encloseY(durationPicker));
+        demoContainer.add(BorderLayout.SOUTH, setTimer);
+        return demoContainer;
     }
     
     private Map<String, Object> createListEntry(String name, String date, String rating) {

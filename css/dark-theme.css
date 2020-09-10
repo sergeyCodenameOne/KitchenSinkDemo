@@ -290,3 +290,12 @@ DemoMultiLine4{
     background-color: #091545;
     color: white;
 }
+
+DemoPicker{
+    background-color: #efeff4;
+    border-radius: 2mm;
+}
+
+DemoLabel{
+    color: white;
+}

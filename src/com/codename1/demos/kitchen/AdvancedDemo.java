@@ -28,13 +28,11 @@ import com.codename1.components.FileTreeModel;
 import com.codename1.components.SignatureComponent;
 import com.codename1.demos.kitchen.ComponentDemos.ImageViewerDemo;
 import com.codename1.ui.BrowserComponent;
-import static com.codename1.ui.CN.isTablet;
 import com.codename1.ui.Calendar;
 import com.codename1.ui.Container;
 import com.codename1.ui.Form;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.table.TableLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
         
@@ -46,9 +44,6 @@ public class AdvancedDemo extends Demo{
      
     public Container createContentPane(){
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
-        if (isTablet()){
-            demoContainer.setLayout(new TableLayout(2, 2));
-        }
         demoContainer.setScrollableY(true);
         ContentBuilder builder = ContentBuilder.getInstance();
 

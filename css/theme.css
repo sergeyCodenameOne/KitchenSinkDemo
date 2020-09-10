@@ -79,6 +79,10 @@ background-image:   url(images/charts/chart-bar.png),
                     url(images/selection/hour-picker.png),
                     url(images/selection/minute-picker.png),
                     url(images/selection/time-picker.png),
+                    url(images/text-field/auto-complete-text-field.png),
+                    url(images/text-field/clearable-text-field.png),
+                    url(images/text-field/text-area.png),
+                    url(images/text-field/text-field.png),
                     url(images/maps/maps-pin.png),
                     url(images/maps/map-google-component.png);
     cn1-source-dpi: 0;
@@ -119,7 +123,8 @@ DemoComponentIcon{
 
 MainWindowDemoName{
     text-align: center;
-    font-family: "native:MainThin";
+    font-family: "native:MainBold";
+    font-size: 3mm
 }
 DemoToolbar{
     background-color: white;
@@ -408,7 +413,7 @@ DemoMultiIconPressed{
     margin: 0;
 }
 
-DemoMultiLine1.pressed {
+DemoMultiLine1.pressed {v
     background-color: #efeff4;
 }
 
@@ -422,4 +427,19 @@ DemoMultiLine3.pressed {
 
 DemoMultiLine4.pressed{
     background-color: #efeff4;
+}
+
+DemoPicker{
+    background-color: #efeff4;
+    border-radius: 2mm;
+}
+
+DemoLabel{
+    color: black;
+}
+
+DemoTextArea{
+    color: black;
+    background-color: white;
+    border-radius: 1mm;
 }

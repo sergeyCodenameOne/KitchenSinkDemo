@@ -22,9 +22,30 @@
  */
 package com.codename1.demos.kitchen;
 
+import com.codename1.components.ClearableTextField;
+import com.codename1.components.ToastBar;
+import com.codename1.io.ConnectionRequest;
+import com.codename1.io.JSONParser;
+import com.codename1.io.Log;
+import com.codename1.io.NetworkManager;
+import com.codename1.processing.Result;
+import com.codename1.ui.AutoCompleteTextField;
+import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
 import com.codename1.ui.Form;
+import com.codename1.ui.Label;
+import com.codename1.ui.TextArea;
+import com.codename1.ui.TextField;
+import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.list.DefaultListModel;
+import com.codename1.ui.table.TableLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
+import java.util.Map;
 
 
 public class TextFieldDemo extends Demo{
@@ -35,6 +56,226 @@ public class TextFieldDemo extends Demo{
      
     @Override
     public Container createContentPane() {
-        return new Container();
+        Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
+        demoContainer.setScrollableY(true);
+        ContentBuilder builder = ContentBuilder.getInstance();
+        
+        
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("text-field.png"),
+                                                                "Text Field",
+                                                                "A specialized version of TextArea with",
+                                                                "some minor deviations from the original specifically: Blinking cursor is rendered on TextField only. "+
+                                                                "com.codename1.ui.events.DataChangeList ener is only available in TextField.\n\nThis is crucial for "+
+                                                                "character by character input event tracking setDoneListener(com. codename1.ui. events.ActionLister) "+
+                                                                "is only available in Text Field Different UIID's (\"TextField\" vs. \"TextArea\")", 
+                                                                e->{                                                                    
+                                                                    showDemo("Text Field", createTextFieldDemo());
+                                                                }));
+        
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("text-area.png"),
+                                                                "Text Area",
+                                                                "An optionally multi-line editable region that",
+                                                                "can display text and allow a user to edit it. By default the text area will grow based on its content. "+
+                                                                "TextArea is useful both for text input and for displaying multi-line data, it is used internally by "+
+                                                                "components such as SpanLabel & SpanButton.\n\nTextArea & TextField are very similar, we discuss the main "+
+                                                                "differences between the two here. In fact they are so similar that our sample code below was written for "+
+                                                                "TextField but should be interchangeable with TextArea,", 
+                                                                e->{
+                                                                    showDemo("Text Area", createTextAreaDemo());
+                                                                }));
+        
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("clearable-text-field.png"),
+                                                                "Clearable Text Field",
+                                                                "Wraps a text field so it will have an X to",
+                                                                "clear its content on the right hand side", 
+                                                                e->{
+                                                                    showDemo("Clearable Text Field", createClearableTextFieldDemo());
+                                                                }));
+ 
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("auto-complete-text-field.png"),
+                                                                "Auto Complete Text Field",
+                                                                "An editable TextField with completion",
+                                                                "suggestions that show up in a drop down menu while the user types in text. This class uses the \"TextField\" "+
+                                                                "UIID by default as well as \"AutoCompletePopup\" & \"AutoCompleteList\" for the popup list details. The "+
+                                                                "sample below shows the more trivial use case for this widget.", 
+                                                                e->{
+                                                                    showDemo("Browser", createAutoCompleteDemo());
+                                                                }));
+        return demoContainer;
     }
+    
+    private Container createTextFieldDemo(){
+        Container textFields = new Container();
+        TableLayout tl;
+        if(Display.getInstance().isTablet()) {
+            tl = new TableLayout(7, 2);
+        } else {
+            tl = new TableLayout(14, 1);
+        }
+        
+        TextField firstName = new TextField("", "First Name", 20, TextArea.ANY);
+        firstName.setUIID("DemoTextArea");
+        TextField surname = new TextField("", "Surname", 20, TextArea.ANY);
+        surname.setUIID("DemoTextArea");
+        TextField email = new TextField("", "E-Mail", 20, TextArea.EMAILADDR);
+        email.setUIID("DemoTextArea");
+        TextField url = new TextField("", "URL", 20, TextArea.URL);
+        url.setUIID("DemoTextArea");
+        TextField phone = new TextField("", "Phone", 20, TextArea.PHONENUMBER);
+        phone.setUIID("DemoTextArea");
+
+        TextField num1 = new TextField("", "1234", 4, TextArea.NUMERIC);
+        num1.setUIID("DemoTextArea");
+        TextField num2 = new TextField("", "1234", 4, TextArea.NUMERIC);
+        num2.setUIID("DemoTextArea");
+        TextField num3 = new TextField("", "1234", 4, TextArea.NUMERIC);
+        num3.setUIID("DemoTextArea");
+        TextField num4 = new TextField("", "1234", 4, TextArea.NUMERIC);
+        num4.setUIID("DemoTextArea");
+        
+        Button submit = new Button("Submit");
+        submit.addActionListener(e->{
+            ToastBar.showInfoMessage("Your personal data was saved successfully");
+        });
+        
+        tl.setGrowHorizontally(true);
+        textFields.setLayout(tl);
+        textFields.add(new Label("First Name", "DemoLabel")).
+                add(firstName).
+                add(new Label("Surname", "DemoLabel")).
+                add(surname).
+                add(new Label("E-Mail", "DemoLabel")).
+                add(email).
+                add(new Label("URL", "DemoLabel")).
+                add(url).
+                add(new Label("Phone", "DemoLabel")).
+                add(phone).
+                add(new Label("Credit Card", "DemoLabel")).
+                add(GridLayout.encloseIn(4, num1, num2, num3, num4));
+        
+        Container demoContainer = BorderLayout.center(textFields);
+        demoContainer.add(BorderLayout.SOUTH, submit);
+        return demoContainer;
+    }
+    
+    private Container createTextAreaDemo(){
+        Container textFields = new Container();
+        TableLayout tl;
+        if(Display.getInstance().isTablet()) {
+            tl = new TableLayout(7, 2);
+        } else {
+            tl = new TableLayout(14, 1);
+        }
+        
+        TextArea firstName = new TextArea(1, 20, TextArea.ANY);
+        firstName.setUIID("DemoTextArea");
+        TextArea surname = new TextArea(1, 20, TextArea.ANY);
+        surname.setUIID("DemoTextArea");
+        TextArea email = new TextArea(1, 20, TextArea.EMAILADDR);
+        email.setUIID("DemoTextArea");
+        TextArea url = new TextArea(1, 20, TextArea.URL);
+        url.setUIID("DemoTextArea");
+        TextArea phone = new TextArea(1, 20, TextArea.PHONENUMBER);
+        phone.setUIID("DemoTextArea");
+
+        TextArea num1 = new TextArea(1, 4, TextArea.NUMERIC);
+        num1.setUIID("DemoTextArea");
+        TextArea num2 = new TextArea(1, 4, TextArea.NUMERIC);
+        num2.setUIID("DemoTextArea");
+        TextArea num3 = new TextArea(1, 4, TextArea.NUMERIC);
+        num3.setUIID("DemoTextArea");
+        TextArea num4 = new TextArea(1, 4, TextArea.NUMERIC);
+        num4.setUIID("DemoTextArea");
+        
+        Button submit = new Button("Submit");
+        submit.addActionListener(e->{
+            ToastBar.showInfoMessage("Your personal data was saved successfully");
+        });
+        
+        tl.setGrowHorizontally(true);
+        textFields.setLayout(tl);
+        textFields.add(new Label("First Name", "DemoLabel")).
+                add(firstName).
+                add(new Label("Surname", "DemoLabel")).
+                add(surname).
+                add(new Label("E-Mail", "DemoLabel")).
+                add(email).
+                add(new Label("URL", "DemoLabel")).
+                add(url).
+                add(new Label("Phone", "DemoLabel")).
+                add(phone).
+                add(new Label("Credit Card", "DemoLabel")).
+                add(GridLayout.encloseIn(4, num1, num2, num3, num4));
+        
+        Container demoContainer = BorderLayout.center(textFields);
+        demoContainer.add(BorderLayout.SOUTH, submit);
+        return demoContainer;
+    }
+    
+    private Container createClearableTextFieldDemo(){
+        TextField userName = new TextField("", "User Name", 20, TextArea.ANY);
+        userName.setUIID("DemoTextArea");
+        ClearableTextField clearableUserName = ClearableTextField.wrap(userName);
+        
+        TextField password = new TextField("", "Password", 20, TextArea.PASSWORD);
+        password.setUIID("DemoTextArea");
+        ClearableTextField clearablePassword = ClearableTextField.wrap(password);
+        
+        Container textFieldsContainer = BoxLayout.encloseY(new Label("Username:", "DemoLabel"),
+                                  clearableUserName,
+                                  new Label("Password:", "DemoLabel"),
+                                  clearablePassword );
+        
+        Button loginButton = new Button("Login");
+        loginButton.addActionListener(e-> ToastBar.showInfoMessage("Username or Password are incorrect"));
+        
+        Container demoContainer = BorderLayout.center(textFieldsContainer);
+        demoContainer.add(BorderLayout.SOUTH, loginButton);
+        return demoContainer;
+    }
+    
+    private Container createAutoCompleteDemo(){
+        final DefaultListModel<String> options = new DefaultListModel<>();
+        AutoCompleteTextField ac = new AutoCompleteTextField(options) {
+            @Override
+            protected boolean filter(String text) {
+                if(text.length() == 0) {
+                    return false;
+                }
+                String[] l = searchLocations(text);
+                if(l == null || l.length == 0) {
+                    return false;
+                }
+
+                options.removeAll();
+                for(String s : l) {
+                    options.addItem(s);
+                }
+                return true;
+            }
+        };
+        ac.setMinimumElementsShownInPopup(5);
+        ac.setUIID("DemoTextArea");
+        return BoxLayout.encloseY(ac);
+    }    
+    
+    String[] searchLocations(String text) {        
+    try {
+        if(text.length() > 0) {
+            ConnectionRequest r = new ConnectionRequest();
+            r.setPost(false);
+            r.setUrl("https://maps.googleapis.com/maps/api/place/autocomplete/json");
+            //TODO delete key from the app.
+            r.addArgument("key", "AIzaSyCBdVdrxXYihc1tMnev5S6pwHDOm43zShA");
+            r.addArgument("input", text);
+            NetworkManager.getInstance().addToQueueAndWait(r);
+            Map<String,Object> result = new JSONParser().parseJSON(new InputStreamReader(new ByteArrayInputStream(r.getResponseData()), "UTF-8"));
+            String[] res = Result.fromContent(result).getAsStringArray("//description");
+            return res;
+        }
+    } catch(Exception err) {
+        Log.e(err);
+    }
+    return null;
+}
 }
