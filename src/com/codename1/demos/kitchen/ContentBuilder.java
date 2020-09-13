@@ -67,7 +67,6 @@ public class ContentBuilder {
                 preferredSize.setHeight(preferredSize.getHeight() * 3);
                 return preferredSize;
             }
-            
         };
         contentImage.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED);
 
@@ -132,11 +131,14 @@ public class ContentBuilder {
                     open();
                 }
             });
-
-            add(BorderLayout.NORTH, contentImage);
-            add(BorderLayout.WEST, contentHeader);
-            add(BorderLayout.EAST, openClose);
-            add(BorderLayout.SOUTH, BoxLayout.encloseY(this.firstLine, this.body));
+            
+            Container cnt = new Container(new BorderLayout());
+            cnt.add(BorderLayout.NORTH, contentImage);
+            cnt.add(BorderLayout.WEST, BoxLayout.encloseY(contentHeader, this.firstLine));
+            cnt.add(BorderLayout.EAST, openClose);
+            
+            add(BorderLayout.NORTH, cnt);
+            add(BorderLayout.CENTER, this.body);
         }
         
         public void open(){
@@ -150,7 +152,8 @@ public class ContentBuilder {
                 isOpen = true;
                 openClose.setIcon(openedIcon);
                 body.setHidden(false);
-                animateLayout(200);
+                body.animateLayout(1);
+                animateLayout(250);
             }
         }
         
@@ -159,7 +162,8 @@ public class ContentBuilder {
                 isOpen = false;
                 openClose.setIcon(closedIcon);
                 body.setHidden(true);
-                animateLayout(200);
+                body.animateLayout(1);
+                animateLayout(250);
             }
         } 
     }

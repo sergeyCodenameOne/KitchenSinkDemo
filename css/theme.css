@@ -83,6 +83,14 @@ background-image:   url(images/charts/chart-bar.png),
                     url(images/text-field/clearable-text-field.png),
                     url(images/text-field/text-area.png),
                     url(images/text-field/text-field.png),
+                    url(images/containers/accordion.png),
+                    url(images/containers/infinite-container.png),
+                    url(images/containers/split-pane.png),
+                    url(images/containers/tabs.png),
+                    url(images/dialog/dialog.png),
+                    url(images/dialog/interaction-dialog.png),
+                    url(images/dialog/sheet.png),
+                    url(images/dialog/toast-bar.png),
                     url(images/maps/maps-pin.png),
                     url(images/maps/map-google-component.png);
     cn1-source-dpi: 0;
@@ -187,8 +195,8 @@ DemoContentBody{
 }
 
 AccordionItem{
-    border-radius: 2mm;
-    background-color: white;
+    background-color: #efeff4;
+    color: black;
 }
 
 DemoTitle{
@@ -442,4 +450,37 @@ DemoTextArea{
     color: black;
     background-color: white;
     border-radius: 1mm;
+}
+
+InfiniteComponentTitle{
+    boeder: none;
+    text-align: center;
+    background-color: rgba(0,0,0,140);
+    color: white;
+    padding: 1mm
+}
+
+RedContainer{
+    background-color: red;
+}
+
+BlueContainer{
+    background-color: blue;
+}
+
+GreenContainer{
+    background-color: green;
+}
+
+DemoTabsContainer{
+    background-color: #efeff4;
+    margin: 0mm;
+    color: black;
+}
+
+SplitPaneDemoContainer{
+    background-color: #efeff4;
+    margin: 0mm;
+    color: black;
+    padding: 0;
 }

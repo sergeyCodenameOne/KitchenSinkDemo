@@ -67,7 +67,7 @@ public class TextFieldDemo extends Demo{
                                                                 "some minor deviations from the original specifically: Blinking cursor is rendered on TextField only. "+
                                                                 "com.codename1.ui.events.DataChangeList ener is only available in TextField.\n\nThis is crucial for "+
                                                                 "character by character input event tracking setDoneListener(com. codename1.ui. events.ActionLister) "+
-                                                                "is only available in Text Field Different UIID's (\"TextField\" vs. \"TextArea\")", 
+                                                                "is only available in Text Field Different UIID's (\"TextField\" vs. \"TextArea\").", 
                                                                 e->{                                                                    
                                                                     showDemo("Text Field", createTextFieldDemo());
                                                                 }));
@@ -79,7 +79,7 @@ public class TextFieldDemo extends Demo{
                                                                 "TextArea is useful both for text input and for displaying multi-line data, it is used internally by "+
                                                                 "components such as SpanLabel & SpanButton.\n\nTextArea & TextField are very similar, we discuss the main "+
                                                                 "differences between the two here. In fact they are so similar that our sample code below was written for "+
-                                                                "TextField but should be interchangeable with TextArea,", 
+                                                                "TextField but should be interchangeable with TextArea.", 
                                                                 e->{
                                                                     showDemo("Text Area", createTextAreaDemo());
                                                                 }));
@@ -87,7 +87,7 @@ public class TextFieldDemo extends Demo{
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("clearable-text-field.png"),
                                                                 "Clearable Text Field",
                                                                 "Wraps a text field so it will have an X to",
-                                                                "clear its content on the right hand side", 
+                                                                "clear its content on the right hand side.", 
                                                                 e->{
                                                                     showDemo("Clearable Text Field", createClearableTextFieldDemo());
                                                                 }));
@@ -256,7 +256,7 @@ public class TextFieldDemo extends Demo{
         };
         ac.setMinimumElementsShownInPopup(5);
         ac.setUIID("DemoTextArea");
-        return BoxLayout.encloseY(ac);
+        return BoxLayout.encloseY(new Label("Serach Places:", "DemoLabel"), ac);
     }    
     
     String[] searchLocations(String text) {        

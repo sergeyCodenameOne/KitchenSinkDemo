@@ -137,7 +137,7 @@ public class SelectionDemo extends Demo{
         PickerComponent datePicker = PickerComponent.createDate(null).label("Select Birthday: ");
         datePicker.setUIID("DemoPicker");
         
-        Button save = new Button("save Birthday");
+        Button save = new Button("Save Birthday");
         save.addActionListener(e->{
             ToastBar.showInfoMessage("Birthday was saved: " + datePicker.getPicker().getText());
         });
@@ -167,11 +167,11 @@ public class SelectionDemo extends Demo{
         int minutes = calendar.get(Calendar.MINUTE);
         int hours = calendar.get(Calendar.HOUR);
         
-        PickerComponent meetingPicker = PickerComponent.createDateTime(null).label("Select Meeting schedule");
+        PickerComponent meetingPicker = PickerComponent.createDateTime(null).label("Select meeting schedule");
         meetingPicker.setUIID("DemoPicker");
         Button scheduleMeeting = new Button("Schedule Meeting");
         scheduleMeeting.addActionListener(e->{
-            ToastBar.showInfoMessage("Meeting has scheduled at : " + meetingPicker.getPicker().getText());
+            ToastBar.showInfoMessage("Meeting was scheduled at: " + meetingPicker.getPicker().getText());
         });
         Container demoContainer = BorderLayout.center(BoxLayout.encloseY(meetingPicker));
         demoContainer.add(BorderLayout.SOUTH, scheduleMeeting);
