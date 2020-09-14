@@ -91,6 +91,10 @@ background-image:   url(images/charts/chart-bar.png),
                     url(images/dialog/interaction-dialog.png),
                     url(images/dialog/sheet.png),
                     url(images/dialog/toast-bar.png),
+                    url(images/progress/circle-animation.png),
+                    url(images/progress/infinite-progress.png),
+                    url(images/progress/slider.png),
+                    url(images/progress/text-loading-animation.png),
                     url(images/maps/maps-pin.png),
                     url(images/maps/map-google-component.png);
     cn1-source-dpi: 0;
@@ -460,18 +464,6 @@ InfiniteComponentTitle{
     padding: 1mm
 }
 
-RedContainer{
-    background-color: red;
-}
-
-BlueContainer{
-    background-color: blue;
-}
-
-GreenContainer{
-    background-color: green;
-}
-
 DemoTabsContainer{
     background-color: #efeff4;
     margin: 0mm;
@@ -483,4 +475,27 @@ SplitPaneDemoContainer{
     margin: 0mm;
     color: black;
     padding: 0;
+}
+
+WhiteContainer{
+    background-color: white;
+    margin: 0;
+}
+
+WhiteBGLabel{
+    background-color: white;
+    margin: 0;
+}
+
+DemoInfiniteProgress{
+    font-size: 10mm;
+}
+
+CenterAlignmentLabel{
+    text-align: center;
+    color: black;
+}
+
+RedColor{
+    color: red;
 }

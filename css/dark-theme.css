@@ -55,7 +55,8 @@ MainWindowDemoName{
     color: white;
     background-color: #112d78;
     text-align: center;
-    font-family: "native:MainThin";
+    font-family: "native:MainBold";
+    font-size: 3mm
 }
 
 DemoComponentIcon{
@@ -297,5 +298,15 @@ DemoPicker{
 }
 
 DemoLabel{
+    color: white;
+}
+
+DemoInfiniteProgress{
+    font-size: 10mm;
+    color: white;
+}
+
+CenterAlignmentLabel{
+    text-align: center;
     color: white;
 }
