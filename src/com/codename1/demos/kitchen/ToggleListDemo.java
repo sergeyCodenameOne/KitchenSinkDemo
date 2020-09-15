@@ -146,7 +146,7 @@ public class ToggleListDemo extends Demo {
         Button confirm = new Button("confirm");
         confirm.addActionListener(e->{
             int selectedIndex = list.getModel().getSelectedIndex();
-            ToastBar.showInfoMessage(list.getModel().getItemAt(selectedIndex) + " has selected");
+            ToastBar.showInfoMessage(list.getModel().getItemAt(selectedIndex) + " was selected");
         });
 
         Container cnt = BorderLayout.center(list);

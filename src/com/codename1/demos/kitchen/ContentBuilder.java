@@ -28,6 +28,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import static com.codename1.ui.ComponentSelector.select;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
@@ -110,7 +111,7 @@ public class ContentBuilder {
                 protected Dimension calcPreferredSize() {
 
                     Dimension preferredSize =  super.calcPreferredSize(); 
-                    preferredSize.setHeight(preferredSize.getHeight() * 3);
+                    preferredSize.setHeight(Display.getInstance().getDisplayHeight() / 10);
                     return preferredSize;
                 }
 

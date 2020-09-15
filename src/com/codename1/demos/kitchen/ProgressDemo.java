@@ -52,10 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @author serge
- */
+
 public class ProgressDemo extends Demo {
     
     public ProgressDemo(Form parentForm) {

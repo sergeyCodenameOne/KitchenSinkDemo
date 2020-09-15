@@ -34,7 +34,6 @@ import com.codename1.properties.ListProperty;
 import com.codename1.properties.Property;
 import com.codename1.properties.PropertyBusinessObject;
 import com.codename1.properties.PropertyIndex;
-import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Image;

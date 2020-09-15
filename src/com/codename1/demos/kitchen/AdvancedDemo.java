@@ -26,22 +26,39 @@ package com.codename1.demos.kitchen;
 import com.codename1.components.FileTree;
 import com.codename1.components.FileTreeModel;
 import com.codename1.components.SignatureComponent;
+import com.codename1.components.SpanLabel;
+import com.codename1.components.ToastBar;
 import com.codename1.demos.kitchen.ComponentDemos.ImageViewerDemo;
 import com.codename1.ui.BrowserComponent;
+import com.codename1.ui.Button;
 import com.codename1.ui.Calendar;
+import com.codename1.ui.Command;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Label;
+import com.codename1.ui.SwipeableContainer;
+import com.codename1.ui.TextComponent;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.util.Resources.getGlobalResources;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
         
 public class AdvancedDemo extends Demo{
+    private HashMap<String, List<String>> allNotes = new HashMap<>();
+    
     
     public AdvancedDemo(Form parentForm) {
         init("Advanced", getGlobalResources().getImage("advanced-icon.png"), parentForm, "");
     }
-     
+    
     public Container createContentPane(){
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
         demoContainer.setScrollableY(true);
@@ -74,11 +91,7 @@ public class AdvancedDemo extends Demo{
                                                                 "the signatureImamge property will be set with a full-size of the signature, and the icon on the button will "+
                                                                 "show a thumbnail of the image.",
                                                                 e->{
-                                                                    Container cnt = new Container(BorderLayout.absolute());
-                                                                    SignatureComponent sig = new SignatureComponent();
-                                                                    sig.setUIID("WhiteContainer");
-                                                                    cnt.addComponent(BorderLayout.CENTER, sig);
-                                                                    showDemo("Signature", cnt);
+                                                                    showDemo("Signature", createSignatureDemo());
                                                                 }));
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("advanced-calendar.png"),
@@ -89,9 +102,7 @@ public class AdvancedDemo extends Demo{
                                                                 "Calendar. Day in the resource localization e.g. \"Calendar.Sunday\", \"Calendar.Monday\" etc …\n\nNote that we "+
                                                                 "recommend using the picker class which is superior when running on the device for most use cases.",
                                                                 e->{
-                                                                    Calendar cld = new Calendar();
-                                                                    cld.setUIID("Calendar");
-                                                                    showDemo("Calendar", BorderLayout.center(cld));
+                                                                    showDemo("Calendar", createCalendarDemo());
                                                                 }));
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("advanced-tree-file.png"),
@@ -113,5 +124,113 @@ public class AdvancedDemo extends Demo{
                                                                     showDemo("Image Viewer", new ImageViewerDemo().createContentPane());
                                                                 }));
         return demoContainer;
+    }
+    
+    private Container createSignatureDemo(){
+        Container demoContainer = new Container(new BorderLayout());
+        
+        Container summary = new Container(new BorderLayout(), "SummaryContainer");
+        summary.add(BorderLayout.NORTH, new Label("COST SUMMARY", "GreyTextLabel"));
+        Container summaryDetails = new Container(new GridLayout(4,2));
+        summaryDetails.add(new Label("Subtotal")).
+                add(new Label("$30.00", "RightAlign")).
+                add(new Label("Shipping")).
+                add(new Label("$5", "RightAlign")).
+                add(new Label("Estimated Tax ")).
+                add(new Label("$3.00", "RightAlign")).
+                add(new Label("Total")).
+                add(new Label("$38.00", "RightAlign"));
+        summary.addComponent(BorderLayout.EAST, summaryDetails);
+        
+        Label cardNumber = new Label("**** 1646 $");
+        Label verified = new Label("Verified", "GreenText");
+        Label debitCard = new Label("Debit card");
+        Label exp = new Label("exp: 10/16");
+
+        Container card = BorderLayout.north(BorderLayout.centerEastWest(null, verified, cardNumber)).
+                            add(BorderLayout.SOUTH, BorderLayout.centerEastWest(null, exp, debitCard));
+        card.setUIID("SummaryContainer");
+        
+        SignatureComponent sig = new SignatureComponent();
+        sig.setUIID("SignatureDemo");
+        
+        Button confirmAndPay = new Button("Confirm & Pay", "InputSaveButton");
+        confirmAndPay.addActionListener(e->{
+            if(sig.getSignatureImage() == null){
+                ToastBar.showInfoMessage("you need to sign");
+            }else {
+                ToastBar.showInfoMessage("purchase was successfully completed");
+            }
+            
+        });
+        demoContainer.add(BorderLayout.NORTH, BoxLayout.encloseY(summary, card, sig)).
+                add(BorderLayout.SOUTH, confirmAndPay);
+        return demoContainer;   
+    }
+    
+    private Container createCalendarDemo(){
+        Container notes = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        notes.setScrollableY(true);
+        
+        Calendar cld = new Calendar();
+        cld.addActionListener((e)->{
+            notes.removeAll();          
+            List<String> currentNotes = allNotes.get(cld.getDate().toString());
+            if(currentNotes == null){
+                currentNotes = new ArrayList<>();
+                allNotes.put(cld.getDate().toString(), currentNotes);
+            }
+            int notesCount = currentNotes.size();
+            if(notesCount == 0){
+                notes.add(new Label("there is no notes for this date"));
+            }else{
+                for(String note : currentNotes){
+                    notes.add(createNote(note, currentNotes, notes));
+                }
+            }
+        });
+                
+        Button addNote = new Button("Add Note");
+        addNote.addActionListener(e->{
+            List<String> currentNotes = allNotes.get(cld.getDate().toString());
+            if(currentNotes == null){
+                currentNotes = new ArrayList<>();
+                allNotes.put(cld.getDate().toString(), currentNotes);
+            }
+            
+            TextComponent currNote = new TextComponent().labelAndHint("Note");
+            Command ok = new Command("Ok");
+            Command cancel = new Command("Cancel");
+            
+            if (Dialog.show("Enter Note", currNote, ok, cancel) == ok && currNote.getText().length() != 0){
+                if(currentNotes.size() == 0){
+                    notes.removeAll();
+                }
+                currentNotes.add(currNote.getText());
+                notes.add(createNote(currNote.getText(), currentNotes, notes));
+                
+                notes.revalidate();
+            }
+        });
+        
+        Container demoContainer = BorderLayout.south(addNote).
+                                    add(BorderLayout.NORTH, cld).
+                                    add(BorderLayout.CENTER, notes);
+        
+        return demoContainer;
+    }
+    
+    private Component createNote(String noteText, List<String> currNotes, Container notes){
+        Button deleteButton = new Button("", FontImage.createMaterial(FontImage.MATERIAL_DELETE, UIManager.getInstance().getComponentStyle("DeleteButton")));
+        SpanLabel noteTextLabel = new SpanLabel(noteText);
+        SwipeableContainer note = new SwipeableContainer(deleteButton, noteTextLabel);
+
+        deleteButton.addActionListener(e->{
+            notes.removeComponent(note);
+            notes.revalidate();
+            currNotes.remove(noteText);
+        });
+        
+        return note;
     }
 }
