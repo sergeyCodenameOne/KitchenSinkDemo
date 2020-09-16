@@ -34,11 +34,13 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.TextComponent;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.layouts.TextModeLayout;
+import com.codename1.ui.plaf.Style;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 import com.codename1.ui.validation.RegexConstraint;
 import com.codename1.ui.validation.Validator;
@@ -64,11 +66,11 @@ public class LabelsDemo extends Demo {
                                                                     Container labelContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
                                                                     
                                                                     labelContainer.add(new Label("Text Label:", "ComponentDemoLabel"));
-                                                                    labelContainer.add(new Label("label", "YellowBgLabel"));
+                                                                    labelContainer.add(new Label("label", "WhiteBGLabel"));
                                                                     labelContainer.add(new Label("Image Label:", "ComponentDemoLabel"));
-                                                                    labelContainer.add(new Label(getGlobalResources().getImage("label.png").scaled(Display.getInstance().getDisplayWidth() / 2, -1), "YellowBgLabel"));
+                                                                    labelContainer.add(new Label(getGlobalResources().getImage("code-name-one-icon.png").scaled(Display.getInstance().getDisplayWidth() / 2, -1), "WhiteBGLabel"));
                                                                     labelContainer.add(new Label("text and image Label:", "ComponentDemoLabel"));
-                                                                    labelContainer.add(new Label("label", getGlobalResources().getImage("label.png").scaled(Display.getInstance().getDisplayWidth() / 2, -1), "YellowBgLabel"));
+                                                                    labelContainer.add(new Label("label", getGlobalResources().getImage("code-name-one-icon.png").scaled(Display.getInstance().getDisplayWidth() / 2, -1), "WhiteBGLabel"));
                                                                     showDemo("Label", labelContainer);
                                                                 }));
         
@@ -79,15 +81,17 @@ public class LabelsDemo extends Demo {
                                                                     Container labelContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
                                                                     
                                                                     labelContainer.add(new Label("SpanLabel:", "ComponentDemoLabel"));
-                                                                    labelContainer.add(new SpanLabel("A multi line label component that can be easily localized, this is simply based on a text area combined with a label.", "YellowBgLabel"));
+                                                                    labelContainer.add(new SpanLabel("A multi line label component that can be easily localized, this is simply based on a text area combined with a label.", "WhiteBGLabel"));
                                                                     labelContainer.add(new Label("SpanLabel with icon (West):", "ComponentDemoLabel"));
-                                                                    SpanLabel labelWithIconWest = new SpanLabel("A multi line label component that can be easily localized, this is simply based on a text area combined with a label.", "YellowBgLabel");
+                                                                    SpanLabel labelWithIconWest = new SpanLabel("A multi line label component that can be easily localized, this is simply based on a text area combined with a label.", "WhiteBGLabel");
                                                                     labelWithIconWest.setMaterialIcon(FontImage.MATERIAL_INFO);
+                                                                    labelWithIconWest.setIconUIID("DemoLabel");
                                                                     labelWithIconWest.setIconPosition("West");
                                                                     labelContainer.add(labelWithIconWest);
                                                                     labelContainer.add(new Label("SpanLabel with icon (North):", "ComponentDemoLabel"));
-                                                                    SpanLabel labelWithIconNorth = new SpanLabel("A multi line label component that can be easily localized, this is simply based on a text area combined with a label.", "YellowBgLabel");
+                                                                    SpanLabel labelWithIconNorth = new SpanLabel("A multi line label component that can be easily localized, this is simply based on a text area combined with a label.", "WhiteBGLabel");
                                                                     labelWithIconNorth.setMaterialIcon(FontImage.MATERIAL_INFO);
+                                                                    labelWithIconNorth.setIconUIID("DemoLabel");
                                                                     labelWithIconNorth.setIconPosition("North");
                                                                     labelContainer.add(labelWithIconNorth);
                                                                     showDemo("SpanLabel", labelContainer);
@@ -101,14 +105,29 @@ public class LabelsDemo extends Demo {
                                                                 "that preferred size equals the image in this case. The default UIID for this component is label", e->{
                                                                     Container labelContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
                                                                     labelContainer.add(new Label("Scale image label:", "ComponentDemoLabel"));
-                                                                    ScaleImageLabel imageLabel = new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png"));
+                                                                    ScaleImageLabel imageLabel = new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png")){
+                                                                        @Override
+                                                                        protected Dimension calcPreferredSize(){
+                                                                            Dimension d = super.calcPreferredSize();
+                                                                            d.setHeight(Display.getInstance().getDisplayHeight() / 7);
+                                                                            return d;
+                                                                        }
+                                                                    };
+                                                                    imageLabel.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED);
                                                                     labelContainer.add(imageLabel);
                                                                     labelContainer.add(new Label("   "));
-                                                                    labelContainer.add(new Label("3 Scale image labels(auto scaled to fit the screen size):", "ComponentDemoLabel"));
+                                                                    labelContainer.add(new Label("3 Scale image labels(auto scaled to fit available space):", "ComponentDemoLabel"));
                                                                     Container threeImagesContainer = new Container(new GridLayout(1, 3));
-                                                                    threeImagesContainer.addAll(new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png")),
-                                                                                                new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png")),
-                                                                                                new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png")));
+                                                                    ScaleImageLabel label1 = new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png"));
+                                                                    label1.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED);
+
+                                                                    ScaleImageLabel label2 = new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png"));
+                                                                    label2.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED);
+
+                                                                    ScaleImageLabel label3 = new ScaleImageLabel(getGlobalResources().getImage("scale-image-label.png"));
+                                                                    label3.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED);
+
+                                                                    threeImagesContainer.addAll(label1, label2, label3);                           
                                                                     labelContainer.add(threeImagesContainer);
     
                                                                     
@@ -131,7 +150,6 @@ public class LabelsDemo extends Demo {
         
         return demoContainer;
     }
-    
     
     private Container createTextComponentContainer(){
         Container textContainer = new Container(new LayeredLayout());
@@ -178,7 +196,6 @@ public class LabelsDemo extends Demo {
             saved.setMessage("Input was successfully saved");
             saved.showDelayed(4000);  
             saved.setExpires(2000);
-            System.out.println(saved.getUiid());
             saved.show();
 
             name.getField().clear();
@@ -191,7 +208,6 @@ public class LabelsDemo extends Demo {
         textFieldsAndSaveButton.setUIID("TextComponents");
         textFieldsAndSaveButton.add(BorderLayout.CENTER, textFields);
         
-        textContainer.add(textFieldsAndSaveButton);
-        return BorderLayout.center(textContainer);
+        return BorderLayout.center(textFieldsAndSaveButton);
     }
 }

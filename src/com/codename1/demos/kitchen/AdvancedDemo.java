@@ -25,6 +25,7 @@ package com.codename1.demos.kitchen;
 
 import com.codename1.components.FileTree;
 import com.codename1.components.FileTreeModel;
+import com.codename1.components.FloatingActionButton;
 import com.codename1.components.SignatureComponent;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
@@ -170,9 +171,12 @@ public class AdvancedDemo extends Demo{
     
     private Container createCalendarDemo(){
         Container notes = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        notes.add(createNote("Empty", null, notes));
         notes.setScrollableY(true);
         
         Calendar cld = new Calendar();
+        cld.setSelectedDaysUIID("CalendarSelected");
+        System.out.println(cld.getSelectedDaysUIID());
         cld.addActionListener((e)->{
             notes.removeAll();          
             List<String> currentNotes = allNotes.get(cld.getDate().toString());
@@ -182,7 +186,7 @@ public class AdvancedDemo extends Demo{
             }
             int notesCount = currentNotes.size();
             if(notesCount == 0){
-                notes.add(new Label("there is no notes for this date"));
+                notes.add(createNote("Empty", currentNotes, notes));
             }else{
                 for(String note : currentNotes){
                     notes.add(createNote(note, currentNotes, notes));
@@ -190,7 +194,7 @@ public class AdvancedDemo extends Demo{
             }
         });
                 
-        Button addNote = new Button("Add Note");
+        FloatingActionButton addNote = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
         addNote.addActionListener(e->{
             List<String> currentNotes = allNotes.get(cld.getDate().toString());
             if(currentNotes == null){
@@ -213,22 +217,23 @@ public class AdvancedDemo extends Demo{
             }
         });
         
-        Container demoContainer = BorderLayout.south(addNote).
-                                    add(BorderLayout.NORTH, cld).
+        Container demoContainer = BorderLayout.north(cld).
                                     add(BorderLayout.CENTER, notes);
         
-        return demoContainer;
+        return addNote.bindFabToContainer(demoContainer);
     }
     
     private Component createNote(String noteText, List<String> currNotes, Container notes){
         Button deleteButton = new Button("", FontImage.createMaterial(FontImage.MATERIAL_DELETE, UIManager.getInstance().getComponentStyle("DeleteButton")));
-        SpanLabel noteTextLabel = new SpanLabel(noteText);
+        SpanLabel noteTextLabel = new SpanLabel(noteText, "Note");
         SwipeableContainer note = new SwipeableContainer(deleteButton, noteTextLabel);
 
         deleteButton.addActionListener(e->{
             notes.removeComponent(note);
             notes.revalidate();
-            currNotes.remove(noteText);
+            if(currNotes != null){
+                currNotes.remove(noteText);
+            }
         });
         
         return note;

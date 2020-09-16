@@ -114,14 +114,14 @@ public class ButtonsDemo extends Demo{
     
         
     private Container createButtonsDemo(){ 
-        Button firstButton = new Button("Button", "ButtonDemo");
-        firstButton.addActionListener(e-> ToastBar.showInfoMessage("first Button has pressed") );
+        Button firstButton = new Button("Button", "BlueButtonDemo");
+        firstButton.addActionListener(e-> ToastBar.showInfoMessage("first Button was pressed") );
         
-        Button secondButton = new Button("", FontImage.MATERIAL_INFO, "ButtonDemo");
-        secondButton.addActionListener(e-> ToastBar.showInfoMessage("second Button has pressed") );
+        Button secondButton = new Button("", FontImage.MATERIAL_INFO, "PurpleButtonDemo");
+        secondButton.addActionListener(e-> ToastBar.showInfoMessage("second Button was pressed") );
         
-        Button thirdButton = new Button("Button", FontImage.MATERIAL_INFO, "ButtonDemo");
-        thirdButton.addActionListener(e-> ToastBar.showInfoMessage("third Button has pressed") );
+        Button thirdButton = new Button("Button", FontImage.MATERIAL_INFO, "OrangeButtonDemo");
+        thirdButton.addActionListener(e-> ToastBar.showInfoMessage("third Button was pressed") );
 
         Container demoContainer =  BoxLayout.encloseY(new Label("button with text:", "ComponentDemoLabel"),
                                                         firstButton,
@@ -136,18 +136,16 @@ public class ButtonsDemo extends Demo{
         SpanButton button = new SpanButton("A complex button similar to MultiButton that breaks lines automatically and looks like "+
                                                 "a regular button(more or less). Unlike the multi button the "+
                                                 "span buttons has the UIID style of a button.", "WhiteText");
-        button.setUIID("ButtonDemo");
-        button.addActionListener(e-> ToastBar.showInfoMessage("Button has pressed") );
+        button.setUIID("OrangeButtonDemo");
+        button.addActionListener(e-> ToastBar.showInfoMessage("Button was pressed") );
         return BoxLayout.encloseY( new Label("SpanButton:", "ComponentDemoLabel"), button);
     }
     
     private Container createMultiButtonsDemo(){ 
-        // TODO rewrite the whole Demo.
         MultiButton twoLinesNoIcon = new MultiButton("MultiButton");
         twoLinesNoIcon.setTextLine2("Line 2");
-        twoLinesNoIcon.setUIID("DemoMultiButton");
-        twoLinesNoIcon.setUIIDLine1("DemoMultiLine1");
-        twoLinesNoIcon.setUIIDLine2("DemoMultiLine2");
+        twoLinesNoIcon.setUIID("OrangeButtonDemo");
+
         
         Image emblem = FontImage.createMaterial(FontImage.MATERIAL_ARROW_RIGHT, UIManager.getInstance().getComponentStyle("DemoMultiEmblem"));
         Image icon = FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("DemoMultiIcon"));
@@ -157,28 +155,29 @@ public class ButtonsDemo extends Demo{
         oneLineIconEmblem.setIcon(icon);
         oneLineIconEmblem.setPressedIcon(pressedIcon);
         oneLineIconEmblem.setEmblem(emblem);
-        oneLineIconEmblem.setUIID("DemoMultiButton");
-        oneLineIconEmblem.setUIIDLine1("DemoMultiLine1");
-        oneLineIconEmblem.setEmblemUIID("DemoMultiEmblem");
-        oneLineIconEmblem.setIconUIID("DemoMultiIcon");
+        oneLineIconEmblem.setUIID("PurpleButtonDemo");
         
         MultiButton twoLinesIconEmblem = new MultiButton("Icon + Emblem");
+        twoLinesIconEmblem.setUIID("BlueButtonDemo");
         twoLinesIconEmblem.setIcon(icon);
         twoLinesIconEmblem.setEmblem(emblem);
         twoLinesIconEmblem.setTextLine2("Line 2");
 
         MultiButton twoLinesIconEmblemHorizontal = new MultiButton("Icon + Emblem");
+        twoLinesIconEmblemHorizontal.setUIID("PurpleButtonDemo");
         twoLinesIconEmblemHorizontal.setIcon(icon);
         twoLinesIconEmblemHorizontal.setEmblem(emblem);
         twoLinesIconEmblemHorizontal.setTextLine2("Line 2 Horizontal");
         twoLinesIconEmblemHorizontal.setHorizontalLayout(true);
 
         MultiButton twoLinesIconCheckBox = new MultiButton("CheckBox");
+        twoLinesIconCheckBox.setUIID("OrangeButtonDemo");
         twoLinesIconCheckBox.setIcon(icon);
         twoLinesIconCheckBox.setCheckBox(true);
         twoLinesIconCheckBox.setTextLine2("Line 2");
 
         MultiButton fourLinesIcon = new MultiButton("With Icon");
+        fourLinesIcon.setUIID("BlueButtonDemo");
         fourLinesIcon.setIcon(icon);
         fourLinesIcon.setTextLine2("Line 2");
         fourLinesIcon.setTextLine3("Line 3");
@@ -196,12 +195,12 @@ public class ButtonsDemo extends Demo{
     
     private Container createShareButtonDemo(){
         ShareButton textShare = new ShareButton();
-        textShare.setUIID("ButtonShareDemo");
+        textShare.setUIID("PurpleButtonDemo");
         textShare.setTextToShare("Hello there");
         textShare.setText("share text");
         
         String imagePath = FileSystemStorage.getInstance().getAppHomePath() + "icon.png";
-        Image imageToShare = getGlobalResources().getImage("blured-puppy.png");
+        Image imageToShare = getGlobalResources().getImage("code-name-one-icon.png");
         
         try {
             OutputStream os = FileSystemStorage.getInstance().openOutputStream(imagePath);
@@ -213,7 +212,7 @@ public class ButtonsDemo extends Demo{
         }
         
         ShareButton imageShare = new ShareButton();
-        imageShare.setUIID("ButtonShareDemo");
+        imageShare.setUIID("BlueButtonDemo");
         imageShare.setText("share image");
         imageShare.setImageToShare(imagePath, "image/png");
 

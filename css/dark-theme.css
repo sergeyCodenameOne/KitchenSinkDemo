@@ -183,14 +183,6 @@ ComponentDemoContainer{
     }
 }
 
-CalendarDay{
-    color : white;
-}
-
-CalendarSelectedDay{
-    color: white;
-}
-
 CalendarTitle{
     color: white;
 }
@@ -257,41 +249,6 @@ PopupContentPane{
     background-color: #091545;
 }
 
-DemoMultiButton{
-    background-color: #091545;
-    color: white;
-}
-
-DemoMultiEmblem{
-    background-color: #091545;
-    color: white;
-}
-
-DemoMultiIcon{
-    background-color: #091545;
-    color: white;
-}
-
-DemoMultiLine1{
-    background-color: #091545;
-    color: white;
-}
-
-DemoMultiLine2{
-    background-color: #091545;
-    color: white;
-}
-
-DemoMultiLine3{
-    background-color: #091545;
-    color: white;
-}
-
-DemoMultiLine4{
-    background-color: #091545;
-    color: white;
-}
-
 DemoPicker{
     background-color: #efeff4;
     border-radius: 2mm;
@@ -309,4 +266,22 @@ DemoInfiniteProgress{
 CenterAlignmentLabel{
     text-align: center;
     color: white;
+}
+
+DemoComboBox{
+    border: none;
+    background-color: #091545;
+    border-radius: 1mm;
+    margin: 1mm;
+}
+
+DemoComboBox.selected{
+    border: none;
+    background-color: #091545;
+    border-radius: 1mm;
+    margin: 1mm;
+}
+
+DemoComboBoxPopup{
+    background-color: #091545;
 }

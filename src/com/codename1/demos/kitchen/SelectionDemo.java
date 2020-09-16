@@ -108,6 +108,7 @@ public class SelectionDemo extends Demo{
             createListEntry("The Winds of Winter", "2016", "4.40"),
             createListEntry("A Dream of Spring", "Unpublished", "unknown")
         );
+
         
         MultiButton mb1 = new MultiButton();
         mb1.setUIID("DemoMultiButton");
@@ -120,7 +121,8 @@ public class SelectionDemo extends Demo{
         mb2.setUIIDLine2("DemoMultiLine2");
         
         combo.setRenderer(new GenericListCellRenderer<>(mb1, mb2));
-        combo.setSelectedIndex(0);
+        combo.setSelectedIndex(1);
+        combo.setIncludeSelectCancel(true);
         demoContainer.add(BorderLayout.CENTER, BoxLayout.encloseY(combo));
         
         Button showRating = new Button("Show Rating");
@@ -213,4 +215,5 @@ public class SelectionDemo extends Demo{
 
         return entry;
     }
+    
 }

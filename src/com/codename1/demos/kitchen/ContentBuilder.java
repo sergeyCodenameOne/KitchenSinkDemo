@@ -63,9 +63,9 @@ public class ContentBuilder {
         ScaleImageButton contentImage = new ScaleImageButton(image){
             @Override
             protected Dimension calcPreferredSize() {
-                
+
                 Dimension preferredSize =  super.calcPreferredSize(); 
-                preferredSize.setHeight(preferredSize.getHeight() * 3);
+                preferredSize.setHeight(Display.getInstance().getDisplayHeight() / 10);
                 return preferredSize;
             }
         };

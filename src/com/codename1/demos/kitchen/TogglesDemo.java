@@ -81,21 +81,6 @@ public class TogglesDemo extends Demo {
         return demoContainer;
     }
     private Container createCheckboxDemo(){
-//        Image icon = FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("DemoCheckBox"));
-//        CheckBox cb1 = new CheckBox("CheckBox No Icon");
-//        cb1.setUIID("DemoCheckBox");
-//        cb1.setSelected(true);
-//        CheckBox cb2 = new CheckBox("CheckBox With Icon", icon);
-//        cb2.setUIID("DemoCheckBox");
-//        CheckBox cb3 = new CheckBox("CheckBox Opposite True", icon);
-//        cb3.setUIID("DemoCheckBox");
-//        CheckBox cb4 = new CheckBox("CheckBox Opposite False", icon);
-//        cb4.setUIID("DemoCheckBox");
-//        cb3.setOppositeSide(true);
-//        cb4.setOppositeSide(false);
-//        
-//        Container checkBoxContainer = BoxLayout.encloseY(cb1, cb2, cb3, cb4);
-//        checkBoxContainer.setUIID("CheckBoxContainer");
         CheckBox redCB = new CheckBox("Red");
         CheckBox GreenCB = new CheckBox("Green");
         CheckBox BlueCB = new CheckBox("Blue");
@@ -125,6 +110,9 @@ public class TogglesDemo extends Demo {
         RadioButton rb1 = new RadioButton("Red");
         RadioButton rb2 = new RadioButton("Green");
         RadioButton rb3 = new RadioButton("Blue", icon);
+        rb1.setUIID("DemoRadioButton");
+        rb2.setUIID("DemoRadioButton");
+        rb3.setUIID("DemoRadioButton");
         new ButtonGroup(rb1, rb2, rb3);
         rb2.setSelected(true);
         Container radioButtonsContainer = BoxLayout.encloseY(rb1, rb2, rb3);
