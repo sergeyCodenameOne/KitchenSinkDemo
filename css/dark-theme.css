@@ -43,11 +43,8 @@ MainWindowToolbar{
 }
 
 MainWindowTitle{
-   text-align: center;
-   font-family: "native:MainBold";
    color: white;
    background-color: #112d78;
-   
    margin: 3mm;
 }
 
@@ -114,12 +111,8 @@ DemoContentBody{
 }
 
 DemoTitle{
-    margin: 0;
-    padding: 0;
     background-color: #112d78;
-    text-align: center;
     color: white;
-    font-family: "native:MainBold";
 }
 
 AccordionButton{
@@ -128,6 +121,8 @@ AccordionButton{
 }
 
 TitleCommand{
+    color: white;
+    background-color: #112d78;
     margin: 0;
     padding: 0;
 }
@@ -163,8 +158,7 @@ ComponentDemoToolbar{
 }
 
 ComponentDemoTitle{
-    text-align: center;
-    font-family: "native:MainBold";
+    background-color: #112d78;
     color: white;
 }
 
@@ -246,7 +240,7 @@ BlueContainer{
 
 PopupContentPane{
     margin: 0;
-    background-color: #091545;
+    background-color: white;
 }
 
 DemoPicker{
@@ -284,4 +278,22 @@ DemoComboBox.selected{
 
 DemoComboBoxPopup{
     background-color: #091545;
+}
+
+FileTree{
+    background-color: #091545;
+}
+
+ScaleComponentDemoLabel{
+    background-color: #091545;
+    color: white;
+}
+
+DemoScaleImageButton{
+    background-color: #091545; 
+    color: white;
+}
+
+DemoRadioButton{
+    color: white;
 }

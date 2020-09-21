@@ -68,9 +68,9 @@ public class LabelsDemo extends Demo {
                                                                     labelContainer.add(new Label("Text Label:", "ComponentDemoLabel"));
                                                                     labelContainer.add(new Label("label", "WhiteBGLabel"));
                                                                     labelContainer.add(new Label("Image Label:", "ComponentDemoLabel"));
-                                                                    labelContainer.add(new Label(getGlobalResources().getImage("code-name-one-icon.png").scaled(Display.getInstance().getDisplayWidth() / 2, -1), "WhiteBGLabel"));
+                                                                    labelContainer.add(new Label(getGlobalResources().getImage("code-name-one-icon.png"), "WhiteBGLabel"));
                                                                     labelContainer.add(new Label("text and image Label:", "ComponentDemoLabel"));
-                                                                    labelContainer.add(new Label("label", getGlobalResources().getImage("code-name-one-icon.png").scaled(Display.getInstance().getDisplayWidth() / 2, -1), "WhiteBGLabel"));
+                                                                    labelContainer.add(new Label("label", getGlobalResources().getImage("code-name-one-icon.png"), "WhiteBGLabel"));
                                                                     showDemo("Label", labelContainer);
                                                                 }));
         

@@ -26,12 +26,15 @@ package com.codename1.demos.kitchen;
 import com.codename1.components.FileTree;
 import com.codename1.components.FileTreeModel;
 import com.codename1.components.FloatingActionButton;
+import com.codename1.components.InfiniteProgress;
 import com.codename1.components.SignatureComponent;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.demos.kitchen.ComponentDemos.ImageViewerDemo;
 import com.codename1.ui.BrowserComponent;
 import com.codename1.ui.Button;
+import com.codename1.ui.CN;
+import static com.codename1.ui.CN.invokeAndBlock;
 import com.codename1.ui.Calendar;
 import com.codename1.ui.Command;
 import com.codename1.ui.Component;
@@ -102,7 +105,7 @@ public class AdvancedDemo extends Demo{
                                                                 "the resource localization e.g. Calendar. Jan, Calendar.Feb etc …\n\nTo localize stings for day names use the values "+
                                                                 "Calendar. Day in the resource localization e.g. \"Calendar.Sunday\", \"Calendar.Monday\" etc …\n\nNote that we "+
                                                                 "recommend using the picker class which is superior when running on the device for most use cases.",
-                                                                e->{
+                                                                e-> {
                                                                     showDemo("Calendar", createCalendarDemo());
                                                                 }));
         
@@ -110,11 +113,10 @@ public class AdvancedDemo extends Demo{
                                                                 "File Tree",
                                                                 "Simple class showing off the file system as",
                                                                 "a tree component.",
-                                                                e->{
+                                                                e-> {
                                                                     FileTree xmlTree = new FileTree(new FileTreeModel(true));
                                                                     Container treeContainer = BorderLayout.center(xmlTree);
-                                                                    treeContainer.setUIID("TreeContainer");
-                                                                    showDemo("File Tree", BorderLayout.center(treeContainer));
+                                                                    showDemo("File Tree", treeContainer);
                                                                 }));
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("advanced-image-viewer.png"),
@@ -122,7 +124,14 @@ public class AdvancedDemo extends Demo{
                                                                 "Image Viewer allows zooming/panning an",
                                                                 "image and potentially flicking between multiple images within a list of images",
                                                                 e->{
-                                                                    showDemo("Image Viewer", new ImageViewerDemo().createContentPane());
+                                                                    Dialog ip = new InfiniteProgress().showInfiniteBlocking();
+                                                                    invokeAndBlock(()-> {
+                                                                        Container demo = new ImageViewerDemo().createContentPane();
+                                                                        CN.callSerially(()-> {
+                                                                            ip.dispose();
+                                                                            showDemo("Image Viewer", demo);
+                                                                        });
+                                                                    });
                                                                 }));
         return demoContainer;
     }
@@ -133,27 +142,26 @@ public class AdvancedDemo extends Demo{
         Container summary = new Container(new BorderLayout(), "SummaryContainer");
         summary.add(BorderLayout.NORTH, new Label("COST SUMMARY", "GreyTextLabel"));
         Container summaryDetails = new Container(new GridLayout(4,2));
-        summaryDetails.add(new Label("Subtotal")).
+        summaryDetails.add(new Label("Subtotal",  "SignatureLabel")).
                 add(new Label("$30.00", "RightAlign")).
-                add(new Label("Shipping")).
+                add(new Label("Shipping", "SignatureLabel")).
                 add(new Label("$5", "RightAlign")).
-                add(new Label("Estimated Tax ")).
+                add(new Label("Estimated Tax ", "SignatureLabel")).
                 add(new Label("$3.00", "RightAlign")).
-                add(new Label("Total")).
+                add(new Label("Total", "SignatureLabel")).
                 add(new Label("$38.00", "RightAlign"));
         summary.addComponent(BorderLayout.EAST, summaryDetails);
         
-        Label cardNumber = new Label("**** 1646 $");
+        Label cardNumber = new Label("**** 1646 $", "SignatureLabel");
         Label verified = new Label("Verified", "GreenText");
-        Label debitCard = new Label("Debit card");
-        Label exp = new Label("exp: 10/16");
+        Label debitCard = new Label("Debit card", "SignatureLabel");
+        Label exp = new Label("exp: 10/16", "SignatureLabel");
 
         Container card = BorderLayout.north(BorderLayout.centerEastWest(null, verified, cardNumber)).
                             add(BorderLayout.SOUTH, BorderLayout.centerEastWest(null, exp, debitCard));
         card.setUIID("SummaryContainer");
         
         SignatureComponent sig = new SignatureComponent();
-        sig.setUIID("SignatureDemo");
         
         Button confirmAndPay = new Button("Confirm & Pay", "InputSaveButton");
         confirmAndPay.addActionListener(e->{
@@ -224,7 +232,7 @@ public class AdvancedDemo extends Demo{
     }
     
     private Component createNote(String noteText, List<String> currNotes, Container notes){
-        Button deleteButton = new Button("", FontImage.createMaterial(FontImage.MATERIAL_DELETE, UIManager.getInstance().getComponentStyle("DeleteButton")));
+        Button deleteButton = new Button("", FontImage.createMaterial(FontImage.MATERIAL_DELETE, UIManager.getInstance().getComponentStyle("DeleteButton")), "DeleteButton");
         SpanLabel noteTextLabel = new SpanLabel(noteText, "Note");
         SwipeableContainer note = new SwipeableContainer(deleteButton, noteTextLabel);
 

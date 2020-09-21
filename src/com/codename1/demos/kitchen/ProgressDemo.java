@@ -107,7 +107,7 @@ public class ProgressDemo extends Demo {
     private Container createInfiniteProgessDemo(){
         Dialog ip = new InfiniteProgress().showInfiniteBlocking();
         invokeAndBlock(()->{
-            sleep(4000); // do some long operation here.
+            sleep(3000); // do some long operation here.
             CN.callSerially(()-> ip.dispose());
         });
         InfiniteProgress prog = new InfiniteProgress();

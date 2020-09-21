@@ -24,7 +24,6 @@ package com.codename1.demos.kitchen;
 
 import com.codename1.components.CheckBoxList;
 import com.codename1.components.RadioButtonList;
-import com.codename1.components.SwitchList;
 import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import com.codename1.ui.CheckBox;
@@ -32,7 +31,6 @@ import com.codename1.ui.Command;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Form;
-import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
@@ -53,11 +51,6 @@ public class ToggleListDemo extends Demo {
         demoContainer.setScrollableY(true);
         ContentBuilder builder = ContentBuilder.getInstance();
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("switch-list.png"),
-                                                                "Switch List (Flow)",
-                                                                "A list of switches", e->{
-                                                                    showDemo("Switch List (Flow)", createSwitchListDemo());
-                                                                }));
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("check-box-list.png"),
                                                                 "Check Box List (Flow)",
@@ -72,33 +65,6 @@ public class ToggleListDemo extends Demo {
                                                                 }));
         
         return demoContainer;
-    }
-    
-    private Container createSwitchListDemo(){
-        SwitchList switchList = new SwitchList(new DefaultListModel("Red", "Green", "Blue", "Indigo"));
-        switchList.addActionListener(e->{
-            String switchText = ((Label)e.getComponent().getParent().getComponentAt(0)).getText();
-            ToastBar.showInfoMessage(switchText + " has pressed");
-
-        });
-        
-        Button clearSelections = new Button("Clear");
-        clearSelections.addActionListener(e -> {
-            switchList.getMultiListModel().setSelectedIndices();
-        });
-        
-        Button addOption = new Button("Add Option");
-        addOption.addActionListener(e -> {
-            TextField val = new TextField();
-            Command res = Dialog.show("Enter Switch name", val, new Command("OK"));
-            switchList.getMultiListModel().addItem(val.getText());
-            switchList.revalidate();
-        });
-        
-        Container cnt = BorderLayout.center(switchList);
-        cnt.setUIID("SwitchListContainer");
-        cnt.add(BorderLayout.SOUTH, BoxLayout.encloseX(addOption, clearSelections));
-        return BorderLayout.center(cnt);
     }
     
     private Container createCheckBoxListDemo(){
@@ -131,27 +97,14 @@ public class ToggleListDemo extends Demo {
     }
     
     private Container createRadioButtonListDemo(){
-        DefaultListModel model = new DefaultListModel("Red", "Green", "Blue", "Indigo");
+        DefaultListModel model = new DefaultListModel("left", "center", "right");
+        
         RadioButtonList list = new RadioButtonList(model);
-        list.setLayout(BoxLayout.y());
-        
-        Button addOption = new Button("Add Option");
-        addOption.addActionListener(e -> {
-            TextField val = new TextField();
-            Command res = Dialog.show("Enter Switch name", val, new Command("OK"));
-            list.getMultiListModel().addItem(val.getText());
-            list.revalidate();
-        });
-        
-        Button confirm = new Button("confirm");
-        confirm.addActionListener(e->{
-            int selectedIndex = list.getModel().getSelectedIndex();
-            ToastBar.showInfoMessage(list.getModel().getItemAt(selectedIndex) + " was selected");
-        });
+        list.setUIID("DemoRadioButtonList");
+        list.setLayout(BoxLayout.y());   
 
-        Container cnt = BorderLayout.center(list);
-        cnt.add(BorderLayout.SOUTH, BoxLayout.encloseX(addOption, confirm));
-        cnt.setUIID("RadioButtonsContainer");
-        return BorderLayout.center(cnt);
+        Container demoContainer = BorderLayout.center(list);
+
+        return demoContainer;
     }
 }

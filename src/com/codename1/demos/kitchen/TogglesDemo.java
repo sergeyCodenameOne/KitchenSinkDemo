@@ -29,14 +29,12 @@ import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
 import com.codename1.ui.CheckBox;
 import com.codename1.ui.Container;
-import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.Image;
+import com.codename1.ui.Label;
 import com.codename1.ui.RadioButton;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
-import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class TogglesDemo extends Demo {
@@ -74,63 +72,68 @@ public class TogglesDemo extends Demo {
                                                                 "when using the android native theme this implementation follows the Material Design Switch "+
                                                                 "guidelines: https://material.io/guidelines/components/ selection-controls.html#selection-controls- radio-button",
                                                                 e->{
-                                                                    
                                                                     showDemo("Switch", createSwitchDemo());
                                                                 }));
         
         return demoContainer;
     }
-    private Container createCheckboxDemo(){
-        CheckBox redCB = new CheckBox("Red");
-        CheckBox GreenCB = new CheckBox("Green");
-        CheckBox BlueCB = new CheckBox("Blue");
-        redCB.setSelected(true);
-        Container checkBoxContainer = BoxLayout.encloseY(redCB, GreenCB, BlueCB);
+    
+    private Container createCheckboxDemo() {
+        CheckBox cb1 = new CheckBox("Tomato");
+        cb1.setUIID("DemoCheckBox");
+        CheckBox cb2 = new CheckBox("Salad");
+        cb2.setUIID("DemoCheckBox");
+        CheckBox cb3 = new CheckBox("Onion");
+        cb3.setUIID("DemoCheckBox");
+        CheckBox cb4 = new CheckBox("Pickled Cucumber");
+        cb4.setUIID("DemoCheckBox");
+        CheckBox cb5 = new CheckBox("Mushrooms");
+        cb5.setUIID("DemoCheckBox");
+        CheckBox cb6 = new CheckBox("Cheese");
+        cb6.setUIID("DemoCheckBox");
+        CheckBox cb7 = new CheckBox("Egg");
+        cb7.setUIID("DemoCheckBox");
+        cb1.setSelected(true);
+        cb2.setSelected(true);
+        cb3.setSelected(true);
+        cb4.setSelected(true);
+        Container checkBoxContainer = BoxLayout.encloseY(cb1, cb2, cb3, cb4, cb5, cb6, cb7);
         Container demoContainer = BorderLayout.center(checkBoxContainer);
-        Button applyButton = new Button("Apply");
-        applyButton.addActionListener(e->{
-            int red = redCB.isSelected() ? 0xff0000 : 0;
-            int green = GreenCB.isSelected() ? 0x00ff00 : 0;
-            int blue = BlueCB.isSelected() ? 0x0000ff : 0;
-            int color = red + green + blue;
-            if (color != 0x000000){
-                demoContainer.getAllStyles().setBgColor(color);
-            }else{
-                ToastBar.showInfoMessage("Black background not allowed here");
-            }
-            demoContainer.revalidate();
+        Button completeOrder = new Button("Complete Order", "DemoCompleteOrder");
+        completeOrder.addActionListener(e->{
+            ToastBar.showInfoMessage("Your order is on the way");
         });
-        demoContainer.add(BorderLayout.SOUTH, applyButton);
-        demoContainer.setUIID("CheckBoxContainer");
-        return BorderLayout.center(demoContainer);
+        demoContainer.add(BorderLayout.SOUTH, completeOrder);
+        return demoContainer;
     }
     
     private Container createRadioButtonDemo(){
-        Image icon = FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("RadioButton"));
-        RadioButton rb1 = new RadioButton("Red");
-        RadioButton rb2 = new RadioButton("Green");
-        RadioButton rb3 = new RadioButton("Blue", icon);
+        ButtonGroup bg = new ButtonGroup();
+        RadioButton rb1 = RadioButton.createToggle("Android", bg);
+        RadioButton rb2 = RadioButton.createToggle("IOS", bg);
+        RadioButton rb3 = RadioButton.createToggle("UWP", bg);
+        RadioButton rb4 = RadioButton.createToggle("Mac Os Desktop", bg);
+        RadioButton rb5 = RadioButton.createToggle("Windows Desktop", bg);
+        RadioButton rb6 = RadioButton.createToggle("Javascript", bg);
+  
         rb1.setUIID("DemoRadioButton");
         rb2.setUIID("DemoRadioButton");
         rb3.setUIID("DemoRadioButton");
-        new ButtonGroup(rb1, rb2, rb3);
-        rb2.setSelected(true);
-        Container radioButtonsContainer = BoxLayout.encloseY(rb1, rb2, rb3);
+        rb4.setUIID("DemoRadioButton");
+        rb5.setUIID("DemoRadioButton");
+        rb6.setUIID("DemoRadioButton");
+        
+        rb1.setSelected(true);
+        Container radioButtonsContainer = BoxLayout.encloseY(new Label("select build:"), rb1, rb2, rb3, rb4, rb5, rb6);
         Container demoContainer = BorderLayout.center(radioButtonsContainer);
-        Button applyButton = new Button("Apply");
+        Button applyButton = new Button("Send Build", "DemoRadioBuildButton");
+        
         applyButton.addActionListener(e->{
-            if(rb1.isSelected()){
-                demoContainer.setUIID("RedContainer");
-            }else if(rb2.isSelected()){
-                demoContainer.setUIID("GreenContainer");
-            }else{
-                demoContainer.setUIID("BlueContainer");
-            }
-            demoContainer.revalidate();
+            RadioButton selectedButton = bg.getSelected();
+            ToastBar.showInfoMessage(selectedButton.getText() + " build was sent");
         });
         demoContainer.add(BorderLayout.SOUTH, applyButton);
-        demoContainer.setUIID("RadioButtonsContainer");
-        return BorderLayout.center(demoContainer);
+        return demoContainer;
     }
     
     private Container createSwitchDemo(){
