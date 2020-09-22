@@ -79,31 +79,32 @@ public class TogglesDemo extends Demo {
     }
     
     private Container createCheckboxDemo() {
-        CheckBox cb1 = new CheckBox("Tomato");
+        CheckBox cb1 = CheckBox.createToggle("Tomato");
         cb1.setUIID("DemoCheckBox");
-        CheckBox cb2 = new CheckBox("Salad");
+        CheckBox cb2 = CheckBox.createToggle("Salad");
         cb2.setUIID("DemoCheckBox");
-        CheckBox cb3 = new CheckBox("Onion");
+        CheckBox cb3 = CheckBox.createToggle("Onion");
         cb3.setUIID("DemoCheckBox");
-        CheckBox cb4 = new CheckBox("Pickled Cucumber");
+        CheckBox cb4 = CheckBox.createToggle("Pickled Cucumber");
         cb4.setUIID("DemoCheckBox");
-        CheckBox cb5 = new CheckBox("Mushrooms");
+        CheckBox cb5 = CheckBox.createToggle("Mushrooms");
         cb5.setUIID("DemoCheckBox");
-        CheckBox cb6 = new CheckBox("Cheese");
+        CheckBox cb6 = CheckBox.createToggle("Cheese");
         cb6.setUIID("DemoCheckBox");
-        CheckBox cb7 = new CheckBox("Egg");
+        CheckBox cb7 = CheckBox.createToggle("Egg");
         cb7.setUIID("DemoCheckBox");
         cb1.setSelected(true);
         cb2.setSelected(true);
         cb3.setSelected(true);
         cb4.setSelected(true);
         Container checkBoxContainer = BoxLayout.encloseY(cb1, cb2, cb3, cb4, cb5, cb6, cb7);
-        Container demoContainer = BorderLayout.center(checkBoxContainer);
         Button completeOrder = new Button("Complete Order", "DemoCompleteOrder");
         completeOrder.addActionListener(e->{
             ToastBar.showInfoMessage("Your order is on the way");
         });
-        demoContainer.add(BorderLayout.SOUTH, completeOrder);
+        Container demoContainer = BorderLayout.center(checkBoxContainer).
+                                        add(BorderLayout.SOUTH, completeOrder).
+                add(BorderLayout.NORTH, new Label("burger ingredients", "BurgerIngredients"));
         return demoContainer;
     }
     
@@ -143,7 +144,7 @@ public class TogglesDemo extends Demo {
             s.setOff();
         }
         Container switchContainer = FlowLayout.encloseCenter(s);
-        s.addChangeListener(ee->{
+        s.addChangeListener(e->{
             if(s.isOn()){
                 switchContainer.setUIID("BrightContainer");
             }else{

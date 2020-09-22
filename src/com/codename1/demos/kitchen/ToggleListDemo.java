@@ -24,17 +24,25 @@ package com.codename1.demos.kitchen;
 
 import com.codename1.components.CheckBoxList;
 import com.codename1.components.RadioButtonList;
+import com.codename1.components.ShareButton;
+import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import com.codename1.ui.CheckBox;
 import com.codename1.ui.Command;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.TextField;
+import com.codename1.ui.Image;
+import com.codename1.ui.Label;
+import com.codename1.ui.TextComponent;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.list.DefaultListModel;
+import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 
@@ -68,43 +76,74 @@ public class ToggleListDemo extends Demo {
     }
     
     private Container createCheckBoxListDemo(){
-        DefaultListModel model = new DefaultListModel("Red", "Green", "Blue", "Indigo");
+        DefaultListModel model = new DefaultListModel("Pasta", "Rice", "Bread", "Butter", "Milk", "Eggs", "Cheese", "Salt", "Pepper", "Honey");
         CheckBoxList list = new CheckBoxList(model);
-
-        Button addOption = new Button("Add Option");
-        addOption.addActionListener(e -> {
-            TextField val = new TextField();
-            Command res = Dialog.show("Enter Switch name", val, new Command("OK"));
-            list.getMultiListModel().addItem(val.getText());
-            list.revalidate();
+        list.setLayout(new FlowLayout(Component.CENTER));  
+        Button add = new Button("Add New", "ShareGroceriesDemo");
+        add.addActionListener(e->{
+            TextComponent newItem = new TextComponent().label("New Item: ");
+            Command ok = new Command("Ok");
+            Command cancel = new Command("Cancel");
+            
+            if (Dialog.show("Enter Note", newItem, ok, cancel) == ok && newItem.getText().length() != 0){
+                model.addItem(newItem.getText());
+                list.revalidate();
+            }
         });
         
-        Button confirm = new Button("confirm");
-        confirm.addActionListener(e->{
-            StringBuilder selectedItems = new StringBuilder();
-            for (int i = 0; i < model.getSize(); i++) {
-                if (((CheckBox)list.getComponentAt(i)).isSelected()){
-                    selectedItems.append(model.getItemAt(i) + ", ");
+        Image icon = FontImage.createMaterial(FontImage.MATERIAL_SHARE, UIManager.getInstance().getComponentStyle("DemoShareIcon"));
+        ShareButton share = new ShareButton();
+        share.setIcon(icon);
+        share.setText("Share Groceries");
+        share.setUIID("ShareGroceriesDemo");
+        share.addActionListener(e->{
+            StringBuilder sb = new StringBuilder();
+            int[] selected = model.getSelectedIndices();
+            for (int i : selected){
+                sb.append(model.getItemAt(i));
+                sb.append(", ");
+            }
+            if (selected.length > 0){
+                sb.delete(sb.length() - 2, sb.length() - 1);
+            }
+            share.setTextToShare(sb.toString());
+            
+            int groceriesSize = model.getSize();
+            for(int i = 0; i < groceriesSize; i++){
+                CheckBox currItem = (CheckBox)list.getComponentAt(i);
+                if(currItem.isSelected()){
+                    currItem.setSelected(false);
                 }
             }
-            selectedItems.delete(selectedItems.length() - 2, selectedItems.length() - 1);
-            ToastBar.showInfoMessage(selectedItems + " has selected");
         });
-        Container checkBoxContainer = BorderLayout.center(list);
-        checkBoxContainer.add(BorderLayout.SOUTH, BoxLayout.encloseX(addOption, confirm));
-        checkBoxContainer.setUIID("CheckBoxContainer");
-        return BorderLayout.center(checkBoxContainer);
+         
+        Container checkBoxContainer = BorderLayout.center(list).
+                                        add(BorderLayout.NORTH, new Label("Select groceries to share", "DemoLabel")).
+                                        add(BorderLayout.SOUTH, FlowLayout.encloseCenter(share, add));
+        return checkBoxContainer;
     }
     
     private Container createRadioButtonListDemo(){
-        DefaultListModel model = new DefaultListModel("left", "center", "right");
+        SpanLabel question = new SpanLabel("Who is the first character in the series to be called \"King in the North\"?", "DemoLabel");
+        Button answer = new Button("Answer", "DemoAnswerButton");
         
+        DefaultListModel model = new DefaultListModel("Jon Snow", "Robb Stark", "Ned Stark", "Edmure Tully");
         RadioButtonList list = new RadioButtonList(model);
-        list.setUIID("DemoRadioButtonList");
         list.setLayout(BoxLayout.y());   
+        
+        answer.addActionListener(e->{
+            if (model.getSelectedIndex() == 1){
+                ToastBar.showInfoMessage("Correct!");
+            }
+            else{
+                ToastBar.showInfoMessage("Incorrect!!");
+            }
+        });
 
-        Container demoContainer = BorderLayout.center(list);
-
+        Container demoContainer = BorderLayout.center(list).
+                                    add(BorderLayout.NORTH, question).
+                                    add(BorderLayout.SOUTH, answer);
+        
         return demoContainer;
     }
 }

@@ -23,15 +23,6 @@
 
 #Constants {
     includeNativeBool: true; 
-/*    radioSelectedFocusImage: "done.png";
-    radioSelectedImage: "done.png";
-    radioUnselectedFocusImage: "empty.png";
-    radioUnselectedImage: "empty.png";*/
-    checkBoxUncheckedFocusImage: "check-box-unselected.png";
-    checkBoxUncheckedImage: "check-box-unselected.png";
-    checkBoxCheckDisFocusImage: "check-box-selected.png";
-    checkBoxCheckedFocusImage: "check-box-selected.png";
-    checkBoxCheckedImage: "check-box-selected.png";
 }
 
 ImagesHighRes{
@@ -79,8 +70,6 @@ background-image:   url(images/charts/chart-bar.png),
                     url(images/toggles/switch.png),
                     url(images/toggles/on-off-switch.png),
                     url(images/toggles/radio-button.png),
-                    url(images/toggles/check-box-selected.png),
-                    url(images/toggles/check-box-unselected.png),
                     url(images/toggle-list/check-box-list.png),
                     url(images/toggle-list/radio-button-list.png),
                     url(images/toggle-list/switch-list.png),
@@ -210,6 +199,34 @@ background-image:   url(images/charts/chart-bar.png),
     DemoCompleteOrder{
         font-size: 5mm; 
     }
+    
+    DemoAnswerButton{
+        font-size: 6mm; 
+    }
+    
+    RadioButton{
+        font-size: 5mm; 
+    }
+    
+    CheckBox{
+        font-size: 5mm; 
+    }
+    
+    ShareGroceriesDemo{
+        font-size: 5mm;
+    }
+    
+    BurgerIngredients{
+        font-size: 5mm;
+    }
+    
+    DemoLabel{
+        font-size: 5mm;
+    }
+}
+
+DialogCommandArea{
+    background-color: rgba(0, 0, 0, 0);
 }
 
 Container{
@@ -634,8 +651,11 @@ DemoMultiIcon{
 }
 
 DemoPicker{
-    background-color: #efeff4;
+    padding: 2mm;
+    border: 0.4mm solid #00c9a7;
+    background-color: white;
     border-radius: 2mm;
+    margin: 2mm;
 }
 
 DemoLabel{
@@ -826,14 +846,22 @@ DemoCheckBoxLabel{
     color: #f3be39;
     padding: 2mm;
 }
+
 DemoCheckBox{
     padding: 1mm;
+    background-color: rgba(0, 0, 0, 0);
+    margin-left: 2mm;
+    margin-right: 2mm;
     margin-bottom: 0.1mm;
     margin-top: 0.1mm;
-    background-color: #da1e26;
+    border: 0.3mm solid #da1e26;
     border-radius: 2mm;
     text-align: center;
     color: #f3be39;
+}
+
+DemoCheckBox.pressed{
+    background-color: #da1e26;
 }
 
 NoteContainer{
@@ -882,10 +910,6 @@ SignatureButton{
 CalendarDate{
     background-color: white;
     color: black;
-}
-
-DemoRadioButtonList{
-    background-color: #a665db;
 }
 
 MonthView{
@@ -938,4 +962,63 @@ DemoShareIcon{
 DemoShareIcon{
     color: black;
     background-color: rgba(0, 0, 0, 0); 
+}
+
+RadioButton{
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    text-align: center;
+    padding: 2mm;
+    margin: 2mm;
+    border-radius: 2mm;
+    background-color: white;
+    color: #33c5f6;
+    border: 0.2mm solid #33c5f6;
+}
+
+DemoAnswerButton{
+    padding : 2mm;
+    text-align: center;
+    background-color: #33c5f6;
+    border-radius: 2mm;
+    margin: 2mm;
+    color: white;
+}
+
+ShareGroceriesDemo{
+    text-align: center;
+    padding: 2mm;
+    margin: 2mm;;
+    background-color: #5add17;
+    color: black;
+    border-radius: 2mm;
+}
+
+CheckBox{
+    font-size: 3mm;
+    color: black;
+    background-color: #5add17;
+    border-radius: 2mm;
+    padding: 2mm;   
+    margin: 0.5mm;
+}
+
+GroceriesDemoLabel{
+    margin-bottom: 3mm;
+}
+
+BurgerIngredients{
+    background-color: rgba(0, 0, 0, 0);
+    color: #da1e26;
+    text-align: center;
+    margin: 3mm;
+}
+
+DemoSaveButton{
+    background-color: #00c9a7;
+    padding: 2mm;
+    margin: 2mm;
+    border-radius: 2mm;
+    color: white;
+    text-align: center;
 }

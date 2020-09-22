@@ -125,7 +125,7 @@ public class SelectionDemo extends Demo{
         combo.setIncludeSelectCancel(true);
         demoContainer.add(BorderLayout.CENTER, BoxLayout.encloseY(combo));
         
-        Button showRating = new Button("Show Rating");
+        Button showRating = new Button("Show Rating", "DemoSaveButton");
         showRating.addActionListener(e->{
             Map selectedItem = combo.getSelectedItem();
             ToastBar.showInfoMessage((String)selectedItem.get("Line1") + " rating is: " + (String)selectedItem.get("rating"));
@@ -139,7 +139,7 @@ public class SelectionDemo extends Demo{
         PickerComponent datePicker = PickerComponent.createDate(null).label("Select Birthday: ");
         datePicker.setUIID("DemoPicker");
         
-        Button save = new Button("Save Birthday");
+        Button save = new Button("Save Birthday", "DemoSaveButton");
         save.addActionListener(e->{
             ToastBar.showInfoMessage("Birthday was saved: " + datePicker.getPicker().getText());
         });
@@ -155,7 +155,7 @@ public class SelectionDemo extends Demo{
         
         PickerComponent timePicker = PickerComponent.createTime(hours * 60 + minutes).label("Select Alarm Time ");
         timePicker.setUIID("DemoPicker");
-        Button setAlarm = new Button("Set Alarm");
+        Button setAlarm = new Button("Set Alarm", "DemoSaveButton");
         setAlarm.addActionListener(e->{
             ToastBar.showInfoMessage("Alarm set for: " + timePicker.getPicker().getText());
         });
@@ -166,12 +166,10 @@ public class SelectionDemo extends Demo{
     
     private Container createDateTimePickerDemo(){
         Calendar calendar =  Calendar.getInstance(TimeZone.getDefault());
-        int minutes = calendar.get(Calendar.MINUTE);
-        int hours = calendar.get(Calendar.HOUR);
         
         PickerComponent meetingPicker = PickerComponent.createDateTime(null).label("Select meeting schedule");
         meetingPicker.setUIID("DemoPicker");
-        Button scheduleMeeting = new Button("Schedule Meeting");
+        Button scheduleMeeting = new Button("Schedule Meeting", "DemoSaveButton");
         scheduleMeeting.addActionListener(e->{
             ToastBar.showInfoMessage("Meeting was scheduled at: " + meetingPicker.getPicker().getText());
         });
@@ -185,7 +183,7 @@ public class SelectionDemo extends Demo{
         PickerComponent durationPicker = PickerComponent.createDurationMinutes(0).label("Select Duration");
         durationPicker.setUIID("DemoPicker");
         
-        Button setTimer = new Button("Set Timer");
+        Button setTimer = new Button("Set Timer", "DemoSaveButton");
         setTimer.addActionListener(e->{
             ToastBar.showInfoMessage("Timer set for: " + durationPicker.getPicker().getText());
         });
@@ -198,7 +196,7 @@ public class SelectionDemo extends Demo{
         PickerComponent durationPicker = PickerComponent.createDurationHoursMinutes(0, 0).label("Select Duration");
         durationPicker.setUIID("DemoPicker");
 
-        Button setTimer = new Button("Set Timer");
+        Button setTimer = new Button("Set Timer", "DemoSaveButton");
         setTimer.addActionListener(e->{
             ToastBar.showInfoMessage("Timer set for: " + durationPicker.getPicker().getText());
         });

@@ -30,6 +30,8 @@ import com.codename1.ui.util.Resources;
 import com.codename1.io.Log;
 import com.codename1.ui.Toolbar;
 import static com.codename1.ui.Button.setButtonRippleEffectDefault;
+import com.codename1.ui.Display;
+import com.codename1.ui.FontImage;
 import java.io.IOException;
 
 public class KitchenSink {
@@ -43,7 +45,7 @@ public class KitchenSink {
         updateNetworkThreadCount(2);
         
         theme = UIManager.initNamedTheme("/theme", "Theme");
-        initTheme();
+//        initTheme();
         
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
@@ -66,13 +68,15 @@ public class KitchenSink {
     
     public void start() {
         if(current != null){
-//            initTheme();
-            current.refreshTheme();
             current.show();
             return;
         }
         MainWindow mw = new MainWindow();
-        mw.buildForm().show();
+        Form mainForm =  mw.buildForm();
+        mainForm.getToolbar().addCommandToLeftBar("", FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoLabel")), e->{
+            initTheme();
+        });
+        mainForm.show();
     }
     
     public void stop() {
@@ -98,6 +102,7 @@ public class KitchenSink {
             }catch(IOException e){
                 Log.e(e);
             }
+            Display.getInstance().getCurrent().refreshTheme();
         }
     }
 }

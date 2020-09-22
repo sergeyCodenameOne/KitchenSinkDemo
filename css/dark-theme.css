@@ -21,6 +21,18 @@
  * need additional information or have any questions.
  */
 
+Dialog{
+    background-color: #091545;
+}
+
+TextField{
+    color: white;
+}
+
+DialogButtonCommand{
+    color: white;
+}
+
 MainWindowContainer{
     background-color: #091545;
     padding: 3mm;
@@ -296,4 +308,8 @@ DemoScaleImageButton{
 
 DemoRadioButton{
     color: white;
+}
+
+RadioButton{
+    background-color: #091545;
 }
