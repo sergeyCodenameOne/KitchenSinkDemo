@@ -24,6 +24,7 @@ package com.codename1.demos.kitchen;
 
 import com.codename1.components.ClearableTextField;
 import com.codename1.components.ToastBar;
+import com.codename1.io.CSVParser;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.Log;
@@ -40,11 +41,17 @@ import com.codename1.ui.TextField;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.list.DefaultListCellRenderer;
 import com.codename1.ui.list.DefaultListModel;
 import com.codename1.ui.table.TableLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -133,7 +140,7 @@ public class TextFieldDemo extends Demo{
         TextField num4 = new TextField("", "1234", 4, TextArea.NUMERIC);
         num4.setUIID("DemoTextArea");
         
-        Button submit = new Button("Submit");
+        Button submit = new Button("Submit", "TextFieldsDemoButton");
         submit.addActionListener(e->{
             ToastBar.showInfoMessage("Your personal data was saved successfully");
         });
@@ -187,7 +194,7 @@ public class TextFieldDemo extends Demo{
         TextArea num4 = new TextArea(1, 4, TextArea.NUMERIC);
         num4.setUIID("DemoTextArea");
         
-        Button submit = new Button("Submit");
+        Button submit = new Button("Submit", "TextFieldsDemoButton");
         submit.addActionListener(e->{
             ToastBar.showInfoMessage("Your personal data was saved successfully");
         });
@@ -226,7 +233,7 @@ public class TextFieldDemo extends Demo{
                                   new Label("Password:", "DemoLabel"),
                                   clearablePassword );
         
-        Button loginButton = new Button("Login");
+        Button loginButton = new Button("Login", "TextFieldsDemoButton");
         loginButton.addActionListener(e-> ToastBar.showInfoMessage("Username or Password are incorrect"));
         
         Container demoContainer = BorderLayout.center(textFieldsContainer);
@@ -235,47 +242,56 @@ public class TextFieldDemo extends Demo{
     }
     
     private Container createAutoCompleteDemo(){
+        CSVParser parser = new CSVParser();
+        List<String> commonWords = new ArrayList();
+        try(InputStream reader = Display.getInstance().getResourceAsStream(getClass(), "/common-words.csv")){
+            String[][] data = parser.parse(reader);            
+            for (String[] s : data){
+                commonWords.add(s[0]);
+            }
+        } catch(IOException err) {
+            Log.e(err);
+        }
+        
         final DefaultListModel<String> options = new DefaultListModel<>();
         AutoCompleteTextField ac = new AutoCompleteTextField(options) {
             @Override
             protected boolean filter(String text) {
                 if(text.length() == 0) {
+                    options.removeAll();
                     return false;
                 }
-                String[] l = searchLocations(text);
-                if(l == null || l.length == 0) {
-                    return false;
+                List<String> matchedWords = searchWords(text, commonWords);
+                options.removeAll();
+                if(matchedWords == null || matchedWords.size() == 0) {
+                    return true;
                 }
 
-                options.removeAll();
-                for(String s : l) {
+                for(String s : matchedWords) {
                     options.addItem(s);
                 }
                 return true;
             }
         };
-        ac.setMinimumElementsShownInPopup(5);
         ac.setUIID("DemoTextArea");
-        return BoxLayout.encloseY(new Label("Serach Places:", "DemoLabel"), ac);
+        DefaultListCellRenderer<Object> renderer = new DefaultListCellRenderer<>();
+        renderer.setUIID("DemoLabel");
+        renderer.setShowNumbers(false);
+        ac.setCompletionRenderer(renderer);
+        return BoxLayout.encloseY(new Label("Search:", "DemoLabel"), ac);
     }    
     
-    String[] searchLocations(String text) {        
-    try {
-        if(text.length() > 0) {
-            ConnectionRequest r = new ConnectionRequest();
-            r.setPost(false);
-            r.setUrl("https://maps.googleapis.com/maps/api/place/autocomplete/json");
-            //TODO delete key from the app.
-            r.addArgument("key", "AIzaSyCBdVdrxXYihc1tMnev5S6pwHDOm43zShA");
-            r.addArgument("input", text);
-            NetworkManager.getInstance().addToQueueAndWait(r);
-            Map<String,Object> result = new JSONParser().parseJSON(new InputStreamReader(new ByteArrayInputStream(r.getResponseData()), "UTF-8"));
-            String[] res = Result.fromContent(result).getAsStringArray("//description");
-            return res;
+    List<String> searchWords(String text, List<String> wordsList) {        
+        List<String> matchedWords = new ArrayList<>();
+        int count = 0;
+        for (String word : wordsList){
+            if (word.contains(text)){
+                matchedWords.add(word);
+                if(++count == 5){
+                    return matchedWords;
+                }
+            }
         }
-    } catch(Exception err) {
-        Log.e(err);
+        return matchedWords;
     }
-    return null;
-}
 }

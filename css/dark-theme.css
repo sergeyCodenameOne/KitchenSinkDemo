@@ -252,7 +252,7 @@ BlueContainer{
 
 PopupContentPane{
     margin: 0;
-    background-color: white;
+    background-color: #112d78;
 }
 
 DemoPicker{
@@ -312,4 +312,68 @@ DemoRadioButton{
 
 RadioButton{
     background-color: #091545;
+}
+
+DemoPicker{
+    background-color: #112d78;
+}
+
+TextComponentField{
+    color: white;
+}
+
+Label{
+    color: grey;
+}
+
+ComboBox{
+    background-color: #112d78;
+}
+
+ComboBoxPopup{
+    background-color: #112d78;
+    color: white;
+}
+
+DemoMultiButton{
+    background-color: #112d78;
+}
+
+DemoMultiLine1{
+    color: white;
+}
+
+DemoMultiLine2{
+    color: white;
+}
+
+FloatingHint{
+    color: white;
+}
+
+DemoTextArea{
+    color: white;
+    background-color: #112d78;
+}
+
+AutoCompletePopup{
+    background-color: #112d78;
+}
+
+AutoCompleteList{
+    background-color: #112d78;
+}
+
+DemoAccordionHeader{
+    background-color: #112d78;
+    color: white;
+}
+
+DemoAccordionLabel{
+    background-color: #112d78;
+    color: white;
+}
+
+AccordionItem{
+    background-color: #112d78;
 }

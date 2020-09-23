@@ -164,9 +164,7 @@ public class SelectionDemo extends Demo{
         return demoContainer;
     }
     
-    private Container createDateTimePickerDemo(){
-        Calendar calendar =  Calendar.getInstance(TimeZone.getDefault());
-        
+    private Container createDateTimePickerDemo(){        
         PickerComponent meetingPicker = PickerComponent.createDateTime(null).label("Select meeting schedule");
         meetingPicker.setUIID("DemoPicker");
         Button scheduleMeeting = new Button("Schedule Meeting", "DemoSaveButton");

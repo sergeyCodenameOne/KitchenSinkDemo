@@ -137,6 +137,10 @@ background-image:   url(images/charts/chart-bar.png),
     ComponentDemoLabel{
         font-size: 3.5mm;
     }
+    
+    DemoTextArea{
+        font-size: 4mm;
+    }
 }
 
 @media device-desktop{
@@ -223,6 +227,10 @@ background-image:   url(images/charts/chart-bar.png),
     DemoLabel{
         font-size: 5mm;
     }
+    
+    DemoTextArea{
+        font-size: 6mm;
+    }
 }
 
 DialogCommandArea{
@@ -236,6 +244,7 @@ Container{
 }
 
 Label{
+    color: black;
     margin: 0;
     padding: 0;
     background-color: rgba(0, 0, 0, 0);
@@ -281,8 +290,10 @@ ComboBoxPopupTitle{
 ComboBox{
     border-radius: 1mm;
     background-color: white;
-    border: 1px solid black;
+    border: 0.4mm solid #00c9a7;
+    padding: 2mm;
     color: black;
+    margin: 2mm;
 }
 
 ComboBoxList{
@@ -467,6 +478,7 @@ InputContainer{
     margin: 0;
 }
 TextComponent{
+    background-color: rgba(0, 0, 0, 0);
     padding: 3mm;
 }
 
@@ -614,22 +626,6 @@ DarkContainer{
     margin: 0;
 }
 
-
-RedContainer{
-    background-color: #ff0000;
-    margin: 0;
-}
-
-GreenContainer{
-    background-color: #00ff00;
-    margin: 0;
-}
-
-BlueContainer{
-    background-color: #0000ff;
-    margin: 0;
-}
-
 ComboBoxContainer{
     margin: 0;
     background-color: #efeff4;
@@ -667,6 +663,8 @@ DemoTextArea{
     color: black;
     background-color: white;
     border-radius: 1mm;
+    padding: 1mm;
+    margin: 2mm;
 }
 
 InfiniteComponentTitle{
@@ -681,13 +679,6 @@ DemoTabsContainer{
     background-color: #efeff4;
     margin: 0mm;
     color: black;
-}
-
-SplitPaneDemoContainer{
-    background-color: #efeff4;
-    margin: 0mm;
-    color: black;
-    padding: 0;
 }
 
 WhiteContainer{
@@ -1021,4 +1012,100 @@ DemoSaveButton{
     border-radius: 2mm;
     color: white;
     text-align: center;
+}
+
+TextComponentField{
+    color: black;
+}
+
+FloatingHint{
+    background-color: rgba(0, 0, 0, 0);
+    color: black;
+}
+
+DemoMultiLine1{
+    background-color: rgba(0, 0, 0, 0);
+    color: black;
+}
+
+DemoMultiLine2{
+    background-color: rgba(0, 0, 0, 0);
+    color: black;
+}
+
+TextFieldsDemoButton{
+    padding: 2mm;
+    margin: 2mm;
+    color: white;
+    background-color: #399cff;
+    border-radius: 2mm;
+    text-align: center;
+}
+
+AutoCompletePopup{
+    background-color: white;
+    border-radius: 2mm;
+}
+
+AutoCompleteList{
+    background-color: white;
+}
+
+PurpleLabel{
+    margin: 0.5mm;
+    border: none;
+    background-color: #9e27b2;  
+}
+
+GreenLabel{
+    margin: 0.5mm;
+    border: none;
+    background-color: #019786;  
+}
+
+RedLabel{
+    margin: 0.5mm;
+    border: none;
+    background-color: #ea1e63;  
+}
+
+BlueLabel{
+    margin: 0.5mm;
+    border: none;
+    background-color: #3e51b8;  
+}
+
+OrangeLabel{
+    margin: 0.5mm;
+    border: none;
+    background-color: #f44236;  
+}
+
+SplitPaneDemoButton{
+    padding: 2mm;
+    margin: 0.5mm 3mm 0.5mm 3mm;
+    border-radius: 2mm;
+    background-color: #318dfa;
+    text-align: center;
+    color: white;
+}
+
+AccordionItem{
+    border-radius: 2mm;
+    background-color: white;
+    margin: 2mm;
+}
+
+DemoAccordionHeader{
+    font-size: 2.5mm;
+    border-radius: 2mm;
+    background-color: white;
+    padding: 2mm;
+}
+
+DemoAccordionLabel{
+    font-size: 2.5mm;
+    border-radius: 2mm;
+    background-color: white;
+    margin: 3mm;
 }
