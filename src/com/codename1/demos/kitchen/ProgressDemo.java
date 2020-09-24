@@ -48,6 +48,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 import com.codename1.util.AsyncResource;
+import com.codename1.util.EasyThread;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -111,8 +112,8 @@ public class ProgressDemo extends Demo {
             CN.callSerially(()-> ip.dispose());
         });
         InfiniteProgress prog = new InfiniteProgress();
-        prog.setAnimation(FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("DemoInfiniteProgress")));
-        return BoxLayout.encloseY(new InfiniteProgress(), prog);
+        prog.setAnimation(FontImage.createMaterial(FontImage.MATERIAL_AUTORENEW, UIManager.getInstance().getComponentStyle("DemoInfiniteProgress")));
+        return BorderLayout.centerAbsolute(prog);   
     }
     
     private Container createSliderDemo(){
@@ -135,17 +136,25 @@ public class ProgressDemo extends Demo {
     
     private Container createCircleAnimationDemo(){
         Label nameLabel = new Label("placeholder", "CenterAlignmentLabel");
-        Container demoContainer = BorderLayout.center(nameLabel);
+        Container demoContainer = BorderLayout.centerCenter(nameLabel);
         // Replace the label by a CircleProgress to indicate that it is loading.
-        CircleProgress.markComponentLoading(nameLabel).setUIID("RedColor");
-
-        AsyncResource<Map<String,Object>> request = fetchJSONAsync("https://anapioficeandfire.com/api/characters/583");
-        request.ready(data -> {
-            nameLabel.setText((String)data.get("name"));
-
-            // Replace the progress with the nameLabel now that
-            // it is ready, using a fade transition
-            CircleProgress.markComponentReady(nameLabel, CommonTransitions.createFade(300));
+        CircleProgress.markComponentLoading(nameLabel).setUIID("BlueColor");
+ 
+        /**
+        * This code block should work without the EasyThread and callSerially()
+        * its here only for the demonstration purpose. 
+        */
+        EasyThread.start("").run(()->{
+            sleep(3000);
+            AsyncResource<Map<String,Object>> request = fetchJSONAsync("https://anapioficeandfire.com/api/characters/583");
+            request.ready(data -> {
+                CN.callSerially(()->{
+                    nameLabel.setText((String)data.get("name"));
+                    // Replace the progress with the nameLabel now that
+                    // it is ready, using a fade transition
+                    CircleProgress.markComponentReady(nameLabel, CommonTransitions.createFade(300));
+                });
+            });
         });
         return demoContainer;
     }
@@ -156,26 +165,33 @@ public class ProgressDemo extends Demo {
         Container demoContainer = BorderLayout.center(profileText);
         // Replace the label by a CircleProgress to indicate that it is loading.
         LoadingTextAnimation.markComponentLoading(profileText);
+        
+        /**
+        * This code block should work without the EasyThread and callSerially()
+        * its here only for the demonstration purpose. 
+        */
+        EasyThread.start("").run(()->{
+            sleep(3000);
+            AsyncResource<Map<String,Object>> request = fetchJSONAsync("https://anapioficeandfire.com/api/characters/583");
+            request.ready(data -> {
+                StringBuilder sb = new StringBuilder();
+                sb.append("name: " + data.get("name") + "\n");
+                sb.append("gender: " + data.get("gender") + "\n");
+                sb.append("culture: " + data.get("culture") + "\n");
+                sb.append("born: " + data.get("born") + "\n");
+                List<String> aliases = (ArrayList<String>)data.get("aliases");
 
-        AsyncResource<Map<String,Object>> request = fetchJSONAsync("https://anapioficeandfire.com/api/characters/583");
-        request.ready(data -> {
-            StringBuilder sb = new StringBuilder();
-            sb.append("name: " + data.get("name") + "\n");
-            sb.append("gender: " + data.get("gender") + "\n");
-            sb.append("culture: " + data.get("culture") + "\n");
-            sb.append("born: " + data.get("born") + "\n");
-            List<String> aliases = (ArrayList<String>)data.get("aliases");
-            
-            sb.append("aliases: \n");
-            for (String alias : aliases){
-                sb.append(alias + "\n");
-            }
-
-            profileText.setText(sb.toString());
-
-            // Replace the progress with the nameLabel now that
-            // it is ready, using a fade transition
-            LoadingTextAnimation.markComponentReady(profileText, CommonTransitions.createFade(300));
+                sb.append("aliases: \n");
+                for (String alias : aliases){
+                    sb.append(alias + "\n");
+                }
+                CN.callSerially(()->{
+                    profileText.setText(sb.toString());
+                    // Replace the progress with the nameLabel now that
+                    // it is ready, using a fade transition
+                    LoadingTextAnimation.markComponentReady(profileText, CommonTransitions.createFade(300));
+                });
+            });
         });
         return demoContainer;
     }

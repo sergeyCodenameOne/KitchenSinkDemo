@@ -133,7 +133,9 @@ public class ContainersDemo extends Demo{
     private Container createAccordionDemo(){
         Accordion accordion = new Accordion();
         accordion.setHeaderUIID("DemoAccordionHeader");
-        accordion.setOpenCloseIconUIID("DemoAccordionHeader");
+        accordion.setOpenCloseIconUIID("DemoAccordionIcon");
+        accordion.setOpenIcon(FontImage.MATERIAL_EXPAND_LESS);
+        accordion.setCloseIcon(FontImage.MATERIAL_EXPAND_MORE);
         accordion.addContent("Does this product have what I need?", new SpanLabel("Totally. Totally does", "DemoAccordionLabel"));
         accordion.addContent("Can I use it all the time?", new SpanLabel("Of course you can, we won't stop you", "DemoAccordionLabel"));
         accordion.addContent("Are there any restrictions?", new SpanLabel("Only your imagination my friend. Go forth!", "DemoAccordionLabel"));
@@ -214,16 +216,15 @@ public class ContainersDemo extends Demo{
         };
         return BorderLayout.center(infiniteContainer);
     }
-
     private Container createTabsDemo(){
         Tabs tabsContainer = new Tabs();
         tabsContainer.setUIID("DemoTabsContainer");
-        tabsContainer.addTab("Categories", FontImage.MATERIAL_PIE_CHART, 3,
+        tabsContainer.addTab("Categories", createMaterial(FontImage.MATERIAL_PIE_CHART, UIManager.getInstance().getComponentStyle("Tab")),
                 DemoCharts.createCategoriesContainer());
 
         tabsContainer.addTab("Annual review", createMaterial(FontImage.MATERIAL_SHOW_CHART, UIManager.getInstance().getComponentStyle("Tab")),
                 DemoCharts.createAnnualContainer());
-        return BorderLayout.center(tabsContainer);
+        return tabsContainer;
     }
 
     private Container createSplitPaneDemo(){

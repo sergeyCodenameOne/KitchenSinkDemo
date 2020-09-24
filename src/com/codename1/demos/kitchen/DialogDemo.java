@@ -26,6 +26,7 @@ import com.codename1.components.InteractionDialog;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
+import com.codename1.ui.Command;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
@@ -106,8 +107,8 @@ public class DialogDemo extends Demo {
     
     private Container createInteractionDialogDemo(){
         InteractionDialog dlg = new InteractionDialog("Header", new BorderLayout());
-        dlg.add(BorderLayout.CENTER, new SpanLabel("Dialog body"));
-        Button openClose = new Button("Opne/Close");
+        dlg.add(BorderLayout.CENTER, new SpanLabel("Dialog body", "DialogDemoSpanLabel"));
+        Button openClose = new Button("Open/Close", "DialogDemoButton");
         openClose.addActionListener((ee) ->{
             if(isInteractionDialogOpen){ 
                 isInteractionDialogOpen = !isInteractionDialogOpen;
@@ -122,26 +123,25 @@ public class DialogDemo extends Demo {
     }
     
     private Container createDialogDemo(){
-        final Button show = new Button("Show Dialog");
-        final Button showPopup = new Button("Show Popup");
-        show.addActionListener(e-> {
-            Dialog.show("Dialog Title", "This is the dialog body, it can contain anything...", "OK", "Cancel");
+        final Button showDialog = new Button("Show Dialog", "DialogDemoButton");
+        final Button showPopup = new Button("Show Popup", "DialogDemoButton");
+        showDialog.addActionListener(e-> {
+            Command ok = new Command("Ok");
+            Command cancel = new Command("Cancel");
+            SpanLabel body = new SpanLabel("This is the dialog body, it can contain anything...", "DialogDemoSpanLabel");
+            Dialog.show("Dialog Title", body, ok, cancel);
         });
         showPopup.addActionListener(e-> {
             Dialog d = new Dialog("Popup Title");
-            SpanLabel label = new SpanLabel("This is the body of the popup", "WhiteBGLabel");
-            d.setLayout(new BorderLayout());
-            Container popupBody = BorderLayout.center(label);
-            popupBody.setUIID("WhiteContainer");
-            d.add(BorderLayout.CENTER, popupBody);
+            SpanLabel body = new SpanLabel("This is the body of the popup", "DialogDemoSpanLabel");
+            d.add(body);
             d.showPopupDialog(showPopup);
-
         });
-        return BoxLayout.encloseY(show, showPopup);
+        return BoxLayout.encloseY(showDialog, showPopup);
     }
     
     private Container createSheetDemo(){
-        Button b = new Button("Open Sheet");
+        Button b = new Button("Open Sheet", "DialogDemoButton");
         b.addActionListener(e->{
             new MySheet(null).show();
         });
@@ -149,11 +149,11 @@ public class DialogDemo extends Demo {
     }
     
     private Container createToastBarDemo(){
-        Button basic = new Button("Basic");
-        Button progress = new Button("Progress");
-        Button expires = new Button("Expires (after 3 seconds)");
-        Button delayed = new Button("Delayed (by 1 second)");
-        Button clear = new Button("Clear All");
+        Button basic = new Button("Basic", "DialogDemoButton");
+        Button progress = new Button("Progress", "DialogDemoButton");
+        Button expires = new Button("Expires (after 3 seconds)", "DialogDemoButton");
+        Button delayed = new Button("Delayed (by 1 second)", "DialogDemoButton");
+        Button clear = new Button("Clear All", "DialogDemoButton");
         
         clear.addActionListener(e->{
             for(ToastBar.Status currStatus : statusList){
@@ -202,12 +202,12 @@ public class DialogDemo extends Demo {
         MySheet(Sheet parent) {
             super(parent, "My Sheet");
             setLayout(BoxLayout.y());
-            Button gotoSheet2 = new Button("Goto Sheet 2");
+            Button gotoSheet2 = new Button("Goto Sheet 2", "DialogDemoButton");
             gotoSheet2.addActionListener(e->{
                 new MySheet2(this).show(300);
             });
             add(gotoSheet2);
-            add(new SpanLabel("Sheet body (you can add anything in here)"));
+            add(new SpanLabel("Sheet body (you can add anything in here)", "DialogDemoSpanLabel"));
         }
     }
     
@@ -216,7 +216,7 @@ public class DialogDemo extends Demo {
             super(parent, "Sheet 2");
             setLayout(BoxLayout.y());
             setScrollableY(true);
-            add(new SpanLabel("Sheet 2 body"));
+            add(new SpanLabel("Sheet 2 body", "DialogDemoSpanLabel"));
             
         }
     }

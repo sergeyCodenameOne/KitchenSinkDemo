@@ -32,7 +32,10 @@ import com.codename1.ui.Toolbar;
 import static com.codename1.ui.Button.setButtonRippleEffectDefault;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
+import com.codename1.ui.plaf.RoundRectBorder;
+import com.codename1.ui.plaf.Style;
 import java.io.IOException;
+import java.util.Hashtable;
 
 public class KitchenSink {
     
@@ -44,7 +47,15 @@ public class KitchenSink {
         // use two network threads instead of one
         updateNetworkThreadCount(2);
         
-        theme = UIManager.initNamedTheme("/theme", "Theme");
+        try {
+            theme = Resources.openLayered("/theme");
+            setPopupDialogBorder(theme.getTheme(theme.getThemeResourceNames()[0]));
+            UIManager.getInstance().setThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
+            Resources.setGlobalResources(theme);
+        } catch(IOException e){
+            Log.e(e);
+        }
+        
 //        initTheme();
         
         // Enable Toolbar on all Forms by default
@@ -73,7 +84,7 @@ public class KitchenSink {
         }
         MainWindow mw = new MainWindow();
         Form mainForm =  mw.buildForm();
-        mainForm.getToolbar().addCommandToLeftBar("", FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoLabel")), e->{
+        mainForm.getToolbar().addCommandToRightBar("", FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommand")), e->{
             initTheme();
         });
         mainForm.show();
@@ -104,6 +115,16 @@ public class KitchenSink {
             }
             Display.getInstance().getCurrent().refreshTheme();
         }
+    }
+    
+    private void setPopupDialogBorder(Hashtable themeProps){
+        themeProps.put("PopupDialog.derive", "Dialog");
+        themeProps.put("PopupDialog.border", RoundRectBorder.create().
+                cornerRadius(2f).
+                shadowOpacity(60).shadowSpread(3.0f));
+        themeProps.put("PopupDialog.transparency", "255");
+        themeProps.put("PopupDialog.padding", "4,4,4,4");
+        themeProps.put("PopupDialog.padUnit", new byte[]{Style.UNIT_TYPE_DIPS, Style.UNIT_TYPE_DIPS, Style.UNIT_TYPE_DIPS, Style.UNIT_TYPE_DIPS});
     }
 }
 

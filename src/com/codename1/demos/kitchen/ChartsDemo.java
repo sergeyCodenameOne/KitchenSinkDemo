@@ -43,8 +43,6 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.plaf.Style;
-import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class ChartsDemo extends Demo {
@@ -148,7 +146,7 @@ public class ChartsDemo extends Demo {
             toolbar.getTitleComponent().setUIID("ComponentDemoTitle");
             
             Form lastForm = getCurrentForm();
-            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, lastForm.getUIManager().getComponentStyle("ComponentDemoTitle")),
+            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, lastForm.getUIManager().getComponentStyle("DemoTitleCommand")),
                     e-> lastForm.showBack());
             
             toolbar.addCommandToLeftBar(backCommand);

@@ -67,7 +67,6 @@ public class DemoCharts {
         };
         
         Table dataTable = createTable(model);
-        dataTable.setDrawBorder(false);
         
         CategorySeries series = new CategorySeries("Sales");
         

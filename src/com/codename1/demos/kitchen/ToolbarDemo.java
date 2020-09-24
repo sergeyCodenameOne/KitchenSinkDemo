@@ -22,19 +22,61 @@
  */
 package com.codename1.demos.kitchen;
 
+import com.codename1.ui.Button;
+import com.codename1.ui.Command;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Toolbar;
+import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-
 public class ToolbarDemo extends Demo{
-    
     public ToolbarDemo(Form parentForm) {
         init("Toolbar", getGlobalResources().getImage("toolbar-demo.png"), parentForm, "");
     }
      
     @Override
     public Container createContentPane() {
-        return new Container();
+        Form toolBarForm = new Form("", new FlowLayout(Component.CENTER));
+        toolBarForm.getContentPane().setUIID("ComponentDemoContainer");
+        Toolbar tb = toolBarForm.getToolbar();
+        tb.setUIID("DemoToolbar");
+        tb.getTitleComponent().setUIID("DemoTitle");
+        
+        // Toolbar add source and back buttons.
+        Style commandStyle = UIManager.getInstance().getComponentStyle("DemoTitleCommand");
+        Form lastForm = Display.getInstance().getCurrent();
+        Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, commandStyle),
+                e-> lastForm.showBack());
+        
+        Command sourceCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_CODE, commandStyle),
+                e->{});
+        
+        tb.addCommandToRightBar(sourceCommand);
+        tb.addCommandToLeftBar(backCommand);
+       
+        tb.setPermanentSideMenu(true);
+                
+        tb.addComponentToSideMenu(new Button("Home", FontImage.MATERIAL_HOME, ("ToolbarDemoButton")));
+        tb.addComponentToSideMenu(new Button("Profile", FontImage.MATERIAL_SUPERVISED_USER_CIRCLE, ("ToolbarDemoButton")));
+        tb.addComponentToSideMenu(new Button("Setting", FontImage.MATERIAL_SETTINGS, ("ToolbarDemoButton")));
+        tb.addComponentToSideMenu(new Button("Logout", FontImage.MATERIAL_INPUT, ("ToolbarDemoButton")));
+        
+        Button searchButton = new Button("Show searchbar", ("ToolbarDemoButton"));
+        searchButton.addActionListener(e->{
+            tb.showSearchBar(ee->{
+                String text = (String)ee.getSource();
+                // Update the UI depending on the text.
+            });
+        });
+        toolBarForm.add(searchButton);
+        
+        toolBarForm.show();
+        return null;
     }
 }

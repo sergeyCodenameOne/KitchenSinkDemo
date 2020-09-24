@@ -22,7 +22,7 @@
  */
 
 Dialog{
-    background-color: #091545;
+    background-color: #112d78;
 }
 
 TextField{
@@ -265,7 +265,6 @@ DemoLabel{
 }
 
 DemoInfiniteProgress{
-    font-size: 10mm;
     color: white;
 }
 
@@ -377,3 +376,63 @@ DemoAccordionLabel{
 AccordionItem{
     background-color: #112d78;
 }
+
+DemoAccordionIcon{
+    color: white;
+}
+
+Tab{
+    background-color: #112d78;
+    color: white;
+}
+
+DialogDemoSpanLabel{
+    color: white;
+}
+
+PopupDialog{
+    background-color: #112d78; 
+}
+
+Sheet{
+    background-color: #112d78;
+}
+
+SheetTitle{
+    color: white;
+}
+
+SheetBackButton{
+    color: white;
+}
+
+DialogCommandArea{
+    background-color: #112d78;
+    margin: 0;
+}
+
+PopupDialogTitle{ 
+   color: white;
+}
+
+DemoTitleCommand{
+    color: white;
+}
+
+ToolbarSearch{
+    background-color: #112d78;
+}
+
+TextFieldSearch{
+    color: white;
+}
+
+SideNavigationPanel{
+    background-color: #112d78;
+}
+
+TitleCommand{
+    color: white;
+}
+
+

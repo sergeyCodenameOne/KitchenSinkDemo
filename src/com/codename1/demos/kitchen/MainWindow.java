@@ -87,22 +87,25 @@ public class MainWindow {
     }
     
     private void createAndShowForm(Demo demo){
+        Container demoContent = demo.createContentPane();
+        if (demoContent == null){
+            return;
+        }
         Form demoForm = new Form(demo.getDemoId(), new BorderLayout());
         Toolbar toolbar = demoForm.getToolbar();
         toolbar.setUIID("DemoToolbar");
         toolbar.getTitleComponent().setUIID("DemoTitle");
         
         // Toolbar add source and back buttons.
-        Style commandStyle = UIManager.getInstance().getComponentStyle("DemoTitle");
+        Style commandStyle = UIManager.getInstance().getComponentStyle("DemoTitleCommand");
         Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, commandStyle),
-                e-> demo.getParentForm().show());
+                e-> demo.getParentForm().showBack());
         
         Command sourceCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_CODE, commandStyle),
                 e->{});
         
         toolbar.addCommandToRightBar(sourceCommand);
         toolbar.addCommandToLeftBar(backCommand);
-        Container demoContent = demo.createContentPane();
         if(isTablet()){
             Demo.adjustToTablet(demoContent);
         }

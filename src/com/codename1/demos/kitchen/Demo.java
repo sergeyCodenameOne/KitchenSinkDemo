@@ -79,7 +79,7 @@ public abstract class Demo{
             toolbar.getTitleComponent().setUIID("ComponentDemoTitle");
             
             Form lastForm = getCurrentForm();
-            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("ComponentDemoTitle")),
+            Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("DemoTitleCommand")),
                     e-> lastForm.showBack());
             
             toolbar.addCommandToLeftBar(backCommand);
