@@ -41,7 +41,7 @@ public class KitchenSink {
     
     private Form current;
     private Resources theme;
-    private boolean isDarkMode = false;
+    private static boolean darkMode = false;
 
     public void init(Object context) {
         // use two network threads instead of one
@@ -105,8 +105,8 @@ public class KitchenSink {
     private void initTheme() {
         Boolean systemDarkMode = isDarkMode();
         if(true){// systemDarkMode != null && systemDarkMode != isDarkMode
-            isDarkMode = !isDarkMode;
-            String themeFilename = isDarkMode ? "/dark-theme" : "/theme";
+            darkMode = !darkMode;
+            String themeFilename = darkMode ? "/dark-theme" : "/theme";
             try {
                 Resources theme = Resources.openLayered(themeFilename);
                 UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
@@ -125,6 +125,10 @@ public class KitchenSink {
         themeProps.put("PopupDialog.transparency", "255");
         themeProps.put("PopupDialog.padding", "4,4,4,4");
         themeProps.put("PopupDialog.padUnit", new byte[]{Style.UNIT_TYPE_DIPS, Style.UNIT_TYPE_DIPS, Style.UNIT_TYPE_DIPS, Style.UNIT_TYPE_DIPS});
+    }
+    
+    public static boolean isDarkMode(){
+        return darkMode;
     }
 }
 

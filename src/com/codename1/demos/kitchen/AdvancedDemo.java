@@ -27,6 +27,7 @@ import com.codename1.components.FileTree;
 import com.codename1.components.FileTreeModel;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.InfiniteProgress;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SignatureComponent;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
@@ -40,14 +41,16 @@ import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.SwipeableContainer;
 import com.codename1.ui.TextComponent;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 import java.util.ArrayList;
@@ -116,6 +119,14 @@ public class AdvancedDemo extends Demo{
                                                                 e-> {
                                                                     FileTree xmlTree = new FileTree(new FileTreeModel(true));
                                                                     Container treeContainer = BorderLayout.center(xmlTree);
+                                                                    int height = Display.getInstance().convertToPixels(4);
+                                                                    int width = Display.getInstance().convertToPixels(4);
+                                                                    xmlTree.setFolderIcon(getGlobalResources().getImage("close-folder.png").scaled(width, height));
+                                                                    xmlTree.setFolderOpenIcon(getGlobalResources().getImage("open-folder.png").scaled(width, height));
+                                                                    xmlTree.setNodeIcon(getGlobalResources().getImage("file.png").scaled(width, height));
+                                                                    
+                                                                    // Refresh the root image.
+                                                                    xmlTree.refreshNode(((Container)xmlTree.getComponentAt(0)).getComponentAt(0));
                                                                     showDemo("File Tree", treeContainer);
                                                                 }));
         
@@ -137,43 +148,50 @@ public class AdvancedDemo extends Demo{
     }
     
     private Container createSignatureDemo(){
-        Container demoContainer = new Container(new BorderLayout());
-        
-        Container summary = new Container(new BorderLayout(), "SummaryContainer");
-        summary.add(BorderLayout.NORTH, new Label("COST SUMMARY", "GreyTextLabel"));
-        Container summaryDetails = new Container(new GridLayout(4,2));
-        summaryDetails.add(new Label("Subtotal",  "SignatureLabel")).
-                add(new Label("$30.00", "RightAlign")).
-                add(new Label("Shipping", "SignatureLabel")).
-                add(new Label("$5", "RightAlign")).
-                add(new Label("Estimated Tax ", "SignatureLabel")).
-                add(new Label("$3.00", "RightAlign")).
-                add(new Label("Total", "SignatureLabel")).
-                add(new Label("$38.00", "RightAlign"));
-        summary.addComponent(BorderLayout.EAST, summaryDetails);
-        
-        Label cardNumber = new Label("**** 1646 $", "SignatureLabel");
-        Label verified = new Label("Verified", "GreenText");
-        Label debitCard = new Label("Debit card", "SignatureLabel");
-        Label exp = new Label("exp: 10/16", "SignatureLabel");
+        Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 
-        Container card = BorderLayout.north(BorderLayout.centerEastWest(null, verified, cardNumber)).
-                            add(BorderLayout.SOUTH, BorderLayout.centerEastWest(null, exp, debitCard));
-        card.setUIID("SummaryContainer");
+        Container costSummury = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        costSummury.setUIID("CostSummary");
+        costSummury.add(new Label("Cost Summary", "CostSummaryLabel")).
+                add(BorderLayout.centerEastWest(null, new Label("$30.00", "SignatureCost"),  new Label("Subtotal",  "SignatureLabel"))).
+                add(BorderLayout.centerEastWest(null, new Label("$5", "SignatureCost"), new Label("Shipping", "SignatureLabel"))).
+                add(BorderLayout.centerEastWest(null, new Label("$3.00", "SignatureCost"), new Label("Estimated Tax ", "SignatureLabel"))).
+                add(new Label(" ", "Separator")).
+                add(BorderLayout.centerEastWest(null, new Label("$38.00", "SignatureTotalCost"), new Label("Total", "SignatureLabel")));
+        
+        ScaleImageLabel creditCard = new ScaleImageLabel(getGlobalResources().getImage("credit-card.png")){
+            @Override
+            protected Dimension calcPreferredSize() {
+                Dimension d = super.calcPreferredSize();
+                d.setWidth(Display.getInstance().getDisplayWidth());
+                d.setHeight(d.getWidth() / 2);
+                return d;
+            }
+        };
+        creditCard.setUIID("CreditCard");
         
         SignatureComponent sig = new SignatureComponent();
         
-        Button confirmAndPay = new Button("Confirm & Pay", "InputSaveButton");
+        Button confirmAndPay = new Button("Confirm & Pay", "SignatureConfirm");
         confirmAndPay.addActionListener(e->{
             if(sig.getSignatureImage() == null){
                 ToastBar.showInfoMessage("you need to sign");
             }else {
                 ToastBar.showInfoMessage("purchase was successfully completed");
             }
-            
         });
-        demoContainer.add(BorderLayout.NORTH, BoxLayout.encloseY(summary, card, sig)).
-                add(BorderLayout.SOUTH, confirmAndPay);
+        
+        Button clear = new Button("Clear", "SignatureClear");
+        clear.addActionListener(e->{
+            sig.setSignatureImage(null);
+        });
+        
+        Container confirmContainer = new Container(new BorderLayout());
+        confirmContainer.setUIID("ConfirmContainer");
+        confirmContainer.add(BorderLayout.NORTH, sig).
+                add(BorderLayout.SOUTH, FlowLayout.encloseCenter(clear, confirmAndPay));
+                
+        demoContainer.addAll(costSummury, creditCard, confirmContainer);
         return demoContainer;   
     }
     
@@ -202,7 +220,7 @@ public class AdvancedDemo extends Demo{
             }
         });
                 
-        FloatingActionButton addNote = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
+        Button addNote = new Button("+ Create Memo", "DemoButton");
         addNote.addActionListener(e->{
             List<String> currentNotes = allNotes.get(cld.getDate().toString());
             if(currentNotes == null){
@@ -226,9 +244,10 @@ public class AdvancedDemo extends Demo{
         });
         
         Container demoContainer = BorderLayout.north(cld).
-                                    add(BorderLayout.CENTER, notes);
+                                    add(BorderLayout.CENTER, notes).
+                                    add(BorderLayout.SOUTH, FlowLayout.encloseRight(addNote));
         
-        return addNote.bindFabToContainer(demoContainer);
+        return demoContainer;
     }
     
     private Component createNote(String noteText, List<String> currNotes, Container notes){

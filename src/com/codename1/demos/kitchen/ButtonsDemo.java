@@ -118,38 +118,43 @@ public class ButtonsDemo extends Demo{
     
         
     private Container createButtonsDemo(){ 
-        Button firstButton = new Button("Button", "BlueButtonDemo");
+        Button firstButton = new Button("Button", "DemoButton");
         firstButton.addActionListener(e-> ToastBar.showInfoMessage("First Button was pressed") );
         
-        Button secondButton = new Button("", FontImage.MATERIAL_INFO, "PurpleButtonDemo");
+        Button secondButton = new Button("", FontImage.MATERIAL_INFO, "DemoButton");
         secondButton.addActionListener(e-> ToastBar.showInfoMessage("Second Button was pressed") );
         
-        Button thirdButton = new Button("Button", FontImage.MATERIAL_INFO, "OrangeButtonDemo");
+        Button thirdButton = new Button("Button", FontImage.MATERIAL_INFO, "DemoButton");
         thirdButton.addActionListener(e-> ToastBar.showInfoMessage("Third Button was pressed") );
 
-        Container demoContainer =  BoxLayout.encloseY(new Label("button with text:", "ComponentDemoLabel"),
+        Container demoContainer =  BoxLayout.encloseY(new Label("button with text:", "DemoLabel"),
                                                         firstButton,
-                                                        new Label("button with icon:", "ComponentDemoLabel"),
+                                                        new Label("button with icon:", "DemoLabel"),
                                                         secondButton,
-                                                        new Label("button with text and icon:", "ComponentDemoLabel"),
+                                                        new Label("button with text and icon:", "DemoLabel"),
                                                         thirdButton);
-        return demoContainer;
+        demoContainer.setUIID("ButtonContainer");
+        
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createSpanButtonsDemo(){ 
         SpanButton button = new SpanButton("A complex button similar to MultiButton that breaks lines automatically and looks like "+
                                                 "a regular button(more or less). Unlike the multi button the "+
                                                 "span buttons has the UIID style of a button.", "WhiteText");
-        button.setUIID("OrangeButtonDemo");
-        button.addActionListener(e-> ToastBar.showInfoMessage("Button was pressed") );
-        return BoxLayout.encloseY( new Label("SpanButton:", "ComponentDemoLabel"), button);
+        button.setUIID("DemoButton");
+        button.addActionListener(e-> ToastBar.showInfoMessage("Button was pressed"));
+        
+        Container SpanLabelContainer = BoxLayout.encloseY(new Label("SpanButton:", "DemoLabel"), button);
+        SpanLabelContainer.setUIID("ButtonContainer");
+        return BoxLayout.encloseY(SpanLabelContainer);
     }
     
     private Container createMultiButtonsDemo(){ 
         MultiButton twoLinesNoIcon = new MultiButton("MultiButton");
         twoLinesNoIcon.setTextLine2("Line 2");
         twoLinesNoIcon.setUIIDLine2("DemoMultiButtonText");
-        twoLinesNoIcon.setUIID("OrangeButtonDemo");
+        twoLinesNoIcon.setUIID("DemoButton");
         twoLinesNoIcon.setUIIDLine1("DemoMultiButtonText");
 
         
@@ -159,11 +164,11 @@ public class ButtonsDemo extends Demo{
         MultiButton oneLineIconEmblem = new MultiButton("Icon + Emblem");
         oneLineIconEmblem.setIcon(icon);
         oneLineIconEmblem.setEmblem(emblem);
-        oneLineIconEmblem.setUIID("PurpleButtonDemo");
+        oneLineIconEmblem.setUIID("DemoButton");
         oneLineIconEmblem.setUIIDLine1("DemoMultiButtonText");
         
         MultiButton twoLinesIconEmblem = new MultiButton("Icon + Emblem");
-        twoLinesIconEmblem.setUIID("BlueButtonDemo");
+        twoLinesIconEmblem.setUIID("DemoButton");
         twoLinesIconEmblem.setIcon(icon);
         twoLinesIconEmblem.setEmblem(emblem);
         twoLinesIconEmblem.setTextLine2("Line 2");
@@ -172,7 +177,7 @@ public class ButtonsDemo extends Demo{
         
 
         MultiButton twoLinesIconEmblemHorizontal = new MultiButton("Icon + Emblem");
-        twoLinesIconEmblemHorizontal.setUIID("PurpleButtonDemo");
+        twoLinesIconEmblemHorizontal.setUIID("DemoButton");
         twoLinesIconEmblemHorizontal.setIcon(icon);
         twoLinesIconEmblemHorizontal.setEmblem(emblem);
         twoLinesIconEmblemHorizontal.setTextLine2("Line 2 Horizontal");
@@ -182,7 +187,7 @@ public class ButtonsDemo extends Demo{
         
 
         MultiButton fourLinesIcon = new MultiButton("With Icon");
-        fourLinesIcon.setUIID("BlueButtonDemo");
+        fourLinesIcon.setUIID("DemoButton");
         fourLinesIcon.setIcon(icon);
         fourLinesIcon.setTextLine2("Line 2");
         fourLinesIcon.setUIIDLine2("DemoMultiButtonText");
@@ -197,15 +202,16 @@ public class ButtonsDemo extends Demo{
                                                     twoLinesIconEmblem,
                                                     twoLinesIconEmblemHorizontal,
                                                     fourLinesIcon);
-        demoContainer.setScrollableY(true);
-        return demoContainer;
+        
+        demoContainer.setUIID("ButtonContainer");
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createShareButtonDemo(){
         ShareButton textShare = new ShareButton();
-        Image icon = FontImage.createMaterial(FontImage.MATERIAL_SHARE, UIManager.getInstance().getComponentStyle("DemoShareIcon"));
+        Image icon = FontImage.createMaterial(FontImage.MATERIAL_SHARE, UIManager.getInstance().getComponentStyle("DemoButton"));
         textShare.setIcon(icon);
-        textShare.setUIID("PurpleButtonDemo");
+        textShare.setUIID("DemoButton");
         textShare.setTextToShare("Hello there");
         textShare.setText("share text");
         
@@ -222,19 +228,22 @@ public class ButtonsDemo extends Demo{
         }
         
         ShareButton imageShare = new ShareButton();
-        imageShare.setUIID("BlueButtonDemo");
+        imageShare.setUIID("DemoButton");
         imageShare.setIcon(icon);
         imageShare.setText("share image");
         imageShare.setImageToShare(imagePath, "image/png");
 
-        return BoxLayout.encloseY(textShare, imageShare);
+        Container shareButtonContainer = BoxLayout.encloseY(textShare, imageShare);
+        shareButtonContainer.setUIID("ButtonContainer");
+        
+        return BoxLayout.encloseY(shareButtonContainer);
     }
     
     private Container createScaleImageButton(){
         TableLayout tableLayout = new TableLayout(2, 2);
-        Container demoContainer = new Container(tableLayout);
+        Container buttonsContainer = new Container(tableLayout);
         
-        Image icon = FontImage.createMaterial(FontImage.MATERIAL_WARNING, UIManager.getInstance().getComponentStyle("DemoScaleImageButton"));
+        Image icon = FontImage.createMaterial(FontImage.MATERIAL_IMAGE, UIManager.getInstance().getComponentStyle("DemoScaleImageButton"));
         
         ScaleImageLabel fillLabel = new ScaleImageLabel(icon);
         fillLabel.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
@@ -250,15 +259,19 @@ public class ButtonsDemo extends Demo{
         ScaleImageButton button2 = new ScaleImageButton(icon);
         button2.setUIID("DemoScaleImageButton");
         
-        demoContainer.add(tableLayout.createConstraint().widthPercentage(20), button1).
+        buttonsContainer.add(tableLayout.createConstraint().widthPercentage(20), button1).
                 add(tableLayout.createConstraint().widthPercentage(80), new Label("<- 20% of the screen", "ScaleComponentDemoLabel")).
                 add(new SpanLabel("80% of the screen->", "ScaleComponentDemoLabel")).
                 add(button2).
                 add(fillLabel).
                 add(new Label("<-image fill", "ScaleComponentDemoLabel")).
-                add(new Label("image fill->", "ScaleComponentDemoLabel")).
+                add(new SpanLabel("image fill->", "ScaleComponentDemoLabel")).
                 add(fillButton);
-        return demoContainer;
+        
+        Container demoContainer = BoxLayout.encloseY(buttonsContainer);
+        demoContainer.setUIID("ButtonContainer");
+        
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createFloatingActionButtonDemo(){

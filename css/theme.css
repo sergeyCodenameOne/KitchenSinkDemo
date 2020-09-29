@@ -43,6 +43,10 @@ background-image:   url(images/charts/chart-bar.png),
                     url(images/advanced/advanced-image-viewer.png),
                     url(images/advanced/advanced-singnature.png),
                     url(images/advanced/advanced-tree-file.png),
+                    url(images/advanced/credit-card.png),
+                    url(images/advanced/open-folder.png),
+                    url(images/advanced/close-folder.png),
+                    url(images/advanced/file.png),
                     url(images/demos/demo-maps.png),
                     url(images/demos/advanced-icon.png),
                     url(images/demos/media-demo-icon.png),
@@ -180,18 +184,6 @@ background-image:   url(images/charts/chart-bar.png),
         background-color: rgba(0, 0, 0, 0); 
     }
     
-    PurpleButtonDemo{
-        font-size: 5mm;
-    }
-
-    OrangeButtonDemo{
-        font-size: 5mm;
-    }
-    
-    BlueButtonDemo{
-        font-size: 5mm;
-    }
-    
     WhiteText{
         font-size: 5mm;
     }
@@ -205,10 +197,6 @@ background-image:   url(images/charts/chart-bar.png),
     }
     
     DemoRadioBuildButton{
-        font-size: 5mm; 
-    }
-    
-    DemoCompleteOrder{
         font-size: 5mm; 
     }
     
@@ -254,6 +242,18 @@ background-image:   url(images/charts/chart-bar.png),
     }
     
     ToolbarDemoButton{
+        font-size: 5mm;
+    }
+    
+    CostSummary{
+        padding: 4mm
+    }
+    
+    ScaleComponentDemoLabel{
+        font-size: 5mm;
+    }
+    
+    DemoButton{
         font-size: 5mm;
     }
 }
@@ -314,8 +314,7 @@ ComboBoxPopupTitle{
 
 ComboBox{
     border-radius: 1mm;
-    background-color: white;
-    border: 0.4mm solid #00c9a7;
+    background-color: #efeff4;
     padding: 2mm;
     color: black;
     margin: 2mm;
@@ -528,52 +527,6 @@ InputSaveButton{
 
 InputSaveButton.pressed{
     background-color: #e44c4c;
-
-}
-
-OrangeButtonDemo{
-    background: linear-gradient(to top, #ff7013, #ff5c6a);
-    border-radius: 3mm;
-    color: white;
-    padding: 3mm;
-    text-align:center;
-    margin: 3mm;
-    color: black;
-}
-
-OrangeButtonDemo.pressed{
-    background: linear-gradient(to right, #fb8233, #fb6f7b);
-}
-
-
-BlueButtonDemo{
-    background: linear-gradient(to right, #0233d9, #00eded);
-    border-radius: 3mm;
-    color: white;
-    padding: 3mm;
-    text-align:center;
-    margin: 3mm;
-    color: black;
-}
-
-BlueButtonDemo.pressed{
-    background: linear-gradient(to right, #254eda, #55e8e8);
-
-}
-
-PurpleButtonDemo{
-    background: linear-gradient(to right, #5203e4, #e11cff);
-    border-radius: 3mm;
-    color: white;
-    padding: 3mm;
-    text-align:center;
-    margin: 3mm;
-    color: black;
-
-}
-
-PurpleButtonDemo.pressed{
-    background: linear-gradient(to right, #6a27e6, #e43efd);
 }
 
 WhiteText{
@@ -618,6 +571,8 @@ MediaIcon{
 }
 
 Calendar{
+    margin: 4mm; 
+    background-color: rgba(0,0,0,0);
     color: white;
 }
 
@@ -744,14 +699,43 @@ GreenText{
     color: greenyellow;
 }
 
-RightAlign{
+SignatureCost{
+    padding: 1mm;
+    font-size: 3mm;
+    font-family: "native:MainRegular";
     color: black;
-    background: white;
+    background-color: rgba(0, 0, 0, 0);
     text-align: right;
 }
-SignatureLabel{
+
+SignatureTotalCost{
+    padding: 1mm;
+    font-size: 3mm;
+    font-family: "native:MainBold";
     color: black;
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0);
+    text-align: right;
+}
+
+CostSummaryLabel{
+    font-size: 4mm;
+    font-family: "native:MainRegular";
+    background-color: rgba(0, 0, 0, 0);
+    text-align: center;
+    color: black;
+}
+
+SignatureLabel{
+    font-size: 3mm;
+    font-family: "native:MainRegular";
+    color: grey;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+CreditCard{
+    background-color: rgba(0, 0, 0, 0);
+    margin: 0 3mm 0 3mm;
+    padding: 0;
 }
 
 SignatureDemo{
@@ -767,14 +751,16 @@ GreyTextLabel{
 
 DeleteButton{
     font-size: 6mm;
-    color: red;
+    color: #9acd32;
     background-color: rgba(0, 0, 0, 0);
 }
 
 Note{
     color: black;
     font-family: "native:MainRegular";
-    border-image: url(images/advanced/note-border.png);
+    background-image: url(images/advanced/calendar-note.png);
+    cn1-background-type: cn1-image-scaled-fill;
+    cn1-source-dpi: 480;
     margin-bottom: 1mm;
     margin-top: 1mm;
     margin-right: 2mm;
@@ -785,7 +771,8 @@ Note{
 
 CalendarDay{
     color: black;
-    background-color: white;
+    padding: 1mm;
+    background-color: rgba(0, 0, 0, 0);
     text-align: center;
 }
 
@@ -795,10 +782,12 @@ CalendarDay.pressed{
 
 CalendarTitle{
     font-family: "native:MainRegular";
-    font-size: 3.5mm;
+    font-size: 3mm;
     color: black;
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 2mm;
     text-align: center;
+    border-bottom: 0.3mm solid #efeff4;
 }
 
 CalendarSelectedDay{
@@ -811,13 +800,6 @@ CalendarSelectedDay{
 
 CalendarSelectedDay.pressed{
     text-align: center;
-}
-
-Calendar{
-    background-color: white; 
-    border-radius: 2mm;
-    margin: 2mm;
-    padding-bottom: 1mm;
 }
 
 DemoComboBox{
@@ -854,12 +836,6 @@ DemoRadioBuildButton{
     text-align: center;
 }
 
-DemoCompleteOrder{
-    text-align: center;
-    padding: 2mm;
-    background-color: #da1e26;
-    color: #f3be39;
-}
 
 DemoCheckBoxLabel{
     border-bottom-left-radius: 2mm;
@@ -872,20 +848,22 @@ DemoCheckBoxLabel{
 }
 
 DemoCheckBox{
+    font-size: 3mm;
+    font-family: "native:MainRegular";
     padding: 1mm;
     background-color: rgba(0, 0, 0, 0);
     margin-left: 2mm;
     margin-right: 2mm;
     margin-bottom: 0.1mm;
     margin-top: 0.1mm;
-    border: 0.3mm solid #da1e26;
     border-radius: 2mm;
     text-align: center;
-    color: #f3be39;
+    color: black;
 }
 
 DemoCheckBox.pressed{
-    background-color: #da1e26;
+    background-color: #f6d2d2;
+    color: #da1e26;
 }
 
 NoteContainer{
@@ -932,12 +910,13 @@ SignatureButton{
 }
 
 CalendarDate{
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0);
     color: black;
 }
 
 MonthView{
     background-color: white;
+    border-radius: 1mm;
 }
 
 FileTree{
@@ -957,11 +936,13 @@ ComponentDemoLabel{
 }
 
 ScaleComponentDemoLabel{
-    margin-top: 5mm;
     font-family: "native:MainRegular";
     font-size: 2.3mm;
-    background-color: #efeff4;
-    color: black;
+    background-image: url(images/buttons/scale-image-button-background.png);
+    color: white;
+    text-align: center;
+    /*border-radius: 2mm;*/
+    margin: 0 0 2mm 0;
 }
 
 DemoMultiButtonText{
@@ -974,8 +955,10 @@ Emblem{
 }
 
 DemoScaleImageButton{
-    background-color: white; 
-    color: black;
+    background-color: #825145; 
+    color: white;
+    padding: 0;
+    margin: 0 0 2mm 0;
 }
 
 DemoShareIcon{
@@ -1012,7 +995,7 @@ DemoAnswerButton{
 ShareGroceriesDemo{
     text-align: center;
     padding: 2mm;
-    margin: 2mm;;
+    margin: 2mm;
     background-color: #5add17;
     color: black;
     border-radius: 2mm;
@@ -1020,8 +1003,8 @@ ShareGroceriesDemo{
 
 CheckBox{
     font-size: 3mm;
-    color: black;
-    background-color: #5add17;
+    color: #f06393;
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 2mm;
     padding: 2mm;   
     margin: 0.5mm;
@@ -1032,6 +1015,8 @@ GroceriesDemoLabel{
 }
 
 BurgerIngredients{
+    border-bottom: 0.2mm solid #efeff4;
+    padding-bottom: 2mm;
     background-color: rgba(0, 0, 0, 0);
     color: #da1e26;
     text-align: center;
@@ -1292,4 +1277,121 @@ DemoTitleCommand{
 TitleCommand{
     background-color: rgba(0, 0, 0, 0);
     color: #157efb;
+}
+
+CostSummary{
+    border: none;
+    background-image: url(images/advanced/summary-background.png);
+    cn1-background-type: cn1-image-scaled;
+    padding: 2mm;
+    margin: 0 2mm 0 2mm;
+}
+
+Separator{
+    font-size: 0.1mm;
+    margin-top: 0.1mm;
+    /*margin-bottom: 0.1mm;*/
+    background-color: rgba(0, 0, 0, 0);
+    border-top: 0.3mm solid #efeff4;
+}
+
+SignatureConfirm{
+    border-radius: 2mm;
+    background-color: #9acd32;
+    text-align: center;
+    color: white;
+}
+
+ConfirmContainer{
+    border-radius: 2mm;
+    margin: 0 4mm 0 4mm;
+    background-color: white;
+}
+
+SignatureClear{
+    color: grey;
+    background-color: rgba(0, 0, 0, 0);
+    text-align: center;
+    border: 0.1mm solid grey;
+    border-radius: 1mm;
+    margin-right: 2mm;
+}
+
+TreeNode{
+    color: black;
+    background-color: white;
+    border-radius: 1mm;
+    padding: 2mm;
+}
+
+LabelContainer{
+    background-color: white;
+    margin: 2mm;
+    border-radius: 2mm;
+}
+
+ButtonContainer{
+    background-color: white;
+    margin: 3mm;
+    padding: 2mm;
+    border-radius: 2mm;
+}
+
+GreyLabel{
+    font-size: 3mm;
+    font-family: "native:MainRegular";
+    color: grey;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+DemoScaleImageLabel{
+    background-color: rgba(0, 0, 0, 0);
+    margin: 1mm;
+}
+
+DemoButton{
+    color: white;
+    text-align: center;
+    background-color: #9acd32;
+    padding: 2mm;
+    border-radius: 2mm;
+    margin: 2mm;
+}
+
+Wrapper{
+    background-color: white;
+    margin: 3mm;
+    padding: 2mm;
+    border-radius: 2mm;
+}
+
+CompleteOrderContainer{
+    cn1-derive: Container;
+    margin-top: 1mm;
+    border-top: 0.2mm solid #efeff4;
+}
+
+SelectBuild{
+    text-align: center;
+    color: black;
+    background-color: rgba(0, 0, 0, 0);
+    border-bottom: 0.2mm solid #efeff4;
+}
+
+SelectGroceriesLabel{
+    text-align: center;
+    color: #e91e63;
+    padding-bottom: 2mm;
+    background-color: rgba(0, 0, 0, 0);
+    border-bottom: 0.2mm solid #efeff4;
+}
+
+AddNewGroceriesDemo{
+    color: grey;
+    background-color: rgba(0, 0, 0, 0);
+    text-align: center;
+    border: 0.1mm solid grey;
+    border-radius: 1mm;
+    padding: 2mm;
+    margin: 2mm;;
 }

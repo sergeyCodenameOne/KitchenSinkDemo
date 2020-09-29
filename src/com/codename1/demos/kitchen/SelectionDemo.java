@@ -131,21 +131,24 @@ public class SelectionDemo extends Demo{
             ToastBar.showInfoMessage((String)selectedItem.get("Line1") + " rating is: " + (String)selectedItem.get("rating"));
         });
         demoContainer.add(BorderLayout.SOUTH, showRating);
-
-        return demoContainer;
+        
+        demoContainer.setUIID("Wrapper");
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createDatePickerDemo(){
         PickerComponent datePicker = PickerComponent.createDate(null).label("Select Birthday: ");
         datePicker.setUIID("DemoPicker");
         
-        Button save = new Button("Save Birthday", "DemoSaveButton");
+        Button save = new Button("Save Birthday", "DemoButton");
         save.addActionListener(e->{
             ToastBar.showInfoMessage("Birthday was saved: " + datePicker.getPicker().getText());
         });
         Container demoContainer = BorderLayout.center(BoxLayout.encloseY(datePicker));
         demoContainer.add(BorderLayout.SOUTH, save);
-        return demoContainer;
+        
+        demoContainer.setUIID("Wrapper");
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createTimePickerDemo(){
@@ -155,25 +158,27 @@ public class SelectionDemo extends Demo{
         
         PickerComponent timePicker = PickerComponent.createTime(hours * 60 + minutes).label("Select Alarm Time ");
         timePicker.setUIID("DemoPicker");
-        Button setAlarm = new Button("Set Alarm", "DemoSaveButton");
+        Button setAlarm = new Button("Set Alarm", "DemoButton");
         setAlarm.addActionListener(e->{
             ToastBar.showInfoMessage("Alarm set for: " + timePicker.getPicker().getText());
         });
         Container demoContainer = BorderLayout.center(BoxLayout.encloseY(timePicker));
         demoContainer.add(BorderLayout.SOUTH, setAlarm);
-        return demoContainer;
+        demoContainer.setUIID("Wrapper");
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createDateTimePickerDemo(){        
         PickerComponent meetingPicker = PickerComponent.createDateTime(null).label("Select meeting schedule");
         meetingPicker.setUIID("DemoPicker");
-        Button scheduleMeeting = new Button("Schedule Meeting", "DemoSaveButton");
+        Button scheduleMeeting = new Button("Schedule Meeting", "DemoButton");
         scheduleMeeting.addActionListener(e->{
             ToastBar.showInfoMessage("Meeting was scheduled at: " + meetingPicker.getPicker().getText());
         });
         Container demoContainer = BorderLayout.center(BoxLayout.encloseY(meetingPicker));
         demoContainer.add(BorderLayout.SOUTH, scheduleMeeting);
-        return demoContainer;
+        demoContainer.setUIID("Wrapper");
+        return BoxLayout.encloseY(demoContainer);
         
     }
     
@@ -181,26 +186,28 @@ public class SelectionDemo extends Demo{
         PickerComponent durationPicker = PickerComponent.createDurationMinutes(0).label("Select Duration");
         durationPicker.setUIID("DemoPicker");
         
-        Button setTimer = new Button("Set Timer", "DemoSaveButton");
+        Button setTimer = new Button("Set Timer", "DemoButton");
         setTimer.addActionListener(e->{
             ToastBar.showInfoMessage("Timer set for: " + durationPicker.getPicker().getText());
         });
         Container demoContainer = BorderLayout.center(BoxLayout.encloseY(durationPicker));
         demoContainer.add(BorderLayout.SOUTH, setTimer);
-        return demoContainer;
+        demoContainer.setUIID("Wrapper");
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createMinuteHourPickerDemo(){
         PickerComponent durationPicker = PickerComponent.createDurationHoursMinutes(0, 0).label("Select Duration");
         durationPicker.setUIID("DemoPicker");
 
-        Button setTimer = new Button("Set Timer", "DemoSaveButton");
+        Button setTimer = new Button("Set Timer", "DemoButton");
         setTimer.addActionListener(e->{
             ToastBar.showInfoMessage("Timer set for: " + durationPicker.getPicker().getText());
         });
         Container demoContainer = BorderLayout.center(BoxLayout.encloseY(durationPicker));
         demoContainer.add(BorderLayout.SOUTH, setTimer);
-        return demoContainer;
+        demoContainer.setUIID("Wrapper");
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Map<String, Object> createListEntry(String name, String date, String rating) {

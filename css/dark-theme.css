@@ -22,7 +22,7 @@
  */
 
 Dialog{
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 TextField{
@@ -34,13 +34,13 @@ DialogButtonCommand{
 }
 
 MainWindowContainer{
-    background-color: #091545;
+    background-color: #000000;
     padding: 3mm;
     margin: 0;
 }
 
 MainWindowDemoComponent{
-    background-color: #112d78;
+    background-color: #222222;
     border-radius: 2mm;
     margin-top: 2mm;
     margin-left: 2mm;
@@ -49,52 +49,52 @@ MainWindowDemoComponent{
 }
 
 MainWindowToolbar{
-    background-color: #112d78;
+    background-color: #222222;
     margin: 0;
     padding: 0;
 }
 
 MainWindowTitle{
    color: white;
-   background-color: #112d78;
+   background-color: #222222;
    margin: 3mm;
 }
 
 MainWindowDemoName{
     color: white;
-    background-color: #112d78;
+    background-color: #222222;
     text-align: center;
     font-family: "native:MainBold";
     font-size: 3mm
 }
 
 DemoComponentIcon{
-    background-color: #112d78;
+    background-color: #222222;
     margin: 2mm;
 }
 
 DemoToolbar{
         margin: 0;
-        background-color: #112d78;
+        background-color: #222222;
         padding: 3mm;
         font-size: 3mm;
 }
 
 DemoContainer{
     margin: 0;
-    background-color: #091545;
+    background-color: #000000;
     padding: 0;
 }
 
 DemoContentAccordion{
-    background-color: #112d78;
+    background-color: #222222;
     border-radius: 2mm;
     padding-bottom: 2mm;
     margin: 3mm;
 }
 
 DemoContentRegular{
-    background-color: #112d78;
+    background-color: #222222;
     border-radius: 2mm;
     padding-bottom: 2mm;
     margin: 3mm;
@@ -103,14 +103,14 @@ DemoContentRegular{
 DemoContentImage{
     margin: 3mm;
     padding: 0;
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 DemoContentHeader{
     margin-left: 2mm;
     font-size: 3mm;
     font-family: "native:MainBold";
-    background-color: #112d78;
+    background-color: #222222;
     color: white;
 }
 
@@ -118,35 +118,35 @@ DemoContentBody{
     font-family: "native:MainRegular";
     font-size: 2.6mm;
     margin-left: 2mm;
-    background-color: #112d78;
+    background-color: #222222;
     color: white;
 }
 
 DemoTitle{
-    background-color: #112d78;
+    background-color: #222222;
     color: white;
 }
 
 AccordionButton{
     color: white;
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 TitleCommand{
     color: white;
-    background-color: #112d78;
+    background-color: #222222;
     margin: 0;
     padding: 0;
 }
 
 VideoContainer{
     border: none;
-    background-color: #091545;
+    background-color: #000000;
     margin: 0;
 }
 
 VideoComponent{
-    background-color: #112d78;
+    background-color: #222222;
     border-radius: 2mm;
     margin-top: 2mm;
     margin-left: 2mm;
@@ -163,19 +163,19 @@ MediaComponentLine2{
 }
 
 ComponentDemoToolbar{
-    background-color: #112d78;
+    background-color: #222222;
     padding: 3mm;
     font-size: 3mm;
     margin: 0;
 }
 
 ComponentDemoTitle{
-    background-color: #112d78;
+    background-color: #222222;
     color: white;
 }
 
 ComponentDemoContainer{
-    background-color: #091545;
+    background-color: #000000;
     margin: 0;
 }
 
@@ -199,7 +199,7 @@ TreeNode{
 
 ComponentDemoLabel{
     color: white;
-    background-color: #091545;
+    background-color: #000000;
 }
 
 DemoCheckBox{
@@ -231,7 +231,7 @@ BrightContainer{
 }
 
 DarkContainer{
-    background-color: #091545;
+    background-color: #000000;
     margin: 0;
 }
 
@@ -252,7 +252,7 @@ BlueContainer{
 
 PopupContentPane{
     margin: 0;
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 DemoPicker{
@@ -275,33 +275,33 @@ CenterAlignmentLabel{
 
 DemoComboBox{
     border: none;
-    background-color: #091545;
+    background-color: #000000;
     border-radius: 1mm;
     margin: 1mm;
 }
 
 DemoComboBox.selected{
     border: none;
-    background-color: #091545;
+    background-color: #000000;
     border-radius: 1mm;
     margin: 1mm;
 }
 
 DemoComboBoxPopup{
-    background-color: #091545;
+    background-color: #000000;
 }
 
 FileTree{
-    background-color: #091545;
+    background-color: #000000;
 }
 
 ScaleComponentDemoLabel{
-    background-color: #091545;
+    background-color: #000000;
     color: white;
 }
 
 DemoScaleImageButton{
-    background-color: #091545; 
+    background-color: #000000; 
     color: white;
 }
 
@@ -310,11 +310,11 @@ DemoRadioButton{
 }
 
 RadioButton{
-    background-color: #091545;
+    background-color: #000000;
 }
 
 DemoPicker{
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 TextComponentField{
@@ -325,17 +325,13 @@ Label{
     color: grey;
 }
 
-ComboBox{
-    background-color: #112d78;
-}
-
 ComboBoxPopup{
-    background-color: #112d78;
+    background-color: #222222;
     color: white;
 }
 
 DemoMultiButton{
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 DemoMultiLine1{
@@ -352,29 +348,29 @@ FloatingHint{
 
 DemoTextArea{
     color: white;
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 AutoCompletePopup{
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 AutoCompleteList{
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 DemoAccordionHeader{
-    background-color: #112d78;
+    background-color: #222222;
     color: white;
 }
 
 DemoAccordionLabel{
-    background-color: #112d78;
+    background-color: #222222;
     color: white;
 }
 
 AccordionItem{
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 DemoAccordionIcon{
@@ -382,7 +378,7 @@ DemoAccordionIcon{
 }
 
 Tab{
-    background-color: #112d78;
+    background-color: #222222;
     color: white;
 }
 
@@ -391,11 +387,11 @@ DialogDemoSpanLabel{
 }
 
 PopupDialog{
-    background-color: #112d78; 
+    background-color: #222222; 
 }
 
 Sheet{
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 SheetTitle{
@@ -407,7 +403,7 @@ SheetBackButton{
 }
 
 DialogCommandArea{
-    background-color: #112d78;
+    background-color: #222222;
     margin: 0;
 }
 
@@ -420,7 +416,7 @@ DemoTitleCommand{
 }
 
 ToolbarSearch{
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 TextFieldSearch{
@@ -428,11 +424,94 @@ TextFieldSearch{
 }
 
 SideNavigationPanel{
-    background-color: #112d78;
+    background-color: #222222;
 }
 
 TitleCommand{
     color: white;
 }
 
+ConfirmContainer{
+    background-color: #222222;
+}
 
+SignatureButton{
+    background-color: #222222;
+    color: white;
+}
+CostSummary{
+    background-image: url(images/advanced/summary-background-dark.png);
+    cn1-background-type: cn1-image-scaled;
+}
+
+CostSummaryLabel{
+    color: white;
+}
+
+SignatureCost{
+    color: white;
+}
+
+SignatureTotalCost{
+    color: white;
+}
+
+TreeNode{
+    color: white;
+    background-color: #222222;
+}
+
+LabelContainer{
+    background-color: #222222;
+}
+
+ButtonContainer{
+    background-color: #222222;
+}
+
+Wrapper{
+    background-color: #222222;
+}
+
+BurgerIngredients{
+    color: white;
+}
+
+DemoCheckBox{
+    color: #9e9e9e;
+}
+
+DemoCheckBox.pressed{
+    color: white;
+    background-color: #3b3b3b;
+}
+
+SelectBuild{
+    color: white;
+}
+
+SelectGroceriesLabel{
+    color: white;
+}
+
+ComboBoxItem{
+    background-color: #222222;
+    color: white;
+}
+
+Note{
+    color: white;
+    border-image: url(images/advanced/calendar-note-dark.png);
+}
+
+MonthView{
+    background-color: #222222;
+}
+
+CalendarDay{
+    color: white;
+}
+
+ComboBox{
+    background-color: black;
+}

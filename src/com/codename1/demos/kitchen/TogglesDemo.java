@@ -98,14 +98,20 @@ public class TogglesDemo extends Demo {
         cb3.setSelected(true);
         cb4.setSelected(true);
         Container checkBoxContainer = BoxLayout.encloseY(cb1, cb2, cb3, cb4, cb5, cb6, cb7);
-        Button completeOrder = new Button("Complete Order", "DemoCompleteOrder");
+        Button completeOrder = new Button("Complete Order", "DemoButton");
         completeOrder.addActionListener(e->{
             ToastBar.showInfoMessage("Your order is on the way");
         });
+        
+        Container completeOrderContainer = FlowLayout.encloseCenter(completeOrder);
+        completeOrderContainer.setUIID("CompleteOrderContainer");
+        
         Container demoContainer = BorderLayout.center(checkBoxContainer).
-                                        add(BorderLayout.SOUTH, completeOrder).
-                add(BorderLayout.NORTH, new Label("burger ingredients", "BurgerIngredients"));
-        return demoContainer;
+                                        add(BorderLayout.SOUTH, completeOrderContainer).
+                add(BorderLayout.NORTH, new Label("Burger Ingredients", "BurgerIngredients"));
+        
+        demoContainer.setUIID("Wrapper");
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createRadioButtonDemo(){
@@ -125,16 +131,20 @@ public class TogglesDemo extends Demo {
         rb6.setUIID("DemoRadioButton");
         
         rb1.setSelected(true);
-        Container radioButtonsContainer = BoxLayout.encloseY(new Label("select build:"), rb1, rb2, rb3, rb4, rb5, rb6);
+        Container radioButtonsContainer = BoxLayout.encloseY(new Label("select build", "SelectBuild"), rb1, rb2, rb3, rb4, rb5, rb6);
         Container demoContainer = BorderLayout.center(radioButtonsContainer);
-        Button applyButton = new Button("Send Build", "DemoRadioBuildButton");
         
+        Button applyButton = new Button("Send Build", "DemoRadioBuildButton");
         applyButton.addActionListener(e->{
             RadioButton selectedButton = bg.getSelected();
             ToastBar.showInfoMessage(selectedButton.getText() + " build was sent");
         });
-        demoContainer.add(BorderLayout.SOUTH, applyButton);
-        return demoContainer;
+        Container applyContainer = FlowLayout.encloseCenter(applyButton);
+        applyContainer.setUIID("CompleteOrderContainer");
+        
+        demoContainer.add(BorderLayout.SOUTH, applyContainer);
+        demoContainer.setUIID("Wrapper");
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createSwitchDemo(){

@@ -30,7 +30,6 @@ import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import com.codename1.ui.CheckBox;
 import com.codename1.ui.Command;
-import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
@@ -61,9 +60,9 @@ public class ToggleListDemo extends Demo {
         
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("check-box-list.png"),
-                                                                "Check Box List (Flow)",
+                                                                "Check Box List",
                                                                 "A list of Check Boxes", e->{  
-                                                                    showDemo("Check Box List (Flow)", createCheckBoxListDemo());
+                                                                    showDemo("Check Box List", createCheckBoxListDemo());
                                                                 }));
         
         demoContainer.add(builder.createComponent(getGlobalResources().getImage("radio-button-list.png"),
@@ -78,14 +77,16 @@ public class ToggleListDemo extends Demo {
     private Container createCheckBoxListDemo(){
         DefaultListModel model = new DefaultListModel("Pasta", "Rice", "Bread", "Butter", "Milk", "Eggs", "Cheese", "Salt", "Pepper", "Honey");
         CheckBoxList list = new CheckBoxList(model);
-        list.setLayout(new FlowLayout(Component.CENTER));  
-        Button add = new Button("Add New", "ShareGroceriesDemo");
+        list.setScrollableY(true);
+        list.setLayout(new BoxLayout(BoxLayout.Y_AXIS));  
+        list.setShouldCalcPreferredSize(true);
+        Button add = new Button("Add New", "AddNewGroceriesDemo");
         add.addActionListener(e->{
             TextComponent newItem = new TextComponent().label("New Item: ");
             Command ok = new Command("Ok");
             Command cancel = new Command("Cancel");
             
-            if (Dialog.show("Enter Note", newItem, ok, cancel) == ok && newItem.getText().length() != 0){
+            if(Dialog.show("Enter Note", newItem, ok, cancel) == ok && newItem.getText().length() != 0){
                 model.addItem(newItem.getText());
                 list.revalidate();
             }
@@ -116,11 +117,16 @@ public class ToggleListDemo extends Demo {
                 }
             }
         });
+        
+        Container buttonsContainer = FlowLayout.encloseCenter(share, add);
+        buttonsContainer.setUIID("CompleteOrderContainer");
          
         Container checkBoxContainer = BorderLayout.center(list).
-                                        add(BorderLayout.NORTH, new Label("Select groceries to share", "DemoLabel")).
-                                        add(BorderLayout.SOUTH, FlowLayout.encloseCenter(share, add));
-        return checkBoxContainer;
+                                        add(BorderLayout.NORTH, new Label("Select groceries to share", "SelectGroceriesLabel")).
+                                        add(BorderLayout.SOUTH, buttonsContainer);
+        checkBoxContainer.setUIID("Wrapper");
+        
+        return BoxLayout.encloseY(checkBoxContainer);
     }
     
     private Container createRadioButtonListDemo(){
@@ -143,7 +149,8 @@ public class ToggleListDemo extends Demo {
         Container demoContainer = BorderLayout.center(list).
                                     add(BorderLayout.NORTH, question).
                                     add(BorderLayout.SOUTH, answer);
+        demoContainer.setUIID("Wrapper");
         
-        return demoContainer;
+        return BoxLayout.encloseY(demoContainer);
     }
 }
