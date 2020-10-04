@@ -22,8 +22,8 @@
  */
 package com.codename1.demos.kitchen;
 
-
 import com.codename1.components.InteractionDialog;
+import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.googlemaps.MapContainer;
 import com.codename1.googlemaps.MapContainer.MapObject;
@@ -39,6 +39,7 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.maps.Coord;
+import static com.codename1.ui.CN.execute;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Form;
@@ -46,8 +47,8 @@ import com.codename1.ui.layouts.BoxLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class MapsDemo extends Demo {
-    
-    boolean tapDisabled = false;
+    // Should be replaced with real api key in order to activate the demo. 
+    private String googleMapsHTMLKey = null;
     MapObject sydney;
     
     public MapsDemo(Form parentForm) {
@@ -62,21 +63,17 @@ public class MapsDemo extends Demo {
         demoContainer.add(BorderLayout.NORTH, builder.createComponent(getGlobalResources().getImage("map-google-component.png"),
                                                                 "Google Map",
                                                                 "Google Map class", e->{
-                                                                    showDemo("Google Map", createGoogleMapComponent());
+                                                                    if(googleMapsHTMLKey == null){
+                                                                        showDemo("Google Map", createKeysGuide());
+                                                                    }else{
+                                                                        showDemo("Google Map", createGoogleMapComponent());
+                                                                    }
                                                                 }));
-        Button settings = new Button("Settings", "DemoButton");
-        settings.addActionListener(e->{
-            Form settingsForm = new Form("Settings", new BoxLayout(BoxLayout.Y_AXIS));
-            
-        });
-        demoContainer.add(BorderLayout.SOUTH, FlowLayout.encloseRight(settings));
         return demoContainer;
     }
     
     private Component createGoogleMapComponent(){
-        //TODO remove the key.
-//        final MapContainer cnt = new MapContainer("AIzaSyAvMh8_ihHqqAOGPN7hXPUdbSHEPA9XOhI");
-        final MapContainer cnt = new MapContainer();
+        final MapContainer cnt = new MapContainer(googleMapsHTMLKey);
 
         Button btnMoveCamera = new Button("Move Camera");
         btnMoveCamera.addActionListener(e->{
@@ -147,5 +144,34 @@ public class MapsDemo extends Demo {
                 )
         );
         return root;
+    }
+    
+    private Container createKeysGuide(){
+        Container keysGuideContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        keysGuideContainer.add(new Label("Configuration", "DemoHeaderLabel"));
+        keysGuideContainer.add(new SpanLabel("In order to make this demo work you should generate Api Keys and define the following build arguments within your project:\n\n" +
+                "javascript.googlemaps.key=YOUR_JAVASCRIPT_API_KEY\n\n" +
+                "android.xapplication=<meta-data android:name=\"com.google.android.maps.v2.API_KEY\" android:value=\"YOUR_ANDROID_API_KEY\"/>\n\n" +
+                "ios.afterFinishLaunching=[GMSServices provideAPIKey:@\"YOUR_IOS_API_KEY\"];\n\nMake sure to replace the values YOUR_ANDROID_API_KEY, YOUR_IOS_API_KEY, "+
+                "and YOUR_JAVASCRIPT_API_KEY with the values you obtained from the Google Cloud console by following the instructions.\n\nAlso you need to replace "+
+                "the \"googleMapsHTMLKey\" attribute in the source code.", "DemoLabel"));
+        
+        Button javascriptButton = new Button("Generate Javascript key", "DemoButton");
+        javascriptButton.addActionListener(e-> execute("https://developers.google.com/maps/documentation/javascript/overview"));
+        
+        Button iosButton = new Button("Generate IOS Key", "DemoButton");
+        iosButton.addActionListener(e-> execute("https://developers.google.com/maps/documentation/ios-sdk/start"));
+        
+        Button androidButton = new Button("Generate Android Key", "DemoButton");
+        androidButton.addActionListener(e-> execute("https://developers.google.com/maps/documentation/android-sdk/start"));
+        
+        Button infoButton = new Button("For More Information", "DemoButton");
+        infoButton.addActionListener(e-> execute("https://www.codenameone.com/blog/new-improved-native-google-maps.html"));
+        
+        keysGuideContainer.addAll(javascriptButton, iosButton, androidButton, infoButton);
+        keysGuideContainer.setUIID("Wrapper");
+        Container demoContainer =  BoxLayout.encloseY(keysGuideContainer);
+        demoContainer.setScrollableY(true);
+        return demoContainer;
     }
 }

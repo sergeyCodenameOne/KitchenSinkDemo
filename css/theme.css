@@ -317,6 +317,10 @@ background-image:   url(images/charts/chart-bar.png),
     DemoButton{
         font-size: 5mm;
     }
+    
+    DemoHeaderLabel{
+        font-size: 5mm;
+    }
 }
 
 DialogCommandArea{
@@ -1520,4 +1524,12 @@ SignaturePanelSignature{
 
 SignatureButtonBox{
     color: black;
+}
+
+DemoHeaderLabel{
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    background-color: rgba(0, 0, 0, 0);
+    color: black;
+    text-align: center;
 }

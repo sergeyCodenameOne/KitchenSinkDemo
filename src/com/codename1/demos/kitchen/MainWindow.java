@@ -92,7 +92,6 @@ public class MainWindow {
             return;
         }
         Form demoForm = new Form(demo.getDemoId(), new BorderLayout());
-//        demoForm.setMinimizeOnBack(false);
         Toolbar toolbar = demoForm.getToolbar();
         toolbar.setUIID("DemoToolbar");
         toolbar.getTitleComponent().setUIID("DemoTitle");
@@ -103,7 +102,7 @@ public class MainWindow {
                 e-> demo.getParentForm().showBack());
         
         Command sourceCommand = Command.create("", FontImage.create("{ }", commandStyle),
-                e->{});
+                e-> execute(demo.getSourceCode()));
         
         toolbar.addCommandToRightBar(sourceCommand);
         toolbar.setBackCommand(backCommand);

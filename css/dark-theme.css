@@ -506,3 +506,7 @@ SignaturePanelSignature{
 SignatureButtonBox{
     color: white;
 }
+
+DemoHeaderLabel{
+    color: white;
+}
