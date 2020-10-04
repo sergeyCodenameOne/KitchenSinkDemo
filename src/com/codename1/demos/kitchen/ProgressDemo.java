@@ -101,7 +101,6 @@ public class ProgressDemo extends Demo {
                                                     e->{
                                                         showDemo("Text Loading Animation", createTextLoadAnimationDemo());
                                                     }));
-        
         return demoContainer;
     }
     
@@ -118,7 +117,8 @@ public class ProgressDemo extends Demo {
     
     private Container createSliderDemo(){
         Slider progress = new Slider();
-        Button download = new Button("Download");
+
+        Button download = new Button("Download", "DemoButton");
         Container demoContainer = BorderLayout.south(progress).
                                     add(BorderLayout.NORTH, download);
         

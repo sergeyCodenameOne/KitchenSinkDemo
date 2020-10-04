@@ -82,7 +82,7 @@ public abstract class Demo{
             Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("DemoTitleCommand")),
                     e-> lastForm.showBack());
             
-            toolbar.addCommandToLeftBar(backCommand);
+            toolbar.setBackCommand(backCommand);
             chartForm.add(BorderLayout.CENTER, content);
             chartForm.show();      
     }

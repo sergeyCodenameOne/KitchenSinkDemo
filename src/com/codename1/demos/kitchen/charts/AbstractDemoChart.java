@@ -36,6 +36,8 @@ import com.codename1.charts.views.AbstractChart;
 import com.codename1.charts.views.PointStyle;
 import com.codename1.ui.Display;
 import com.codename1.ui.Font;
+import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -285,10 +287,14 @@ public abstract class AbstractDemoChart implements IDemoChart {
 
     
     protected void initRendererer(DefaultRenderer renderer) {
-        renderer.setBackgroundColor(0xffffffff);
+        Style s = UIManager.getInstance().getComponentStyle("DemoChart");
+        renderer.setBackgroundColor(s.getBgColor());
         renderer.setApplyBackgroundColor(true);
-        renderer.setLabelsColor(0xff000000);
-        renderer.setAxesColor(0xff000000);
+        renderer.setLabelsColor(s.getFgColor());
+        renderer.setAxesColor(s.getFgColor());
+        if (renderer instanceof XYMultipleSeriesRenderer){
+            ((XYMultipleSeriesRenderer)renderer).setMarginsColor(s.getBgColor());
+        }
         if(Font.isNativeFontSchemeSupported()) {
             Font fnt = Font.createTrueTypeFont("native:MainLight", "native:MainLight").
                     derive(Display.getInstance().convertToPixels(2.5f), Font.STYLE_PLAIN);
@@ -302,9 +308,8 @@ public abstract class AbstractDemoChart implements IDemoChart {
             }
             if(renderer instanceof XYMultipleSeriesRenderer) {
                 XYMultipleSeriesRenderer x = (XYMultipleSeriesRenderer)renderer;
-                x.setMarginsColor(0xfff7f7f7);
-                x.setXLabelsColor(0xff000000);
-                x.setYLabelsColor(0, 0xff000000);
+                x.setXLabelsColor(s.getFgColor());
+                x.setYLabelsColor(0, s.getFgColor());
             }
         }
     }

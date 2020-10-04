@@ -293,7 +293,7 @@ public class ButtonsDemo extends Demo{
     
     private Component createNote(String header, String body, Container notes){
         Button deleteButton = new Button("", FontImage.createMaterial(FontImage.MATERIAL_DELETE, UIManager.getInstance().getComponentStyle("DeleteButton")), "DeleteButton");
-        Label emptyLabel = new Label(" ", "EmptyPurpleLabel");
+        Label emptyLabel = new Label(" ", "EmptyGreenLabel");
         SpanLabel noteHeaderLabel = new SpanLabel(header, "NoteHeaderLabel");
         SpanLabel noteBodyLabel = new SpanLabel(body, "NoteBodyLabel");
         Container noteContainer = BoxLayout.encloseY(emptyLabel, noteHeaderLabel, noteBodyLabel);

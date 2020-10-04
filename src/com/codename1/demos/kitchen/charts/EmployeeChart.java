@@ -26,6 +26,7 @@ import com.codename1.charts.models.AreaSeries;
 import com.codename1.charts.models.CategorySeries;
 import com.codename1.charts.renderers.DefaultRenderer;
 import com.codename1.charts.util.ColorUtil;
+import com.codename1.charts.views.RadarChart;
 import com.codename1.ui.Component;
 
 public class EmployeeChart extends AbstractDemoChart {
@@ -46,8 +47,7 @@ public class EmployeeChart extends AbstractDemoChart {
         DefaultRenderer renderer = buildCategoryRenderer(colors);
         initRendererer(renderer);
         
-        // TODO change to RadarChart afther fixed
-        MyRadarChart chart = new MyRadarChart(getDataSet(), renderer);
+        RadarChart chart = new RadarChart(getDataSet(), renderer);
            
         return newChart(chart);
     }

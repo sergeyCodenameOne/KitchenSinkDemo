@@ -54,7 +54,7 @@ public class ToolbarDemo extends Demo{
         Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, commandStyle),
                 e-> lastForm.showBack());
         
-        Command sourceCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_CODE, commandStyle),
+        Command sourceCommand = Command.create("", FontImage.create("{ }", commandStyle),
                 e->{});
         
         tb.addCommandToRightBar(sourceCommand);

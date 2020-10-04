@@ -149,8 +149,9 @@ public class ChartsDemo extends Demo {
             Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, lastForm.getUIManager().getComponentStyle("DemoTitleCommand")),
                     e-> lastForm.showBack());
             
-            toolbar.addCommandToLeftBar(backCommand);
+            toolbar.setBackCommand(backCommand);
             chartForm.add(BorderLayout.CENTER, demo.execute());
+            chartForm.getContentPane().setUIID("ComponentDemoContainer");
             chartForm.show();      
     }
 }

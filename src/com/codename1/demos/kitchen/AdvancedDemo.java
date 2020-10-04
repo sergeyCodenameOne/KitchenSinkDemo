@@ -25,7 +25,6 @@ package com.codename1.demos.kitchen;
 
 import com.codename1.components.FileTree;
 import com.codename1.components.FileTreeModel;
-import com.codename1.components.FloatingActionButton;
 import com.codename1.components.InfiniteProgress;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SignatureComponent;
@@ -192,6 +191,7 @@ public class AdvancedDemo extends Demo{
                 add(BorderLayout.SOUTH, FlowLayout.encloseCenter(clear, confirmAndPay));
                 
         demoContainer.addAll(costSummury, creditCard, confirmContainer);
+        demoContainer.setScrollableY(true);
         return demoContainer;   
     }
     

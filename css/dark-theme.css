@@ -35,37 +35,24 @@ DialogButtonCommand{
 
 MainWindowContainer{
     background-color: #000000;
-    padding: 3mm;
-    margin: 0;
 }
 
 MainWindowDemoComponent{
     background-color: #222222;
-    border-radius: 2mm;
-    margin-top: 2mm;
-    margin-left: 2mm;
-    margin-right: 2mm;
-    padding:2mm;
 }
 
 MainWindowToolbar{
     background-color: #222222;
-    margin: 0;
-    padding: 0;
 }
 
 MainWindowTitle{
    color: white;
    background-color: #222222;
-   margin: 3mm;
 }
 
 MainWindowDemoName{
     color: white;
     background-color: #222222;
-    text-align: center;
-    font-family: "native:MainBold";
-    font-size: 3mm
 }
 
 DemoComponentIcon{
@@ -74,50 +61,31 @@ DemoComponentIcon{
 }
 
 DemoToolbar{
-        margin: 0;
         background-color: #222222;
-        padding: 3mm;
-        font-size: 3mm;
 }
 
 DemoContainer{
-    margin: 0;
     background-color: #000000;
-    padding: 0;
 }
 
 DemoContentAccordion{
     background-color: #222222;
-    border-radius: 2mm;
-    padding-bottom: 2mm;
-    margin: 3mm;
 }
 
 DemoContentRegular{
     background-color: #222222;
-    border-radius: 2mm;
-    padding-bottom: 2mm;
-    margin: 3mm;
 }
 
 DemoContentImage{
-    margin: 3mm;
-    padding: 0;
     background-color: #222222;
 }
 
 DemoContentHeader{
-    margin-left: 2mm;
-    font-size: 3mm;
-    font-family: "native:MainBold";
     background-color: #222222;
     color: white;
 }
 
 DemoContentBody{
-    font-family: "native:MainRegular";
-    font-size: 2.6mm;
-    margin-left: 2mm;
     background-color: #222222;
     color: white;
 }
@@ -135,23 +103,14 @@ AccordionButton{
 TitleCommand{
     color: white;
     background-color: #222222;
-    margin: 0;
-    padding: 0;
 }
 
 VideoContainer{
-    border: none;
     background-color: #000000;
-    margin: 0;
 }
 
 VideoComponent{
     background-color: #222222;
-    border-radius: 2mm;
-    margin-top: 2mm;
-    margin-left: 2mm;
-    margin-right: 2mm;
-    padding:2mm;
 }
 
 MediaComponentLine1{
@@ -164,9 +123,6 @@ MediaComponentLine2{
 
 ComponentDemoToolbar{
     background-color: #222222;
-    padding: 3mm;
-    font-size: 3mm;
-    margin: 0;
 }
 
 ComponentDemoTitle{
@@ -218,7 +174,6 @@ RadioButtonsContainer{
 
 SwitchContainer{
     background-color: #efeff4;
-    margin: 0;
 }
 
 DemoSwitch{
@@ -227,40 +182,37 @@ DemoSwitch{
 
 BrightContainer{
     background-color: #efeff4;
-    margin: 0;
 }
 
 DarkContainer{
     background-color: #000000;
-    margin: 0;
 }
 
 RedContainer{
     background-color: #ff0000;
-    margin: 0;
 }
 
 GreenContainer{
     background-color: #00ff00;
-    margin: 0;
 }
 
 BlueContainer{
     background-color: #0000ff;
-    margin: 0;
 }
 
 PopupContentPane{
-    margin: 0;
     background-color: #222222;
 }
 
 DemoPicker{
     background-color: #efeff4;
-    border-radius: 2mm;
 }
 
 DemoLabel{
+    color: white;
+}
+
+DemoHeader{
     color: white;
 }
 
@@ -297,11 +249,6 @@ FileTree{
 
 ScaleComponentDemoLabel{
     background-color: #000000;
-    color: white;
-}
-
-DemoScaleImageButton{
-    background-color: #000000; 
     color: white;
 }
 
@@ -348,7 +295,7 @@ FloatingHint{
 
 DemoTextArea{
     color: white;
-    background-color: #222222;
+    background-color: #000000;
 }
 
 AutoCompletePopup{
@@ -514,4 +461,48 @@ CalendarDay{
 
 ComboBox{
     background-color: black;
+}
+
+TextComponents{
+    background-color: #222222;
+}
+
+TabsContainer{
+    background-color: black;
+}
+
+ToolbarDemoButton{
+    color: white;
+}
+
+DemoChart{
+    color: white;
+    background-color: black;
+}
+
+SalesTableHeader{
+    background-color: #3b3b3b;
+    color: white;
+}
+
+SalesTableEvenRow{
+    background-color: #222222;
+    color: white;
+}
+
+SalesTableOddRow{
+    background-color: #292929;
+    color: white;
+}
+
+SignaturePanelBox{
+    color: white;
+}
+
+SignaturePanelSignature{
+    color: white;
+}
+
+SignatureButtonBox{
+    color: white;
 }

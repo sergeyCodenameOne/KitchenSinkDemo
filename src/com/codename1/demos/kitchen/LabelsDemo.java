@@ -99,15 +99,15 @@ public class LabelsDemo extends Demo {
     }
     
     private Container createLabelDemo(){
-        Container cnt1 = BoxLayout.encloseY(new Label("Text Label:", "DemoLabel"),
+        Container cnt1 = BoxLayout.encloseY(new Label("Text Label:", "DemoHeader"),
                 new Label("label", "DemoLabel"));
         cnt1.setUIID("LabelContainer");
 
-        Container cnt2 = BoxLayout.encloseY(new Label("Image Label:", "DemoLabel"),
+        Container cnt2 = BoxLayout.encloseY(new Label("Image Label:", "DemoHeader"),
                 new Label(getGlobalResources().getImage("code-name-one-icon.png"), "DemoLabel"));
         cnt2.setUIID("LabelContainer");
 
-        Container cnt3 = BoxLayout.encloseY(new Label("text and image Label:", "DemoLabel"),
+        Container cnt3 = BoxLayout.encloseY(new Label("text and image Label:", "DemoHeader"),
                 new Label("label", getGlobalResources().getImage("code-name-one-icon.png"), "DemoLabel"));
         cnt3.setUIID("LabelContainer");
 
@@ -115,7 +115,7 @@ public class LabelsDemo extends Demo {
     }
     
     private Container createSpanLabelDemo(){
-        Container cnt1 = BoxLayout.encloseY(new Label("SpanLabel:", "DemoLabel"), 
+        Container cnt1 = BoxLayout.encloseY(new Label("SpanLabel:", "DemoHeader"), 
                 new SpanLabel("A multi line label component that can be easily localized, this is simply based on a text area combined with a label.", "DemoLabel"));
         cnt1.setUIID("LabelContainer");
         
@@ -123,14 +123,14 @@ public class LabelsDemo extends Demo {
         labelWithIconWest.setMaterialIcon(FontImage.MATERIAL_INFO);
         labelWithIconWest.setIconUIID("DemoLabel");
         labelWithIconWest.setIconPosition("West");
-        Container cnt2 = BoxLayout.encloseY(new Label("SpanLabel with icon (West):", "DemoLabel"), labelWithIconWest);
+        Container cnt2 = BoxLayout.encloseY(new Label("SpanLabel with icon (West):", "DemoHeader"), labelWithIconWest);
         cnt2.setUIID("LabelContainer");        
         
         SpanLabel labelWithIconNorth = new SpanLabel("A multi line label component that can be easily localized, this is simply based on a text area combined with a label.", "DemoLabel");
         labelWithIconNorth.setMaterialIcon(FontImage.MATERIAL_INFO);
         labelWithIconNorth.setIconUIID("DemoLabel");
         labelWithIconNorth.setIconPosition("North");
-        Container cnt3 = BoxLayout.encloseY(new Label("SpanLabel with icon (North):", "DemoLabel"), labelWithIconNorth);
+        Container cnt3 = BoxLayout.encloseY(new Label("SpanLabel with icon (North):", "DemoHeader"), labelWithIconNorth);
         cnt3.setUIID("LabelContainer");
         
         return BoxLayout.encloseY(cnt1, cnt2, cnt3);

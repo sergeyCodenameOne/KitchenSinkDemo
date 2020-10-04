@@ -28,8 +28,10 @@ import com.codename1.ui.Dialog;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.io.Log;
+import com.codename1.ui.Button;
 import com.codename1.ui.Toolbar;
 import static com.codename1.ui.Button.setButtonRippleEffectDefault;
+import com.codename1.ui.Command;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.plaf.RoundRectBorder;
@@ -42,6 +44,7 @@ public class KitchenSink {
     private Form current;
     private Resources theme;
     private static boolean darkMode = false;
+    private static Command darkModeCommand;
 
     public void init(Object context) {
         // use two network threads instead of one
@@ -84,7 +87,7 @@ public class KitchenSink {
         }
         MainWindow mw = new MainWindow();
         Form mainForm =  mw.buildForm();
-        mainForm.getToolbar().addCommandToRightBar("", FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommand")), e->{
+        darkModeCommand = mainForm.getToolbar().addCommandToRightBar("", FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommand")), e->{
             initTheme();
         });
         mainForm.show();
@@ -113,6 +116,8 @@ public class KitchenSink {
             }catch(IOException e){
                 Log.e(e);
             }
+            Button darkModeCmd = Display.getInstance().getCurrent().getToolbar().findCommandComponent(darkModeCommand);
+            darkModeCmd.setIcon(FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommand")));
             Display.getInstance().getCurrent().refreshTheme();
         }
     }

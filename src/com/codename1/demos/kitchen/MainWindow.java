@@ -47,7 +47,7 @@ public class MainWindow {
         tb.setUIID("MainWindowToolbar");
         tb.getTitleComponent().setUIID("MainWindowTitle");
 
-        //create demos
+        // Create demos
         Demo[] demos = {new ChartsDemo(mainWindow),
                         new AdvancedDemo(mainWindow),
                         new MapsDemo(mainWindow),
@@ -92,6 +92,7 @@ public class MainWindow {
             return;
         }
         Form demoForm = new Form(demo.getDemoId(), new BorderLayout());
+//        demoForm.setMinimizeOnBack(false);
         Toolbar toolbar = demoForm.getToolbar();
         toolbar.setUIID("DemoToolbar");
         toolbar.getTitleComponent().setUIID("DemoTitle");
@@ -101,11 +102,11 @@ public class MainWindow {
         Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, commandStyle),
                 e-> demo.getParentForm().showBack());
         
-        Command sourceCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_CODE, commandStyle),
+        Command sourceCommand = Command.create("", FontImage.create("{ }", commandStyle),
                 e->{});
         
         toolbar.addCommandToRightBar(sourceCommand);
-        toolbar.addCommandToLeftBar(backCommand);
+        toolbar.setBackCommand(backCommand);
         if(isTablet()){
             Demo.adjustToTablet(demoContent);
         }

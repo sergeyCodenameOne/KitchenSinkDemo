@@ -50,32 +50,39 @@ public class MapsDemo extends Demo {
     boolean tapDisabled = false;
     MapObject sydney;
     
-    
     public MapsDemo(Form parentForm) {
         init("Maps", getGlobalResources().getImage("demo-maps.png"), parentForm, "");
     }
-     
+    
     @Override
     public Container createContentPane() {
-        Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
+        Container demoContainer = new Container(new BorderLayout(), "DemoContainer");
         ContentBuilder builder = ContentBuilder.getInstance();
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("map-google-component.png"),
+        demoContainer.add(BorderLayout.NORTH, builder.createComponent(getGlobalResources().getImage("map-google-component.png"),
                                                                 "Google Map",
                                                                 "Google Map class", e->{
                                                                     showDemo("Google Map", createGoogleMapComponent());
                                                                 }));
+        Button settings = new Button("Settings", "DemoButton");
+        settings.addActionListener(e->{
+            Form settingsForm = new Form("Settings", new BoxLayout(BoxLayout.Y_AXIS));
+            
+        });
+        demoContainer.add(BorderLayout.SOUTH, FlowLayout.encloseRight(settings));
         return demoContainer;
     }
     
     private Component createGoogleMapComponent(){
         //TODO remove the key.
-        final MapContainer cnt = new MapContainer("AIzaSyAvMh8_ihHqqAOGPN7hXPUdbSHEPA9XOhI");
+//        final MapContainer cnt = new MapContainer("AIzaSyAvMh8_ihHqqAOGPN7hXPUdbSHEPA9XOhI");
+        final MapContainer cnt = new MapContainer();
 
         Button btnMoveCamera = new Button("Move Camera");
         btnMoveCamera.addActionListener(e->{
             cnt.setCameraPosition(new Coord(-33.867, 151.206));
         });
+        
         Style s = new Style();
         s.setFgColor(0xff0000);
         s.setBgTransparency(0);
@@ -83,29 +90,26 @@ public class MapsDemo extends Demo {
 
         Button btnAddMarker = new Button("Add Marker");
         btnAddMarker.addActionListener(e->{
-
             cnt.setCameraPosition(new Coord(41.889, -87.622));
             cnt.addMarker(
-                    EncodedImage.createFromImage(markerImg, false),
-                    cnt.getCameraPosition(),
-                    "Hi marker",
-                    "Optional long description",
-                     evt -> {
-                             ToastBar.showMessage("You clicked the marker", FontImage.MATERIAL_PLACE);
-                     }
+                EncodedImage.createFromImage(markerImg, false),
+                cnt.getCameraPosition(),
+                "Hi marker",
+                "Optional long description",
+                evt -> {
+                    ToastBar.showMessage("You clicked the marker", FontImage.MATERIAL_PLACE);
+                }
             );
-
         });
 
         Button btnAddPath = new Button("Add Path");
         btnAddPath.addActionListener(e->{
-
             cnt.addPath(
-                    cnt.getCameraPosition(),
-                    new Coord(-33.866, 151.195), // Sydney
-                    new Coord(-18.142, 178.431),  // Fiji
-                    new Coord(21.291, -157.821),  // Hawaii
-                    new Coord(37.423, -122.091)  // Mountain View
+                cnt.getCameraPosition(),
+                new Coord(-33.866, 151.195), // Sydney
+                new Coord(-18.142, 178.431),  // Fiji
+                new Coord(21.291, -157.821),  // Hawaii
+                new Coord(37.423, -122.091)  // Mountain View
             );
         });
 

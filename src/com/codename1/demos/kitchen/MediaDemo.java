@@ -34,11 +34,13 @@ import static com.codename1.io.Util.downloadUrlToFileSystemInBackground;
 import com.codename1.media.Media;
 import com.codename1.media.MediaManager;
 import static com.codename1.ui.CN.*;
+import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
@@ -60,7 +62,7 @@ public class MediaDemo extends Demo {
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "VideoContainer");
       
         Style iconStyle = UIManager.getInstance().getComponentStyle("MediaIcon");
-        Component downloadButton = createVideoComponent("Hello (Online)", "Download to FileSystem", FontImage.createMaterial(FontImage.MATERIAL_ARROW_DROP_DOWN_CIRCLE, iconStyle),
+        Component downloadButton = createVideoComponent("Hello (Online)", "Download to FileSystem", FontImage.createMaterial(FontImage.MATERIAL_ARROW_CIRCLE_DOWN, iconStyle),
                                         e-> {
                                             if (!existsInFileSystem(DOWNLOADED_VIDEO)){
                                                 ToastBar.showMessage("Downloading", FontImage.MATERIAL_SYSTEM_UPDATE, 3000);
@@ -108,11 +110,16 @@ public class MediaDemo extends Demo {
     }
     private void playVideoOnNewForm(String fileURI, Form parentForm){
         Form videoForm = new Form("Video", new BorderLayout());
+        videoForm.getContentPane().setUIID("ComponentDemoContainer");
+        Toolbar toolbar = videoForm.getToolbar();
+        toolbar.setUIID("DemoToolbar");
+        toolbar.getTitleComponent().setUIID("DemoTitle");
         videoForm.add(CENTER, new InfiniteProgress());
+        Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("DemoTitleCommand")),
+                    e-> parentForm.showBack());
+        toolbar.setBackCommand(backCommand);
+        
         videoForm.show();
-        videoForm.getToolbar().setBackCommand("", e->{
-            parentForm.show();
-        });
         scheduleBackgroundTask(() -> {
             try{
                 Media capturedVideo = MediaManager.createMedia(fileURI, true);
@@ -135,7 +142,6 @@ public class MediaDemo extends Demo {
     }
     
     private void downloadFile(String Url){
-        
         downloadUrlToFileSystemInBackground(Url, DOWNLOADED_VIDEO, (e)-> {
             callSerially(()-> ToastBar.showInfoMessage("Your download has completed"));
         });

@@ -122,10 +122,9 @@ public class SelectionDemo extends Demo{
         
         combo.setRenderer(new GenericListCellRenderer<>(mb1, mb2));
         combo.setSelectedIndex(1);
-        combo.setIncludeSelectCancel(true);
         demoContainer.add(BorderLayout.CENTER, BoxLayout.encloseY(combo));
         
-        Button showRating = new Button("Show Rating", "DemoSaveButton");
+        Button showRating = new Button("Show Rating", "DemoButton");
         showRating.addActionListener(e->{
             Map selectedItem = combo.getSelectedItem();
             ToastBar.showInfoMessage((String)selectedItem.get("Line1") + " rating is: " + (String)selectedItem.get("rating"));

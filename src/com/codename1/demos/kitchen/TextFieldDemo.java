@@ -25,11 +25,7 @@ package com.codename1.demos.kitchen;
 import com.codename1.components.ClearableTextField;
 import com.codename1.components.ToastBar;
 import com.codename1.io.CSVParser;
-import com.codename1.io.ConnectionRequest;
-import com.codename1.io.JSONParser;
 import com.codename1.io.Log;
-import com.codename1.io.NetworkManager;
-import com.codename1.processing.Result;
 import com.codename1.ui.AutoCompleteTextField;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
@@ -45,15 +41,10 @@ import com.codename1.ui.list.DefaultListCellRenderer;
 import com.codename1.ui.list.DefaultListModel;
 import com.codename1.ui.table.TableLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 
 public class TextFieldDemo extends Demo{
     
@@ -162,7 +153,8 @@ public class TextFieldDemo extends Demo{
         
         Container demoContainer = BorderLayout.center(textFields);
         demoContainer.add(BorderLayout.SOUTH, submit);
-        return demoContainer;
+        demoContainer.setUIID("Wrapper");
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createTextAreaDemo(){
@@ -216,7 +208,8 @@ public class TextFieldDemo extends Demo{
         
         Container demoContainer = BorderLayout.center(textFields);
         demoContainer.add(BorderLayout.SOUTH, submit);
-        return demoContainer;
+        demoContainer.setUIID("Wrapper");
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createClearableTextFieldDemo(){
@@ -238,7 +231,8 @@ public class TextFieldDemo extends Demo{
         
         Container demoContainer = BorderLayout.center(textFieldsContainer);
         demoContainer.add(BorderLayout.SOUTH, loginButton);
-        return demoContainer;
+        demoContainer.setUIID("Wrapper");
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createAutoCompleteDemo(){
@@ -278,7 +272,11 @@ public class TextFieldDemo extends Demo{
         renderer.setUIID("DemoLabel");
         renderer.setShowNumbers(false);
         ac.setCompletionRenderer(renderer);
-        return BoxLayout.encloseY(new Label("Search:", "DemoLabel"), ac);
+        
+        
+        Container demoContainer = BoxLayout.encloseY(new Label("Search:", "DemoLabel"), ac);
+        demoContainer.setUIID("Wrapper");
+        return BoxLayout.encloseY(demoContainer);
     }    
     
     List<String> searchWords(String text, List<String> wordsList) {        
