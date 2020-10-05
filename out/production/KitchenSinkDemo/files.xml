@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <project>
+        <css>
+            <images>
+                <animal-images>
+                    <puppy.jpg></puppy.jpg>
+                    <kitty.jpg></kitty.jpg>
+                    <cow.jpg></cow.jpg>
+                    <bird.jpg></bird.jpg>
+                    <llama.jpg></llama.jpg>
+                </animal-images>
+                <button.jpg></button.jpg>
+            </images>
+            <theme.css></theme.css>
+        </css>
+        <src>
+            <main.java></main.java>
+            <button.java></button.java>
+            <toolbar.java></toolbar.java>
+        </src>
+    </project>
