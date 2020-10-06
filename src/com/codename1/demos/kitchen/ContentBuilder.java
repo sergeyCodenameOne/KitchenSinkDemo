@@ -23,22 +23,18 @@
 package com.codename1.demos.kitchen;
 
 import com.codename1.components.ScaleImageButton;
-import com.codename1.components.SpanLabel;
-import com.codename1.ui.Button;
-import com.codename1.ui.Component;
-import static com.codename1.ui.ComponentSelector.select;
-import com.codename1.ui.Container;
-import com.codename1.ui.Display;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Image;
-import com.codename1.ui.Label;
+import com.codename1.components.SpanButton;
+import com.codename1.ui.*;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
+
 import java.util.List;
+
+import static com.codename1.ui.ComponentSelector.select;
 
 
 public class ContentBuilder {
@@ -73,19 +69,21 @@ public class ContentBuilder {
 
         contentImage.addActionListener(listener);
         contentImage.setUIID("DemoContentImage");
-        Label contentHeader = new Label(header, "DemoContentHeader");
-        Label contentFirstLine = new Label(firstLine, "DemoContentBody");
-        
+        Label contentHeader = new Button(header, "DemoContentHeader");
+        Label contentFirstLine = new Button(firstLine, "DemoContentBody");
+
+
         Container demoContent = BoxLayout.encloseY(contentImage, contentHeader, contentFirstLine);
         contentImage.setWidth(demoContent.getWidth() - demoContent.getAllStyles().getPadding(Component.LEFT) - demoContent.getAllStyles().getPadding(Component.RIGHT) - contentImage.getAllStyles().getPadding(Component.LEFT) - contentImage.getAllStyles().getPadding(Component.RIGHT));
+        demoContent.setLeadComponent(contentImage);
         demoContent.setUIID("DemoContentRegular");
         return demoContent;
     }
     
     private class AccordionComponent extends Container{
         private boolean isOpen = false;
-        private Label firstLine;
-        private SpanLabel body;
+        private Button firstLine;
+        private SpanButton body;
         private Image openedIcon;
         private Image closedIcon;
         private Button openClose;
@@ -100,11 +98,14 @@ public class ContentBuilder {
          * @param listener add ActionListener to the image of the component.
          */
         private AccordionComponent(Image image, String header, String firstLine, String body, ActionListener listener) {
-            super(new BorderLayout());   
-            this.firstLine = new Label(firstLine, "DemoContentBody");
-            this.body = new SpanLabel(body, "DemoContentBody");
+            super(new BorderLayout());
+            this.firstLine = new Button(firstLine, "DemoContentBody");
+            this.body = new SpanButton(body, "DemoContentBody");
             this.body.setHidden(true);
-            
+
+            this.firstLine.addActionListener(listener);
+            this.body.addActionListener(listener);
+
             setUIID("DemoContentAccordion");
             ScaleImageButton contentImage = new ScaleImageButton(image){
                 @Override
@@ -114,12 +115,12 @@ public class ContentBuilder {
                     preferredSize.setHeight(Display.getInstance().getDisplayHeight() / 10);
                     return preferredSize;
                 }
-
             };
             contentImage.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED);
             contentImage.addActionListener(listener);
             contentImage.setUIID("DemoContentImage");
-            Label contentHeader = new Label(header, "DemoContentHeader");
+            Button contentHeader = new Button(header, "DemoContentHeader");
+            contentHeader.addActionListener(listener);
 
             Style buttonStyle = UIManager.getInstance().getComponentStyle("AccordionButton");
             openedIcon = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_UP, buttonStyle);

@@ -101,6 +101,7 @@ background-image:   url(images/charts/chart-bar.png),
                     url(images/progress/text-loading-animation.png),
                     url(images/maps/maps-pin.png),
                     url(images/maps/map-google-component.png),
+                    url(images/default-contact-pic.jpg),
                     url(images/code-name-one-icon.png);
     cn1-source-dpi: 0;
 }
@@ -188,10 +189,6 @@ background-image:   url(images/charts/chart-bar.png),
         font-size: 5mm;
     }
     
-    SplitPaneDemoButton{
-        font-size: 5mm;
-    }
-    
     TextFieldsDemoButton{
         font-size: 5mm;
     }
@@ -199,11 +196,6 @@ background-image:   url(images/charts/chart-bar.png),
     SelectGroceriesLabel{
         font-size: 5mm;
     }
-    
-    AddNewGroceriesDemo{
-        font-size: 5mm;
-    }
-    
     
     TitleCommand{
         font-size: 5mm;
@@ -226,12 +218,6 @@ background-image:   url(images/charts/chart-bar.png),
     NoteBodyLabel{
         font-size: 4mm;
     }
-
-    DemoShareIcon{
-        color: black;
-        font-size: 5mm;
-        background-color: rgba(0, 0, 0, 0); 
-    }
     
     WhiteText{
         font-size: 5mm;
@@ -245,16 +231,16 @@ background-image:   url(images/charts/chart-bar.png),
        font-size: 5mm; 
     }
     
-    DemoRadioBuildButton{
-        font-size: 5mm; 
-    }
-    
     DemoAnswerButton{
         font-size: 6mm; 
     }
     
     RadioButton{
         font-size: 5mm; 
+    }
+
+    AddNewButton{
+        font-size: 5mm;
     }
     
     CheckBox{
@@ -344,11 +330,14 @@ Container{
 }
 
 Label{
+    font-family: "native:MainRegular";
+    font-size: 3mm;
     color: black;
     margin: 0;
     padding: 0;
     background-color: rgba(0, 0, 0, 0);
 }
+
 
 Dialog{
     background-color: white;
@@ -404,7 +393,7 @@ ComboBoxList{
 
 ComboBoxItem{
     padding: 1mm;
-    border: none;
+    border-bottom: 0.2mm solid grey;
     background-color: white;
     color: black;
     text-align: center;
@@ -534,7 +523,7 @@ DemoContentBody{
     color: black;
     background-color: white;
     font-family: "native:MainRegular";
-    font-size: 2.4mm;
+    font-size: 2.3mm;
     margin-left: 2mm;
     color: #707070;
 }
@@ -701,6 +690,7 @@ PopupContentPane{
 DemoMultiButton{
     background-color: white;
     color: black;
+    border-bottom: 0.2mm solid grey;
 }
 
 DemoMultiIcon{
@@ -917,16 +907,6 @@ DemoRadioButton.pressed{
     border-radius: 2mm;
 }
 
-DemoRadioBuildButton{
-    color: white;
-    padding: 2mm;
-    margin: 2mm;
-    border-radius: 2mm;
-    background-color: #9bce2e;
-    text-align: center;
-}
-
-
 DemoCheckBoxLabel{
     border-bottom-left-radius: 2mm;
     border-bottom-right-radius: 2mm;
@@ -966,6 +946,10 @@ NoteContainer{
 FabDemo{
     background-color: #9acd32;
     color: white;
+}
+
+FabDemo.pressed{
+    background-color: #a6d841;
 }
 
 EmptyGreenLabel{
@@ -1045,16 +1029,6 @@ DemoScaleImageButton{
     margin: 0 0 2mm 0;
 }
 
-DemoShareIcon{
-    color: yellow;
-    background-color: red; 
-}
-
-DemoShareIcon{
-    color: black;
-    background-color: rgba(0, 0, 0, 0); 
-}
-
 RadioButton{
     font-family: "native:MainRegular";
     font-size: 3mm;
@@ -1074,6 +1048,10 @@ DemoAnswerButton{
     border-radius: 2mm;
     margin: 2mm;
     color: white;
+}
+
+DemoAnswerButton.pressed{
+    background-color: #2ba7d1;
 }
 
 ShareGroceriesDemo{
@@ -1117,6 +1095,7 @@ DemoSaveButton{
 }
 
 TextComponentField{
+    margin-left: 2mm;
     color: black;
 }
 
@@ -1142,6 +1121,10 @@ TextFieldsDemoButton{
     background-color: #399cff;
     border-radius: 2mm;
     text-align: center;
+}
+
+TextFieldsDemoButton.pressed{
+    background-color: #71b8ff;
 }
 
 AutoCompletePopup{
@@ -1181,15 +1164,6 @@ OrangeLabel{
     margin: 0.5mm;
     border: none;
     background-color: #f44236;  
-}
-
-SplitPaneDemoButton{
-    padding: 2mm;
-    margin: 0.5mm 3mm 0.5mm 3mm;
-    border-radius: 2mm;
-    background-color: #318dfa;
-    text-align: center;
-    color: white;
 }
 
 AccordionItem{
@@ -1232,9 +1206,6 @@ Tab.pressed{
 
 TabsContainer{
     background-color: #efeff4;
-    align-items: center;
-    align-content: center;
-    alignment-adjust: auto;
 }
 
 SalesTableHeader{
@@ -1275,7 +1246,7 @@ DialogDemoButton{
 }
 
 DialogDemoButton.pressed{
-    color: black;
+    background-color: #74b3ff;
 }
 
 ToastBarMessage{
@@ -1301,6 +1272,8 @@ Sheet{
 SheetTitle{
     background-color: rgba(0, 0, 0, 0);
     color: black;
+    font-family: "native:MainBold";
+    font-size: 4mm;
 }
 
 SheetBackButton{
@@ -1322,7 +1295,11 @@ ToolbarDemoButton{
     font-size: 2mm;
     padding: 2mm;
     color: #157efb;
-    text-align: center;
+    text-align: left;
+}
+
+ToolbarDemoButton.pressed{
+    color: #69adff;
 }
 
 DemoSideMenu{
@@ -1388,6 +1365,10 @@ SignatureConfirm{
     color: white;
 }
 
+SignatureConfirm.pressed{
+    background-color: #a6d841;
+}
+
 ConfirmContainer{
     border-radius: 2mm;
     margin: 0 4mm 0 4mm;
@@ -1404,6 +1385,26 @@ SignatureClear{
     text-align: center;
     border: 0.1mm solid grey;
     border-radius: 1mm;
+}
+
+SignatureClear.pressed{
+    background-color: #a6d841;
+}
+
+AddNewButton{
+    font-size: 3mm;
+    font-family: "native:MainRegular";
+    text-align: center;
+    padding: 2mm;
+    margin: 2mm;
+    color: grey;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0.1mm solid grey;
+    border-radius: 1mm;
+}
+
+AddNewButton.pressed{
+    background-color: #a6d841;
 }
 
 TreeNode{
@@ -1442,12 +1443,18 @@ DemoScaleImageLabel{
 }
 
 DemoButton{
+    font-size: 3mm;
+    font-family: "native:MainRegular";
     color: white;
     text-align: center;
     background-color: #9acd32;
     padding: 2mm;
     border-radius: 2mm;
     margin: 2mm;
+}
+
+DemoButton.pressed{
+    background-color: #a6d841;
 }
 
 Wrapper{
@@ -1478,15 +1485,6 @@ SelectGroceriesLabel{
     border-bottom: 0.2mm solid #efeff4;
 }
 
-AddNewGroceriesDemo{
-    color: grey;
-    background-color: rgba(0, 0, 0, 0);
-    text-align: center;
-    border: 0.1mm solid grey;
-    border-radius: 1mm;
-    padding: 2mm;
-    margin: 2mm;
-}
 
 DemoChart{
     color: black;
@@ -1532,4 +1530,57 @@ DemoHeaderLabel{
     background-color: rgba(0, 0, 0, 0);
     color: black;
     text-align: center;
+}
+
+DemoButtonIcon{
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+DefaultContactImage{
+    background-color: blue;
+    color: black;
+    font-size: 5mm;
+}
+
+ContactComponent{
+    background-color: white;
+    border-radius: 1mm;
+    margin: 1mm;
+    padding: 1mm;
+}
+
+SheetTitleBar{
+    padding: 3mm;
+    border-bottom: 0.2mm solid grey;
+}
+
+ContactDetails{
+    background-color: rgba(0, 0, 0, 0);
+    margin: 2mm;
+    color: black;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+contactActions{
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+ContactsGreenButton{
+    background-color: rgba(0, 0, 0, 0);
+    color: green;
+}
+
+ContactsRedButton{
+    background-color: rgba(0, 0, 0, 0);
+    color: red;
+}
+
+MultiLine1{
+    background-color: rgba(0, 0, 0, 0);
+    color: black;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
 }

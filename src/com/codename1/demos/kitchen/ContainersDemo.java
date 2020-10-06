@@ -22,45 +22,25 @@
  */
 package com.codename1.demos.kitchen;
 
-import static com.codename1.ui.CN.*;
-import com.codename1.components.Accordion;
-import com.codename1.components.ScaleImageLabel;
-import com.codename1.components.SpanLabel;
-import com.codename1.components.SplitPane;
-import com.codename1.components.ToastBar;
+import com.codename1.components.*;
 import com.codename1.demos.kitchen.charts.DemoCharts;
 import com.codename1.io.rest.Response;
 import com.codename1.io.rest.Rest;
-import com.codename1.properties.IntProperty;
-import com.codename1.properties.ListProperty;
-import com.codename1.properties.Property;
-import com.codename1.properties.PropertyBusinessObject;
-import com.codename1.properties.PropertyIndex;
-import com.codename1.ui.Button;
-import com.codename1.ui.Component;
-import com.codename1.ui.Container;
-import com.codename1.ui.EncodedImage;
-import com.codename1.ui.FontImage;
-import static com.codename1.ui.FontImage.createMaterial;
-import com.codename1.ui.Form;
-import com.codename1.ui.Image;
-import com.codename1.ui.InfiniteContainer;
-import com.codename1.ui.Label;
-import com.codename1.ui.Tabs;
-import com.codename1.ui.URLImage;
+import com.codename1.properties.*;
+import com.codename1.ui.*;
 import com.codename1.ui.geom.Dimension;
-import com.codename1.ui.layouts.BorderLayout;
-import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.layouts.FlowLayout;
-import com.codename1.ui.layouts.GridLayout;
-import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.layouts.*;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.table.TableLayout;
-import static com.codename1.ui.util.Resources.getGlobalResources;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static com.codename1.ui.CN.*;
+import static com.codename1.ui.FontImage.createMaterial;
+import static com.codename1.ui.util.Resources.getGlobalResources;
 
 
 public class ContainersDemo extends Demo{
@@ -68,7 +48,7 @@ public class ContainersDemo extends Demo{
     private Container colorsContainer;
 
     public ContainersDemo(Form parentForm) {
-        init("Containers", getGlobalResources().getImage("containers-demo.png"), parentForm, "");
+        init("Containers", getGlobalResources().getImage("containers-demo.png"), parentForm, "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/ContainersDemo.java");
     }
 
     @Override
@@ -138,7 +118,7 @@ public class ContainersDemo extends Demo{
         accordion.setCloseIcon(FontImage.MATERIAL_EXPAND_MORE);
         accordion.addContent("Does this product have what I need?", new SpanLabel("Totally. Totally does", "DemoAccordionLabel"));
         accordion.addContent("Can I use it all the time?", new SpanLabel("Of course you can, we won't stop you", "DemoAccordionLabel"));
-        accordion.addContent("Are there any restrictions?", new SpanLabel("Only your imagination my friend. Go forth!", "DemoAccordionLabel"));
+        accordion.addContent("Are there any restrictions?", new SpanLabel("Only your imagination my friend. Go for it!", "DemoAccordionLabel"));
         return accordion;
     }
 
@@ -229,7 +209,7 @@ public class ContainersDemo extends Demo{
 
     private Container createSplitPaneDemo(){
         Button flow = new Button("Flow Layout");
-        flow.setUIID("SplitPaneDemoButton");
+        flow.setUIID("DemoButton");
         flow.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.setLayout(new FlowLayout());
@@ -237,7 +217,7 @@ public class ContainersDemo extends Demo{
         });
 
         Button flowCenter = new Button("Flow Center Layout");
-        flowCenter.setUIID("SplitPaneDemoButton");
+        flowCenter.setUIID("DemoButton");
         flowCenter.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.setLayout(new FlowLayout(Component.CENTER));
@@ -245,7 +225,7 @@ public class ContainersDemo extends Demo{
         });
 
         Button border = new Button("border Layout");
-        border.setUIID("SplitPaneDemoButton");
+        border.setUIID("DemoButton");
         border.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.removeAll();
@@ -259,7 +239,7 @@ public class ContainersDemo extends Demo{
         });
 
         Button absoluteBorder = new Button("Absolute Border Layout");
-        absoluteBorder.setUIID("SplitPaneDemoButton");
+        absoluteBorder.setUIID("DemoButton");
         absoluteBorder.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.removeAll();
@@ -273,7 +253,7 @@ public class ContainersDemo extends Demo{
         });
 
         Button boxX = new Button("Box X Layout");
-        boxX.setUIID("SplitPaneDemoButton");
+        boxX.setUIID("DemoButton");
         boxX.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.setLayout(new BoxLayout(BoxLayout.X_AXIS));
@@ -282,7 +262,7 @@ public class ContainersDemo extends Demo{
 
 
         Button boxY = new Button("Box Y Layout");
-        boxY.setUIID("SplitPaneDemoButton");
+        boxY.setUIID("DemoButton");
         boxY.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
@@ -290,7 +270,7 @@ public class ContainersDemo extends Demo{
         });
 
         Button grid = new Button("Grid Layout");
-        grid.setUIID("SplitPaneDemoButton");
+        grid.setUIID("DemoButton");
         grid.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.setLayout(new GridLayout(1, 1));
@@ -298,7 +278,7 @@ public class ContainersDemo extends Demo{
         });
 
         Button simpleTable = new Button("Table Layout(simple)");
-        simpleTable.setUIID("SplitPaneDemoButton");
+        simpleTable.setUIID("DemoButton");
         simpleTable.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.setLayout(new TableLayout(3, 2));
@@ -314,7 +294,7 @@ public class ContainersDemo extends Demo{
         });
 
         Button complexTable = new Button("Table Layout(complex)");
-        complexTable.setUIID("SplitPaneDemoButton");
+        complexTable.setUIID("DemoButton");
         complexTable.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.removeAll();
@@ -323,7 +303,7 @@ public class ContainersDemo extends Demo{
         });
 
         Button layered = new Button("Layered Layout");
-        layered.setUIID("SplitPaneDemoButton");
+        layered.setUIID("DemoButton");
         layered.addActionListener(e-> {
             resetMargin(colorsContainer);
             colorsContainer.setLayout(new LayeredLayout());

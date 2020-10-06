@@ -48,7 +48,8 @@ import static com.codename1.ui.util.Resources.getGlobalResources;
 public class ToggleListDemo extends Demo {
     
     public ToggleListDemo(Form parentForm) {
-        init("Toggle List", getGlobalResources().getImage("toggle-list-demo.png"), parentForm, "");
+        init("Toggle List", getGlobalResources().getImage("toggle-list-demo.png"), parentForm,
+                "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/ToggleListDemo.java");
     }
      
     @Override
@@ -80,7 +81,7 @@ public class ToggleListDemo extends Demo {
         list.setScrollableY(true);
         list.setLayout(new BoxLayout(BoxLayout.Y_AXIS));  
         list.setShouldCalcPreferredSize(true);
-        Button add = new Button("Add New", "AddNewGroceriesDemo");
+        Button add = new Button("Add New", "AddNewButton");
         add.addActionListener(e->{
             TextComponent newItem = new TextComponent().label("New Item: ");
             Command ok = new Command("Ok");
@@ -92,11 +93,11 @@ public class ToggleListDemo extends Demo {
             }
         });
         
-        Image icon = FontImage.createMaterial(FontImage.MATERIAL_SHARE, UIManager.getInstance().getComponentStyle("DemoShareIcon"));
+        Image icon = FontImage.createMaterial(FontImage.MATERIAL_SHARE, UIManager.getInstance().getComponentStyle("DemoButtonIcon"));
         ShareButton share = new ShareButton();
         share.setIcon(icon);
         share.setText("Share Groceries");
-        share.setUIID("ShareGroceriesDemo");
+        share.setUIID("DemoButton");
         share.addActionListener(e->{
             StringBuilder sb = new StringBuilder();
             int[] selected = model.getSelectedIndices();

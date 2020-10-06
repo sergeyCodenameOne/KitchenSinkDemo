@@ -22,21 +22,19 @@
  */
 package com.codename1.demos.kitchen;
 
-import com.codename1.components.InteractionDialog;
-import com.codename1.components.SpanLabel;
-import com.codename1.components.ToastBar;
-import com.codename1.ui.Button;
-import com.codename1.ui.Command;
-import com.codename1.ui.Container;
-import com.codename1.ui.Dialog;
-import com.codename1.ui.Display;
-import com.codename1.ui.Form;
-import com.codename1.ui.Sheet;
+import com.codename1.components.*;
+import com.codename1.contacts.Contact;
+import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import static com.codename1.ui.util.Resources.getGlobalResources;
+import com.codename1.ui.layouts.FlowLayout;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.codename1.contacts.ContactsManager.deleteContact;
+import static com.codename1.ui.CN.*;
+import static com.codename1.ui.util.Resources.getGlobalResources;
 
 
 public class DialogDemo extends Demo {
@@ -44,7 +42,8 @@ public class DialogDemo extends Demo {
     private static List<ToastBar.Status> statusList = new ArrayList<>();
     
     public DialogDemo(Form parentForm) {
-        init("Dialog", getGlobalResources().getImage("dialog-demo.png"), parentForm, "");
+        init("Dialog", getGlobalResources().getImage("dialog-demo.png"), parentForm,
+                "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/DialogDemo.java");
     }
      
     @Override
@@ -141,13 +140,29 @@ public class DialogDemo extends Demo {
     }
     
     private Container createSheetDemo(){
-        Button b = new Button("Open Sheet", "DialogDemoButton");
-        b.addActionListener(e->{
-            new MySheet(null).show();
+        Container demoContainer = new Container(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
+
+        // getAllContacts can take long time so we add infiniteProgress to modify user experience.
+        demoContainer.add(BorderLayout.CENTER, new InfiniteProgress());
+
+        // Create new background Thread that will get all the contacts.
+        scheduleBackgroundTask(()->{
+            Contact contacts[] = Display.getInstance().getAllContacts(true, true, false, true, false, false);
+
+            // Return to the EDT for edit the UI (the UI should be edited only within the EDT).
+            callSerially(()->{
+                demoContainer.removeAll();
+                demoContainer.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+                demoContainer.setScrollableY(true);
+                for (Contact currentContact : contacts){
+                    demoContainer.add(createContactComponent(currentContact));
+                    demoContainer.revalidate();
+                }
+            });
         });
-        return BorderLayout.north(b);
+        return demoContainer;
     }
-    
+
     private Container createToastBarDemo(){
         Button basic = new Button("Basic", "DialogDemoButton");
         Button progress = new Button("Progress", "DialogDemoButton");
@@ -197,27 +212,55 @@ public class DialogDemo extends Demo {
         
         return BoxLayout.encloseY(basic, progress, expires, delayed, clear);
     }
-    
-    private class MySheet extends Sheet {
-        MySheet(Sheet parent) {
-            super(parent, "My Sheet");
-            setLayout(BoxLayout.y());
-            Button gotoSheet2 = new Button("Goto Sheet 2", "DialogDemoButton");
-            gotoSheet2.addActionListener(e->{
-                new MySheet2(this).show(300);
+
+    private Component createContactComponent(Contact contact){
+        MultiButton contactComponent = new MultiButton(contact.getDisplayName());
+        contactComponent.setUIID("ContactComponent");
+
+        Image contactImage = contact.getPhoto();
+        // Set default avatar for contacts without avatar picture.
+        if (contactImage == null){
+            contactImage = getGlobalResources().getImage("default-contact-pic.jpg");
+        }
+        contactImage = contactImage.fill(convertToPixels(8), convertToPixels(8));
+        contactImage = contactImage.applyMask(CommonBehavior.getRoundMask(contactImage.getHeight()));
+        contactComponent.setIcon(contactImage);
+
+        contactComponent.addActionListener(e->{
+            Sheet contactInfo = new Sheet(null, contact.getDisplayName());
+            contactInfo.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+            contactInfo.add(new Label("Phone: " + contact.getPrimaryPhoneNumber(), "ContactDetails"));
+            if (contact.getPrimaryEmail() != null){
+                contactInfo.add(new Label("Email: " + contact.getPrimaryEmail(), "ContactDetails"));
+            }
+            if (contact.getBirthday() != 0){
+                contactInfo.add(new Label("Birthday: " + contact.getBirthday(), "ContactDetails"));
+            }
+
+            Button call = new Button(FontImage.MATERIAL_CALL, 6f, "ContactsGreenButton");
+            call.addActionListener(ev-> dial(contact.getPrimaryPhoneNumber()));
+
+            ShareButton share = new ShareButton();
+            share.setUIID("ContactsGreenButton");
+            share.setMaterialIcon(FontImage.MATERIAL_SHARE, 6f);  // Change the size of the icon.
+            share.setTextToShare(contact.getDisplayName() + " phone: " + contact.getPrimaryPhoneNumber());
+
+            Button delete = new Button(FontImage.MATERIAL_DELETE, 6f, "ContactsRedButton");
+            delete.addActionListener(ev->{
+                if (Dialog.show("Delete", "This will delete the contact permanently!\nAre you sure?", "Delete", "Cancel")){
+                    if (contact.getId()!= null){
+                        deleteContact(contact.getId());
+                        contactComponent.remove();
+                        Display.getInstance().getCurrent().revalidate();
+                    }
+                }
             });
-            add(gotoSheet2);
-            add(new SpanLabel("Sheet body (you can add anything in here)", "DialogDemoSpanLabel"));
-        }
-    }
-    
-    private class MySheet2 extends Sheet {
-        MySheet2(Sheet parent) {
-            super(parent, "Sheet 2");
-            setLayout(BoxLayout.y());
-            setScrollableY(true);
-            add(new SpanLabel("Sheet 2 body", "DialogDemoSpanLabel"));
-            
-        }
+            Container contactActions = FlowLayout.encloseCenter(call, share, delete);
+            contactActions.setUIID("contactActions");
+            contactInfo.add(contactActions);
+            contactInfo.show();
+        });
+
+        return contactComponent;
     }
 }

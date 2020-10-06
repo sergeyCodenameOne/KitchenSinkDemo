@@ -30,24 +30,20 @@ import com.codename1.components.ToastBar;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.io.Log;
 import com.codename1.io.Util;
-import static com.codename1.io.Util.downloadUrlToFileSystemInBackground;
 import com.codename1.media.Media;
 import com.codename1.media.MediaManager;
-import static com.codename1.ui.CN.*;
-import com.codename1.ui.Command;
-import com.codename1.ui.Component;
-import com.codename1.ui.Container;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
-import com.codename1.ui.Image;
-import com.codename1.ui.Toolbar;
+import com.codename1.ui.*;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
-import static com.codename1.ui.util.Resources.getGlobalResources;
+
 import java.io.IOException;
+
+import static com.codename1.io.Util.downloadUrlToFileSystemInBackground;
+import static com.codename1.ui.CN.*;
+import static com.codename1.ui.util.Resources.getGlobalResources;
 
 
 public class MediaDemo extends Demo {
@@ -55,7 +51,8 @@ public class MediaDemo extends Demo {
     private static final String DOWNLOADED_VIDEO = FileSystemStorage.getInstance().getAppHomePath() + "hello-codenameone.mp4";
     
     public MediaDemo(Form parentForm) {
-        init("media", getGlobalResources().getImage("media-demo-icon.png"), parentForm, "");
+        init("media", getGlobalResources().getImage("media-demo-icon.png"), parentForm,
+                "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/MediaDemo.java");
     }
     
     public Container createContentPane(){

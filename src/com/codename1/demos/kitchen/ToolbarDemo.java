@@ -33,16 +33,19 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
+
+import static com.codename1.ui.CN.execute;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class ToolbarDemo extends Demo{
     public ToolbarDemo(Form parentForm) {
-        init("Toolbar", getGlobalResources().getImage("toolbar-demo.png"), parentForm, "");
+        init("Toolbar", getGlobalResources().getImage("toolbar-demo.png"), parentForm,
+                "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/ToolbarDemo.java");
     }
      
     @Override
     public Container createContentPane() {
-        Form toolBarForm = new Form("", new FlowLayout(Component.CENTER));
+        Form toolBarForm = new Form("Toolbar", new FlowLayout(Component.CENTER));
         toolBarForm.getContentPane().setUIID("ComponentDemoContainer");
         Toolbar tb = toolBarForm.getToolbar();
         tb.setUIID("DemoToolbar");
@@ -53,26 +56,40 @@ public class ToolbarDemo extends Demo{
         Form lastForm = Display.getInstance().getCurrent();
         Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, commandStyle),
                 e-> lastForm.showBack());
-        
+
         Command sourceCommand = Command.create("", FontImage.create("{ }", commandStyle),
-                e->{});
+                e-> execute(getSourceCode()));
         
         tb.addCommandToRightBar(sourceCommand);
         tb.addCommandToLeftBar(backCommand);
        
         tb.setPermanentSideMenu(true);
-                
-        tb.addComponentToSideMenu(new Button("Home", FontImage.MATERIAL_HOME, ("ToolbarDemoButton")));
-        tb.addComponentToSideMenu(new Button("Profile", FontImage.MATERIAL_SUPERVISED_USER_CIRCLE, ("ToolbarDemoButton")));
-        tb.addComponentToSideMenu(new Button("Setting", FontImage.MATERIAL_SETTINGS, ("ToolbarDemoButton")));
-        tb.addComponentToSideMenu(new Button("Logout", FontImage.MATERIAL_INPUT, ("ToolbarDemoButton")));
-        
+
+        Button homeButton = new Button("Home", FontImage.MATERIAL_HOME, ("ToolbarDemoButton"));
+        homeButton.addActionListener(e-> lastForm.showBack());
+
+        Button homePageButton = new Button("codenameone.com", FontImage.MATERIAL_WEB, ("ToolbarDemoButton"));
+        homePageButton.addActionListener(e-> execute("https://www.codenameone.com/"));
+
+        Button javaDocButton = new Button("JavaDoc (Reference)", FontImage.MATERIAL_OPEN_IN_BROWSER, ("ToolbarDemoButton"));
+        javaDocButton.addActionListener(e-> execute("https://www.codenameone.com/javadoc/"));
+
+        Button sourceCodeButton = new Button("Source Code", FontImage.MATERIAL_CODE, ("ToolbarDemoButton"));
+        sourceCodeButton.addActionListener(e-> execute("https://github.com/sergeyCodenameOne/KitchenSinkDemo"));
+
+        tb.addComponentToSideMenu(homeButton);
+        tb.addComponentToSideMenu(homePageButton);
+        tb.addComponentToSideMenu(javaDocButton);
+        tb.addComponentToSideMenu(sourceCodeButton);
+
         Button searchButton = new Button("Show searchbar", ("ToolbarDemoButton"));
         searchButton.addActionListener(e->{
+            Display.getInstance().getCurrent().setToolbar(tb);
             tb.showSearchBar(ee->{
                 String text = (String)ee.getSource();
                 // Update the UI depending on the text.
             });
+            Display.getInstance().getCurrent().revalidate();
         });
         toolBarForm.add(searchButton);
         

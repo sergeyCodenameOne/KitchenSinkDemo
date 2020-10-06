@@ -22,28 +22,22 @@
  */
 package com.codename1.demos.kitchen;
 
+import com.codename1.components.Accordion;
 import com.codename1.components.InteractionDialog;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.googlemaps.MapContainer;
 import com.codename1.googlemaps.MapContainer.MapObject;
-import com.codename1.ui.Button;
-import com.codename1.ui.Display;
-import com.codename1.ui.EncodedImage;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Label;
-import com.codename1.ui.TextField;
+import com.codename1.maps.Coord;
+import com.codename1.ui.*;
 import com.codename1.ui.geom.Rectangle;
 import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
-import com.codename1.maps.Coord;
+
 import static com.codename1.ui.CN.execute;
-import com.codename1.ui.Component;
-import com.codename1.ui.Container;
-import com.codename1.ui.Form;
-import com.codename1.ui.layouts.BoxLayout;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class MapsDemo extends Demo {
@@ -52,7 +46,8 @@ public class MapsDemo extends Demo {
     MapObject sydney;
     
     public MapsDemo(Form parentForm) {
-        init("Maps", getGlobalResources().getImage("demo-maps.png"), parentForm, "");
+        init("Maps", getGlobalResources().getImage("demo-maps.png"), parentForm,
+                "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/MapsDemo.java");
     }
     
     @Override
@@ -143,16 +138,27 @@ public class MapsDemo extends Demo {
                         FlowLayout.encloseBottom(btnMoveCamera, btnAddMarker, btnAddPath, btnClearAll)
                 )
         );
+        Accordion ad = new Accordion();
         return root;
     }
     
     private Container createKeysGuide(){
         Container keysGuideContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         keysGuideContainer.add(new Label("Configuration", "DemoHeaderLabel"));
-        keysGuideContainer.add(new SpanLabel("In order to make this demo work you should generate Api Keys and define the following build arguments within your project:\n\n" +
-                "javascript.googlemaps.key=YOUR_JAVASCRIPT_API_KEY\n\n" +
-                "android.xapplication=<meta-data android:name=\"com.google.android.maps.v2.API_KEY\" android:value=\"YOUR_ANDROID_API_KEY\"/>\n\n" +
-                "ios.afterFinishLaunching=[GMSServices provideAPIKey:@\"YOUR_IOS_API_KEY\"];\n\nMake sure to replace the values YOUR_ANDROID_API_KEY, YOUR_IOS_API_KEY, "+
+        keysGuideContainer.add(new SpanLabel("In order to make this demo work you should generate Api Keys and define the following build arguments within your project:", "DemoLabel"));
+
+        TextArea javascriptKey = new TextArea("javascript.googlemaps.key=YOUR_JAVASCRIPT_API_KEY");
+        javascriptKey.setUIID("DemoTextArea");
+
+        TextArea androidKey = new TextArea("android.xapplication=<meta-data android:name=\"com.google.android.maps.v2.API_KEY\" android:value=\"YOUR_ANDROID_API_KEY\"/>");
+        androidKey.setUIID("DemoTextArea");
+
+        TextArea iosKey = new TextArea("ios.afterFinishLaunching=[GMSServices provideAPIKey:@\"YOUR_IOS_API_KEY\"];");
+        iosKey.setUIID("DemoTextArea");
+        keysGuideContainer.addAll(javascriptKey, androidKey, iosKey);
+
+
+        keysGuideContainer.add(new SpanLabel("Make sure to replace the values YOUR_ANDROID_API_KEY, YOUR_IOS_API_KEY, "+
                 "and YOUR_JAVASCRIPT_API_KEY with the values you obtained from the Google Cloud console by following the instructions.\n\nAlso you need to replace "+
                 "the \"googleMapsHTMLKey\" attribute in the source code.", "DemoLabel"));
         

@@ -24,25 +24,23 @@ package com.codename1.demos.kitchen;
 
 import com.codename1.components.MultiButton;
 import com.codename1.components.ToastBar;
-import com.codename1.ui.Button;
-import com.codename1.ui.ComboBox;
-import com.codename1.ui.Container;
-import com.codename1.ui.Form;
-import com.codename1.ui.PickerComponent;
+import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.list.GenericListCellRenderer;
-import static com.codename1.ui.util.Resources.getGlobalResources;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
+import static com.codename1.ui.util.Resources.getGlobalResources;
+
 
 public class SelectionDemo extends Demo{
     
     public SelectionDemo(Form parentForm) {
-        init("Selection", getGlobalResources().getImage("selection-demo.png"), parentForm, "");
+        init("Selection", getGlobalResources().getImage("selection-demo.png"), parentForm, "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/SelectionDemo.java");
     }
      
     @Override

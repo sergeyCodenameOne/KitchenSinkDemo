@@ -22,19 +22,13 @@
  */
 package com.codename1.demos.kitchen;
 
-import static com.codename1.ui.CN.getCurrentForm;
-import com.codename1.ui.Command;
-import com.codename1.ui.Component;
-import com.codename1.ui.Container;
-import com.codename1.ui.Display;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
-import com.codename1.ui.Image;
-import com.codename1.ui.Toolbar;
+import com.codename1.ui.*;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.UIManager;
+
+import static com.codename1.ui.CN.getCurrentForm;
 
 /** 
  * This is the base class for all the demos.
@@ -72,19 +66,19 @@ public abstract class Demo{
     abstract public Container createContentPane();
 
     protected void showDemo(String title, Component content){
-        Form chartForm = new Form(title, new BorderLayout());
+            Form chartForm = new Form(title, new BorderLayout());
             content.setUIID("ComponentDemoContainer");
             Toolbar toolbar = chartForm.getToolbar();
             toolbar.setUIID("ComponentDemoToolbar");
             toolbar.getTitleComponent().setUIID("ComponentDemoTitle");
-            
+
             Form lastForm = getCurrentForm();
             Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("DemoTitleCommand")),
                     e-> lastForm.showBack());
-            
+
             toolbar.setBackCommand(backCommand);
             chartForm.add(BorderLayout.CENTER, content);
-            chartForm.show();      
+            chartForm.show();
     }
     
     public static void adjustToTablet(Container cnt){

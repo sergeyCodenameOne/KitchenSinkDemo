@@ -22,25 +22,21 @@
  */
 package com.codename1.demos.kitchen;
 
-import static com.codename1.ui.CN.*;
 import com.codename1.components.Switch;
 import com.codename1.components.ToastBar;
-import com.codename1.ui.Button;
-import com.codename1.ui.ButtonGroup;
-import com.codename1.ui.CheckBox;
-import com.codename1.ui.Container;
-import com.codename1.ui.Form;
-import com.codename1.ui.Label;
-import com.codename1.ui.RadioButton;
+import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+
+import static com.codename1.ui.CN.isDarkMode;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class TogglesDemo extends Demo {
     
     public TogglesDemo(Form parentForm) {
-        init("Toggles", getGlobalResources().getImage("toggles-demo.png"), parentForm, "");
+        init("Toggles", getGlobalResources().getImage("toggles-demo.png"), parentForm,
+                "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/TogglesDemo.java");
     }
      
     @Override
@@ -134,11 +130,17 @@ public class TogglesDemo extends Demo {
         Container radioButtonsContainer = BoxLayout.encloseY(new Label("select build", "SelectBuild"), rb1, rb2, rb3, rb4, rb5, rb6);
         Container demoContainer = BorderLayout.center(radioButtonsContainer);
         
-        Button applyButton = new Button("Send Build", "DemoRadioBuildButton");
+        Button applyButton = new Button("Send Build", "DemoButton");
         applyButton.addActionListener(e->{
             RadioButton selectedButton = bg.getSelected();
             ToastBar.showInfoMessage(selectedButton.getText() + " build was sent");
         });
+
+        bg.addActionListener(e->{
+            applyButton.setText("Send " + bg.getSelected().getText() + " Build");
+            demoContainer.revalidate();
+        });
+
         Container applyContainer = FlowLayout.encloseCenter(applyButton);
         applyContainer.setUIID("CompleteOrderContainer");
         

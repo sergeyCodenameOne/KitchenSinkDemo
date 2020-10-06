@@ -23,33 +23,29 @@
 package com.codename1.demos.kitchen;
 
 import com.codename1.components.ClearableTextField;
+import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.io.CSVParser;
 import com.codename1.io.Log;
-import com.codename1.ui.AutoCompleteTextField;
-import com.codename1.ui.Button;
-import com.codename1.ui.Container;
-import com.codename1.ui.Display;
-import com.codename1.ui.Form;
-import com.codename1.ui.Label;
-import com.codename1.ui.TextArea;
-import com.codename1.ui.TextField;
+import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.list.DefaultListCellRenderer;
 import com.codename1.ui.list.DefaultListModel;
 import com.codename1.ui.table.TableLayout;
-import static com.codename1.ui.util.Resources.getGlobalResources;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codename1.ui.util.Resources.getGlobalResources;
+
 public class TextFieldDemo extends Demo{
     
     public TextFieldDemo(Form parentForm) {
-        init("Text Field", getGlobalResources().getImage("text-field-demo.png"), parentForm, "");
+        init("Text Field", getGlobalResources().getImage("text-field-demo.png"), parentForm, "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/TextFieldDemo.java");
     }
      
     @Override
@@ -165,49 +161,36 @@ public class TextFieldDemo extends Demo{
         } else {
             tl = new TableLayout(14, 1);
         }
-        
-        TextArea firstName = new TextArea(1, 20, TextArea.ANY);
-        firstName.setUIID("DemoTextArea");
-        TextArea surname = new TextArea(1, 20, TextArea.ANY);
-        surname.setUIID("DemoTextArea");
+
+        TextArea name = new TextArea(1, 20, TextArea.ANY);
+        name.setUIID("DemoTextArea");
+
         TextArea email = new TextArea(1, 20, TextArea.EMAILADDR);
         email.setUIID("DemoTextArea");
-        TextArea url = new TextArea(1, 20, TextArea.URL);
-        url.setUIID("DemoTextArea");
-        TextArea phone = new TextArea(1, 20, TextArea.PHONENUMBER);
-        phone.setUIID("DemoTextArea");
 
-        TextArea num1 = new TextArea(1, 4, TextArea.NUMERIC);
-        num1.setUIID("DemoTextArea");
-        TextArea num2 = new TextArea(1, 4, TextArea.NUMERIC);
-        num2.setUIID("DemoTextArea");
-        TextArea num3 = new TextArea(1, 4, TextArea.NUMERIC);
-        num3.setUIID("DemoTextArea");
-        TextArea num4 = new TextArea(1, 4, TextArea.NUMERIC);
-        num4.setUIID("DemoTextArea");
-        
-        Button submit = new Button("Submit", "TextFieldsDemoButton");
-        submit.addActionListener(e->{
-            ToastBar.showInfoMessage("Your personal data was saved successfully");
+        TextArea message = new TextArea(7, 20, TextArea.ANY);
+        message.setUIID("DemoTextArea");
+
+        Button contactUsButton = new Button("Contact Us", "TextFieldsDemoButton");
+        contactUsButton.addActionListener(e->{
+            name.setText("");
+            email.setText("");
+            message.setText("");
+            ToastBar.showInfoMessage("Your Message has sent");
         });
         
         tl.setGrowHorizontally(true);
         textFields.setLayout(tl);
-        textFields.add(new Label("First Name", "DemoLabel")).
-                add(firstName).
-                add(new Label("Surname", "DemoLabel")).
-                add(surname).
-                add(new Label("E-Mail", "DemoLabel")).
+        textFields.add(new Label("Your Name*", "DemoLabel")).
+                add(name).
+                add(new Label("Your Email*", "DemoLabel")).
                 add(email).
-                add(new Label("URL", "DemoLabel")).
-                add(url).
-                add(new Label("Phone", "DemoLabel")).
-                add(phone).
-                add(new Label("Credit Card", "DemoLabel")).
-                add(GridLayout.encloseIn(4, num1, num2, num3, num4));
+                add(new SpanLabel("Your Message", "DemoLabel")).
+                add(message);
+
         
         Container demoContainer = BorderLayout.center(textFields);
-        demoContainer.add(BorderLayout.SOUTH, submit);
+        demoContainer.add(BorderLayout.SOUTH, contactUsButton);
         demoContainer.setUIID("Wrapper");
         return BoxLayout.encloseY(demoContainer);
     }

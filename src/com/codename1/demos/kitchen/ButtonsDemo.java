@@ -22,40 +22,26 @@
  */
 package com.codename1.demos.kitchen;
 
-import com.codename1.components.FloatingActionButton;
-import com.codename1.components.MultiButton;
-import com.codename1.components.ScaleImageButton;
-import com.codename1.components.ScaleImageLabel;
-import com.codename1.components.ShareButton;
-import com.codename1.components.SpanButton;
-import com.codename1.components.SpanLabel;
-import com.codename1.components.ToastBar;
+import com.codename1.components.*;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.io.Log;
-import com.codename1.ui.Button;
-import com.codename1.ui.Command;
-import com.codename1.ui.Component;
-import com.codename1.ui.Container;
-import com.codename1.ui.Dialog;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
-import com.codename1.ui.Image;
-import com.codename1.ui.Label;
-import com.codename1.ui.SwipeableContainer;
-import com.codename1.ui.TextComponent;
+import com.codename1.ui.*;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.table.TableLayout;
 import com.codename1.ui.util.ImageIO;
-import static com.codename1.ui.util.Resources.getGlobalResources;
+
 import java.io.OutputStream;
+
+import static com.codename1.ui.util.Resources.getGlobalResources;
 
 
 public class ButtonsDemo extends Demo{
 
     public ButtonsDemo(Form parentForm) {
-        init("Buttons", getGlobalResources().getImage("demo-buttons.png"), parentForm, "");
+        init("Buttons", getGlobalResources().getImage("demo-buttons.png"), parentForm,
+                "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/ButtonsDemo.java");
     }
      
     @Override
@@ -209,7 +195,7 @@ public class ButtonsDemo extends Demo{
     
     private Container createShareButtonDemo(){
         ShareButton textShare = new ShareButton();
-        Image icon = FontImage.createMaterial(FontImage.MATERIAL_SHARE, UIManager.getInstance().getComponentStyle("DemoButton"));
+        Image icon = FontImage.createMaterial(FontImage.MATERIAL_SHARE, UIManager.getInstance().getComponentStyle("DemoButtonIcon"));
         textShare.setIcon(icon);
         textShare.setUIID("DemoButton");
         textShare.setTextToShare("Hello there");

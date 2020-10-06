@@ -27,37 +27,32 @@ import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SliderBridge;
 import com.codename1.components.SpanLabel;
 import com.codename1.io.ConnectionRequest;
-import static com.codename1.io.ConnectionRequest.fetchJSONAsync;
 import com.codename1.io.NetworkManager;
-import static com.codename1.io.Util.sleep;
-import com.codename1.ui.Button;
-import com.codename1.ui.CN;
-import static com.codename1.ui.CN.invokeAndBlock;
+import com.codename1.ui.*;
 import com.codename1.ui.CommonProgressAnimations.CircleProgress;
 import com.codename1.ui.CommonProgressAnimations.LoadingTextAnimation;
-import com.codename1.ui.Container;
-import com.codename1.ui.Dialog;
-import com.codename1.ui.EncodedImage;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
-import com.codename1.ui.Label;
-import com.codename1.ui.Slider;
 import com.codename1.ui.animations.CommonTransitions;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.UIManager;
-import static com.codename1.ui.util.Resources.getGlobalResources;
 import com.codename1.util.AsyncResource;
 import com.codename1.util.EasyThread;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static com.codename1.io.ConnectionRequest.fetchJSONAsync;
+import static com.codename1.io.Util.sleep;
+import static com.codename1.ui.CN.invokeAndBlock;
+import static com.codename1.ui.util.Resources.getGlobalResources;
 
 
 public class ProgressDemo extends Demo {
     
     public ProgressDemo(Form parentForm) {
-        init("Progress", getGlobalResources().getImage("progress-demo.png"), parentForm, "");
+        init("Progress", getGlobalResources().getImage("progress-demo.png"), parentForm,
+                "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/ProgressDemo.java");
     }
      
     @Override

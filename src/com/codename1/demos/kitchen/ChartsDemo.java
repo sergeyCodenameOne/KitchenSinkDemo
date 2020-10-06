@@ -23,32 +23,19 @@
 package com.codename1.demos.kitchen;
 
 
-import com.codename1.demos.kitchen.charts.AbstractDemoChart;
-import com.codename1.demos.kitchen.charts.AverageCubicTemperatureChart;
-import com.codename1.demos.kitchen.charts.BudgetDoughnutChart;
-import com.codename1.demos.kitchen.charts.BudgetPieChart;
-import com.codename1.demos.kitchen.charts.CombinedTemperatureChart;
-import com.codename1.demos.kitchen.charts.EmployeeChart;
-import com.codename1.demos.kitchen.charts.ProjectStatusBubbleChart;
-import com.codename1.demos.kitchen.charts.SalesBarChart;
-import com.codename1.demos.kitchen.charts.ScatterChart;
-import com.codename1.demos.kitchen.charts.SensorValuesChart;
-import com.codename1.demos.kitchen.charts.TrigonometricFunctionsChart;
-import com.codename1.demos.kitchen.charts.WeightDialChart;
-import static com.codename1.ui.CN.*;
-import com.codename1.ui.Command;
-import com.codename1.ui.Container;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
-import com.codename1.ui.Toolbar;
+import com.codename1.demos.kitchen.charts.*;
+import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+
+import static com.codename1.ui.CN.getCurrentForm;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class ChartsDemo extends Demo {
     
     public ChartsDemo(Form parentForm) {
-        init("Charts", getGlobalResources().getImage("charts-demo-icon.png"), parentForm, "");
+        init("Charts", getGlobalResources().getImage("charts-demo-icon.png"), parentForm,
+                "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/ChartsDemo.java");
     }
     
     public Container createContentPane(){

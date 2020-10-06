@@ -23,38 +23,21 @@
 
 package com.codename1.demos.kitchen;
 
-import com.codename1.components.FileTree;
-import com.codename1.components.FileTreeModel;
-import com.codename1.components.InfiniteProgress;
-import com.codename1.components.ScaleImageLabel;
-import com.codename1.components.SignatureComponent;
-import com.codename1.components.SpanLabel;
-import com.codename1.components.ToastBar;
+import com.codename1.components.*;
 import com.codename1.demos.kitchen.ComponentDemos.ImageViewerDemo;
-import com.codename1.ui.BrowserComponent;
-import com.codename1.ui.Button;
-import com.codename1.ui.CN;
-import static com.codename1.ui.CN.invokeAndBlock;
-import com.codename1.ui.Calendar;
-import com.codename1.ui.Command;
-import com.codename1.ui.Component;
-import com.codename1.ui.Container;
-import com.codename1.ui.Dialog;
-import com.codename1.ui.Display;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
-import com.codename1.ui.Label;
-import com.codename1.ui.SwipeableContainer;
-import com.codename1.ui.TextComponent;
+import com.codename1.ui.*;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.UIManager;
-import static com.codename1.ui.util.Resources.getGlobalResources;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.codename1.ui.CN.invokeAndBlock;
+import static com.codename1.ui.util.Resources.getGlobalResources;
 
         
 public class AdvancedDemo extends Demo{
@@ -62,7 +45,7 @@ public class AdvancedDemo extends Demo{
     
     
     public AdvancedDemo(Form parentForm) {
-        init("Advanced", getGlobalResources().getImage("advanced-icon.png"), parentForm, "");
+        init("Advanced", getGlobalResources().getImage("advanced-icon.png"), parentForm, "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/AdvancedDemo.java");
     }
     
     public Container createContentPane(){

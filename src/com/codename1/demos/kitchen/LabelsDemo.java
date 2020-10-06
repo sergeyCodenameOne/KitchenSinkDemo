@@ -26,29 +26,20 @@ import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.components.ToastBar.Status;
-import com.codename1.ui.Button;
-import com.codename1.ui.Container;
-import com.codename1.ui.Display;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
-import com.codename1.ui.Label;
-import com.codename1.ui.TextArea;
-import com.codename1.ui.TextComponent;
+import com.codename1.ui.*;
 import com.codename1.ui.geom.Dimension;
-import com.codename1.ui.layouts.BorderLayout;
-import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.layouts.GridLayout;
-import com.codename1.ui.layouts.LayeredLayout;
-import com.codename1.ui.layouts.TextModeLayout;
+import com.codename1.ui.layouts.*;
 import com.codename1.ui.plaf.Style;
-import static com.codename1.ui.util.Resources.getGlobalResources;
 import com.codename1.ui.validation.RegexConstraint;
 import com.codename1.ui.validation.Validator;
+
+import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class LabelsDemo extends Demo {
     
     public LabelsDemo(Form parentForm) {
-        init("Labels", getGlobalResources().getImage("demo-labels.png"), parentForm, "");
+        init("Labels", getGlobalResources().getImage("demo-labels.png"), parentForm,
+                "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/LabelsDemo.java");
     }
      
     @Override

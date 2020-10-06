@@ -23,9 +23,11 @@
 package com.codename1.demos.kitchen;
 
 import com.codename1.ui.CN;
+import com.codename1.ui.Graphics;
+import com.codename1.ui.Image;
 
 public class CommonBehavior {
-    
+    private static Image roundMaskImage = null;
     private static int imageWidth = -1;
     private static int imageHeight = -1;
     
@@ -41,5 +43,18 @@ public class CommonBehavior {
              imageHeight = CN.convertToPixels(12);
         }
         return imageHeight;
+    }
+
+    public static Object getRoundMask(int width){
+        if (roundMaskImage == null) {
+            roundMaskImage = Image.createImage(width, width, 0xff000000);
+            Graphics gr = roundMaskImage.getGraphics();
+            gr.setColor(0xffffff);
+            gr.setAntiAliased(true);
+            gr.fillArc(0, 0, width, width, 0, 360);
+        }else{
+            roundMaskImage = roundMaskImage.fill(width, width);
+        }
+        return roundMaskImage.createMask();
     }
 }
