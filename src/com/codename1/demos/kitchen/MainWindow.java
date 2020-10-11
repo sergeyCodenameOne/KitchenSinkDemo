@@ -23,18 +23,14 @@
 package com.codename1.demos.kitchen;
 
 import com.codename1.components.MultiButton;
-import static com.codename1.ui.CN.*;
-import com.codename1.ui.Command;
-import com.codename1.ui.Component;
-import com.codename1.ui.Container;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
-import com.codename1.ui.Toolbar;
+import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 
+import static com.codename1.ui.CN.execute;
+import static com.codename1.ui.CN.isTablet;
 
 public class MainWindow {
        
@@ -47,38 +43,59 @@ public class MainWindow {
         tb.setUIID("MainWindowToolbar");
         tb.getTitleComponent().setUIID("MainWindowTitle");
 
-        // Create demos
-        Demo[] demos = {new ChartsDemo(mainWindow),
-                        new AdvancedDemo(mainWindow),
-                        new MapsDemo(mainWindow),
-                        new LabelsDemo(mainWindow),
-                        new ButtonsDemo(mainWindow),
-                        new TogglesDemo(mainWindow),
-                        new ToggleListDemo(mainWindow),
-                        new SelectionDemo(mainWindow),
-                        new TextFieldDemo(mainWindow),
-                        new ContainersDemo(mainWindow),
-                        new DialogDemo(mainWindow),
-                        new ProgressDemo(mainWindow),
-                        new ToolbarDemo(mainWindow),
-                        new MediaDemo(mainWindow)
+        Demo[] demos = {
+//                new ClockDemo(mainWindow),
+                new LabelsDemo(mainWindow),
+                new ButtonsDemo(mainWindow),
+                new TogglesDemo(mainWindow),
+                new TextFieldDemo(mainWindow),
+                new SelectionDemo(mainWindow),
+                new ContainersDemo(mainWindow),
+                new DialogDemo(mainWindow),
+                new ProgressDemo(mainWindow),
+                new ToolbarDemo(mainWindow),
+                new ChartsDemo(mainWindow),
+                new AdvancedDemo(mainWindow),
+                new MediaDemo(mainWindow),
+                new MapsDemo(mainWindow),
+                new ClockDemo(mainWindow)
         };
         
         if (isTablet()){
             mainWindow.setLayout(new GridLayout(5, 3));
         }
-        
+
         for(Demo demo : demos){
-            mainWindow.add(createDemoComponent(demo));
+            Component demoComponent = createDemoComponent(demo);
+            mainWindow.add(demoComponent);
         }
-        
         return mainWindow;
     }
     
     private Component createDemoComponent(Demo demo){
+        if (demo instanceof ClockDemo){
+            Label dd = new Label(demo.getDemoImage().fill(CommonBehavior.getDemoImageWidth(), CommonBehavior.getDemoImageHeight()));
+            return dd;
+            //            Button demoIcon = new Button(){
+//                @Override
+//                public boolean animate() {
+//                    return this.getIcon().animate();
+//                }
+//            };
+//            demoIcon.setIcon(demo.getDemoImage().fill(CommonBehavior.getDemoImageWidth(), CommonBehavior.getDemoImageHeight()));
+//            demoIcon.addActionListener(e-> createAndShowForm(demo));
+//            demoIcon.setUIID("DemoComponentIcon");
+//            Container demoComponent = BorderLayout.center(demoIcon).
+//                    add(BorderLayout.SOUTH, new Label(demo.getDemoId(), "MainWindowDemoName"));
+//
+//            demoComponent.setLeadComponent(demoIcon);
+//            demoComponent.setUIID("MainWindowDemoComponent");
+//            return demoComponent;
+        }
+
         MultiButton demoComponent = new MultiButton(demo.getDemoId());
         demoComponent.setUIID("MainWindowDemoComponent");
-        demoComponent.setIcon(demo.getDemoImage().scaled(CommonBehavior.getDemoImageWidth(), CommonBehavior.getDemoImageHeight()));
+        demoComponent.setIcon(demo.getDemoImage().fill(CommonBehavior.getDemoImageWidth(), CommonBehavior.getDemoImageHeight()));
         demoComponent.setIconPosition(BorderLayout.NORTH);
         demoComponent.addActionListener(e-> createAndShowForm(demo));
         demoComponent.setIconUIID("DemoComponentIcon");

@@ -1337,6 +1337,7 @@ DemoTitleCommand{
 TitleCommand{
     background-color: rgba(0, 0, 0, 0);
     color: #157efb;
+    padding: 2mm;
 }
 
 CostSummary{
@@ -1583,4 +1584,9 @@ MultiLine1{
     color: black;
     font-family: "native:MainRegular";
     font-size: 3mm;
+}
+
+ClockComponent{
+    background-color: rgba(0, 0, 0, 0);
+    color: black;
 }

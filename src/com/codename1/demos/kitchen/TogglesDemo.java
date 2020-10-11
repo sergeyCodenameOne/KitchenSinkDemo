@@ -22,12 +22,13 @@
  */
 package com.codename1.demos.kitchen;
 
-import com.codename1.components.Switch;
-import com.codename1.components.ToastBar;
+import com.codename1.components.*;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.list.DefaultListModel;
+import com.codename1.ui.plaf.UIManager;
 
 import static com.codename1.ui.CN.isDarkMode;
 import static com.codename1.ui.util.Resources.getGlobalResources;
@@ -69,6 +70,18 @@ public class TogglesDemo extends Demo {
                                                                 "guidelines: https://material.io/guidelines/components/ selection-controls.html#selection-controls- radio-button",
                                                                 e->{
                                                                     showDemo("Switch", createSwitchDemo());
+                                                                }));
+
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("check-box-list.png"),
+                                                                "Check Box List",
+                                                                "A list of Check Boxes", e->{
+                                                                    showDemo("CheckBox List", createCheckBoxListDemo());
+                                                                }));
+
+        demoContainer.add(builder.createComponent(getGlobalResources().getImage("radio-button-list.png"),
+                                                                "RadioButton List (BoxLayout Y)",
+                                                                "A list of Radio Buttons.", e->{
+                                                                    showDemo("RadioButton List (BoxLayout Y)", createRadioButtonListDemo());
                                                                 }));
         
         return demoContainer;
@@ -165,5 +178,85 @@ public class TogglesDemo extends Demo {
             switchContainer.revalidate();
         });
         return switchContainer;
+    }
+
+    private Container createCheckBoxListDemo(){
+        DefaultListModel model = new DefaultListModel("Pasta", "Rice", "Bread", "Butter", "Milk", "Eggs", "Cheese", "Salt", "Pepper", "Honey");
+        CheckBoxList list = new CheckBoxList(model);
+        list.setScrollableY(true);
+        list.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        list.setShouldCalcPreferredSize(true);
+        Button add = new Button("Add New", "AddNewButton");
+        add.addActionListener(e->{
+            TextComponent newItem = new TextComponent().label("New Item: ");
+            Command ok = new Command("Ok");
+            Command cancel = new Command("Cancel");
+
+            if(Dialog.show("Enter Note", newItem, ok, cancel) == ok && newItem.getText().length() != 0){
+                model.addItem(newItem.getText());
+                list.revalidate();
+            }
+        });
+
+        Image icon = FontImage.createMaterial(FontImage.MATERIAL_SHARE, UIManager.getInstance().getComponentStyle("DemoButtonIcon"));
+        ShareButton share = new ShareButton();
+        share.setIcon(icon);
+        share.setText("Share Groceries");
+        share.setUIID("DemoButton");
+        share.addActionListener(e->{
+            StringBuilder sb = new StringBuilder();
+            int[] selected = model.getSelectedIndices();
+            for (int i : selected){
+                sb.append(model.getItemAt(i));
+                sb.append(", ");
+            }
+            if (selected.length > 0){
+                sb.delete(sb.length() - 2, sb.length() - 1);
+            }
+            share.setTextToShare(sb.toString());
+
+            int groceriesSize = model.getSize();
+            for(int i = 0; i < groceriesSize; i++){
+                CheckBox currItem = (CheckBox)list.getComponentAt(i);
+                if(currItem.isSelected()){
+                    currItem.setSelected(false);
+                }
+            }
+        });
+
+        Container buttonsContainer = FlowLayout.encloseCenter(share, add);
+        buttonsContainer.setUIID("CompleteOrderContainer");
+
+        Container checkBoxContainer = BorderLayout.center(list).
+                add(BorderLayout.NORTH, new Label("Select groceries to share", "SelectGroceriesLabel")).
+                add(BorderLayout.SOUTH, buttonsContainer);
+        checkBoxContainer.setUIID("Wrapper");
+
+        return BoxLayout.encloseY(checkBoxContainer);
+    }
+
+    private Container createRadioButtonListDemo(){
+        SpanLabel question = new SpanLabel("Who is the first character in the series to be called \"King in the North\"?", "DemoLabel");
+        Button answer = new Button("Answer", "DemoAnswerButton");
+
+        DefaultListModel model = new DefaultListModel("Jon Snow", "Robb Stark", "Ned Stark", "Edmure Tully");
+        RadioButtonList list = new RadioButtonList(model);
+        list.setLayout(BoxLayout.y());
+
+        answer.addActionListener(e->{
+            if (model.getSelectedIndex() == 1){
+                ToastBar.showInfoMessage("Correct!");
+            }
+            else{
+                ToastBar.showInfoMessage("Incorrect!!");
+            }
+        });
+
+        Container demoContainer = BorderLayout.center(list).
+                add(BorderLayout.NORTH, question).
+                add(BorderLayout.SOUTH, answer);
+        demoContainer.setUIID("Wrapper");
+
+        return BoxLayout.encloseY(demoContainer);
     }
 }

@@ -28,9 +28,12 @@ import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.list.GenericListCellRenderer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.codename1.contacts.ContactsManager.deleteContact;
 import static com.codename1.ui.CN.*;
@@ -128,7 +131,31 @@ public class DialogDemo extends Demo {
             Command ok = new Command("Ok");
             Command cancel = new Command("Cancel");
             SpanLabel body = new SpanLabel("This is the dialog body, it can contain anything...", "DialogDemoSpanLabel");
-            Dialog.show("Dialog Title", body, ok, cancel);
+            ComboBox<Map<String, Object>> combo = new ComboBox<> (
+                    createListEntry("A Game of Thrones", "1996", "4.45"),
+                    createListEntry("A Clash Of Kings", "1998", "4.41"),
+                    createListEntry("A Storm Of Swords", "2000", "4.54"),
+                    createListEntry("A Feast For Crows", "2005", "4.14"),
+                    createListEntry("A Dance With Dragons", "2011", "4.33"),
+                    createListEntry("The Winds of Winter", "2016", "4.40"),
+                    createListEntry("A Dream of Spring", "Unpublished", "unknown")
+
+            );
+
+
+            MultiButton mb1 = new MultiButton();
+            mb1.setUIID("DemoMultiButton");
+            mb1.setUIIDLine1("DemoMultiLine1");
+            mb1.setUIIDLine2("DemoMultiLine2");
+
+            MultiButton mb2 = new MultiButton();
+            mb2.setUIID("DemoMultiButton");
+            mb2.setUIIDLine1("DemoMultiLine1");
+            mb2.setUIIDLine2("DemoMultiLine2");
+
+            combo.setRenderer(new GenericListCellRenderer<>(mb1, mb2));
+            combo.setSelectedIndex(1);
+            Dialog.show("Dialog Title", BoxLayout.encloseY(combo), ok, cancel);
         });
         showPopup.addActionListener(e-> {
             Dialog d = new Dialog("Popup Title");
@@ -262,5 +289,14 @@ public class DialogDemo extends Demo {
         });
 
         return contactComponent;
+    }
+
+    private Map<String, Object> createListEntry(String name, String date, String rating) {
+        Map<String, Object> entry = new HashMap<>();
+        entry.put("Line1", name);
+        entry.put("Line2", date);
+        entry.put("rating", rating);
+
+        return entry;
     }
 }

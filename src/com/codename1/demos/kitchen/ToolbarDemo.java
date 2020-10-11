@@ -82,7 +82,7 @@ public class ToolbarDemo extends Demo{
         tb.addComponentToSideMenu(javaDocButton);
         tb.addComponentToSideMenu(sourceCodeButton);
 
-        Button searchButton = new Button("Show searchbar", ("ToolbarDemoButton"));
+        Button searchButton = new Button("Show Searchbar", ("ToolbarDemoButton"));
         searchButton.addActionListener(e->{
             Display.getInstance().getCurrent().setToolbar(tb);
             tb.showSearchBar(ee->{

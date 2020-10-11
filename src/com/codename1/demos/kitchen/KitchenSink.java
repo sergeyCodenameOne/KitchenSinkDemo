@@ -22,29 +22,25 @@
  */
 package com.codename1.demos.kitchen;
 
-import static com.codename1.ui.CN.*;
-import com.codename1.ui.Form;
-import com.codename1.ui.Dialog;
-import com.codename1.ui.plaf.UIManager;
-import com.codename1.ui.util.Resources;
 import com.codename1.io.Log;
-import com.codename1.ui.Button;
-import com.codename1.ui.Toolbar;
-import static com.codename1.ui.Button.setButtonRippleEffectDefault;
-import com.codename1.ui.Command;
-import com.codename1.ui.Display;
-import com.codename1.ui.FontImage;
+import com.codename1.ui.*;
 import com.codename1.ui.plaf.RoundRectBorder;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
+import com.codename1.ui.util.Resources;
+
 import java.io.IOException;
 import java.util.Hashtable;
+
+import static com.codename1.ui.Button.setButtonRippleEffectDefault;
+import static com.codename1.ui.CN.*;
 
 public class KitchenSink {
     
     private Form current;
     private Resources theme;
-    private static boolean darkMode = false;
-    private static Command darkModeCommand;
+    private boolean darkMode = false;
+    private Command darkModeCommand;
 
     public void init(Object context) {
         // use two network threads instead of one
@@ -58,9 +54,7 @@ public class KitchenSink {
         } catch(IOException e){
             Log.e(e);
         }
-        
-//        initTheme();
-        
+
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
 
@@ -85,12 +79,12 @@ public class KitchenSink {
             current.show();
             return;
         }
-        MainWindow mw = new MainWindow();
-        Form mainForm =  mw.buildForm();
-        darkModeCommand = mainForm.getToolbar().addCommandToRightBar("", FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommand")), e->{
-            initTheme();
-        });
+        Form mainForm =  new MainWindow().buildForm();
+        darkModeCommand = mainForm.getToolbar().addCommandToRightBar("",
+                FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommand")),
+                e-> initTheme());
         mainForm.show();
+        System.out.println("asdas");
     }
     
     public void stop() {
@@ -106,20 +100,18 @@ public class KitchenSink {
     }
     
     private void initTheme() {
-        Boolean systemDarkMode = isDarkMode();
-        if(true){// systemDarkMode != null && systemDarkMode != isDarkMode
-            darkMode = !darkMode;
-            String themeFilename = darkMode ? "/dark-theme" : "/theme";
-            try {
-                Resources theme = Resources.openLayered(themeFilename);
-                UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
-            }catch(IOException e){
-                Log.e(e);
-            }
-            Button darkModeCmd = Display.getInstance().getCurrent().getToolbar().findCommandComponent(darkModeCommand);
-            darkModeCmd.setIcon(FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommand")));
-            Display.getInstance().getCurrent().refreshTheme();
+        darkMode = !darkMode;
+        String themeFileName = darkMode ? "/dark-theme" : "/theme";
+        try {
+            Resources theme = Resources.openLayered(themeFileName);
+            UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
+        }catch(IOException e){
+            Log.e(e);
         }
+        Button darkModeCmd = Display.getInstance().getCurrent().getToolbar().findCommandComponent(darkModeCommand);
+        darkModeCmd.setIcon(FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommand")));
+        ClockDemo.refreshClockColor();
+        Display.getInstance().getCurrent().refreshTheme();
     }
     
     private void setPopupDialogBorder(Hashtable themeProps){
@@ -130,10 +122,6 @@ public class KitchenSink {
         themeProps.put("PopupDialog.transparency", "255");
         themeProps.put("PopupDialog.padding", "4,4,4,4");
         themeProps.put("PopupDialog.padUnit", new byte[]{Style.UNIT_TYPE_DIPS, Style.UNIT_TYPE_DIPS, Style.UNIT_TYPE_DIPS, Style.UNIT_TYPE_DIPS});
-    }
-    
-    public static boolean isDarkMode(){
-        return darkMode;
     }
 }
 

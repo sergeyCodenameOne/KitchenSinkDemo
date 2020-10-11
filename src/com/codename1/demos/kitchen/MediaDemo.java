@@ -27,9 +27,7 @@ import com.codename1.components.InfiniteProgress;
 import com.codename1.components.MediaPlayer;
 import com.codename1.components.MultiButton;
 import com.codename1.components.ToastBar;
-import com.codename1.io.FileSystemStorage;
-import com.codename1.io.Log;
-import com.codename1.io.Util;
+import com.codename1.io.*;
 import com.codename1.media.Media;
 import com.codename1.media.MediaManager;
 import com.codename1.ui.*;
@@ -41,7 +39,6 @@ import com.codename1.ui.plaf.UIManager;
 
 import java.io.IOException;
 
-import static com.codename1.io.Util.downloadUrlToFileSystemInBackground;
 import static com.codename1.ui.CN.*;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
@@ -59,11 +56,12 @@ public class MediaDemo extends Demo {
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "VideoContainer");
       
         Style iconStyle = UIManager.getInstance().getComponentStyle("MediaIcon");
-        Component downloadButton = createVideoComponent("Hello (Online)", "Download to FileSystem", FontImage.createMaterial(FontImage.MATERIAL_ARROW_CIRCLE_DOWN, iconStyle),
+        Component downloadButton = createVideoComponent("Hello (Download)", "Download to FileSystem", FontImage.createMaterial(FontImage.MATERIAL_ARROW_CIRCLE_DOWN, iconStyle),
                                         e-> {
                                             if (!existsInFileSystem(DOWNLOADED_VIDEO)){
-                                                ToastBar.showMessage("Downloading", FontImage.MATERIAL_SYSTEM_UPDATE, 3000);
                                                 downloadFile("https://www.codenameone.com/files/hello-codenameone.mp4");
+                                            }else{
+                                                ToastBar.showErrorMessage("File is already downloaded", FontImage.MATERIAL_SYSTEM_UPDATE);
                                             }
                                         });
         
@@ -115,14 +113,18 @@ public class MediaDemo extends Demo {
         Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("DemoTitleCommand")),
                     e-> parentForm.showBack());
         toolbar.setBackCommand(backCommand);
-        
+
         videoForm.show();
         scheduleBackgroundTask(() -> {
             try{
                 Media capturedVideo = MediaManager.createMedia(fileURI, true);
                 callSerially(()->{
                     if(capturedVideo != null){
-                        capturedVideo.setNativePlayerMode(true);
+                        if(isDesktop()){
+                            capturedVideo.setNativePlayerMode(false);
+                        }else{
+                            capturedVideo.setNativePlayerMode(true);
+                        }
                         capturedVideo.prepare();
                         MediaPlayer mediaPlayer = new MediaPlayer(capturedVideo);
                         mediaPlayer.setAutoplay(true);
@@ -138,10 +140,17 @@ public class MediaDemo extends Demo {
         });
     }
     
-    private void downloadFile(String Url){
-        downloadUrlToFileSystemInBackground(Url, DOWNLOADED_VIDEO, (e)-> {
-            callSerially(()-> ToastBar.showInfoMessage("Your download has completed"));
-        });
+    private void downloadFile(String url){
+        ConnectionRequest cr = new ConnectionRequest();
+        cr.setPost(false);
+        cr.setFailSilently(true);
+        cr.setReadResponseForErrors(false);
+        cr.setDuplicateSupported(true);
+        cr.setUrl(url);
+        cr.setDestinationFile(DOWNLOADED_VIDEO);
+        cr.addResponseListener(e->{});
+        ToastBar.showConnectionProgress("Downloading", cr, null, null);
+        NetworkManager.getInstance().addToQueue(cr);
     }
     
     private Component createVideoComponent(String firstLine, String secondLine, Image icon, ActionListener actionListener){
