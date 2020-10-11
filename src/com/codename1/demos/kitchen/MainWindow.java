@@ -44,7 +44,6 @@ public class MainWindow {
         tb.getTitleComponent().setUIID("MainWindowTitle");
 
         Demo[] demos = {
-//                new ClockDemo(mainWindow),
                 new LabelsDemo(mainWindow),
                 new ButtonsDemo(mainWindow),
                 new TogglesDemo(mainWindow),
@@ -73,26 +72,6 @@ public class MainWindow {
     }
     
     private Component createDemoComponent(Demo demo){
-        if (demo instanceof ClockDemo){
-            Label dd = new Label(demo.getDemoImage().fill(CommonBehavior.getDemoImageWidth(), CommonBehavior.getDemoImageHeight()));
-            return dd;
-            //            Button demoIcon = new Button(){
-//                @Override
-//                public boolean animate() {
-//                    return this.getIcon().animate();
-//                }
-//            };
-//            demoIcon.setIcon(demo.getDemoImage().fill(CommonBehavior.getDemoImageWidth(), CommonBehavior.getDemoImageHeight()));
-//            demoIcon.addActionListener(e-> createAndShowForm(demo));
-//            demoIcon.setUIID("DemoComponentIcon");
-//            Container demoComponent = BorderLayout.center(demoIcon).
-//                    add(BorderLayout.SOUTH, new Label(demo.getDemoId(), "MainWindowDemoName"));
-//
-//            demoComponent.setLeadComponent(demoIcon);
-//            demoComponent.setUIID("MainWindowDemoComponent");
-//            return demoComponent;
-        }
-
         MultiButton demoComponent = new MultiButton(demo.getDemoId());
         demoComponent.setUIID("MainWindowDemoComponent");
         demoComponent.setIcon(demo.getDemoImage().fill(CommonBehavior.getDemoImageWidth(), CommonBehavior.getDemoImageHeight()));

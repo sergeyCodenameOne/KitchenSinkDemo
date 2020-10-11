@@ -84,7 +84,6 @@ public class KitchenSink {
                 FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommand")),
                 e-> initTheme());
         mainForm.show();
-        System.out.println("asdas");
     }
     
     public void stop() {
