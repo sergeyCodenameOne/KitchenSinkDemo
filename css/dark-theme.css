@@ -212,6 +212,10 @@ DemoLabel{
     color: white;
 }
 
+DemoToolbarLabel{
+    color: white;
+}
+
 DemoHeader{
     color: white;
 }

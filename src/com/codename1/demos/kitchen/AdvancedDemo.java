@@ -203,7 +203,7 @@ public class AdvancedDemo extends Demo{
             }
         });
                 
-        Button addNote = new Button("+ Create Memo", "DemoButton");
+        FloatingActionButton addNote = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD, "CalendarAddNew");
         addNote.addActionListener(e->{
             List<String> currentNotes = allNotes.get(cld.getDate().toString());
             if(currentNotes == null){
@@ -227,10 +227,9 @@ public class AdvancedDemo extends Demo{
         });
         
         Container demoContainer = BorderLayout.north(cld).
-                                    add(BorderLayout.CENTER, notes).
-                                    add(BorderLayout.SOUTH, FlowLayout.encloseRight(addNote));
+                                    add(BorderLayout.CENTER, notes);
         
-        return demoContainer;
+        return addNote.bindFabToContainer(demoContainer);
     }
     
     private Component createNote(String noteText, List<String> currNotes, Container notes){

@@ -22,19 +22,17 @@
  */
 package com.codename1.demos.kitchen;
 
-import com.codename1.ui.Button;
-import com.codename1.ui.Command;
-import com.codename1.ui.Component;
-import com.codename1.ui.Container;
-import com.codename1.ui.Display;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
-import com.codename1.ui.Toolbar;
+import com.codename1.components.ScaleImageLabel;
+import com.codename1.components.Switch;
+import com.codename1.components.ToastBar;
+import com.codename1.ui.*;
+import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 
-import static com.codename1.ui.CN.execute;
+import static com.codename1.ui.CN.*;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class ToolbarDemo extends Demo{
@@ -50,37 +48,6 @@ public class ToolbarDemo extends Demo{
         Toolbar tb = toolBarForm.getToolbar();
         tb.setUIID("DemoToolbar");
         tb.getTitleComponent().setUIID("DemoTitle");
-        
-        // Toolbar add source and back buttons.
-        Style commandStyle = UIManager.getInstance().getComponentStyle("DemoTitleCommand");
-        Form lastForm = Display.getInstance().getCurrent();
-        Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, commandStyle),
-                e-> lastForm.showBack());
-
-        Command sourceCommand = Command.create("", FontImage.create("{ }", commandStyle),
-                e-> execute(getSourceCode()));
-        
-        tb.addCommandToRightBar(sourceCommand);
-        tb.addCommandToLeftBar(backCommand);
-       
-        tb.setPermanentSideMenu(true);
-
-        Button homeButton = new Button("Home", FontImage.MATERIAL_HOME, ("ToolbarDemoButton"));
-        homeButton.addActionListener(e-> lastForm.showBack());
-
-        Button homePageButton = new Button("codenameone.com", FontImage.MATERIAL_WEB, ("ToolbarDemoButton"));
-        homePageButton.addActionListener(e-> execute("https://www.codenameone.com/"));
-
-        Button javaDocButton = new Button("JavaDoc (Reference)", FontImage.MATERIAL_OPEN_IN_BROWSER, ("ToolbarDemoButton"));
-        javaDocButton.addActionListener(e-> execute("https://www.codenameone.com/javadoc/"));
-
-        Button sourceCodeButton = new Button("Source Code", FontImage.MATERIAL_CODE, ("ToolbarDemoButton"));
-        sourceCodeButton.addActionListener(e-> execute("https://github.com/sergeyCodenameOne/KitchenSinkDemo"));
-
-        tb.addComponentToSideMenu(homeButton);
-        tb.addComponentToSideMenu(homePageButton);
-        tb.addComponentToSideMenu(javaDocButton);
-        tb.addComponentToSideMenu(sourceCodeButton);
 
         Button searchButton = new Button("Show Searchbar", ("ToolbarDemoButton"));
         searchButton.addActionListener(e->{
@@ -91,6 +58,72 @@ public class ToolbarDemo extends Demo{
             });
             Display.getInstance().getCurrent().revalidate();
         });
+
+        // Toolbar add source and back buttons.
+        Style commandStyle = UIManager.getInstance().getComponentStyle("DemoTitleCommand");
+
+        Command sourceCommand = Command.create("", FontImage.create("{ }", commandStyle),
+                e-> execute(getSourceCode()));
+
+        tb.addCommandToRightBar(sourceCommand);
+        if (isTablet()){
+            tb.setPermanentSideMenu(true);
+        }
+
+        Form lastForm = Display.getInstance().getCurrent();
+        Button homeButton = new Button("Home", FontImage.MATERIAL_HOME, ("ToolbarDemoButton"));
+        homeButton.addActionListener(e-> lastForm.showBack());
+
+        Button showSearchButton = new Button("Search", FontImage.MATERIAL_SEARCH, ("ToolbarDemoButton"));
+        showSearchButton.addActionListener(e-> {
+            Container contentPane = toolBarForm.getContentPane();
+            contentPane.setLayout(new FlowLayout(Component.CENTER));
+            contentPane.removeAll();
+            contentPane.add(searchButton);
+            if (!isTablet()){
+                tb.closeSideMenu();
+            }
+            contentPane.revalidate();
+        });
+
+        Button settings = new Button("Settings", FontImage.MATERIAL_SETTINGS, ("ToolbarDemoButton"));
+        settings.addActionListener(e-> {
+            Container contentPane = toolBarForm.getContentPane();
+            contentPane.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+            contentPane.removeAll();
+            Container settingsLabel = FlowLayout.encloseCenter(new Label("Settings", "DemoHeader"));
+            Container wifi = BorderLayout.west(new Label("Wi-Fi", "DemoToolbarLabel")).add(BorderLayout.EAST, new Switch());
+            Container mobileData = BorderLayout.west(new Label("Mobile data", "DemoToolbarLabel")).add(BorderLayout.EAST, new Switch());
+            Container airplaneMode = BorderLayout.west(new Label("Airplane mode", "DemoToolbarLabel")).add(BorderLayout.EAST, new Switch());
+            contentPane.addAll(settingsLabel, wifi, mobileData, airplaneMode);
+            if (!isTablet()){
+                tb.closeSideMenu();
+            }
+            contentPane.revalidate();
+        });
+
+        Button logoutButton = new Button("Logout", FontImage.MATERIAL_EXIT_TO_APP, ("ToolbarDemoButton"));
+        logoutButton.addActionListener(e-> {
+            if (!isTablet()){
+                tb.closeSideMenu();
+            }
+            ToastBar.showInfoMessage("You have successfully logged out");
+        });
+
+        if (!isTablet()){
+            ScaleImageLabel cn1Icon = new ScaleImageLabel(getGlobalResources().getImage("code-name-one-icon.png"));
+            int size = convertToPixels(20);
+            cn1Icon.setPreferredH(size);
+            cn1Icon.setPreferredW(size);
+            Container sideMenuHeader = BoxLayout.encloseY(cn1Icon, new Label("Codename One", "DemoHeaderLabel"));
+            tb.addComponentToSideMenu(sideMenuHeader);
+        }
+
+        tb.addComponentToSideMenu(homeButton);
+        tb.addComponentToSideMenu(showSearchButton);
+        tb.addComponentToSideMenu(settings);
+        tb.addComponentToSideMenu(logoutButton);
+
         toolBarForm.add(searchButton);
         
         toolBarForm.show();

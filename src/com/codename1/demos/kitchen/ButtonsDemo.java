@@ -262,29 +262,49 @@ public class ButtonsDemo extends Demo{
     
     private Container createFloatingActionButtonDemo(){
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-        FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD, "FabDemo");
-        
-        fab.addActionListener(e->{
+        FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD, "RedFabDemo");
+
+        FloatingActionButton greenButton = fab.createSubFAB(FontImage.MATERIAL_ADD_TASK, "");
+        greenButton.setUIID("GreenFabDemo");
+        greenButton.addActionListener(e->{
             TextComponent header = new TextComponent().labelAndHint("note header: ");
             TextComponent body = new TextComponent().labelAndHint("note body: ");
             Command ok = new Command("Ok");
             Command cancel = new Command("Cancel");
             if (Dialog.show("Enter Note", BoxLayout.encloseY(header, body), ok, cancel) == ok && header.getText().length() != 0){
-                demoContainer.add(createNote(header.getText(), body.getText(), demoContainer));
+                demoContainer.add(createNote(header.getText(), body.getText(), demoContainer, true));
+                demoContainer.revalidate();
+            }
+        });
+
+        FloatingActionButton purpleButton = fab.createSubFAB(FontImage.MATERIAL_ADD_TASK, "");
+        purpleButton.setUIID("PurpleFabDemo");
+        purpleButton.addActionListener(e->{
+            TextComponent header = new TextComponent().labelAndHint("note header: ");
+            TextComponent body = new TextComponent().labelAndHint("note body: ");
+            Command ok = new Command("Ok");
+            Command cancel = new Command("Cancel");
+            if (Dialog.show("Enter Note", BoxLayout.encloseY(header, body), ok, cancel) == ok && header.getText().length() != 0){
+                demoContainer.add(createNote(header.getText(), body.getText(), demoContainer, false));
                 demoContainer.revalidate();
             }
         });
         return fab.bindFabToContainer(demoContainer);
     }
     
-    private Component createNote(String header, String body, Container notes){
+    private Component createNote(String header, String body, Container notes, boolean isGreen){
         Button deleteButton = new Button("", FontImage.createMaterial(FontImage.MATERIAL_DELETE, UIManager.getInstance().getComponentStyle("DeleteButton")), "DeleteButton");
         Label emptyLabel = new Label(" ", "EmptyGreenLabel");
         SpanLabel noteHeaderLabel = new SpanLabel(header, "NoteHeaderLabel");
         SpanLabel noteBodyLabel = new SpanLabel(body, "NoteBodyLabel");
         Container noteContainer = BoxLayout.encloseY(emptyLabel, noteHeaderLabel, noteBodyLabel);
-        noteContainer.setUIID("NoteContainer");
         SwipeableContainer note = new SwipeableContainer(deleteButton, noteContainer);
+        if(isGreen) {
+            noteContainer.setUIID("NoteGreenContainer");
+        }else{
+            noteContainer.setUIID("NotePurpleContainer");
+            emptyLabel.setUIID("EmptyPurpleLabel");
+        }
 
         deleteButton.addActionListener(e->{
             notes.removeComponent(note);

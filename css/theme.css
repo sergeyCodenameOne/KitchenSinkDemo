@@ -162,6 +162,10 @@ background-image:   url(images/charts/chart-bar.png),
     ComponentDemoLabel{
         font-size: 3.5mm;
     }
+
+    DemoToolbarLabel{
+        font-size: 4mm;
+    }
     
     DemoTextArea{
         font-size: 4mm;
@@ -258,7 +262,10 @@ background-image:   url(images/charts/chart-bar.png),
     DemoLabel{
         font-size: 5mm;
     }
-    
+    DemoToolbarLabel{
+        font-size: 3.5mm;
+    }
+
     DemoHeader{
         font-size: 5mm;
     }
@@ -712,6 +719,14 @@ DemoLabel{
     color: black;
 }
 
+DemoToolbarLabel{
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    background-color: rgba(0, 0, 0, 0);
+    color: black;
+    padding: 2mm;
+}
+
 DemoHeader{
     font-family: "native:MainBold";
     font-size: 3mm;
@@ -936,19 +951,51 @@ DemoCheckBox.pressed{
     color: #da1e26;
 }
 
-NoteContainer{
+NoteGreenContainer{
     background-color: #c2ef65;
     border-radius: 2mm;
     padding: 0;
     margin: 2mm; 
 }
 
-FabDemo{
+NotePurpleContainer{
+    background-color: #948df8;
+    border-radius: 2mm;
+    padding: 0;
+    margin: 2mm;
+}
+
+GreenFabDemo{
     background-color: #9acd32;
     color: white;
 }
 
-FabDemo.pressed{
+GreenFabDemo.pressed{
+    background-color: #a6d841;
+}
+
+PurpleFabDemo{
+    background-color: #766fde;
+    color: white;
+}
+PurpleFabDemo.pressed{
+    background-color: #6058d0;
+}
+
+RedFabDemo{
+    background-color: #c30209;
+    color: white;
+}
+RedFabDemo.pressed{
+    background-color: #de3f44;
+}
+
+CalendarAddNew{
+    background-color: #9acd32;
+    color: white;
+}
+
+CalendarAddNew.pressed{
     background-color: #a6d841;
 }
 
@@ -961,6 +1008,18 @@ EmptyGreenLabel{
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+
+EmptyPurpleLabel{
+    margin: 0;
+    background-color: #766fde;
+    padding: 0mm;
+    font-size: 1mm;
+    border-radius: 2mm;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
 
 NoteHeaderLabel{
     color: black;
@@ -1292,7 +1351,7 @@ PopupDialogTitle{
 
 ToolbarDemoButton{
     background-color: rgba(0, 0, 0, 0);
-    font-size: 2mm;
+    font-size: 3mm;
     padding: 2mm;
     color: #157efb;
     text-align: left;
@@ -1313,6 +1372,7 @@ SideNavigationPanel{
 }
 
 TextFieldSearch{
+    color: black;
     border: 1px solid gray;
     margin: 2mm 5mm 2mm 5mm;
     font-size: 3mm;

@@ -130,18 +130,16 @@ public class DialogDemo extends Demo {
         showDialog.addActionListener(e-> {
             Command ok = new Command("Ok");
             Command cancel = new Command("Cancel");
-            SpanLabel body = new SpanLabel("This is the dialog body, it can contain anything...", "DialogDemoSpanLabel");
             ComboBox<Map<String, Object>> combo = new ComboBox<> (
-                    createListEntry("A Game of Thrones", "1996", "4.45"),
-                    createListEntry("A Clash Of Kings", "1998", "4.41"),
-                    createListEntry("A Storm Of Swords", "2000", "4.54"),
-                    createListEntry("A Feast For Crows", "2005", "4.14"),
-                    createListEntry("A Dance With Dragons", "2011", "4.33"),
-                    createListEntry("The Winds of Winter", "2016", "4.40"),
-                    createListEntry("A Dream of Spring", "Unpublished", "unknown")
+                    createListEntry("The Godfather", "1994", "9.1"),
+                    createListEntry("The Dark Knight", "2008", "9.0"),
+                    createListEntry("The Lord of the Rings", "2001", "8.9"),
+                    createListEntry("Fight Club", "1999", "8.8"),
+                    createListEntry("Forrest Gump", "1994", "8.8"),
+                    createListEntry("Inception", "2010", "8.7"),
+                    createListEntry("Saving Private Ryan", "1998", "8.5")
 
             );
-
 
             MultiButton mb1 = new MultiButton();
             mb1.setUIID("DemoMultiButton");
@@ -155,7 +153,10 @@ public class DialogDemo extends Demo {
 
             combo.setRenderer(new GenericListCellRenderer<>(mb1, mb2));
             combo.setSelectedIndex(1);
-            Dialog.show("Dialog Title", BoxLayout.encloseY(combo), ok, cancel);
+            if (Dialog.show("Dialog Title", BoxLayout.encloseY(new Label("Choose Movie:", "DemoHeaderLabel"), combo), ok, cancel) == ok){
+                Map selectedItem = combo.getSelectedItem();
+                ToastBar.showInfoMessage((String)selectedItem.get("Line1") + " rating is: " + (String)selectedItem.get("rating"));
+            }
         });
         showPopup.addActionListener(e-> {
             Dialog d = new Dialog("Popup Title");
