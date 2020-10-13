@@ -42,7 +42,13 @@ import java.io.IOException;
 import static com.codename1.ui.CN.*;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-
+/**
+ * Class that demonstrate the usage of the MediaPlayer and the MediaManager components.
+ * The MediaPlayer allows you to control video playback. To use the MediaPlayer we need to first load the Media object from the MediaManager.
+ * The MediaManager is the core class responsible for media interaction in Codename One.
+ *
+ * @author Sergey Gerashenko.
+ */
 public class MediaDemo extends Demo {
     private static final String CAPTURED_VIDEO = FileSystemStorage.getInstance().getAppHomePath() + "captured.mp4";
     private static final String DOWNLOADED_VIDEO = FileSystemStorage.getInstance().getAppHomePath() + "hello-codenameone.mp4";
@@ -51,7 +57,8 @@ public class MediaDemo extends Demo {
         init("media", getGlobalResources().getImage("media-demo-icon.png"), parentForm,
                 "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/MediaDemo.java");
     }
-    
+
+    @Override
     public Container createContentPane(){
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "VideoContainer");
       
@@ -103,7 +110,8 @@ public class MediaDemo extends Demo {
         demoContainer.addAll(downloadButton, playOfflineButton, playOnlineButton, captureVideoButton, playCaptured);
         return demoContainer;
     }
-    private void playVideoOnNewForm(String fileURI, Form parentForm){
+
+    private void playVideoOnNewForm(String fileURI, Form parentForm) {
         Form videoForm = new Form("Video", new BorderLayout());
         videoForm.getContentPane().setUIID("ComponentDemoContainer");
         Toolbar toolbar = videoForm.getToolbar();
@@ -115,24 +123,24 @@ public class MediaDemo extends Demo {
         toolbar.setBackCommand(backCommand);
 
         videoForm.show();
-        scheduleBackgroundTask(() -> {
+        scheduleBackgroundTask(()-> {
             try{
-                Media capturedVideo = MediaManager.createMedia(fileURI, true);
-                callSerially(()->{
-                    if(capturedVideo != null){
-                        if(isDesktop()){
-                            capturedVideo.setNativePlayerMode(false);
-                        }else{
-                            capturedVideo.setNativePlayerMode(true);
-                        }
-                        capturedVideo.prepare();
-                        MediaPlayer mediaPlayer = new MediaPlayer(capturedVideo);
-                        mediaPlayer.setAutoplay(true);
-                        videoForm.removeAll();
-                        videoForm.add(BorderLayout.CENTER, mediaPlayer);
-                        videoForm.getContentPane().revalidate();
+                Media video = MediaManager.createMedia(fileURI, true);
+                if(video != null){
+                    video.prepare();
+                    if(isDesktop() || isSimulator()){
+                        video.setNativePlayerMode(false);
+                    }else{
+                        video.setNativePlayerMode(true);
                     }
-                });
+                    MediaPlayer player = new MediaPlayer(video);
+                    player.setAutoplay(true);
+                    callSerially(()->{
+                        videoForm.removeAll();
+                        videoForm.add(BorderLayout.CENTER, player);
+                        videoForm.revalidate();
+                    });
+                }
             }catch(IOException error){
                 Log.e(error);
                 ToastBar.showErrorMessage("Error loading video");

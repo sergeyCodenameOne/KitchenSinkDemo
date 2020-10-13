@@ -36,7 +36,13 @@ import java.io.OutputStream;
 
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-
+/**
+ * Class that demonstrate a simple usage of the Button, SpanButton, MultiButton, ScaleImageButton
+ * FloatingActionButton, and ShareButton components.
+ * The buttons are components that allowing clickability.
+ *
+ * @author Sergey Gerashenko.
+ */
 public class ButtonsDemo extends Demo{
 
     public ButtonsDemo(Form parentForm) {
@@ -48,9 +54,8 @@ public class ButtonsDemo extends Demo{
     public Container createContentPane() {
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
         demoContainer.setScrollableY(true);
-        ContentBuilder builder = ContentBuilder.getInstance();
-        
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("buttons.png"),
+
+        demoContainer.add(createComponent(getGlobalResources().getImage("buttons.png"),
                                                                 "Buttons",
                                                                 "Button is the base class for several UI",
                                                                 "widgets allowing clickability. It has 3 States: rollover, pressed and the default state. Button can also "+
@@ -59,7 +64,7 @@ public class ButtonsDemo extends Demo{
                                                                     showDemo("Buttons", createButtonsDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("span-button.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("span-button.png"),
                                                                 "Span Buttons",
                                                                 "A complex button similar to MultiButton",
                                                                 "that breaks lines automatically and looks like a regular button(more or less). Unlike the multi button the "+
@@ -67,7 +72,7 @@ public class ButtonsDemo extends Demo{
                                                                     showDemo("Span Buttons", createSpanButtonsDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("multi-buttons.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("multi-buttons.png"),
                                                                 "Multi Buttons",
                                                                 "A powerful button like component that",
                                                                 "allows multiple rows/and an icon to be added every row/icon can have its own UIID.\n\nInternally the "+
@@ -75,7 +80,7 @@ public class ButtonsDemo extends Demo{
                                                                     showDemo("Multi Buttons", createMultiButtonsDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("scale-image-label.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("scale-image-label.png"),
                                                                 "Scale Image Button",
                                                                 "Button that simplifies the usage of scale to",
                                                                 "fill/fit. This is effectively equivalent to just setting the style image on a button but more convenient "+
@@ -83,7 +88,7 @@ public class ButtonsDemo extends Demo{
                                                                    showDemo("Scale Image Button", createScaleImageButton());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("floating-action-button.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("floating-action-button.png"),
                                                                 "Floating Action Button",
                                                                 "Floating action buttons are a material design",
                                                                 "element used to promote a special action in a form. They are represented as a floating circle with a "+
@@ -91,7 +96,7 @@ public class ButtonsDemo extends Demo{
                                                                    showDemo("Floating Action Button", createFloatingActionButtonDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("share-button.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("share-button.png"),
                                                                 "Share Button",
                                                                 "The share button allows sharing a String",
                                                                 "or an image either thru the defined sharing services or thru native OS sharing support. On Android & iOS the "+
@@ -142,7 +147,6 @@ public class ButtonsDemo extends Demo{
         twoLinesNoIcon.setUIIDLine2("DemoMultiButtonText");
         twoLinesNoIcon.setUIID("DemoButton");
         twoLinesNoIcon.setUIIDLine1("DemoMultiButtonText");
-
         
         Image emblem = FontImage.createMaterial(FontImage.MATERIAL_ARROW_RIGHT, UIManager.getInstance().getComponentStyle("DemoMultiIcon"));
         Image icon = FontImage.createMaterial(FontImage.MATERIAL_INFO, UIManager.getInstance().getComponentStyle("DemoMultiIcon"));

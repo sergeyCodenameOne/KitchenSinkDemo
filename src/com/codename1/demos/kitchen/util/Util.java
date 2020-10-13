@@ -20,13 +20,13 @@
  * Please contact Codename One through http://www.codenameone.com/ if you 
  * need additional information or have any questions.
  */
-package com.codename1.demos.kitchen;
+package com.codename1.demos.kitchen.util;
 
 import com.codename1.ui.CN;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 
-public class CommonBehavior {
+public class Util {
     private static Image roundMaskImage = null;
     private static int imageWidth = -1;
     private static int imageHeight = -1;

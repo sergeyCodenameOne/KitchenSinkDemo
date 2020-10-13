@@ -36,7 +36,12 @@ import java.util.TimeZone;
 
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-
+/**
+ * Class that demonstrate the usage of the ComboBox and PickerComponent components.
+ * The Selection components are lists of items that allow to select one or more items at a time.
+ *
+ * @author Sergey Gerashenko.
+ */
 public class SelectionDemo extends Demo{
     
     public SelectionDemo(Form parentForm) {
@@ -47,9 +52,8 @@ public class SelectionDemo extends Demo{
     public Container createContentPane() {
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
         demoContainer.setScrollableY(true);
-        ContentBuilder builder = ContentBuilder.getInstance();
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("combo-box.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("combo-box.png"),
                                                                 "Combo Box",
                                                                 "ComboBox is a list that allows only one",
                                                                 "selection at a time, when a user clicks * the code ComboBox a popup button with the full list of elements allows the "+
@@ -58,35 +62,35 @@ public class SelectionDemo extends Demo{
                                                                     showDemo("Combo Box", createComboBoxDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("date-picker.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("date-picker.png"),
                                                                 "Date Picker",
                                                                 "Date Picker is a PickerComponent use",
                                                                 "PickerComponent.createDate(null).label(\"Se- lect Birthday\")", e->{
                                                                     showDemo("Date Picker", createDatePickerDemo());                                           
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("time-picker.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("time-picker.png"),
                                                                 "Time Picker",
                                                                 "Time Picker is a PickerComponent use",
                                                                 "PickerComponent.createTime(null).label(\"Se- lect Alarm time\")", e->{
                                                                     showDemo("Time Picker", createTimePickerDemo());     
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("date-time-picker.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("date-time-picker.png"),
                                                                 "Date Time Picker",
                                                                 "DateTime Picker is a PickerComponent use ",
                                                                 "PickerComponent.createDateTime(null).label (\"Select Meeting schedule\")", e->{
                                                                     showDemo("Date Time Picker", createDateTimePickerDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("minute-picker.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("minute-picker.png"),
                                                                 "Minute Duration Picker",
                                                                 "Minute Picker is a PickerComponent use",
                                                                 "PickerComponent.createDurationMMInutes (0).label(\"Select Duration\")", e->{
                                                                     showDemo("Minute Duration Picker", createMinuteDurationPickerDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("hour-picker.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("hour-picker.png"),
                                                                 "Minute, Hour, Duration Picker",
                                                                 "Hour Minute Picker is a PickerComponent",
                                                                 "use PickerComponent.createDurationHoursMinutes(0,0).label(\"Select Duration\")", e->{

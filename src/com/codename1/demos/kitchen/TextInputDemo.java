@@ -28,12 +28,12 @@ import com.codename1.components.ToastBar;
 import com.codename1.io.CSVParser;
 import com.codename1.io.Log;
 import com.codename1.ui.*;
-import com.codename1.ui.layouts.BorderLayout;
-import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.layouts.*;
 import com.codename1.ui.list.DefaultListCellRenderer;
 import com.codename1.ui.list.DefaultListModel;
 import com.codename1.ui.table.TableLayout;
+import com.codename1.ui.validation.RegexConstraint;
+import com.codename1.ui.validation.Validator;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,20 +42,25 @@ import java.util.List;
 
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-public class TextFieldDemo extends Demo{
+/**
+ * Class that demonstrate the usage of the TextField, TextArea, ClearableTextField, AutoCompleteTextField,
+ * and TextComponent components.
+ * The TextInput Components are basic components that allow to view the text on the form and get text input from the user.
+ *
+ * @author Sergey Gerashenko.
+ */
+public class TextInputDemo extends Demo{
     
-    public TextFieldDemo(Form parentForm) {
-        init("Text Field", getGlobalResources().getImage("text-field-demo.png"), parentForm, "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/TextFieldDemo.java");
+    public TextInputDemo(Form parentForm) {
+        init("Text Input", getGlobalResources().getImage("text-field-demo.png"), parentForm, "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/TextFieldDemo.java");
     }
      
     @Override
     public Container createContentPane() {
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
         demoContainer.setScrollableY(true);
-        ContentBuilder builder = ContentBuilder.getInstance();
         
-        
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("text-field.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("text-field.png"),
                                                                 "Text Field",
                                                                 "A specialized version of TextArea with",
                                                                 "some minor deviations from the original specifically: Blinking cursor is rendered on TextField only. "+
@@ -66,7 +71,7 @@ public class TextFieldDemo extends Demo{
                                                                     showDemo("Text Field", createTextFieldDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("text-area.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("text-area.png"),
                                                                 "Text Area",
                                                                 "An optionally multi-line editable region that",
                                                                 "can display text and allow a user to edit it. By default the text area will grow based on its content. "+
@@ -78,7 +83,7 @@ public class TextFieldDemo extends Demo{
                                                                     showDemo("Text Area", createTextAreaDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("clearable-text-field.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("clearable-text-field.png"),
                                                                 "Clearable Text Field",
                                                                 "Wraps a text field so it will have an X to",
                                                                 "clear its content on the right hand side.", 
@@ -86,7 +91,7 @@ public class TextFieldDemo extends Demo{
                                                                     showDemo("Clearable Text Field", createClearableTextFieldDemo());
                                                                 }));
  
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("auto-complete-text-field.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("auto-complete-text-field.png"),
                                                                 "Auto Complete Text Field",
                                                                 "An editable TextField with completion",
                                                                 "suggestions that show up in a drop down menu while the user types in text. This class uses the \"TextField\" "+
@@ -95,6 +100,19 @@ public class TextFieldDemo extends Demo{
                                                                 e->{
                                                                     showDemo("Browser", createAutoCompleteDemo());
                                                                 }));
+
+        demoContainer.add(createComponent(getGlobalResources().getImage("floating-hint.png"),
+                                                                "Text Component",
+                                                                "Text Component Encapsulates a text field",
+                                                                "and label into a single component. This allows the UI to adapt for IOS/Android behavior differences and "+
+                                                                        "support features like floating hint when necessary.\n\nIt also includes platform specific error handling "+
+                                                                        "logic. It is highly recommended to use text component in the context of a TextModeLayout this allows "+
+                                                                        "the layout to implicitly adapt to the on-top mode and use a box layout Y mode for iOS and other platforms. "+
+                                                                        "This class supports several theme constants.", e->{
+
+                                                                    showDemo("Text Component", createTextComponentContainer());
+                                                                }));
+
         return demoContainer;
     }
     
@@ -274,5 +292,65 @@ public class TextFieldDemo extends Demo{
             }
         }
         return matchedWords;
+    }
+
+    private Container createTextComponentContainer(){
+        Container textContainer = new Container(new LayeredLayout());
+        // Set UIID for background image.
+        textContainer.setUIID("InputContainer");
+
+        Container textFields = new Container(new TextModeLayout(6, 1));
+
+        // Add some text fields to the page
+        TextComponent name = new TextComponent().labelAndHint("Name");
+        FontImage.setMaterialIcon(name.getField().getHintLabel(), FontImage.MATERIAL_PERSON);
+
+        TextComponent email = new TextComponent().labelAndHint("E-mail").constraint(TextArea.EMAILADDR);
+        FontImage.setMaterialIcon(email.getField().getHintLabel(), FontImage.MATERIAL_EMAIL);
+
+        TextComponent password = new TextComponent().labelAndHint("Password").constraint(TextArea.PASSWORD);
+        FontImage.setMaterialIcon(password.getField().getHintLabel(), FontImage.MATERIAL_LOCK);
+
+        TextComponent bio = new TextComponent().labelAndHint("Bio").multiline(true);
+        FontImage.setMaterialIcon(bio.getField().getHintLabel(), FontImage.MATERIAL_LIBRARY_BOOKS);
+
+        textFields.add(name);
+        textFields.add(email);
+        textFields.add(password);
+        textFields.add(bio);
+
+        Button saveButton = new Button("Save", "InputSaveButton");
+
+        // Add validation to the save Button
+        Validator saveValidation = new Validator();
+        saveValidation.addConstraint(email, RegexConstraint.validEmail());
+        saveValidation.addSubmitButtons(saveButton);
+
+        saveButton.addActionListener(ee ->{
+            // Show saving status
+            ToastBar.Status savingStatus = ToastBar.getInstance().createStatus();
+            savingStatus.setMessage("Saving");
+            savingStatus.setExpires(3000);
+            savingStatus.setShowProgressIndicator(true);
+            savingStatus.show();
+
+            // Show saved
+            ToastBar.Status saved = ToastBar.getInstance().createStatus();
+            saved.setMessage("Input was successfully saved");
+            saved.showDelayed(4000);
+            saved.setExpires(2000);
+            saved.show();
+
+            name.getField().clear();
+            email.getField().clear();
+            bio.getField().clear();
+            password.getField().clear();
+        });
+
+        Container textFieldsAndSaveButton = BorderLayout.south(saveButton);
+        textFieldsAndSaveButton.setUIID("TextComponents");
+        textFieldsAndSaveButton.add(BorderLayout.CENTER, textFields);
+
+        return BorderLayout.center(textFieldsAndSaveButton);
     }
 }

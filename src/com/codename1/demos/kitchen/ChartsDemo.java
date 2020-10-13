@@ -31,41 +31,48 @@ import com.codename1.ui.layouts.BoxLayout;
 import static com.codename1.ui.CN.getCurrentForm;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
+/**
+ * Class that demonstrate the usage of the Chart components.
+ * The charts package enables Codename One developers to add charts and visualizations to their
+ * apps without having to include external libraries or embedding web views.
+ *
+ * @author Sergey Gerashenko.
+ */
 public class ChartsDemo extends Demo {
     
     public ChartsDemo(Form parentForm) {
         init("Charts", getGlobalResources().getImage("charts-demo-icon.png"), parentForm,
                 "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/ChartsDemo.java");
     }
-    
+
+    @Override
     public Container createContentPane(){
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
         
         demoContainer.setScrollableY(true);
-        ContentBuilder builder = ContentBuilder.getInstance();
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-bar.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("chart-bar.png"),
                                                                 "Bar Chart",
                                                                 "The bar chart rendering class", e->{
                                                                     AbstractDemoChart chart = new SalesBarChart();
                                                                     showChart(chart);
                                                                 }));
        
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-bubble.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("chart-bubble.png"),
                                                                 "Bubble Chart",
                                                                 "The bubble chart rendering class", e-> {
                                                                     AbstractDemoChart chart = new ProjectStatusBubbleChart();
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-combined-xy.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("chart-combined-xy.png"),
                                                                 "CombinedXY Chart",
                                                                 "The combinedXY chart rendering class",e->{
                                                                     AbstractDemoChart chart = new CombinedTemperatureChart();
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-cubic-line.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("chart-cubic-line.png"),
                                                                 "CubicLine Chart",
                                                                 "The interpolated (cubic) line chart rendering",
                                                                 " class", e->{
@@ -73,14 +80,14 @@ public class ChartsDemo extends Demo {
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-dial.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("chart-dial.png"),
                                                                 "Dial Chart",
                                                                 "The dial chart rendering class", e->{
                                                                     WeightDialChart chart = new WeightDialChart();
                                                                     showChart(chart);
                                                                 }));
 
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-donut.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("chart-donut.png"),
                                                                 "Donut Chart",
                                                                 "The donut chart rendering class", e->{
                                                                     BudgetDoughnutChart chart = new BudgetDoughnutChart();
@@ -88,35 +95,35 @@ public class ChartsDemo extends Demo {
 
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-line.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("chart-line.png"),
                                                                 "Line Chart",
                                                                 "The linechart rendering class", e->{
                                                                     TrigonometricFunctionsChart chart = new TrigonometricFunctionsChart();
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-pie.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("chart-pie.png"),
                                                                 "Pie Chart",
                                                                 "The pie chart rendering class", e->{
                                                                     BudgetPieChart chart = new BudgetPieChart();
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-radar.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("chart-radar.png"),
                                                                 "Radar Chart",
                                                                 "The radar chart rendering class", e->{
                                                                     EmployeeChart chart = new EmployeeChart();
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-scatter.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("chart-scatter.png"),
                                                                 "Scatter Chart",
                                                                 "The scater chart rendering class", e->{
                                                                     ScatterChart chart = new ScatterChart();
                                                                     showChart(chart);
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("chart-time.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("chart-time.png"),
                                                                 "Time Chart",
                                                                 "The Time chart rendering class", e->{
                                                                     SensorValuesChart chart = new SensorValuesChart();

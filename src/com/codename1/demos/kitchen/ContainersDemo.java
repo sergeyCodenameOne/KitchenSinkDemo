@@ -42,7 +42,13 @@ import static com.codename1.ui.CN.*;
 import static com.codename1.ui.FontImage.createMaterial;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-
+/**
+ * Class that demonstrate the usage of the Accordion, InfiniteContainer, SplitPane, and Tabs Containers.
+ * The Containers are Components that allow to Contain other Components inside them and to arrange them using layout manager.
+ * The Containers are derived from Component class so they able to contain another containers as well.
+ *
+ * @author Sergey Gerashenko.
+ */
 public class ContainersDemo extends Demo{
     private List<Component> colorLabelList;
     private Container colorsContainer;
@@ -55,9 +61,8 @@ public class ContainersDemo extends Demo{
     public Container createContentPane() {
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
         demoContainer.setScrollableY(true);
-        ContentBuilder builder = ContentBuilder.getInstance();
 
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("accordion.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("accordion.png"),
                 "Accordion",
                 "This Accordion ui pattern is a vertically",
                 "stacked list of items. Each items can be opened/closed to reveal more content similar to a Tree however "+
@@ -71,7 +76,7 @@ public class ContainersDemo extends Demo{
                     showDemo("Accordion", createAccordionDemo());
                 }));
 
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("infinite-container.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("infinite-container.png"),
                 "Infinite Container",
                 "This abstract Container can scroll",
                 "indefinitely (or at least until we run out of data). This class uses the "+
@@ -82,7 +87,7 @@ public class ContainersDemo extends Demo{
                     showDemo("Infinite Container", createInfiniteContainerDemo());
                 }));
 
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("split-pane.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("split-pane.png"),
                 "Split Pane",
                 "A split pane can either be horizontal or",
                 "vertical, and provides a draggable divider between two components. If the orientation is HORIZONTAL_SPLIT, "+
@@ -93,7 +98,7 @@ public class ContainersDemo extends Demo{
                     showDemo("Split Pane", createSplitPaneDemo());
                 }));
 
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("tabs.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("tabs.png"),
                 "Tabs",
                 "A component that lets the user switch",
                 "between a group if components by clicking on a tab with a given "+
@@ -107,6 +112,7 @@ public class ContainersDemo extends Demo{
                 e->{
                     showDemo("Tabs", createTabsDemo());
                 }));
+
         return demoContainer;
     }
 

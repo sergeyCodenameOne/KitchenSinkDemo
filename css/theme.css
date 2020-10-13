@@ -146,6 +146,10 @@ background-image:   url(images/charts/chart-bar.png),
     DemoTitleCommand{
         font-size: 5mm;
     }
+
+    DemoTitleCommandDark{
+        font-size: 5mm;
+    }
     
     DemoContentAccordion{
         margin: 1.9mm;
@@ -314,6 +318,10 @@ background-image:   url(images/charts/chart-bar.png),
     DemoHeaderLabel{
         font-size: 5mm;
     }
+
+    SideMenuHeader{
+            font-size: 5mm;
+        }
 }
 
 DialogCommandArea{
@@ -1029,6 +1037,15 @@ NoteHeaderLabel{
     font-family: "native:MainRegular";
 }
 
+SideMenuHeader{
+    margin-bottom: 3mm;
+    color: black;
+    background-color: rgba(0, 0, 0, 0);
+    text-align: center;
+    font-size: 3.5mm;
+    font-family: "native:MainRegular";
+}
+
 NoteBodyLabel{
     color: black;
     background-color: rgba(0, 0, 0, 0);
@@ -1394,6 +1411,14 @@ DemoTitleCommand{
     font-family: "native:MainRegular";
 }
 
+DemoTitleCommandDark{
+    font-size: 3mm;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    text-align: center;
+    font-family: "native:MainRegular";
+}
+
 TitleCommand{
     background-color: rgba(0, 0, 0, 0);
     color: #157efb;
@@ -1649,4 +1674,9 @@ MultiLine1{
 ClockComponent{
     background-color: rgba(0, 0, 0, 0);
     color: black;
+}
+
+SideMenuIconDemo{
+    margin-top: 4mm;
+    margin-bottom: 1mm;
 }

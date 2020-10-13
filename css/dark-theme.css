@@ -530,3 +530,7 @@ MultiLine1{
 ClockComponent{
     color: white;
 }
+
+SideMenuHeader{
+    color: white;
+}

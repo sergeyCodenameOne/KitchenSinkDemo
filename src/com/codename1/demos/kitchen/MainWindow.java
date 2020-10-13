@@ -23,6 +23,7 @@
 package com.codename1.demos.kitchen;
 
 import com.codename1.components.MultiButton;
+import com.codename1.demos.kitchen.util.Util;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.GridLayout;
@@ -47,7 +48,7 @@ public class MainWindow {
                 new LabelsDemo(mainWindow),
                 new ButtonsDemo(mainWindow),
                 new TogglesDemo(mainWindow),
-                new TextFieldDemo(mainWindow),
+                new TextInputDemo(mainWindow),
                 new SelectionDemo(mainWindow),
                 new ContainersDemo(mainWindow),
                 new DialogDemo(mainWindow),
@@ -74,7 +75,7 @@ public class MainWindow {
     private Component createDemoComponent(Demo demo){
         MultiButton demoComponent = new MultiButton(demo.getDemoId());
         demoComponent.setUIID("MainWindowDemoComponent");
-        demoComponent.setIcon(demo.getDemoImage().fill(CommonBehavior.getDemoImageWidth(), CommonBehavior.getDemoImageHeight()));
+        demoComponent.setIcon(demo.getDemoImage().fill(Util.getDemoImageWidth(), Util.getDemoImageHeight()));
         demoComponent.setIconPosition(BorderLayout.NORTH);
         demoComponent.addActionListener(e-> createAndShowForm(demo));
         demoComponent.setIconUIID("DemoComponentIcon");

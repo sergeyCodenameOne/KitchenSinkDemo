@@ -13,6 +13,12 @@ import java.util.TimeZone;
 
 import static com.codename1.ui.CN.*;
 
+/**
+ * This demo shows off low level graphics in Codename One and drawing of shapes, it also demonstrates the
+ * flexibility of the image class
+ *
+ * @author Sergey Gerashenko.
+ */
 public class ClockDemo extends Demo{
     private int shortTickLen;  // at 1-minute intervals
     private int medTickLen;  // at 5-minute intervals

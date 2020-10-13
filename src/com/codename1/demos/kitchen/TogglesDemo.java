@@ -33,6 +33,14 @@ import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.CN.isDarkMode;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
+
+/**
+ * Class that demonstrate the usage of the CheckBox, RadioButton, and Switch components.
+ * The Toggle buttons are basic components that have 2 states: selected and unselected.
+ * They allow the user to see it state and change it.
+ *
+ * @author Sergey Gerashenko.
+ */
 public class TogglesDemo extends Demo {
     
     public TogglesDemo(Form parentForm) {
@@ -44,9 +52,8 @@ public class TogglesDemo extends Demo {
     public Container createContentPane() {
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
         demoContainer.setScrollableY(true);
-        ContentBuilder builder = ContentBuilder.getInstance();
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("check-box.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("check-box.png"),
                                                                 "Checkbox",
                                                                 "Checkbox is a button that can be selected",
                                                                 "or deselected and display its state to the user. Check out RadioButton for a more exclusive selection "+
@@ -54,7 +61,7 @@ public class TogglesDemo extends Demo {
                                                                     showDemo("Checkbox", createCheckboxDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("radio-button.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("radio-button.png"),
                                                                 "Radio Button",
                                                                 "Checkbox is a button that can be selected",
                                                                 "or deselected and display its state to the user. Check out RadioButton for a more exclusive selection "+
@@ -62,7 +69,7 @@ public class TogglesDemo extends Demo {
                                                                     showDemo("Radio Button", createRadioButtonDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("switch.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("switch.png"),
                                                                 "Switch",
                                                                 "Button is the base class for several UI",
                                                                 "The on/off switch is a checkbox of sort (although it derives container) that represents its state as a switch "+
@@ -72,13 +79,13 @@ public class TogglesDemo extends Demo {
                                                                     showDemo("Switch", createSwitchDemo());
                                                                 }));
 
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("check-box-list.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("check-box-list.png"),
                                                                 "Check Box List",
                                                                 "A list of Check Boxes", e->{
                                                                     showDemo("CheckBox List", createCheckBoxListDemo());
                                                                 }));
 
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("radio-button-list.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("radio-button-list.png"),
                                                                 "RadioButton List (BoxLayout Y)",
                                                                 "A list of Radio Buttons.", e->{
                                                                     showDemo("RadioButton List (BoxLayout Y)", createRadioButtonListDemo());

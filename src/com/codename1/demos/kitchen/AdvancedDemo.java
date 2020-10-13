@@ -39,21 +39,24 @@ import java.util.List;
 import static com.codename1.ui.CN.invokeAndBlock;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-        
+/**
+ * Class that demonstrate the usage of the BrowserComponent, SignatureComponent, Calendar, FileTree and ImageViewer components.
+ *
+ * @author Sergey Gerashenko.
+ */
 public class AdvancedDemo extends Demo{
     private HashMap<String, List<String>> allNotes = new HashMap<>();
-    
     
     public AdvancedDemo(Form parentForm) {
         init("Advanced", getGlobalResources().getImage("advanced-icon.png"), parentForm, "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/AdvancedDemo.java");
     }
-    
+
+    @Override
     public Container createContentPane(){
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
         demoContainer.setScrollableY(true);
-        ContentBuilder builder = ContentBuilder.getInstance();
 
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("advanced-browser.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("advanced-browser.png"),
                                                                 "Browser Component",
                                                                 "The browser component is an interface",
                                                                 "to an embeddable native platform browser on "+
@@ -72,7 +75,7 @@ public class AdvancedDemo extends Demo{
                                                                     showDemo("Browser", browser);
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("advanced-singnature.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("advanced-singnature.png"),
                                                                 "Signature Component",
                                                                 "A component to allow a user to enter",
                                                                 "their signature. This is just a button that, when pressed, will pop up a dialog where the user can draw "+
@@ -83,7 +86,7 @@ public class AdvancedDemo extends Demo{
                                                                     showDemo("Signature", createSignatureDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("advanced-calendar.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("advanced-calendar.png"),
                                                                 "Calendar",
                                                                 "Date widget for selecting a date/time value.",
                                                                 "To localize stings for month names use the values Calendar. Month using 3 first characters of the month name in "+
@@ -94,7 +97,7 @@ public class AdvancedDemo extends Demo{
                                                                     showDemo("Calendar", createCalendarDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("advanced-tree-file.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("advanced-tree-file.png"),
                                                                 "File Tree",
                                                                 "Simple class showing off the file system as",
                                                                 "a tree component.",
@@ -112,7 +115,7 @@ public class AdvancedDemo extends Demo{
                                                                     showDemo("File Tree", treeContainer);
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("advanced-image-viewer.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("advanced-image-viewer.png"),
                                                                 "Image Viewer",
                                                                 "Image Viewer allows zooming/panning an",
                                                                 "image and potentially flicking between multiple images within a list of images",
@@ -132,9 +135,9 @@ public class AdvancedDemo extends Demo{
     private Container createSignatureDemo(){
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 
-        Container costSummury = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-        costSummury.setUIID("CostSummary");
-        costSummury.add(new Label("Cost Summary", "CostSummaryLabel")).
+        Container costSummary = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        costSummary.setUIID("CostSummary");
+        costSummary.add(new Label("Cost Summary", "CostSummaryLabel")).
                 add(BorderLayout.centerEastWest(null, new Label("$30.00", "SignatureCost"),  new Label("Subtotal",  "SignatureLabel"))).
                 add(BorderLayout.centerEastWest(null, new Label("$5", "SignatureCost"), new Label("Shipping", "SignatureLabel"))).
                 add(BorderLayout.centerEastWest(null, new Label("$3.00", "SignatureCost"), new Label("Estimated Tax ", "SignatureLabel"))).
@@ -173,7 +176,7 @@ public class AdvancedDemo extends Demo{
         confirmContainer.add(BorderLayout.NORTH, sig).
                 add(BorderLayout.SOUTH, FlowLayout.encloseCenter(clear, confirmAndPay));
                 
-        demoContainer.addAll(costSummury, creditCard, confirmContainer);
+        demoContainer.addAll(costSummary, creditCard, confirmContainer);
         demoContainer.setScrollableY(true);
         return demoContainer;   
     }
@@ -244,7 +247,6 @@ public class AdvancedDemo extends Demo{
                 currNotes.remove(noteText);
             }
         });
-        
         return note;
     }
 }

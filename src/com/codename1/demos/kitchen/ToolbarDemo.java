@@ -35,12 +35,20 @@ import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.CN.*;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
+/**
+ * Class that demonstrate the usage of the Toolbar component.
+ * Toolbar replaces the default title area with a powerful abstraction that allows functionality
+ * ranging from side menus (hamburger) to title animations and any arbitrary component type.
+ * Toolbar allows customizing the Form title with different commands on the title area, within the side menu or the overflow menu.
+ *
+ * @author Sergey Gerashenko.
+ */
 public class ToolbarDemo extends Demo{
     public ToolbarDemo(Form parentForm) {
         init("Toolbar", getGlobalResources().getImage("toolbar-demo.png"), parentForm,
                 "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/ToolbarDemo.java");
     }
-     
+
     @Override
     public Container createContentPane() {
         Form toolBarForm = new Form("Toolbar", new FlowLayout(Component.CENTER));
@@ -112,10 +120,11 @@ public class ToolbarDemo extends Demo{
 
         if (!isTablet()){
             ScaleImageLabel cn1Icon = new ScaleImageLabel(getGlobalResources().getImage("code-name-one-icon.png"));
+            cn1Icon.setUIID("SideMenuIconDemo");
             int size = convertToPixels(20);
             cn1Icon.setPreferredH(size);
             cn1Icon.setPreferredW(size);
-            Container sideMenuHeader = BoxLayout.encloseY(cn1Icon, new Label("Codename One", "DemoHeaderLabel"));
+            Container sideMenuHeader = BoxLayout.encloseY(cn1Icon, new Label("Codename One", "SideMenuHeader"));
             tb.addComponentToSideMenu(sideMenuHeader);
         }
 

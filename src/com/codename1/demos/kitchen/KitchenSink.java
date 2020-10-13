@@ -41,19 +41,24 @@ public class KitchenSink {
     private Resources theme;
     private boolean darkMode = false;
     private Command darkModeCommand;
+    private Image darkModeImageDark;
+    private Image darkModeImageLight;
 
     public void init(Object context) {
         // use two network threads instead of one
         updateNetworkThreadCount(2);
-        
+
         try {
             theme = Resources.openLayered("/theme");
             setPopupDialogBorder(theme.getTheme(theme.getThemeResourceNames()[0]));
             UIManager.getInstance().setThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
             Resources.setGlobalResources(theme);
-        } catch(IOException e){
+        }catch(IOException e){
             Log.e(e);
         }
+
+        darkModeImageLight = FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommand"));
+        darkModeImageDark = FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommandDark"));
 
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
@@ -81,7 +86,7 @@ public class KitchenSink {
         }
         Form mainForm =  new MainWindow().buildForm();
         darkModeCommand = mainForm.getToolbar().addCommandToRightBar("",
-                FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommand")),
+                darkModeImageLight,
                 e-> initTheme());
         mainForm.show();
     }
@@ -108,7 +113,12 @@ public class KitchenSink {
             Log.e(e);
         }
         Button darkModeCmd = Display.getInstance().getCurrent().getToolbar().findCommandComponent(darkModeCommand);
-        darkModeCmd.setIcon(FontImage.createMaterial(FontImage.MATERIAL_BRIGHTNESS_MEDIUM, UIManager.getInstance().getComponentStyle("DemoTitleCommand")));
+        if(darkMode){
+            darkModeCmd.setIcon(darkModeImageDark);
+        }else{
+            darkModeCmd.setIcon(darkModeImageLight);
+        }
+
         ClockDemo.refreshClockColor();
         Display.getInstance().getCurrent().refreshTheme();
     }

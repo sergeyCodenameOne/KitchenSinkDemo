@@ -24,7 +24,11 @@ package com.codename1.demos.kitchen;
 
 import com.codename1.components.*;
 import com.codename1.contacts.Contact;
+import com.codename1.demos.kitchen.util.Util;
 import com.codename1.ui.*;
+import com.codename1.ui.animations.CommonTransitions;
+import com.codename1.ui.animations.FlipTransition;
+import com.codename1.ui.animations.Transition;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
@@ -39,10 +43,15 @@ import static com.codename1.contacts.ContactsManager.deleteContact;
 import static com.codename1.ui.CN.*;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-
+/**
+ * Class that demonstrate the usage of the InteractionDialog, Dialog, Sheet, and ToastBar Components.
+ * The Dialog are Forms that occupies a part of the screen, and used mostly to display information and to get information from the user.
+ *
+ * @author Sergey Gerashenko.
+ */
 public class DialogDemo extends Demo {
     boolean isInteractionDialogOpen = false;
-    private static List<ToastBar.Status> statusList = new ArrayList<>();
+    private List<ToastBar.Status> statusList = new ArrayList<>();
     
     public DialogDemo(Form parentForm) {
         init("Dialog", getGlobalResources().getImage("dialog-demo.png"), parentForm,
@@ -53,9 +62,8 @@ public class DialogDemo extends Demo {
     public Container createContentPane() {
         Container demoContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DemoContainer");
         demoContainer.setScrollableY(true);
-        ContentBuilder builder = ContentBuilder.getInstance();
-        
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("interaction-dialog.png"),
+
+        demoContainer.add(createComponent(getGlobalResources().getImage("interaction-dialog.png"),
                                                                 "Interaction Dialog",
                                                                 "Unlike a regular dialog the interaction",
                                                                 "dialog only looks like a dialog, it resides in the layered pane and can be used to implement features "+
@@ -65,7 +73,7 @@ public class DialogDemo extends Demo {
                                                                     showDemo("Interaction Dialog", createInteractionDialogDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("dialog.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("dialog.png"),
                                                                 "Dialog",
                                                                 "A dialog is a form that occupies a part of",
                                                                 "the screen and appears as a modal entity to the developer. Dialogs allow us to prompt users for information "+
@@ -82,7 +90,7 @@ public class DialogDemo extends Demo {
                                                                     showDemo("Dialog", createDialogDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("sheet.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("sheet.png"),
                                                                 "Sheet",
                                                                 "A light-weight dialog that slides up from",
                                                                 "the bottom of the screen on mobile devices. Sheets include a \"title\" bar, with a back/close button, a title "+
@@ -95,7 +103,7 @@ public class DialogDemo extends Demo {
                                                                     showDemo("Sheet", createSheetDemo());
                                                                 }));
         
-        demoContainer.add(builder.createComponent(getGlobalResources().getImage("toast-bar.png"),
+        demoContainer.add(createComponent(getGlobalResources().getImage("toast-bar.png"),
                                                                 "ToastBar",
                                                                 "An API to present status messages to the",
                                                                 "user in an unobtrusive manner. This is useful if there are background tasks that need to display "+
@@ -127,44 +135,48 @@ public class DialogDemo extends Demo {
     private Container createDialogDemo(){
         final Button showDialog = new Button("Show Dialog", "DialogDemoButton");
         final Button showPopup = new Button("Show Popup", "DialogDemoButton");
+
+        ComboBox<Map<String, Object>> combo = new ComboBox<> (
+                createListEntry("Fade"),
+                createListEntry("Slide Horizontal"),
+                createListEntry("Slide Vertical"),
+                createListEntry("Flip")
+        );
+
+        MultiButton mb1 = new MultiButton();
+        mb1.setUIID("DemoMultiButton");
+        mb1.setUIIDLine1("DemoMultiLine1");
+
+        MultiButton mb2 = new MultiButton();
+        mb2.setUIID("DemoMultiButton");
+        mb2.setUIIDLine1("DemoMultiLine1");
+
+        combo.setRenderer(new GenericListCellRenderer<>(mb1, mb2));
+        combo.setSelectedIndex(1);
+
         showDialog.addActionListener(e-> {
+            Dialog d = new Dialog("Dialog Title");
             Command ok = new Command("Ok");
             Command cancel = new Command("Cancel");
-            ComboBox<Map<String, Object>> combo = new ComboBox<> (
-                    createListEntry("The Godfather", "1994", "9.1"),
-                    createListEntry("The Dark Knight", "2008", "9.0"),
-                    createListEntry("The Lord of the Rings", "2001", "8.9"),
-                    createListEntry("Fight Club", "1999", "8.8"),
-                    createListEntry("Forrest Gump", "1994", "8.8"),
-                    createListEntry("Inception", "2010", "8.7"),
-                    createListEntry("Saving Private Ryan", "1998", "8.5")
-
-            );
-
-            MultiButton mb1 = new MultiButton();
-            mb1.setUIID("DemoMultiButton");
-            mb1.setUIIDLine1("DemoMultiLine1");
-            mb1.setUIIDLine2("DemoMultiLine2");
-
-            MultiButton mb2 = new MultiButton();
-            mb2.setUIID("DemoMultiButton");
-            mb2.setUIIDLine1("DemoMultiLine1");
-            mb2.setUIIDLine2("DemoMultiLine2");
-
-            combo.setRenderer(new GenericListCellRenderer<>(mb1, mb2));
-            combo.setSelectedIndex(1);
-            if (Dialog.show("Dialog Title", BoxLayout.encloseY(new Label("Choose Movie:", "DemoHeaderLabel"), combo), ok, cancel) == ok){
-                Map selectedItem = combo.getSelectedItem();
-                ToastBar.showInfoMessage((String)selectedItem.get("Line1") + " rating is: " + (String)selectedItem.get("rating"));
-            }
+            SpanLabel body = new SpanLabel("This is the body of the popup", "DialogDemoSpanLabel");
+            Command[] cmds = {ok, cancel};
+            Transition t = createTransition(combo.getSelectedIndex());
+            Dialog.show("Dialog Title", body, cmds, Dialog.TYPE_INFO, null, 0, t);
         });
+
         showPopup.addActionListener(e-> {
             Dialog d = new Dialog("Popup Title");
             SpanLabel body = new SpanLabel("This is the body of the popup", "DialogDemoSpanLabel");
             d.add(body);
+            d.setTransitionInAnimator(createTransition(combo.getSelectedIndex()));
+            d.setTransitionOutAnimator(createTransition(combo.getSelectedIndex()));
             d.showPopupDialog(showPopup);
         });
-        return BoxLayout.encloseY(showDialog, showPopup);
+
+        Container demoContainer = BoxLayout.encloseY(new Label("Choose Transition", "DemoHeaderLabel"), combo, showDialog, showPopup);
+        demoContainer.setUIID("Wrapper");
+
+        return BoxLayout.encloseY(demoContainer);
     }
     
     private Container createSheetDemo(){
@@ -251,7 +263,7 @@ public class DialogDemo extends Demo {
             contactImage = getGlobalResources().getImage("default-contact-pic.jpg");
         }
         contactImage = contactImage.fill(convertToPixels(8), convertToPixels(8));
-        contactImage = contactImage.applyMask(CommonBehavior.getRoundMask(contactImage.getHeight()));
+        contactImage = contactImage.applyMask(Util.getRoundMask(contactImage.getHeight()));
         contactComponent.setIcon(contactImage);
 
         contactComponent.addActionListener(e->{
@@ -292,12 +304,27 @@ public class DialogDemo extends Demo {
         return contactComponent;
     }
 
-    private Map<String, Object> createListEntry(String name, String date, String rating) {
+    private Map<String, Object> createListEntry(String name) {
         Map<String, Object> entry = new HashMap<>();
         entry.put("Line1", name);
-        entry.put("Line2", date);
-        entry.put("rating", rating);
-
         return entry;
     }
+
+    private Transition createTransition(int selectedIndex){
+        switch (selectedIndex){
+            case 0:
+                return CommonTransitions.createFade(1000);
+            case 1:
+                return CommonTransitions.createSlide(CommonTransitions.SLIDE_HORIZONTAL, true, 1000);
+            case 2:
+                return CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000);
+            case 3:
+                return new FlipTransition(-1, 1000);
+            default:
+                return CommonTransitions.createFade(1000);
+        }
+    }
 }
+
+
+

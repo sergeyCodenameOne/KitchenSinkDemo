@@ -22,12 +22,10 @@
  */
 package com.codename1.demos.kitchen;
 
-import com.codename1.components.Accordion;
 import com.codename1.components.InteractionDialog;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.googlemaps.MapContainer;
-import com.codename1.googlemaps.MapContainer.MapObject;
 import com.codename1.maps.Coord;
 import com.codename1.ui.*;
 import com.codename1.ui.geom.Rectangle;
@@ -40,11 +38,15 @@ import com.codename1.ui.plaf.Style;
 import static com.codename1.ui.CN.execute;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
+/**
+ * Class that demonstrate the usage of the Google Maps within the app.
+ *
+ * @author Sergey Gerashenko.
+ */
 public class MapsDemo extends Demo {
     // Should be replaced with real api key in order to activate the demo. 
     private String googleMapsHTMLKey = null;
-    MapObject sydney;
-    
+
     public MapsDemo(Form parentForm) {
         init("Maps", getGlobalResources().getImage("demo-maps.png"), parentForm,
                 "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/MapsDemo.java");
@@ -53,9 +55,8 @@ public class MapsDemo extends Demo {
     @Override
     public Container createContentPane() {
         Container demoContainer = new Container(new BorderLayout(), "DemoContainer");
-        ContentBuilder builder = ContentBuilder.getInstance();
         
-        demoContainer.add(BorderLayout.NORTH, builder.createComponent(getGlobalResources().getImage("map-google-component.png"),
+        demoContainer.add(BorderLayout.NORTH, createComponent(getGlobalResources().getImage("map-google-component.png"),
                                                                 "Google Map",
                                                                 "Google Map class", e->{
                                                                     if(googleMapsHTMLKey == null){
@@ -106,11 +107,11 @@ public class MapsDemo extends Demo {
         });
 
         Button btnClearAll = new Button("Clear All");
-        btnClearAll.addActionListener(e->{
+        btnClearAll.addActionListener(e-> {
             cnt.clearMapLayers();
         });
 
-        cnt.addTapListener(e->{
+        cnt.addTapListener(e-> {
             TextField enterName = new TextField();
             Container wrapper = BoxLayout.encloseY(new Label("Name:"), enterName);
             InteractionDialog dlg = new InteractionDialog("Add Marker");
@@ -123,7 +124,7 @@ public class MapsDemo extends Demo {
                         enterName.getText(),
                         "",
                         e3->{
-                                ToastBar.showMessage("You clicked "+txt, FontImage.MATERIAL_PLACE);
+                            ToastBar.showMessage("You clicked " + txt, FontImage.MATERIAL_PLACE);
                         }
                 );
                 dlg.dispose();
@@ -138,7 +139,6 @@ public class MapsDemo extends Demo {
                         FlowLayout.encloseBottom(btnMoveCamera, btnAddMarker, btnAddPath, btnClearAll)
                 )
         );
-        Accordion ad = new Accordion();
         return root;
     }
     
