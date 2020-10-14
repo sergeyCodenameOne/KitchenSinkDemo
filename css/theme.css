@@ -1327,6 +1327,8 @@ DialogDemoButton.pressed{
 
 ToastBarMessage{
     text-align: center;
+    padding: 2mm;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 DialogDemoSpanLabel{

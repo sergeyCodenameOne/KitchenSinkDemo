@@ -534,3 +534,7 @@ ClockComponent{
 SideMenuHeader{
     color: white;
 }
+
+ToastBar{
+    background-color: #222222;
+}
