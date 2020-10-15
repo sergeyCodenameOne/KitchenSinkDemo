@@ -112,11 +112,13 @@ public class MediaDemo extends Demo {
     }
 
     private void playVideoOnNewForm(String fileURI, Form parentForm) {
-        Form videoForm = new Form("Video", new BorderLayout());
+        Form videoForm = new Form("Video", new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER));
         videoForm.getContentPane().setUIID("ComponentDemoContainer");
+
         Toolbar toolbar = videoForm.getToolbar();
         toolbar.setUIID("DemoToolbar");
         toolbar.getTitleComponent().setUIID("DemoTitle");
+
         videoForm.add(CENTER, new InfiniteProgress());
         Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("DemoTitleCommand")),
                     e-> parentForm.showBack());
@@ -134,7 +136,8 @@ public class MediaDemo extends Demo {
                         video.setNativePlayerMode(true);
                     }
                     MediaPlayer player = new MediaPlayer(video);
-                    player.setAutoplay(true);
+                    player.setAutoplay(false);
+
                     callSerially(()->{
                         videoForm.removeAll();
                         videoForm.add(BorderLayout.CENTER, player);
