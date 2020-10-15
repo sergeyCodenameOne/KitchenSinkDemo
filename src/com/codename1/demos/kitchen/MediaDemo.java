@@ -55,7 +55,7 @@ public class MediaDemo extends Demo {
     
     public MediaDemo(Form parentForm) {
         init("media", getGlobalResources().getImage("media-demo-icon.png"), parentForm,
-                "https://github.com/sergeyCodenameOne/KitchenSinkDemo/blob/master/src/com/codename1/demos/kitchen/MediaDemo.java");
+                "https://github.com/codenameone/KitchenSink/blob/master/src/com/codename1/demos/kitchen/MediaDemo.java");
     }
 
     @Override
@@ -118,7 +118,7 @@ public class MediaDemo extends Demo {
         Toolbar toolbar = videoForm.getToolbar();
         toolbar.setUIID("DemoToolbar");
         toolbar.getTitleComponent().setUIID("DemoTitle");
-
+        
         videoForm.add(CENTER, new InfiniteProgress());
         Command backCommand = Command.create("", FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("DemoTitleCommand")),
                     e-> parentForm.showBack());
