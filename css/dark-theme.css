@@ -102,7 +102,10 @@ AccordionButton{
 
 TitleCommand{
     color: white;
-    background-color: #222222;
+}
+
+SourceCommand{
+    color: white;
 }
 
 VideoContainer{

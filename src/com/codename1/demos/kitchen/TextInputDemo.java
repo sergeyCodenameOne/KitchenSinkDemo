@@ -64,7 +64,7 @@ public class TextInputDemo extends Demo{
                                                                 "Text Field",
                                                                 "A specialized version of TextArea with",
                                                                 "some minor deviations from the original specifically: Blinking cursor is rendered on TextField only. "+
-                                                                "com.codename1.ui.events.DataChangeList ener is only available in TextField.\n\nThis is crucial for "+
+                                                                "com.codename1.ui.events.DataChangeList is only available in TextField.\n\nThis is crucial for "+
                                                                 "character by character input event tracking setDoneListener(com. codename1.ui. events.ActionLister) "+
                                                                 "is only available in Text Field Different UIID's (\"TextField\" vs. \"TextArea\").", 
                                                                 e->{                                                                    
@@ -108,16 +108,17 @@ public class TextInputDemo extends Demo{
                                                                         "support features like floating hint when necessary.\n\nIt also includes platform specific error handling "+
                                                                         "logic. It is highly recommended to use text component in the context of a TextModeLayout this allows "+
                                                                         "the layout to implicitly adapt to the on-top mode and use a box layout Y mode for iOS and other platforms. "+
-                                                                        "This class supports several theme constants.", e->{
-
-                                                                    showDemo("Text Component", createTextComponentContainer());
-                                                                }));
+                                                                        "This class supports several theme constants.",
+                                                                        e->{
+                                                                            showDemo("Text Component", createTextComponentContainer());
+                                                                        }));
 
         return demoContainer;
     }
     
     private Container createTextFieldDemo(){
         Container textFields = new Container();
+
         TableLayout tl;
         if(Display.getInstance().isTablet()) {
             tl = new TableLayout(7, 2);
@@ -135,7 +136,6 @@ public class TextInputDemo extends Demo{
         url.setUIID("DemoTextArea");
         TextField phone = new TextField("", "Phone", 20, TextArea.PHONENUMBER);
         phone.setUIID("DemoTextArea");
-
         TextField num1 = new TextField("", "1234", 4, TextArea.NUMERIC);
         num1.setUIID("DemoTextArea");
         TextField num2 = new TextField("", "1234", 4, TextArea.NUMERIC);
@@ -144,6 +144,30 @@ public class TextInputDemo extends Demo{
         num3.setUIID("DemoTextArea");
         TextField num4 = new TextField("", "1234", 4, TextArea.NUMERIC);
         num4.setUIID("DemoTextArea");
+
+        num1.addDataChangedListener((i, ii) -> {
+            if(num1.getText().length() == 4) {
+                num1.stopEditing();
+                num2.startEditing();
+            }
+        });
+        num2.addDataChangedListener((i, ii) -> {
+            if(num2.getText().length() == 4) {
+                num2.stopEditing();
+                num3.startEditing();
+            }
+        });
+        num3.addDataChangedListener((i, ii) -> {
+            if(num3.getText().length() == 4) {
+                num3.stopEditing();
+                num4.startEditing();
+            }
+        });
+        num4.addDataChangedListener((i, ii) -> {
+            if(num4.getText().length() == 4) {
+                num4.stopEditing();
+            }
+        });
         
         Button submit = new Button("Submit", "TextFieldsDemoButton");
         submit.addActionListener(e->{
@@ -168,7 +192,10 @@ public class TextInputDemo extends Demo{
         Container demoContainer = BorderLayout.center(textFields);
         demoContainer.add(BorderLayout.SOUTH, submit);
         demoContainer.setUIID("Wrapper");
-        return BoxLayout.encloseY(demoContainer);
+
+        Container cnt = BoxLayout.encloseY(demoContainer);
+        cnt.setScrollableY(true);
+        return cnt;
     }
     
     private Container createTextAreaDemo(){
@@ -351,6 +378,8 @@ public class TextInputDemo extends Demo{
         textFieldsAndSaveButton.setUIID("TextComponents");
         textFieldsAndSaveButton.add(BorderLayout.CENTER, textFields);
 
-        return BorderLayout.center(textFieldsAndSaveButton);
+        Container demoContainer = BorderLayout.center(textFieldsAndSaveButton);
+        demoContainer.setScrollableY(true);
+        return demoContainer;
     }
 }
