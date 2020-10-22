@@ -26,6 +26,7 @@ import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.Switch;
 import com.codename1.components.ToastBar;
 import com.codename1.ui.*;
+import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
@@ -109,6 +110,12 @@ public class ToolbarDemo extends Demo{
         tb.addComponentToSideMenu(settings);
         tb.addComponentToSideMenu(sourceCode);
         tb.addComponentToSideMenu(logoutButton);
+        toolBarForm.setBackCommand(new Command("") {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                getParentForm().showBack();
+            }
+        });
 
         toolBarForm.add(BorderLayout.SOUTH, backButton);
         toolBarForm.show();

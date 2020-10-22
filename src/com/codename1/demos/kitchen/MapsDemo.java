@@ -35,10 +35,10 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.UIManager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codename1.ui.CN.convertToPixels;
 import static com.codename1.ui.CN.execute;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
@@ -50,7 +50,7 @@ import static com.codename1.ui.util.Resources.getGlobalResources;
 public class MapsDemo extends Demo {
     // Should be replaced with real api key in order to activate the demo. 
     private String googleMapsHTMLKey = "AIzaSyAOzyccab7fGRkJx0Iya_FopmozLTFUA4A";
-    List<Coord> markerList = new ArrayList();
+    List<Coord> markerList = new ArrayList<>();
 
     public MapsDemo(Form parentForm) {
         init("Maps", getGlobalResources().getImage("demo-maps.png"), parentForm,
@@ -78,31 +78,29 @@ public class MapsDemo extends Demo {
 
         FloatingActionButton moveToCurrentLocation = FloatingActionButton.createFAB(FontImage.MATERIAL_GPS_FIXED, "MapsCurrLocation");
         moveToCurrentLocation.addActionListener(e->{
-            try{
-                Location currLocation = Display.getInstance().getLocationManager().getCurrentLocation();
-                map.setCameraPosition(new Coord(currLocation.getLatitude(), currLocation.getLongitude()));
-            }catch (IOException error){
+                Location currLocation = Display.getInstance().getLocationManager().getCurrentLocationSync();
+            if(currLocation != null){
+                map.zoom(new Coord(currLocation.getLatitude(), currLocation.getLongitude()), (map.getMaxZoom() + map.getMinZoom()) / 2);
+            }else{
                 ToastBar.showInfoMessage("Turn on Location");
             }
         });
 
         FontImage markerImg = FontImage.createMaterial(FontImage.MATERIAL_PLACE,
-                UIManager.getInstance().getComponentStyle("MapsPlace"),
-                Display.getInstance().convertToPixels(3));
+                UIManager.getInstance().getComponentStyle("MapsPlace"));
+        final int markerImgSize = convertToPixels(10);
 
         map.addTapListener(e-> {
+            Coord currLocation = map.getCoordAtPosition(e.getX(), e.getY());
             TextComponent placeName = new TextComponent().labelAndHint("Mark name: ");
             Command ok = new Command("Ok");
             Command cancel = new Command("Cancel");
             if (Dialog.show("Enter Note", placeName, ok, cancel) == ok && placeName.getText().length() != 0) {
-                Coord currLocation = map.getCoordAtPosition(e.getX(), e.getY());
-                map.addMarker(EncodedImage.createFromImage(markerImg, false),
+                map.addMarker(EncodedImage.createFromImage(markerImg, false).scaledEncoded(markerImgSize, markerImgSize),
                         currLocation,
                         placeName.getText(),
                         "",
-                        ee -> {
-                        }
-                );
+                        null);
                 markerList.add(currLocation);
             }
         });
@@ -110,23 +108,23 @@ public class MapsDemo extends Demo {
         Button btnClearAll = new Button("Clear All", "MapsButton");
         btnClearAll.addActionListener(e-> {
             map.clearMapLayers();
+            markerList.clear();
         });
 
         Button btnAddPath = new Button("Add Path", "MapsButton");
         btnAddPath.addActionListener(e->{
             if (markerList.size() > 1){
-                map.addPath((Coord[])markerList.toArray());
+                Coord[] markers = new Coord[markerList.size()];
+                markerList.toArray(markers);
+                map.addPath(markers);
             }else{
                 ToastBar.showInfoMessage("You need add more markers(try to press the map)");
             }
         });
 
-        Container root = LayeredLayout.encloseIn(
-                BorderLayout.center(map),
-                BorderLayout.south(
-                        FlowLayout.encloseBottom(btnAddPath, btnClearAll)
-                )
-        );
+        Container root = LayeredLayout.encloseIn( BorderLayout.center(map),
+                BorderLayout.south( FlowLayout.encloseBottom(btnAddPath, btnClearAll) ));
+
         return moveToCurrentLocation.bindFabToContainer(root);
     }
     

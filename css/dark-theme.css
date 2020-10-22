@@ -161,10 +161,6 @@ ComponentDemoLabel{
     background-color: #000000;
 }
 
-DemoCheckBox{
-    margin: 2mm;
-}
-
 CheckBoxContainer{
     background-color: #efeff4;
     margin: 0;
@@ -540,4 +536,8 @@ SideMenuHeader{
 
 ToastBar{
     background-color: #222222;
+}
+
+DemoSpanLabelIcon{
+    color: white;
 }

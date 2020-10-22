@@ -28,7 +28,9 @@ import com.codename1.components.ToastBar;
 import com.codename1.io.CSVParser;
 import com.codename1.io.Log;
 import com.codename1.ui.*;
-import com.codename1.ui.layouts.*;
+import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.list.DefaultListCellRenderer;
 import com.codename1.ui.list.DefaultListModel;
 import com.codename1.ui.table.TableLayout;
@@ -147,20 +149,23 @@ public class TextInputDemo extends Demo{
 
         num1.addDataChangedListener((i, ii) -> {
             if(num1.getText().length() == 4) {
-                num1.stopEditing();
-                num2.startEditing();
+                num1.stopEditing(()->{
+                    num2.startEditing();
+                });
             }
         });
         num2.addDataChangedListener((i, ii) -> {
             if(num2.getText().length() == 4) {
-                num2.stopEditing();
-                num3.startEditing();
+                num2.stopEditing(()->{
+                    num3.startEditing();
+                });
             }
         });
         num3.addDataChangedListener((i, ii) -> {
             if(num3.getText().length() == 4) {
-                num3.stopEditing();
-                num4.startEditing();
+                num3.stopEditing(()->{
+                    num4.startEditing();
+                });
             }
         });
         num4.addDataChangedListener((i, ii) -> {
@@ -233,7 +238,6 @@ public class TextInputDemo extends Demo{
                 add(new SpanLabel("Your Message", "DemoLabel")).
                 add(message);
 
-        
         Container demoContainer = BorderLayout.center(textFields);
         demoContainer.add(BorderLayout.SOUTH, contactUsButton);
         demoContainer.setUIID("Wrapper");
@@ -301,7 +305,6 @@ public class TextInputDemo extends Demo{
         renderer.setShowNumbers(false);
         ac.setCompletionRenderer(renderer);
         
-        
         Container demoContainer = BoxLayout.encloseY(new Label("Search:", "DemoLabel"), ac);
         demoContainer.setUIID("Wrapper");
         return BoxLayout.encloseY(demoContainer);
@@ -322,12 +325,6 @@ public class TextInputDemo extends Demo{
     }
 
     private Container createTextComponentContainer(){
-        Container textContainer = new Container(new LayeredLayout());
-        // Set UIID for background image.
-        textContainer.setUIID("InputContainer");
-
-        Container textFields = new Container(new TextModeLayout(6, 1));
-
         // Add some text fields to the page
         TextComponent name = new TextComponent().labelAndHint("Name");
         FontImage.setMaterialIcon(name.getField().getHintLabel(), FontImage.MATERIAL_PERSON);
@@ -340,11 +337,6 @@ public class TextInputDemo extends Demo{
 
         TextComponent bio = new TextComponent().labelAndHint("Bio").multiline(true);
         FontImage.setMaterialIcon(bio.getField().getHintLabel(), FontImage.MATERIAL_LIBRARY_BOOKS);
-
-        textFields.add(name);
-        textFields.add(email);
-        textFields.add(password);
-        textFields.add(bio);
 
         Button saveButton = new Button("Save", "InputSaveButton");
 
@@ -374,12 +366,13 @@ public class TextInputDemo extends Demo{
             password.getField().clear();
         });
 
-        Container textFieldsAndSaveButton = BorderLayout.south(saveButton);
-        textFieldsAndSaveButton.setUIID("TextComponents");
-        textFieldsAndSaveButton.add(BorderLayout.CENTER, textFields);
+        Container textFields = BoxLayout.encloseY(name, email, password, bio);
+        textFields.setScrollableY(true);
+        Container textFieldsAndSaveButton = BorderLayout.south(saveButton).
+                                            add(BorderLayout.CENTER, textFields);
+        textFieldsAndSaveButton.setUIID("Wrapper");
 
         Container demoContainer = BorderLayout.center(textFieldsAndSaveButton);
-        demoContainer.setScrollableY(true);
         return demoContainer;
     }
 }

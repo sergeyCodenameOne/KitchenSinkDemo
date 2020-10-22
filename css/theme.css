@@ -575,7 +575,7 @@ DemoTitle{
     text-align: center;
     font-family: "native:MainBold";
     margin: 0;
-    padding: 0;
+    padding-bottom: 1mm;
 
 }
 
@@ -656,6 +656,7 @@ ComponentDemoTitle{
     background-color: white;
     text-align: center;
     font-family: "native:MainBold";
+    padding-bottom: 1mm;
 }
 
 MediaComponentLine1{
@@ -1430,6 +1431,9 @@ TextFieldSearch{
     color: black;
     border: 1px solid gray;
     margin: 2mm 5mm 2mm 5mm;
+    padding-left: 1.5mm;
+    padding-top: 1mm;
+    padding-bottom: 1mm;
     font-size: 3mm;
     border-radius: 2mm;
     background-color: rgba(0, 0, 0, 0);
@@ -1487,7 +1491,7 @@ Separator{
 SignatureConfirm{
     font-family: "native:MainRegular";
     margin: 1mm;
-    padding: 1mm;
+    padding: 2mm;
     font-size: 3mm;
     border-radius: 2mm;
     background-color: #9acd32;
@@ -1508,7 +1512,7 @@ ConfirmContainer{
 SignatureClear{
     font-family: "native:MainRegular";
     margin: 1mm;
-    padding: 1mm;
+    padding: 2mm;
     font-size: 3mm;
     color: grey;
     background-color: rgba(0, 0, 0, 0);
@@ -1785,4 +1789,9 @@ MapsButton{
     font-family: "native:MainRegular";
     font-size: 4mm;
     margin: 4mm;
+}
+
+MapsPlace{
+    color: #f70000;
+    background-color: rgba(0, 0, 0, 0);
 }
