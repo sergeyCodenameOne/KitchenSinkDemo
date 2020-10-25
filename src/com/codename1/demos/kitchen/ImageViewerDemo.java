@@ -20,7 +20,7 @@
  * Please contact Codename One through http://www.codenameone.com/ if you 
  * need additional information or have any questions.
  */
-package com.codename1.demos.kitchen.ComponentDemos;
+package com.codename1.demos.kitchen;
 
 import com.codename1.components.ImageViewer;
 import com.codename1.components.SpanLabel;

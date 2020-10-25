@@ -24,7 +24,6 @@
 package com.codename1.demos.kitchen;
 
 import com.codename1.components.*;
-import com.codename1.demos.kitchen.ComponentDemos.ImageViewerDemo;
 import com.codename1.ui.*;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;

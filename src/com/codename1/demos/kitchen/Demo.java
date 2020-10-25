@@ -212,7 +212,8 @@ public abstract class Demo{
                 }
             });
 
-            contentContainer.addAll(contentHeader, this.firstLine);
+            contentContainer.addAll(contentHeader, this.firstLine, this.body);
+            this.body.setHidden(true);
             add(BorderLayout.NORTH, contentImage);
             add(BorderLayout.CENTER, contentContainer);
             add(BorderLayout.EAST, openClose);
@@ -228,9 +229,9 @@ public abstract class Demo{
             if (!isOpen){
                 isOpen = true;
                 openClose.setIcon(openedIcon);
-                contentContainer.removeComponent(firstLine);
-                contentContainer.add(body);
-                this.getParent().animateLayout(250);
+                this.body.setHidden(false);
+                this.firstLine.setHidden(true);
+                this.getParent().animateLayout(500);
             }
         }
 
@@ -238,10 +239,10 @@ public abstract class Demo{
             if (isOpen){
                 isOpen = false;
                 openClose.setIcon(closedIcon);
-                contentContainer.removeComponent(body);
-                contentContainer.add(firstLine);
+                this.body.setHidden(true);
+                this.firstLine.setHidden(false);
                 if (shouldAnimate){
-                    this.getParent().animateLayout(250);
+                    this.getParent().animateLayout(500);
                 }
             }
         }
