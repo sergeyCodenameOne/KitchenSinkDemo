@@ -44,7 +44,7 @@ import static com.codename1.ui.util.Resources.getGlobalResources;
  * @author Sergey Gerashenko.
  */
 public class AdvancedDemo extends Demo{
-    private HashMap<String, List<String>> allNotes = new HashMap<>();
+    private final HashMap<String, List<String>> allNotes = new HashMap<>();
     
     public AdvancedDemo(Form parentForm) {
         init("Advanced", getGlobalResources().getImage("advanced-icon.png"), parentForm, "https://github.com/codenameone/KitchenSink/blob/master/src/com/codename1/demos/kitchen/AdvancedDemo.java");
@@ -82,9 +82,7 @@ public class AdvancedDemo extends Demo{
                                                                 "their signature with their finger.\n\nThe user is given the option to save/reset/cancel the signature. On save, "+
                                                                 "the signature Image property will be set with a full-size of the signature, and the icon on the button will "+
                                                                 "show a thumbnail of the image.",
-                                                                e->{
-                                                                    showDemo("Signature", createSignatureDemo());
-                                                                }));
+                                                                e-> showDemo("Signature", createSignatureDemo())));
         
         demoContainer.add(createComponent(getGlobalResources().getImage("advanced-calendar.png"),
                                                                 "Calendar",
@@ -93,9 +91,7 @@ public class AdvancedDemo extends Demo{
                                                                 "the resource localization e.g. Calendar. Jan, Calendar.Feb etc …\n\nTo localize stings for day names use the values "+
                                                                 "Calendar. Day in the resource localization e.g. \"Calendar.Sunday\", \"Calendar.Monday\" etc …\n\nNote that we "+
                                                                 "recommend using the picker class which is superior when running on the device for most use cases.",
-                                                                e-> {
-                                                                    showDemo("Calendar", createCalendarDemo());
-                                                                }));
+                                                                e-> showDemo("Calendar", createCalendarDemo())));
         
         demoContainer.add(createComponent(getGlobalResources().getImage("advanced-tree-file.png"),
                                                                 "File Tree",
@@ -171,9 +167,7 @@ public class AdvancedDemo extends Demo{
         });
         
         Button clear = new Button("Clear", "SignatureClear");
-        clear.addActionListener(e->{
-            sig.setSignatureImage(null);
-        });
+        clear.addActionListener(e-> sig.setSignatureImage(null));
         
         Container confirmContainer = new Container(new BorderLayout());
         confirmContainer.setUIID("ConfirmContainer");
@@ -194,7 +188,8 @@ public class AdvancedDemo extends Demo{
         cld.setSelectedDaysUIID("CalendarSelected");
         System.out.println(cld.getSelectedDaysUIID());
         cld.addActionListener((e)->{
-            notes.removeAll();          
+            notes.removeAll();
+            notes.removeAll();
             List<String> currentNotes = allNotes.get(cld.getDate().toString());
             if(currentNotes == null){
                 currentNotes = new ArrayList<>();
@@ -217,7 +212,7 @@ public class AdvancedDemo extends Demo{
                 currentNotes = new ArrayList<>();
                 allNotes.put(cld.getDate().toString(), currentNotes);
             }
-            
+
             TextComponent currNote = new TextComponent().labelAndHint("Note");
             Command ok = new Command("Ok");
             Command cancel = new Command("Cancel");

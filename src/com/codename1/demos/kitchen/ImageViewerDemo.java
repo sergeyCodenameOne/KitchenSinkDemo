@@ -66,14 +66,12 @@ public class ImageViewerDemo {
 
                         
         if(resultData.getResponseCode() != 200) {
-            callSerially(() -> {
-                ToastBar.showErrorMessage("Error code from the server");
-            });
+            callSerially(() -> ToastBar.showErrorMessage("Error code from the server"));
             return null;
         }
                 
         // Make list of items
-        List<Item> itemList = new ArrayList();
+        ArrayList<Item> itemList = new ArrayList<>();
         for(Map currItemMap : itemListData.items.asList()){
             Item currItem = new Item();
             currItem.getPropertyIndex().populateFromMap(currItemMap);
@@ -103,9 +101,9 @@ public class ImageViewerDemo {
      * Image model for the ImageViewer
      */
     private class ImageList implements ListModel<Image>{
-        private List<Item> itemList;
+        private final List<Item> itemList;
         private int selection;
-        private EventDispatcher selectionListeners = new EventDispatcher();
+        private final EventDispatcher selectionListeners = new EventDispatcher();
 
         public ImageList(List<Item> itemList, int selection) {
             this.itemList = itemList;
@@ -178,7 +176,7 @@ public class ImageViewerDemo {
         }
     }
     
-    class ItemList implements PropertyBusinessObject {
+    static class ItemList implements PropertyBusinessObject {
         public final Property<String, ItemList> title = new Property<>("title");
         public final IntProperty<ItemList> elements = new IntProperty<>("elements");
         public final Property<String, ItemList> copyright = new Property<>("copyright");
