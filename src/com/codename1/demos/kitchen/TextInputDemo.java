@@ -223,7 +223,9 @@ public class TextInputDemo extends Demo{
         Container demoContainer = BorderLayout.center(textFields);
         demoContainer.add(BorderLayout.SOUTH, contactUsButton);
         demoContainer.setUIID("Wrapper");
-        return BoxLayout.encloseY(demoContainer);
+        Container cnt =  BoxLayout.encloseY(demoContainer);
+        cnt.setScrollableY(true);
+        return cnt;
     }
     
     private Container createClearableTextFieldDemo(){
@@ -246,7 +248,9 @@ public class TextInputDemo extends Demo{
         Container demoContainer = BorderLayout.center(textFieldsContainer);
         demoContainer.add(BorderLayout.SOUTH, loginButton);
         demoContainer.setUIID("Wrapper");
-        return BoxLayout.encloseY(demoContainer);
+        Container cnt =  BoxLayout.encloseY(demoContainer);
+        cnt.setScrollableY(true);
+        return cnt;
     }
     
     private Container createAutoCompleteDemo(){
@@ -289,7 +293,9 @@ public class TextInputDemo extends Demo{
         
         Container demoContainer = BoxLayout.encloseY(new Label("Search:", "DemoLabel"), ac);
         demoContainer.setUIID("Wrapper");
-        return BoxLayout.encloseY(demoContainer);
+        Container cnt =  BoxLayout.encloseY(demoContainer);
+        cnt.setScrollableY(true);
+        return cnt;
     }    
     
     List<String> searchWords(String text, List<String> wordsList) {        

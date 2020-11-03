@@ -186,7 +186,6 @@ public class AdvancedDemo extends Demo{
         
         Calendar cld = new Calendar();
         cld.setSelectedDaysUIID("CalendarSelected");
-        System.out.println(cld.getSelectedDaysUIID());
         cld.addActionListener((e)->{
             notes.removeAll();
             notes.removeAll();

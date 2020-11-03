@@ -78,7 +78,7 @@ public class MapsDemo extends Demo {
 
         FloatingActionButton moveToCurrentLocation = FloatingActionButton.createFAB(FontImage.MATERIAL_GPS_FIXED, "MapsCurrLocation");
         moveToCurrentLocation.addActionListener(e->{
-                Location currLocation = Display.getInstance().getLocationManager().getCurrentLocationSync();
+            Location currLocation = Display.getInstance().getLocationManager().getCurrentLocationSync();
             if(currLocation != null){
                 map.zoom(new Coord(currLocation.getLatitude(), currLocation.getLongitude()), (map.getMaxZoom() + map.getMinZoom()) / 2);
             }else{

@@ -1421,15 +1421,8 @@ SideNavigationPanel{
 
 TextFieldSearch{
     color: black;
-    border: 1px solid gray;
-    margin: 2mm 5mm 2mm 5mm;
-    padding-left: 1.5mm;
-    padding-top: 1mm;
-    padding-bottom: 1mm;
     font-size: 3mm;
-    border-radius: 2mm;
     background-color: rgba(0, 0, 0, 0);
-    text-align: center;
 }
 
 ToolbarSearch{
