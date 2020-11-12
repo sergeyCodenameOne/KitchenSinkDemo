@@ -494,10 +494,11 @@ DemoToolbar{
 }
 
 ToolbarSearch{
+    font-family: "native:MainRegular";
     margin: 0;
     background-color: white;
     font-size: 3mm;
-    padding: 1.5mm;
+    padding: 1mm;
 }
 
 MainWindowToolbar{

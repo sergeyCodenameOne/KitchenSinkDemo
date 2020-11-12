@@ -49,7 +49,7 @@ import static com.codename1.ui.util.Resources.getGlobalResources;
  */
 public class MapsDemo extends Demo {
     // Should be replaced with real api key in order to activate the demo. 
-    private final String googleMapsHTMLKey = "AIzaSyAOzyccab7fGRkJx0Iya_FopmozLTFUA4A";
+    private final String googleMapsHTMLKey = "AIzaSyD5gChODsBV6_SK6u83PN3Yvz4Z3ODEIOw";
     List<Coord> markerList = new ArrayList<>();
 
     public MapsDemo(Form parentForm) {
